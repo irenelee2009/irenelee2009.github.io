@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chapter 5 — Irene Lee</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --gold: #c8a84b;
+      --salt: #e8edf5;
+      --fog: #b8c4d8;
+      --ink: #0a0e1a;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: #06090f;
+      color: var(--salt);
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* SKY CANVAS */
+    #sky-canvas {
+      position: fixed; inset: 0;
+      z-index: 0; pointer-events: none;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.2rem 6vw;
+      display: flex; justify-content: space-between; align-items: center;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.55), transparent);
+      backdrop-filter: blur(6px);
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-style: italic; font-size: 1rem; color: #fff;
+      text-decoration: none; text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+    }
+    .nav-chapter {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: rgba(255,255,255,0.5);
+    }
+    .nav-home {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: rgba(255,255,255,0.5);
+      text-decoration: none; transition: color 0.3s;
+    }
+    .nav-home:hover { color: var(--gold); }
+
+    /* MAIN CONTENT */
+    .page-wrapper {
+      position: relative; z-index: 2;
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 8rem 4vw 6rem;
+    }
+
+    /* CHAPTER HEADER */
+    .chapter-header {
+      text-align: center;
+      margin-bottom: 5rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .chapter-number {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.35em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 1.5rem;
+      text-shadow: 0 0 20px rgba(200,168,75,0.6);
+      display: block;
+    }
+    .chapter-title-display {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 400; line-height: 1.15;
+      text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+      margin-bottom: 1.5rem;
+    }
+    .chapter-title-display em { font-style: italic; color: #ffd98a; }
+    .chapter-divider {
+      display: flex; align-items: center; justify-content: center;
+      gap: 1rem; margin-top: 2rem;
+    }
+    .chapter-divider-line {
+      width: 60px; height: 1px;
+      background: linear-gradient(to right, transparent, rgba(200,168,75,0.5));
+    }
+    .chapter-divider-line.r {
+      background: linear-gradient(to left, transparent, rgba(200,168,75,0.5));
+    }
+    .chapter-divider-icon { color: var(--gold); font-size: 0.9rem; }
+
+    /* BOOK PAGES — FLIP CONTAINER */
+    .book-container {
+      perspective: 2000px;
+      margin-bottom: 6rem;
+    }
+
+    .pages-wrapper {
+      position: relative;
+      min-height: 200px;
+    }
+
+    /* Each "page" is a screen of text */
+    .book-page {
+      background: rgba(8, 14, 28, 0.72);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 2px;
+      padding: 4rem 4.5rem;
+      position: relative;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08);
+      transform-origin: left center;
+      transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000),
+                  opacity 0.4s ease;
+      /* Page turn crease */
+    }
+    .book-page::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: linear-gradient(to right, rgba(0,0,0,0.4), transparent);
+      border-radius: 2px 0 0 2px;
+    }
+    .book-page::after {
+      content: '';
+      position: absolute; top: 0; right: 0;
+      width: 40px; height: 100%;
+      background: linear-gradient(to left, rgba(0,0,0,0.15), transparent);
+      pointer-events: none;
+    }
+
+    /* Flip animation states */
+    .book-page.flip-out {
+      animation: flipOut 0.5s ease-in forwards;
+    }
+    .book-page.flip-in {
+      animation: flipIn 0.5s ease-out forwards;
+    }
+    .book-page.flip-out-back {
+      animation: flipOutBack 0.5s ease-in forwards;
+    }
+    .book-page.flip-in-back {
+      animation: flipInBack 0.5s ease-out forwards;
+    }
+
+    @keyframes flipOut {
+      0%   { transform: rotateY(0deg); opacity: 1; }
+      100% { transform: rotateY(-90deg); opacity: 0; }
+    }
+    @keyframes flipIn {
+      0%   { transform: rotateY(90deg); opacity: 0; }
+      100% { transform: rotateY(0deg); opacity: 1; }
+    }
+    @keyframes flipOutBack {
+      0%   { transform: rotateY(0deg); opacity: 1; }
+      100% { transform: rotateY(90deg); opacity: 0; }
+    }
+    @keyframes flipInBack {
+      0%   { transform: rotateY(-90deg); opacity: 0; }
+      100% { transform: rotateY(0deg); opacity: 1; }
+    }
+
+    /* PAGE CONTENT */
+    .page-text {
+      font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+      line-height: 2.0;
+      color: rgba(232,237,245,0.92);
+    }
+    .page-text p { margin-bottom: 1.8em; }
+    .page-text p:last-child { margin-bottom: 0; }
+
+    /* Opening drop cap */
+    .page-text.first-page p:first-child::first-letter {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5em;
+      float: left;
+      line-height: 0.75;
+      margin-right: 0.1em;
+      margin-top: 0.08em;
+      color: var(--gold);
+      text-shadow: 0 0 30px rgba(200,168,75,0.5);
+    }
+
+    /* PAGE COUNTER */
+    .page-counter {
+      text-align: center;
+      margin: 1.5rem 0 2rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.3);
+    }
+    .page-dot {
+      display: inline-block;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      margin: 0 3px;
+      transition: all 0.3s;
+      vertical-align: middle;
+    }
+    .page-dot.active {
+      background: var(--gold);
+      box-shadow: 0 0 8px rgba(200,168,75,0.7);
+      transform: scale(1.3);
+    }
+
+    /* IN-PAGE NAV (prev/next page within chapter) */
+    .page-nav {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 1rem; gap: 1rem;
+    }
+    .page-btn {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.6);
+      padding: 0.7rem 1.4rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      backdrop-filter: blur(4px);
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .page-btn:hover:not(:disabled) {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.35);
+      color: #fff;
+      transform: translateX(0) scale(1.02);
+    }
+    .page-btn:disabled { opacity: 0.25; cursor: default; }
+    .page-btn.prev:hover:not(:disabled) { transform: translateX(-3px); }
+    .page-btn.next:hover:not(:disabled) { transform: translateX(3px); }
+    .page-btn-arrow { font-size: 1rem; }
+
+    /* END OF CHAPTER */
+    .chapter-end {
+      display: none;
+      text-align: center;
+      padding: 5rem 2rem;
+      background: rgba(8,14,28,0.6);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .chapter-end.visible { display: block; }
+    .chapter-end-symbol {
+      font-size: 2rem; color: var(--gold); margin-bottom: 2rem;
+      text-shadow: 0 0 25px rgba(200,168,75,0.6);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 0.8; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.1); }
+    }
+    .chapter-end h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem; font-weight: 400;
+      margin-bottom: 0.8rem;
+    }
+    .chapter-end p {
+      font-size: 1.1rem; color: var(--fog);
+      margin-bottom: 3rem; font-style: italic;
+    }
+    .chapter-nav-btns {
+      display: flex; justify-content: center;
+      align-items: center; gap: 1.5rem; flex-wrap: wrap;
+    }
+    .chapter-nav-btn {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.18em;
+      text-transform: uppercase; text-decoration: none;
+      padding: 1rem 2rem;
+      transition: all 0.3s; display: flex; align-items: center; gap: 0.8rem;
+    }
+    .chapter-nav-btn.prev-ch {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.7);
+    }
+    .chapter-nav-btn.prev-ch:hover {
+      border-color: rgba(255,255,255,0.6); color: #fff;
+      transform: translateX(-4px);
+    }
+    .chapter-nav-btn.next-ch {
+      background: var(--gold); color: var(--ink);
+      box-shadow: 0 0 30px rgba(200,168,75,0.45);
+    }
+    .chapter-nav-btn.next-ch:hover {
+      background: #ffd060;
+      transform: translateX(4px);
+      box-shadow: 0 0 45px rgba(200,168,75,0.65);
+    }
+    .chapter-nav-btn.toc {
+      background: transparent;
+      border: 1px solid rgba(200,168,75,0.35);
+      color: var(--gold);
+    }
+    .chapter-nav-btn.toc:hover {
+      border-color: var(--gold);
+      box-shadow: 0 0 15px rgba(200,168,75,0.2);
+    }
+
+    /* PROGRESS BAR */
+    .reading-progress {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: 2px; z-index: 200;
+      background: rgba(255,255,255,0.08);
+    }
+    .reading-progress-bar {
+      height: 100%;
+      background: linear-gradient(to right, var(--gold), #7fffda);
+      transition: width 0.4s ease;
+      box-shadow: 0 0 8px rgba(200,168,75,0.7);
+    }
+
+    /* KEYBOARD HINT */
+    .keyboard-hint {
+      text-align: center;
+      margin-top: 1rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.52rem; letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.2);
+    }
+    kbd {
+      display: inline-block;
+      padding: 0.15rem 0.4rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 3px;
+      font-size: 0.5rem;
+      margin: 0 2px;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="sky-canvas"></canvas>
+
+<!-- Reading progress bar -->
+<div class="reading-progress">
+  <div class="reading-progress-bar" id="progress-bar"></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">Irene Lee</a>
+  <span class="nav-chapter" id="nav-chapter-label">Chapter 1</span>
+  <a href="index.html" class="nav-home">← Home</a>
+</nav>
+
+<!-- MAIN -->
+<div class="page-wrapper">
+
+  <!-- Chapter header -->
+  <div class="chapter-header">
+    <span class="chapter-number" id="chapter-number-label">Chapter 1</span>
+    <h1 class="chapter-title-display" id="chapter-title-display">
+      <!-- Title goes here, or just "Chapter 1" -->
+    </h1>
+    <div class="chapter-divider">
+      <div class="chapter-divider-line"></div>
+      <span class="chapter-divider-icon">✦</span>
+      <div class="chapter-divider-line r"></div>
+    </div>
+  </div>
+
+  <!-- Book pages -->
+  <div class="book-container">
+    <div class="pages-wrapper">
+      <div class="book-page" id="current-page">
+        <div class="page-text" id="page-text"></div>
+      </div>
+    </div>
+
+    <!-- Page dots -->
+    <div class="page-counter" id="page-counter"></div>
+
+    <!-- Page navigation -->
+    <div class="page-nav">
+      <button class="page-btn prev" id="btn-prev-page" onclick="changePage(-1)">
+        <span class="page-btn-arrow">←</span> Previous page
+      </button>
+      <button class="page-btn next" id="btn-next-page" onclick="changePage(1)">
+        Next page <span class="page-btn-arrow">→</span>
+      </button>
+    </div>
+    <div class="keyboard-hint">
+      Use <kbd>←</kbd> <kbd>→</kbd> arrow keys or swipe to turn pages
+    </div>
+  </div>
+
+  <!-- End of chapter -->
+  <div class="chapter-end" id="chapter-end">
+    <div class="chapter-end-symbol">⚓</div>
+    <h3>End of Chapter <span id="end-chapter-num"></span></h3>
+    <p>The journey continues...</p>
+    <div class="chapter-nav-btns">
+      <a href="#" class="chapter-nav-btn prev-ch" id="btn-prev-chapter">← Previous Chapter</a>
+      <a href="index.html" class="chapter-nav-btn toc">📖 Table of Contents</a>
+      <a href="#" class="chapter-nav-btn next-ch" id="btn-next-chapter">Next Chapter →</a>
+    </div>
+  </div>
+
+</div><!-- end page-wrapper -->
+
+<script>
+// ══════════════════════════════════════════
+//  CONFIGURATION — change this per chapter
+// ══════════════════════════════════════════
+const CHAPTER_NUM = 5;   // ← change this number for each chapter
+const TOTAL_CHAPTERS = 29;
+const CHAPTER_TITLE = ''; // ← add title here when ready, e.g. "The Departure"
+
+// ══════════════════════════════════════════
+//  CHAPTER TEXT — paste content here
+// ══════════════════════════════════════════
+const CHAPTER_TEXT = `
+  <p>Eonni was afraid of the inmingun returning, of losing any of us again, of our family splintering beyond repair. As if more damage could be done.</p>
+  <p>I sat in the living room in silence, with Yeomjae in my lap. He was fortunately unaffected by the raid, but he stayed quiet now as if he could sense the tension in the air.</p>
+  <p>I observed my sister everyday. She tried to make everything go back to normal, as if this all never happened. She continued her daily routine of waking up before any of us, making a light breakfast, and then going out to work on the fields. She then came back inside during each meal of the day, then went back out again. She smiled and talked a lot, but my sister was gone—far out of reach.</p>
+  <p>I aimlessly stared out the window which pointed to the field, completely ignoring the school textbooks that were beside me. What was the point in trying to keep up with my studies now? All I could do now was stay at home and do nothing but take care of my younger brothers. Without looking down, I grabbed the golden rings that ornated my fingers and twisted them, the smooth metal rubbing against my rough skin. My most prized possessions: my mother's rings. They used to give me comfort—knowing that a piece of my mother was still with me—but now it was like any other metal. Cold, and foreign against the warmth of my skin.</p>
+  <p>As I twisted the rings, I remembered the moments when I had seen my friends outside. I had opened my mouth to greet them, but they immediately looked away and walked faster—their eyes wide.</p>
+  <p>They were all afraid.</p>
+  <p>I thought of Oppa. If there were no problems, my brother would have arrived at the islands by now. Maybe not long enough to find my father again, but enough to escape safely. Finding my father would take around a few more days, maybe weeks, and bringing back a boat for us to use could take more time then we could ever imagine. The future didn't look that great, but we planned to make the best out of it.</p>
+  <p>I quickly walked towards the back door and stepped outside. The cool sharp air nipped at my bare face as I closed the door behind me. The soft rustling of the trees around the house was the only noise that disrupted the silence. It was too quiet. Looking around the house and towards the fields, I saw my sister just standing in the middle of the rice paddies—motionless—while staring up at the blue sky.</p>
+  <p>Walking towards the well in our backyard, I peered into the deep dark hole and saw a faint reflection of myself. Under my eyes were large dark sags of skin, my skin pale and eyes wide and frightened. My black hair stuck out in uneven strands, and my pale chapped lips twitched at the sight. I couldn't recognize myself as the girl I used to be a few months ago. Gritting my teeth, I grabbed the bucket and threw it down the well while holding the end of the course rope that was tied to the bucket's wooden handle. The loud splash of cold water below roared in my ears as I quickly pulled it back up. Even in the cool air, my chest raged with heat and anger. Harabeoji dug up this very well. He worked on it for days, and told the whole village they could take water for free, even after his death. Such kindness. Generosity.</p>
+  <p>And yet when the inmingun came to our home, the people were so quick to abandon us. In the dead of night, I would hear the bucket splash into the well every few hours, even to this day. During the day, however, nobody came to collect water for themselves. I clenched my fingers around the bucket handle as I dragged it out of the well until my knuckles turned white.</p>
+  <p>With the water in the bucket, I could see my reflection even clearer now. As the sun casted a bright flash against the reflection, my mind wandered back to what happened long ago. The rough hands closing around my throat. The slimy breath of the men as they nearly squeezed the life out of me. I stared and stared and stared at the bright reflection on the water. My breathing stopped.</p>
+  <p>I needed air.</p>
+  <p>Shaking, tears welled up in my eyes. I took a wobbly step back. I could still feel those large fingers digging into my skin. The screams.</p>
+  <p>SPLASH.</p>
+  <p>The wave of ice nearly made me shout in shock. I froze, and stared at the empty bucket in my hands. I had thrown the water onto my face. The bitter cold jolted me awake, and I burst out laughing.</p>
+  <p>Hysterically.</p>
+  <p>Oh, how life could turn on you so quickly! Flinging my head back, I breathed in the cool air as my skin shuddered awake. The thought that I kept so far back in my mind was starting to claw its way back to me. The dreadful reality that my life would never return to normal, and there was no way out of it other than to move forward.</p>
+  <p>Drawing up another bucket of cold water, I trudged back to the house, water dripping onto the wooden floor. Taejae looked at me with curiosity as he took the bucket from me, but he didn't say his usual teasing comments. As if he understood what happened.</p>
+  <p>I watched as Taejae poured the water into a wooden pitcher, setting it on top of the kitchen counter. He looked up at me and smiled weakly, the only sound being the faint thuds of each water droplet that fell from my clothes and onto the floor. Without a word, he then picked up the bucket and awkwardly held it in front of me, beckoning me to go out and gather more.</p>
+  <p>I combed my damp hair back with my fingers and sighed.</p>
+`;
+
+// ══════════════════════════════════════════
+//  PAGE SPLIT — break text into pages
+// ══════════════════════════════════════════
+function splitIntoPages(html, wordsPerPage = 180) {
+  const temp = document.createElement('div');
+  temp.innerHTML = html;
+  const paragraphs = Array.from(temp.querySelectorAll('p')).map(p => p.outerHTML);
+
+  const pages = [];
+  let current = [];
+  let wordCount = 0;
+
+  paragraphs.forEach(p => {
+    const words = p.replace(/<[^>]+>/g, '').split(/\s+/).length;
+    if (wordCount + words > wordsPerPage && current.length > 0) {
+      pages.push(current.join(''));
+      current = [p];
+      wordCount = words;
+    } else {
+      current.push(p);
+      wordCount += words;
+    }
+  });
+  if (current.length > 0) pages.push(current.join(''));
+  return pages;
+}
+
+const pages = splitIntoPages(CHAPTER_TEXT);
+let currentPage = 0;
+let isAnimating = false;
+
+// ── Setup ──
+document.getElementById('chapter-number-label').textContent = `Chapter ${CHAPTER_NUM}`;
+document.getElementById('nav-chapter-label').textContent = `Chapter ${CHAPTER_NUM}`;
+document.title = `Chapter ${CHAPTER_NUM} — Irene Lee`;
+
+const titleEl = document.getElementById('chapter-title-display');
+if (CHAPTER_TITLE) {
+  titleEl.textContent = CHAPTER_TITLE;
+} else {
+  titleEl.textContent = `Chapter ${CHAPTER_NUM}`;
+}
+
+document.getElementById('end-chapter-num').textContent = CHAPTER_NUM;
+
+// Chapter nav links
+const prevChBtn = document.getElementById('btn-prev-chapter');
+const nextChBtn = document.getElementById('btn-next-chapter');
+if (CHAPTER_NUM > 1) {
+  prevChBtn.href = `chapter-${CHAPTER_NUM - 1}.html`;
+} else {
+  prevChBtn.style.display = 'none';
+}
+if (CHAPTER_NUM < TOTAL_CHAPTERS) {
+  nextChBtn.href = `chapter-${CHAPTER_NUM + 1}.html`;
+} else {
+  nextChBtn.textContent = '🎉 The End';
+  nextChBtn.href = 'index.html';
+}
+
+function renderPage() {
+  const pageEl = document.getElementById('current-page');
+  const textEl = document.getElementById('page-text');
+  textEl.innerHTML = pages[currentPage];
+  if (currentPage === 0) textEl.classList.add('first-page');
+  else textEl.classList.remove('first-page');
+
+  // Dots
+  const counter = document.getElementById('page-counter');
+  counter.innerHTML = pages.map((_, i) =>
+    `<span class="page-dot ${i === currentPage ? 'active' : ''}"></span>`
+  ).join('') + `&nbsp; <span style="opacity:0.4">${currentPage + 1} / ${pages.length}</span>`;
+
+  // Buttons
+  document.getElementById('btn-prev-page').disabled = currentPage === 0;
+  document.getElementById('btn-next-page').disabled = currentPage === pages.length - 1;
+
+  // Show chapter end on last page
+  const endEl = document.getElementById('chapter-end');
+  if (currentPage === pages.length - 1) {
+    endEl.classList.add('visible');
+  } else {
+    endEl.classList.remove('visible');
+  }
+
+  // Progress bar
+  const progress = ((currentPage + 1) / pages.length) * 100;
+  document.getElementById('progress-bar').style.width = progress + '%';
+}
+
+function changePage(dir, instant = false) {
+  if (isAnimating) return;
+  const next = currentPage + dir;
+  if (next < 0 || next >= pages.length) return;
+
+  isAnimating = true;
+  const pageEl = document.getElementById('current-page');
+
+  const outClass = dir > 0 ? 'flip-out' : 'flip-out-back';
+  const inClass  = dir > 0 ? 'flip-in'  : 'flip-in-back';
+
+  pageEl.classList.add(outClass);
+
+  setTimeout(() => {
+    currentPage = next;
+    pageEl.classList.remove(outClass);
+    renderPage();
+    pageEl.classList.add(inClass);
+    setTimeout(() => {
+      pageEl.classList.remove(inClass);
+      isAnimating = false;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 500);
+  }, 450);
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changePage(1);
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   changePage(-1);
+});
+
+// Touch/swipe navigation
+let touchStartX = 0;
+document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+document.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  if (Math.abs(dx) > 60) changePage(dx < 0 ? 1 : -1);
+}, { passive: true });
+
+// Init
+renderPage();
+
+// ══════════════════════════════════════════
+//  SKY CANVAS (same as homepage, always night/dusk for reading)
+// ══════════════════════════════════════════
+const canvas = document.getElementById('sky-canvas');
+const ctx = canvas.getContext('2d');
+function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+resize();
+window.addEventListener('resize', resize);
+
+const stars = Array.from({length: 160}, () => ({
+  x: Math.random(), y: Math.random() * 0.72,
+  size: Math.random() * 2.2 + 0.4,
+  phase: Math.random() * Math.PI * 2,
+  speed: Math.random() * 0.7 + 0.3,
+  brightness: Math.random() * 0.6 + 0.4
+}));
+const waves = [
+  { y:0.77, amp:14, freq:0.007, spd:0.5, alpha:0.28, w:2.8 },
+  { y:0.81, amp:10, freq:0.011, spd:0.75, alpha:0.20, w:2.0 },
+  { y:0.84, amp:7,  freq:0.016, spd:0.4,  alpha:0.14, w:1.5 },
+  { y:0.88, amp:4,  freq:0.025, spd:0.9,  alpha:0.09, w:1.0 },
+];
+
+function drawChapterSky(ts) {
+  const t = ts / 1000;
+  const W = canvas.width, H = canvas.height;
+
+  // Deep night sky
+  const sg = ctx.createLinearGradient(0, 0, 0, H * 0.85);
+  sg.addColorStop(0, '#010206');
+  sg.addColorStop(0.5, '#020810');
+  sg.addColorStop(1, '#060e1e');
+  ctx.fillStyle = sg; ctx.fillRect(0, 0, W, H);
+
+  // Moon
+  const mx = W * 0.75, my = H * 0.14, mr = 22;
+  const mg = ctx.createRadialGradient(mx, my, 0, mx, my, mr * 4);
+  mg.addColorStop(0, 'rgba(180,200,255,0.22)');
+  mg.addColorStop(1, 'transparent');
+  ctx.fillStyle = mg; ctx.beginPath(); ctx.arc(mx, my, mr*4, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(mx, my, mr, 0, Math.PI*2);
+  ctx.fillStyle = 'rgba(255,252,235,0.95)'; ctx.fill();
+  ctx.beginPath(); ctx.arc(mx - mr*0.2, my - mr*0.15, mr*0.85, 0, Math.PI*2);
+  ctx.fillStyle = 'rgba(5,8,20,0.92)'; ctx.fill();
+
+  // Stars
+  stars.forEach(s => {
+    const tw = 0.45 + 0.55 * Math.sin(s.phase + t * s.speed);
+    const a = s.brightness * tw * 0.92;
+    ctx.beginPath(); ctx.arc(s.x*W, s.y*H, s.size, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(255,255,235,${a})`; ctx.fill();
+    if (s.size > 1.5 && a > 0.5) {
+      ctx.strokeStyle = `rgba(255,255,220,${a*0.4})`; ctx.lineWidth = 0.5;
+      const len = s.size * 3;
+      ctx.beginPath();
+      ctx.moveTo(s.x*W-len, s.y*H); ctx.lineTo(s.x*W+len, s.y*H);
+      ctx.moveTo(s.x*W, s.y*H-len); ctx.lineTo(s.x*W, s.y*H+len);
+      ctx.stroke();
+    }
+  });
+
+  // Ocean
+  const ot = H * 0.74;
+  const og = ctx.createLinearGradient(0, ot, 0, H);
+  og.addColorStop(0, 'rgba(5,10,35,0.97)');
+  og.addColorStop(1, 'rgba(3,6,20,1)');
+  ctx.fillStyle = og; ctx.fillRect(0, ot, W, H - ot);
+
+  // Moon reflection
+  const mrg = ctx.createLinearGradient(mx, ot, mx, H);
+  mrg.addColorStop(0, 'rgba(180,200,255,0.22)');
+  mrg.addColorStop(1, 'transparent');
+  ctx.fillStyle = mrg; ctx.fillRect(mx-18, ot, 36, H-ot);
+
+  // Waves
+  waves.forEach(wv => {
+    const wy = H * wv.y;
+    ctx.beginPath(); ctx.moveTo(0, wy);
+    for (let x = 0; x <= W; x += 2) {
+      const y = wy + Math.sin(x*wv.freq + t*wv.spd)*wv.amp
+                   + Math.sin(x*wv.freq*1.7 + t*wv.spd*0.6)*wv.amp*0.4;
+      ctx.lineTo(x, y);
+    }
+    ctx.strokeStyle = `rgba(255,255,255,${wv.alpha})`; ctx.lineWidth = wv.w; ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(0, wy);
+    for (let x = 0; x <= W; x += 2) {
+      const y = wy + Math.sin(x*wv.freq + t*wv.spd)*wv.amp
+                   + Math.sin(x*wv.freq*1.7 + t*wv.spd*0.6)*wv.amp*0.4 - 2.5;
+      ctx.lineTo(x, y);
+    }
+    ctx.strokeStyle = `rgba(255,255,255,${wv.alpha*0.3})`; ctx.lineWidth = wv.w*0.4; ctx.stroke();
+  });
+
+  requestAnimationFrame(drawChapterSky);
+}
+requestAnimationFrame(drawChapterSky);
+</script>
+</body>
+</html>
