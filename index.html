@@ -381,7 +381,6 @@
 <body>
 
 <canvas id="sky-canvas"></canvas>
-<div id="time-label">Dawn</div>
 
 <nav>
   <a href="#" class="nav-brand">Irene Lee</a>
@@ -488,22 +487,38 @@ resize();
 window.addEventListener('resize', resize);
 
 // Stars
-const stars = Array.from({length: 180}, () => ({
+const stars = Array.from({length: 130}, () => ({
   x: Math.random(),
   y: Math.random() * 0.70,
-  size: Math.random() * 2.4 + 0.5,
+  size: Math.random() * 2.8 + 0.6,
   phase: Math.random() * Math.PI * 2,
-  speed: Math.random() * 0.8 + 0.4,
-  brightness: Math.random() * 0.6 + 0.4
+  speed: Math.random() * 0.6 + 0.3,
+  brightness: Math.random() * 0.5 + 0.55
 }));
+
+// Shooting stars
+const shootingStars = [];
+let nextShoot = 3 + Math.random() * 5;
+
+function spawnShootingStar() {
+  shootingStars.push({
+    x: Math.random() * 0.7 + 0.05,
+    y: Math.random() * 0.35 + 0.03,
+    len: 0.08 + Math.random() * 0.1,
+    angle: Math.PI / 4 + (Math.random() - 0.5) * 0.4,
+    speed: 0.18 + Math.random() * 0.15,
+    progress: 0,
+    alpha: 0.9 + Math.random() * 0.1,
+  });
+}
 
 // Wave rows
 const waves = [
-  { y: 0.765, amp: 16, freq: 0.007,  spd: 0.55, alpha: 0.30, w: 3.0 },
-  { y: 0.800, amp: 11, freq: 0.011,  spd: 0.80, alpha: 0.22, w: 2.2 },
-  { y: 0.832, amp:  8, freq: 0.016,  spd: 0.45, alpha: 0.16, w: 1.6 },
-  { y: 0.860, amp:  5, freq: 0.024,  spd: 1.00, alpha: 0.10, w: 1.1 },
-  { y: 0.890, amp:  3, freq: 0.035,  spd: 0.65, alpha: 0.07, w: 0.8 },
+  { y: 0.765, amp: 22, freq: 0.007,  spd: 0.55, alpha: 0.52, w: 3.5 },
+  { y: 0.800, amp: 16, freq: 0.011,  spd: 0.80, alpha: 0.40, w: 2.8 },
+  { y: 0.832, amp: 11, freq: 0.016,  spd: 0.45, alpha: 0.30, w: 2.2 },
+  { y: 0.860, amp:  7, freq: 0.024,  spd: 1.00, alpha: 0.20, w: 1.6 },
+  { y: 0.890, amp:  4, freq: 0.035,  spd: 0.65, alpha: 0.14, w: 1.1 },
 ];
 
 let animTime = 0;
@@ -523,183 +538,254 @@ function lerpHex(c1, c2, t) {
   return `rgb(${Math.round(lerp(r1,r2,t))},${Math.round(lerp(g1,g2,t))},${Math.round(lerp(b1,b2,t))})`;
 }
 
-// Sky phases: dawn(0) → day(0.25) → sunset(0.5) → dusk(0.75) → night(1)
-const phases = [
-  { name:'Dawn',   skyT:'#1a0828', skyM:'#7b2d5e', skyB:'#ff7043', sunY:0.86, sunR:30, sunC:'#ff9060', glowC:[255,130,60],  moonA:0.5 },
-  { name:'Day',    skyT:'#082258', skyM:'#0d4fa0', skyB:'#5bc8f5', sunY:0.20, sunR:38, sunC:'#fffde0', glowC:[255,240,160], moonA:0   },
-  { name:'Sunset', skyT:'#180812', skyM:'#961840', skyB:'#ff5a20', sunY:0.80, sunR:32, sunC:'#ff6030', glowC:[255,90,30],   moonA:0   },
-  { name:'Dusk',   skyT:'#040814', skyM:'#180e38', skyB:'#2a1660', sunY:0.98, sunR:0,  sunC:'transparent', glowC:[80,40,160], moonA:0.7 },
-  { name:'Night',  skyT:'#010206', skyM:'#020810', skyB:'#060e1e', sunY:1.10, sunR:0,  sunC:'transparent', glowC:[0,0,0],    moonA:1.0 },
-];
-
-function getBlended(prog) {
-  const n = phases.length - 1;
-  const s = prog * n;
-  const i = Math.min(Math.floor(s), n - 1);
-  const t = s - i;
-  const a = phases[i], b = phases[i + 1];
-  return {
-    name: t < 0.5 ? a.name : b.name,
-    skyT: lerpHex(a.skyT, b.skyT, t),
-    skyM: lerpHex(a.skyM, b.skyM, t),
-    skyB: lerpHex(a.skyB, b.skyB, t),
-    sunY: lerp(a.sunY, b.sunY, t),
-    sunR: lerp(a.sunR, b.sunR, t),
-    sunC: a.sunC,
-    glowC: [lerp(a.glowC[0],b.glowC[0],t), lerp(a.glowC[1],b.glowC[1],t), lerp(a.glowC[2],b.glowC[2],t)],
-    moonA: lerp(a.moonA, b.moonA, t)
-  };
-}
-
+// ── FIXED NIGHT SKY with northern-lights green tints + scroll-into-ocean ──
 function draw(ts) {
   animTime = ts / 1000;
   const W = canvas.width, H = canvas.height;
-  const p = getBlended(scrollProgress);
 
-  // Sky gradient
+  // As user scrolls, we transition from night sky → underwater
+  // scrollProgress 0 = full sky, 1 = deep underwater
+  const diveDepth = Math.min(scrollProgress * 1.4, 1.0); // reaches full dive at ~70% scroll
+
+  // Sky — fades to deep ocean teal as you scroll
+  const skyTop    = diveDepth < 0.5 ? '#010208' : `rgba(0,${Math.round(8 + diveDepth*30)},${Math.round(8 + diveDepth*60)},1)`;
+  const skyMid    = diveDepth < 0.3 ? '#030d14' : `rgba(0,${Math.round(13 + diveDepth*40)},${Math.round(20 + diveDepth*80)},1)`;
+  const skyBot    = diveDepth < 0.2 ? '#041a18' : `rgba(0,${Math.round(26 + diveDepth*50)},${Math.round(24 + diveDepth*90)},1)`;
+
   const sg = ctx.createLinearGradient(0, 0, 0, H * 0.85);
-  sg.addColorStop(0,   p.skyT);
-  sg.addColorStop(0.5, p.skyM);
-  sg.addColorStop(1,   p.skyB);
+  sg.addColorStop(0,   skyTop);
+  sg.addColorStop(0.3, skyMid);
+  sg.addColorStop(0.6, skyBot);
+  sg.addColorStop(1,   '#060e1e');
   ctx.fillStyle = sg;
   ctx.fillRect(0, 0, W, H);
 
-  // Sun
-  const sunX = W * 0.68, sunY = H * p.sunY;
-  if (p.sunR > 1) {
-    // Outer glow layers
-    [0.30, 0.18, 0.10].forEach((alpha, i) => {
-      const gr = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, W * (0.22 - i * 0.04));
-      gr.addColorStop(0, `rgba(${p.glowC[0]},${p.glowC[1]},${p.glowC[2]},${alpha})`);
-      gr.addColorStop(1, 'transparent');
-      ctx.fillStyle = gr;
-      ctx.fillRect(0, 0, W, H);
-    });
-    // Sun disk
-    ctx.beginPath();
-    ctx.arc(sunX, sunY, p.sunR, 0, Math.PI * 2);
-    ctx.fillStyle = p.sunC;
-    ctx.fill();
-    ctx.beginPath();
-    ctx.arc(sunX, sunY, p.sunR * 0.6, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(255,255,255,0.85)';
-    ctx.fill();
+  // Underwater teal flood — rises from bottom as you scroll
+  if (diveDepth > 0.1) {
+    const floodH = H * (diveDepth - 0.1) * 1.1;
+    const floodGrad = ctx.createLinearGradient(0, H - floodH, 0, H);
+    floodGrad.addColorStop(0, `rgba(0,40,50,0)`);
+    floodGrad.addColorStop(0.3, `rgba(0,55,65,${diveDepth * 0.6})`);
+    floodGrad.addColorStop(1, `rgba(0,30,45,${diveDepth * 0.9})`);
+    ctx.fillStyle = floodGrad;
+    ctx.fillRect(0, H - floodH, W, floodH);
   }
+
+  // Caustic light rays when deep enough
+  if (diveDepth > 0.5) {
+    const rayAlpha = (diveDepth - 0.5) * 0.15;
+    for (let r = 0; r < 5; r++) {
+      const rx = W * (0.1 + r * 0.2 + 0.04 * Math.sin(animTime * 0.3 + r));
+      const rg = ctx.createLinearGradient(rx, 0, rx + W * 0.08, H);
+      rg.addColorStop(0, `rgba(100,220,200,${rayAlpha})`);
+      rg.addColorStop(1, 'transparent');
+      ctx.fillStyle = rg;
+      ctx.beginPath();
+      ctx.moveTo(rx - W*0.02, 0);
+      ctx.lineTo(rx + W*0.08, H);
+      ctx.lineTo(rx + W*0.1,  H);
+      ctx.lineTo(rx,          0);
+      ctx.fill();
+    }
+  }
+
+  // Northern lights — subtle green aurora shimmer
+  const auroraTime = animTime * 0.18;
+  const auroraGrad = ctx.createLinearGradient(0, H*0.05, 0, H*0.5);
+  const a1 = 0.055 + 0.025 * Math.sin(auroraTime);
+  const a2 = 0.035 + 0.02  * Math.sin(auroraTime * 1.3 + 1);
+  const a3 = 0.02  + 0.015 * Math.sin(auroraTime * 0.7 + 2);
+  auroraGrad.addColorStop(0,   `rgba(26,107,90,${a1})`);
+  auroraGrad.addColorStop(0.3, `rgba(20,80,70,${a2})`);
+  auroraGrad.addColorStop(0.7, `rgba(10,50,60,${a3})`);
+  auroraGrad.addColorStop(1,   'transparent');
+  ctx.fillStyle = auroraGrad;
+  ctx.fillRect(0, 0, W, H);
+
+  // Second aurora band — slight horizontal drift
+  const auroraGrad2 = ctx.createLinearGradient(
+    W * (0.3 + 0.05 * Math.sin(auroraTime * 0.5)), H*0.1,
+    W * (0.7 + 0.05 * Math.cos(auroraTime * 0.4)), H*0.45
+  );
+  const b1 = 0.03 + 0.015 * Math.sin(auroraTime * 1.1 + 0.5);
+  auroraGrad2.addColorStop(0,   'transparent');
+  auroraGrad2.addColorStop(0.4, `rgba(42,140,100,${b1})`);
+  auroraGrad2.addColorStop(1,   'transparent');
+  ctx.fillStyle = auroraGrad2;
+  ctx.fillRect(0, 0, W, H);
 
   // Moon
-  if (p.moonA > 0.02) {
-    const mx = W * 0.22, my = H * 0.16;
-    const mr = 24;
-    const mg = ctx.createRadialGradient(mx, my, 0, mx, my, mr * 4);
-    mg.addColorStop(0, `rgba(180,200,255,${p.moonA * 0.28})`);
-    mg.addColorStop(1, 'transparent');
-    ctx.fillStyle = mg;
-    ctx.beginPath(); ctx.arc(mx, my, mr * 4, 0, Math.PI * 2); ctx.fill();
-    ctx.beginPath(); ctx.arc(mx, my, mr, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(255,252,235,${p.moonA})`;
-    ctx.fill();
-    ctx.beginPath(); ctx.arc(mx - mr*0.2, my - mr*0.15, mr * 0.85, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(${scrollProgress > 0.6 ? '10,14,30' : '5,8,20'},${p.moonA * 0.92})`;
-    ctx.fill();
-  }
+  const mx = W * 0.22, my = H * 0.16, mr = 24;
+  const mg = ctx.createRadialGradient(mx, my, 0, mx, my, mr * 4);
+  mg.addColorStop(0, `rgba(180,215,200,0.28)`);
+  mg.addColorStop(1, 'transparent');
+  ctx.fillStyle = mg;
+  ctx.beginPath(); ctx.arc(mx, my, mr * 4, 0, Math.PI * 2); ctx.fill();
+  ctx.beginPath(); ctx.arc(mx, my, mr, 0, Math.PI * 2);
+  ctx.fillStyle = 'rgba(255,252,235,1.0)'; ctx.fill();
+  ctx.beginPath(); ctx.arc(mx - mr*0.2, my - mr*0.15, mr * 0.85, 0, Math.PI * 2);
+  ctx.fillStyle = 'rgba(5,12,20,0.92)'; ctx.fill();
 
-  // Stars — visible at dawn (fading) and from dusk onward
-  const starVis = scrollProgress < 0.18
-    ? (1 - scrollProgress / 0.18) * 0.85
-    : scrollProgress > 0.55
-    ? Math.min((scrollProgress - 0.55) / 0.15, 1)
-    : 0;
-
-  if (starVis > 0.01) {
+  // Stars — fade out as you dive underwater
+  const starVis2 = Math.max(0, 1 - diveDepth * 2.5);
+  if (starVis2 > 0.01) {
     stars.forEach(s => {
-      const twinkle = 0.45 + 0.55 * Math.sin(s.phase + animTime * s.speed);
-      const a = starVis * s.brightness * twinkle;
+      const twinkle = 0.55 + 0.45 * Math.sin(s.phase + animTime * s.speed);
+      const a = starVis2 * s.brightness * twinkle;
       ctx.beginPath();
       ctx.arc(s.x * W, s.y * H, s.size, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(255,255,235,${a})`;
       ctx.fill();
-      if (s.size > 1.6 && a > 0.5) {
-        ctx.strokeStyle = `rgba(255,255,220,${a * 0.45})`;
-        ctx.lineWidth = 0.6;
-        const cx = s.x * W, cy = s.y * H, len = s.size * 3;
+      if (s.size > 1.8 && a > 0.4) {
+        ctx.strokeStyle = `rgba(255,255,220,${a * 0.55})`; ctx.lineWidth = 0.7;
+        const cx = s.x*W, cy = s.y*H, len = s.size * 4;
         ctx.beginPath();
-        ctx.moveTo(cx - len, cy); ctx.lineTo(cx + len, cy);
-        ctx.moveTo(cx, cy - len); ctx.lineTo(cx, cy + len);
+        ctx.moveTo(cx-len, cy); ctx.lineTo(cx+len, cy);
+        ctx.moveTo(cx, cy-len); ctx.lineTo(cx, cy+len);
         ctx.stroke();
       }
     });
+
+    // Shooting stars
+    nextShoot -= 0.016;
+    if (nextShoot <= 0) {
+      spawnShootingStar();
+      nextShoot = 4 + Math.random() * 7;
+    }
+    for (let i = shootingStars.length - 1; i >= 0; i--) {
+      const ss = shootingStars[i];
+      ss.progress += ss.speed * 0.016;
+      if (ss.progress >= 1) { shootingStars.splice(i, 1); continue; }
+      const fade = ss.progress < 0.2
+        ? ss.progress / 0.2
+        : ss.progress > 0.7
+        ? 1 - (ss.progress - 0.7) / 0.3
+        : 1;
+      const headX = (ss.x + Math.cos(ss.angle) * ss.len * ss.progress) * W;
+      const headY = (ss.y + Math.sin(ss.angle) * ss.len * ss.progress) * H;
+      const tailX = (ss.x + Math.cos(ss.angle) * ss.len * Math.max(0, ss.progress - 0.35)) * W;
+      const tailY = (ss.y + Math.sin(ss.angle) * ss.len * Math.max(0, ss.progress - 0.35)) * H;
+      const grad = ctx.createLinearGradient(tailX, tailY, headX, headY);
+      grad.addColorStop(0, 'rgba(255,255,245,0)');
+      grad.addColorStop(1, `rgba(255,255,245,${ss.alpha * fade * starVis2})`);
+      ctx.beginPath(); ctx.moveTo(tailX, tailY); ctx.lineTo(headX, headY);
+      ctx.strokeStyle = grad; ctx.lineWidth = 1.5; ctx.stroke();
+      ctx.beginPath(); ctx.arc(headX, headY, 1.5, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,245,${ss.alpha * fade * starVis2})`; ctx.fill();
+    }
   }
 
-  // Horizon atmospheric glow
+  // Horizon glow — teal/green tint
   const hg = ctx.createLinearGradient(0, H * 0.55, 0, H * 0.82);
-  const ha = scrollProgress < 0.1 ? 0.4
-    : scrollProgress < 0.3 ? lerp(0.4, 0.2, (scrollProgress-0.1)/0.2)
-    : scrollProgress < 0.55 ? lerp(0.2, 0.5, (scrollProgress-0.3)/0.25)
-    : lerp(0.5, 0.1, (scrollProgress-0.55)/0.45);
-  hg.addColorStop(0, `rgba(${p.glowC[0]},${p.glowC[1]},${p.glowC[2]},${ha * 0.55})`);
+  hg.addColorStop(0, `rgba(26,107,90,0.12)`);
   hg.addColorStop(1, 'transparent');
   ctx.fillStyle = hg; ctx.fillRect(0, 0, W, H);
 
-  // Ocean base
+  // Ocean base — deep blue-green
   const ot = H * 0.73;
   const og = ctx.createLinearGradient(0, ot, 0, H);
-  const od = scrollProgress < 0.25
-    ? [`rgba(20,35,85,0.96)`, `rgba(10,25,70,1)`]
-    : scrollProgress < 0.5
-    ? [`rgba(8,30,80,0.96)`, `rgba(5,20,60,1)`]
-    : scrollProgress < 0.75
-    ? [`rgba(12,20,65,0.96)`, `rgba(8,15,50,1)`]
-    : [`rgba(5,10,35,0.96)`, `rgba(3,7,22,1)`];
-  og.addColorStop(0, od[0]); og.addColorStop(1, od[1]);
+  og.addColorStop(0, 'rgba(5,20,35,0.97)');
+  og.addColorStop(1, 'rgba(3,10,22,1)');
   ctx.fillStyle = og; ctx.fillRect(0, ot, W, H - ot);
 
-  // Sun/moon reflection on water
-  if (p.sunR > 1 && p.sunY < 0.95) {
-    const rg = ctx.createLinearGradient(sunX, ot, sunX, H);
-    rg.addColorStop(0, `rgba(${p.glowC[0]},${p.glowC[1]},${p.glowC[2]},0.4)`);
-    rg.addColorStop(1, 'transparent');
-    ctx.fillStyle = rg; ctx.fillRect(sunX - 35, ot, 70, H - ot);
-  }
-  if (p.moonA > 0.3) {
-    const mrg = ctx.createLinearGradient(W*0.22, ot, W*0.22, H);
-    mrg.addColorStop(0, `rgba(180,200,255,${p.moonA * 0.28})`);
-    mrg.addColorStop(1, 'transparent');
-    ctx.fillStyle = mrg; ctx.fillRect(W*0.22 - 22, ot, 44, H - ot);
+  // Moon reflection — teal tinted
+  const mrg = ctx.createLinearGradient(mx, ot, mx, H);
+  mrg.addColorStop(0, `rgba(100,200,180,0.22)`);
+  mrg.addColorStop(1, 'transparent');
+  ctx.fillStyle = mrg; ctx.fillRect(mx - 22, ot, 44, H - ot);
+
+  // Waves — fade OUT as you dive (so you feel fully submerged)
+  const waveAlphaScale = Math.max(0, 1 - diveDepth * 3.5);
+  const waveRise = diveDepth * 0.28;
+  if (waveAlphaScale > 0.01) {
+    waves.forEach(wv => {
+      const wy = H * (wv.y - waveRise);
+      ctx.beginPath(); ctx.moveTo(0, wy);
+      for (let x = 0; x <= W; x += 2) {
+        const y = wy + Math.sin(x * wv.freq + animTime * wv.spd) * wv.amp
+                     + Math.sin(x * wv.freq * 1.7 + animTime * wv.spd * 0.6) * wv.amp * 0.4;
+        ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = `rgba(255,255,255,${wv.alpha * waveAlphaScale})`;
+      ctx.lineWidth = wv.w; ctx.stroke();
+
+      // shimmer highlight
+      ctx.beginPath(); ctx.moveTo(0, wy);
+      for (let x = 0; x <= W; x += 2) {
+        const y = wy + Math.sin(x * wv.freq + animTime * wv.spd) * wv.amp
+                     + Math.sin(x * wv.freq * 1.7 + animTime * wv.spd * 0.6) * wv.amp * 0.4 - 2.5;
+        ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = `rgba(150,255,220,${wv.alpha * 0.4 * waveAlphaScale})`;
+      ctx.lineWidth = wv.w * 0.4; ctx.stroke();
+    });
   }
 
-  // Waves
-  waves.forEach(wv => {
-    const wy = H * wv.y;
+  // Boat — sits on the top wave, fades as you dive under
+  const boatAlpha = Math.max(0, 1 - diveDepth * 3.5);
+  if (boatAlpha > 0.01) {
+    const bx = W * 0.82;
+    const topWaveY = H * (waves[0].y - waveRise)
+      + Math.sin(bx * waves[0].freq + animTime * waves[0].spd) * waves[0].amp;
+    const rock = Math.sin(animTime * 0.7) * 2.5;
+    const tilt = Math.sin(animTime * 0.7) * 0.04;
+
+    ctx.save();
+    ctx.globalAlpha = boatAlpha;
+    ctx.translate(bx, topWaveY);
+    ctx.rotate(tilt);
+
+    // Hull — lighter, visible silhouette with a subtle rim
     ctx.beginPath();
-    ctx.moveTo(0, wy);
-    for (let x = 0; x <= W; x += 2) {
-      const y = wy + Math.sin(x * wv.freq + animTime * wv.spd) * wv.amp
-                   + Math.sin(x * wv.freq * 1.7 + animTime * wv.spd * 0.6) * wv.amp * 0.4;
-      ctx.lineTo(x, y);
-    }
-    ctx.strokeStyle = `rgba(255,255,255,${wv.alpha})`;
-    ctx.lineWidth = wv.w;
+    ctx.moveTo(-42, rock);
+    ctx.bezierCurveTo(-42, rock+10, -22, rock+19, 0, rock+20);
+    ctx.bezierCurveTo(22, rock+19, 42, rock+10, 42, rock);
+    ctx.lineTo(32, rock);
+    ctx.bezierCurveTo(28, rock+13, 14, rock+15, 0, rock+15);
+    ctx.bezierCurveTo(-14, rock+15, -28, rock+13, -32, rock);
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(60,90,130,0.92)';
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(140,200,220,0.55)';
+    ctx.lineWidth = 1;
     ctx.stroke();
 
-    // Shimmer
+    // Mast
     ctx.beginPath();
-    ctx.moveTo(0, wy);
-    for (let x = 0; x <= W; x += 2) {
-      const y = wy + Math.sin(x * wv.freq + animTime * wv.spd) * wv.amp
-                   + Math.sin(x * wv.freq * 1.7 + animTime * wv.spd * 0.6) * wv.amp * 0.4 - 2.5;
-      ctx.lineTo(x, y);
-    }
-    ctx.strokeStyle = `rgba(255,255,255,${wv.alpha * 0.35})`;
-    ctx.lineWidth = wv.w * 0.4;
+    ctx.moveTo(4, rock);
+    ctx.lineTo(4, rock - 58);
+    ctx.strokeStyle = 'rgba(160,210,230,0.75)';
+    ctx.lineWidth = 2.2;
     ctx.stroke();
-  });
 
-  timeLabel.textContent = p.name;
+    // Sail — filled with a soft blue-white
+    ctx.beginPath();
+    ctx.moveTo(4, rock - 54);
+    ctx.lineTo(4, rock - 14);
+    ctx.lineTo(30, rock - 28);
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(180,225,240,0.45)';
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(160,210,230,0.4)';
+    ctx.lineWidth = 0.8;
+    ctx.stroke();
+
+    // Rigging
+    ctx.beginPath();
+    ctx.moveTo(4, rock - 54);
+    ctx.lineTo(-26, rock - 2);
+    ctx.strokeStyle = 'rgba(140,200,220,0.35)';
+    ctx.lineWidth = 0.9;
+    ctx.stroke();
+
+    ctx.restore();
+  }
+
   requestAnimationFrame(draw);
 }
 requestAnimationFrame(draw);
 
-// Scroll
+// Scroll (progress kept for potential future use)
 window.addEventListener('scroll', () => {
   const max = document.body.scrollHeight - window.innerHeight;
   scrollProgress = Math.min(window.scrollY / max, 1);
