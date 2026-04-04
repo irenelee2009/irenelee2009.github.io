@@ -1,819 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Irene Lee — What Was Carried, What Was Lost</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Last Ship South — Irene Lee</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --ink: #0a0e1a;
-      --fog: #b8c4d8;
-      --salt: #e8edf5;
-      --tide: #2a4a6b;
-      --wave: #1a6b5a;
-      --gold: #c8a84b;
-    }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: #0a0e1a;
-      color: var(--salt);
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      overflow-x: hidden;
+
+    :root {
+      --bg: #0d0c0b;
+      --surface: #131210;
+      --text: #e8dece;
+      --muted: #8a7f72;
+      --accent: #c8a96e;
+      --accent-dim: #7a6540;
+      --border: #2a2620;
     }
-    #sky-canvas {
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.1rem;
+      line-height: 1.75;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
       position: fixed;
       inset: 0;
-      z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
       pointer-events: none;
-    }
-    .content { position: relative; z-index: 2; }
-
-    /* NAV */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 1.5rem 10vw;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
-      backdrop-filter: blur(6px);
-    }
-    .nav-brand {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 1.1rem;
-      color: #fff;
-      text-decoration: none;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.6);
-    }
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-links a {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.75);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-    .nav-links a:hover { color: #fff; }
-    @media (max-width: 600px) { .nav-links { display: none; } }
-
-    /* TIME LABEL */
-    #time-label {
-      position: fixed;
-      top: 5rem; right: 10vw;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.55rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.55);
-      z-index: 50;
-      transition: color 0.8s;
+      z-index: 0;
+      opacity: 0.4;
     }
 
-    /* HERO */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 10vw 10vw 8vw;
+    .page-wrapper {
       position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 5rem 2rem 6rem;
     }
-    .hero-content { max-width: 780px; }
 
-    .byline {
-      font-family: 'Space Mono', monospace;
-      font-size: clamp(0.6rem, 1.2vw, 0.75rem);
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: #ffd98a;
-      margin-bottom: 2rem;
-      opacity: 0;
-      animation: fadeUp 1s 0.3s forwards;
-      text-shadow: 0 0 25px rgba(255,217,138,0.7);
+    /* Hero */
+    .hero {
+      text-align: center;
+      margin-bottom: 5rem;
+      animation: fadeIn 1s ease both;
     }
-    .hero-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.8rem, 7vw, 6.5rem);
-      line-height: 1.05;
-      font-weight: 400;
-      letter-spacing: -0.02em;
-      margin-bottom: 1.2rem;
-      opacity: 0;
-      animation: fadeUp 1s 0.6s forwards;
-      text-shadow: 0 4px 30px rgba(0,0,0,0.6);
-    }
-    .hero-title em { font-style: italic; color: #ffd98a; }
-    .hero-subtitle {
-      font-family: 'Space Mono', monospace;
-      font-size: clamp(0.65rem, 1.3vw, 0.8rem);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #7fffda;
-      margin-bottom: 3rem;
-      opacity: 0;
-      animation: fadeUp 1s 0.9s forwards;
-      border-left: 2px solid #7fffda;
-      padding-left: 1rem;
-      text-shadow: 0 0 18px rgba(127,255,218,0.7);
-    }
-    .hero-desc {
-      font-size: clamp(1.1rem, 2vw, 1.4rem);
-      line-height: 1.8;
-      color: rgba(232,237,245,0.92);
-      max-width: 540px;
-      margin-bottom: 3.5rem;
-      opacity: 0;
-      animation: fadeUp 1s 1.1s forwards;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-    }
-    .cta-group {
-      display: flex; gap: 1.2rem; flex-wrap: wrap;
-      opacity: 0; animation: fadeUp 1s 1.3s forwards;
-    }
-    .btn {
-      display: inline-block;
-      padding: 0.9rem 2.2rem;
-      font-family: 'Space Mono', monospace;
+
+    .hero-byline {
+      font-family: 'Cinzel', serif;
       font-size: 0.7rem;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.35em;
       text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-rule {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      margin: 0 auto 1.5rem;
+    }
+
+    .hero-description {
+      font-size: 1.05rem;
+      color: var(--muted);
+      font-style: italic;
+      max-width: 480px;
+      margin: 0 auto;
+      font-weight: 300;
+    }
+
+    /* TOC */
+    .toc-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent-dim);
+      margin-bottom: 1.5rem;
+      animation: fadeIn 0.8s ease 0.2s both;
+    }
+
+    .chapter-list {
+      list-style: none;
+      animation: fadeIn 1s ease 0.3s both;
+    }
+
+    .chapter-item {
+      border-top: 1px solid var(--border);
+      transition: background 0.25s;
+    }
+
+    .chapter-item:last-child {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .chapter-link {
+      display: flex;
+      align-items: baseline;
+      gap: 1.2rem;
+      padding: 1.1rem 0.5rem;
       text-decoration: none;
-      cursor: pointer; border: none;
-      transition: all 0.3s ease;
+      color: inherit;
+      transition: color 0.25s, padding-left 0.25s;
     }
-    .btn-primary {
-      background: var(--gold); color: var(--ink);
-      box-shadow: 0 0 35px rgba(200,168,75,0.5);
+
+    .chapter-link:hover {
+      padding-left: 1rem;
+      color: var(--accent);
     }
-    .btn-primary:hover {
-      background: #ffd060;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 40px rgba(200,168,75,0.7);
+
+    .chapter-link:hover .chapter-num {
+      color: var(--accent);
     }
-    .btn-ghost {
-      background: rgba(255,255,255,0.12);
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.45);
-      backdrop-filter: blur(4px);
+
+    .chapter-num {
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      color: var(--accent-dim);
+      min-width: 5rem;
+      flex-shrink: 0;
+      transition: color 0.25s;
     }
-    .btn-ghost:hover {
-      background: rgba(255,255,255,0.22);
-      border-color: #fff;
-      transform: translateY(-2px);
+
+    .chapter-preview {
+      font-size: 0.98rem;
+      color: var(--muted);
+      font-style: italic;
+      font-weight: 300;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
-    .scroll-hint {
-      position: absolute; bottom: 2.5rem; left: 50%;
-      transform: translateX(-50%);
-      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-      opacity: 0; animation: fadeUp 1s 2s forwards;
+
+    .chapter-link:hover .chapter-preview {
+      color: var(--text);
     }
-    .scroll-hint span {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.55rem; letter-spacing: 0.2em;
-      text-transform: uppercase; color: rgba(255,255,255,0.55);
-    }
-    .scroll-line {
-      width: 1px; height: 50px;
-      background: linear-gradient(to bottom, rgba(255,255,255,0.55), transparent);
-      animation: scrollPulse 2s ease-in-out infinite;
-    }
-    @keyframes scrollPulse {
-      0%,100% { transform: scaleY(1); opacity: 0.55; }
-      50% { transform: scaleY(1.4); opacity: 1; }
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(14px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* SECTIONS */
-    .section { padding: 10vw 10vw; position: relative; }
-    .glass-card {
-      background: rgba(0,0,0,0.38);
-      backdrop-filter: blur(22px);
-      -webkit-backdrop-filter: blur(22px);
-      border: 1px solid rgba(255,255,255,0.14);
-      padding: 4rem 3.5rem;
-      position: relative; overflow: hidden;
+    @media (max-width: 600px) {
+      .page-wrapper { padding: 3rem 1.3rem 4rem; }
+      .chapter-preview { display: none; }
+      .chapter-num { min-width: 4rem; }
     }
-    .glass-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0;
-      width: 4px; height: 100%;
-      background: linear-gradient(to bottom, var(--gold), #7fffda);
-    }
-    .section-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem; letter-spacing: 0.3em;
-      text-transform: uppercase; color: #7fffda;
-      margin-bottom: 2rem;
-      display: flex; align-items: center; gap: 1rem;
-      text-shadow: 0 0 14px rgba(127,255,218,0.5);
-    }
-    .section-label::after {
-      content: ''; display: inline-block;
-      width: 40px; height: 1px;
-      background: #7fffda;
-      box-shadow: 0 0 8px rgba(127,255,218,0.6);
-    }
-    .about-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 6vw; align-items: start;
-    }
-    @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; } }
-    .about-text h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      font-weight: 400; line-height: 1.2; margin-bottom: 2rem;
-    }
-    .about-text h2 em { font-style: italic; color: #ffd98a; }
-    .about-text p {
-      font-size: clamp(1rem, 1.5vw, 1.25rem);
-      line-height: 1.9; color: rgba(232,237,245,0.88);
-      margin-bottom: 1.5rem;
-    }
-    .book-card {
-      background: rgba(0,0,0,0.45);
-      border: 1px solid rgba(255,255,255,0.16);
-      padding: 3rem 2.5rem;
-      position: relative; overflow: hidden;
-      backdrop-filter: blur(12px);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .book-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.45), 0 0 50px rgba(200,168,75,0.2);
-    }
-    .book-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0;
-      width: 4px; height: 100%;
-      background: linear-gradient(to bottom, var(--gold), #7fffda);
-    }
-    .book-card-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem; font-weight: 400; line-height: 1.3; margin-bottom: 0.5rem;
-    }
-    .book-card-subtitle {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
-      color: #7fffda; margin-bottom: 2rem;
-      text-shadow: 0 0 10px rgba(127,255,218,0.5);
-    }
-    .book-card-author {
-      font-size: 1rem; color: rgba(232,237,245,0.7);
-      margin-bottom: 2.5rem; font-style: italic;
-    }
-    .book-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; }
-    .tag {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.55rem; letter-spacing: 0.15em; text-transform: uppercase;
-      padding: 0.35rem 0.8rem;
-      border: 1px solid rgba(255,255,255,0.22);
-      color: rgba(232,237,245,0.75);
-      transition: all 0.3s;
-    }
-    .tag:hover { border-color: var(--gold); color: var(--gold); }
-
-    .divider {
-      display: flex; align-items: center; gap: 1.5rem;
-      padding: 0 10vw; margin: 2rem 0;
-    }
-    .divider-line {
-      flex: 1; height: 1px;
-      background: linear-gradient(to right, transparent, rgba(255,255,255,0.18), transparent);
-    }
-    .divider-icon {
-      color: var(--gold); font-size: 1.2rem;
-      text-shadow: 0 0 18px rgba(200,168,75,0.7);
-    }
-
-    .chapters-header { margin-bottom: 4rem; }
-    .chapters-header h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4vw, 3rem); font-weight: 400;
-    }
-    .chapter-list { display: flex; flex-direction: column; }
-    .chapter-item {
-      display: grid; grid-template-columns: 60px 1fr auto;
-      align-items: center; gap: 2rem;
-      padding: 1.8rem 1rem;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-      cursor: pointer; transition: all 0.3s ease;
-      text-decoration: none; color: inherit; border-radius: 4px;
-    }
-    .chapter-item:hover {
-      background: rgba(255,255,255,0.06);
-      padding-left: 2rem;
-      border-bottom-color: rgba(200,168,75,0.45);
-    }
-    .chapter-item:hover .chapter-num {
-      color: var(--gold);
-      text-shadow: 0 0 12px rgba(200,168,75,0.6);
-    }
-    .chapter-num {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem; color: rgba(255,255,255,0.35);
-      letter-spacing: 0.1em; transition: all 0.3s;
-    }
-    .chapter-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.1rem, 2vw, 1.4rem); font-weight: 400;
-    }
-    .chapter-arrow {
-      color: rgba(255,255,255,0.25); font-size: 1.2rem; transition: all 0.3s;
-    }
-    .chapter-item:hover .chapter-arrow { color: var(--gold); transform: translateX(6px); }
-    .chapter-soon { cursor: default; pointer-events: none; }
-    .chapter-soon:hover { background: transparent; border-color: rgba(255,255,255,0.06); transform: none; }
-
-    .author-inner { max-width: 660px; }
-    .author-inner h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4vw, 3rem); font-weight: 400; margin-bottom: 2rem;
-    }
-    .author-inner p {
-      font-size: clamp(1rem, 1.5vw, 1.2rem);
-      line-height: 1.9; color: rgba(232,237,245,0.88); margin-bottom: 1.5rem;
-    }
-    .author-sig {
-      font-family: 'Playfair Display', serif;
-      font-style: italic; font-size: 1.8rem; color: var(--gold);
-      margin-top: 2.5rem;
-      text-shadow: 0 0 20px rgba(200,168,75,0.5);
-    }
-
-    footer {
-      padding: 4rem 10vw;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 1.5rem;
-      background: rgba(0,0,0,0.35);
-      backdrop-filter: blur(12px);
-    }
-    .footer-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem; font-style: italic; color: var(--gold);
-      text-shadow: 0 0 18px rgba(200,168,75,0.5);
-    }
-    .footer-note {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase;
-      color: rgba(255,255,255,0.32);
-    }
-
-    .reveal {
-      opacity: 0; transform: translateY(30px);
-      transition: opacity 0.9s ease, transform 0.9s ease;
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
   </style>
 </head>
 <body>
-
-<canvas id="sky-canvas"></canvas>
-
-<nav>
-  <a href="#" class="nav-brand">Irene Lee</a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#chapters">Read</a></li>
-    <li><a href="#author">Author</a></li>
-  </ul>
-</nav>
-
-<div class="content">
-
-  <section class="hero">
-    <div class="hero-content">
-      <p class="byline">A novel by Irene Lee</p>
-      <h1 class="hero-title">
-        What Was Carried,<br>
-        <em>What Was Lost</em>
-      </h1>
-      <p class="hero-subtitle">The Last Boat South</p>
-      <p class="hero-desc">
-        A story of passage, memory, and the things we hold onto —<br>
-        and the ones that slip beneath the waves.
-      </p>
-      <div class="cta-group">
-        <a href="#chapters" class="btn btn-primary">Read the Book</a>
-        <a href="#about" class="btn btn-ghost">Learn More</a>
-      </div>
+  <div class="page-wrapper">
+    <div class="hero">
+      <p class="hero-byline">By Irene Lee</p>
+      <h1 class="hero-title">The Last Ship South</h1>
+      <div class="hero-rule"></div>
+      <p class="hero-description">A story of family, survival, and the long journey away from everything you have ever known.</p>
     </div>
-    <div class="scroll-hint">
-      <span>Scroll</span>
-      <div class="scroll-line"></div>
-    </div>
-  </section>
 
-  <section class="section" id="about">
-    <div class="glass-card reveal">
-      <div class="about-grid">
-        <div class="about-text">
-          <div class="section-label">About the Book</div>
-          <h2>A voyage that <em>changes everything</em></h2>
-          <p>Set against the vast and restless sea, this is a story about what it means to leave — and what it truly means to arrive. With each mile traveled south, the past becomes both anchor and compass.</p>
-          <p>Part adventure, part meditation on loss and belonging, <em>What Was Carried, What Was Lost</em> asks: when you can only take so much, what do you choose?</p>
-        </div>
-        <div>
-          <div class="book-card">
-            <div class="book-card-title">What Was Carried,<br>What Was Lost</div>
-            <div class="book-card-subtitle">The Last Boat South</div>
-            <div class="book-card-author">by Irene Lee</div>
-            <div class="book-tags">
-              <span class="tag">Adventure</span>
-              <span class="tag">Coming of Age</span>
-              <span class="tag">Sea Voyage</span>
-              <span class="tag">Fiction</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"><div class="divider-line"></div><span class="divider-icon">⚓</span><div class="divider-line"></div></div>
-
-  <section class="section" id="chapters">
-    <div class="glass-card reveal">
-      <div class="chapters-header">
-        <div class="section-label">The Story</div>
-        <h2>Read the Chapters</h2>
-      </div>
-      <div class="chapter-list" id="chapter-list"></div>
-    </div>
-  </section>
-
-  <div class="divider"><div class="divider-line"></div><span class="divider-icon">✦</span><div class="divider-line"></div></div>
-
-  <section class="section" id="author">
-    <div class="glass-card reveal">
-      <div class="section-label">The Author</div>
-      <div class="author-inner">
-        <h2>About Irene Lee</h2>
-        <p>Irene Lee is a young writer with a passion for adventure stories and the ocean. She wrote <em>What Was Carried, What Was Lost</em> as an exploration of courage, memory, and the journeys that define us.</p>
-        <p>This is her first published work — and the beginning of many voyages to come.</p>
-        <div class="author-sig">— Irene Lee</div>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <span class="footer-name">Irene Lee</span>
-    <span class="footer-note">irenelee.org &nbsp;·&nbsp; All rights reserved</span>
-  </footer>
-</div>
-
-<script>
-// ══════════════════════════════
-//  SKY CANVAS
-// ══════════════════════════════
-const canvas = document.getElementById('sky-canvas');
-const ctx = canvas.getContext('2d');
-const timeLabel = document.getElementById('time-label');
-
-function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-resize();
-window.addEventListener('resize', resize);
-
-// Stars
-const stars = Array.from({length: 130}, () => ({
-  x: Math.random(),
-  y: Math.random() * 0.70,
-  size: Math.random() * 2.8 + 0.6,
-  phase: Math.random() * Math.PI * 2,
-  speed: Math.random() * 0.6 + 0.3,
-  brightness: Math.random() * 0.5 + 0.55
-}));
-
-// Shooting stars
-const shootingStars = [];
-let nextShoot = 3 + Math.random() * 5;
-
-function spawnShootingStar() {
-  shootingStars.push({
-    x: Math.random() * 0.7 + 0.05,
-    y: Math.random() * 0.35 + 0.03,
-    len: 0.08 + Math.random() * 0.1,
-    angle: Math.PI / 4 + (Math.random() - 0.5) * 0.4,
-    speed: 0.18 + Math.random() * 0.15,
-    progress: 0,
-    alpha: 0.9 + Math.random() * 0.1,
-  });
-}
-
-// Wave rows
-const waves = [
-  { y: 0.765, amp: 22, freq: 0.007,  spd: 0.55, alpha: 0.52, w: 3.5 },
-  { y: 0.800, amp: 16, freq: 0.011,  spd: 0.80, alpha: 0.40, w: 2.8 },
-  { y: 0.832, amp: 11, freq: 0.016,  spd: 0.45, alpha: 0.30, w: 2.2 },
-  { y: 0.860, amp:  7, freq: 0.024,  spd: 1.00, alpha: 0.20, w: 1.6 },
-  { y: 0.890, amp:  4, freq: 0.035,  spd: 0.65, alpha: 0.14, w: 1.1 },
-];
-
-let animTime = 0;
-let scrollProgress = 0;
-
-function lerp(a, b, t) { return a + (b - a) * t; }
-
-function hexToRgb(hex) {
-  const r = parseInt(hex.slice(1,3),16);
-  const g = parseInt(hex.slice(3,5),16);
-  const b = parseInt(hex.slice(5,7),16);
-  return [r,g,b];
-}
-function lerpHex(c1, c2, t) {
-  const [r1,g1,b1] = hexToRgb(c1);
-  const [r2,g2,b2] = hexToRgb(c2);
-  return `rgb(${Math.round(lerp(r1,r2,t))},${Math.round(lerp(g1,g2,t))},${Math.round(lerp(b1,b2,t))})`;
-}
-
-// ── FIXED NIGHT SKY with northern-lights green tints + scroll-into-ocean ──
-function draw(ts) {
-  animTime = ts / 1000;
-  const W = canvas.width, H = canvas.height;
-
-  // As user scrolls, we transition from night sky → underwater
-  // scrollProgress 0 = full sky, 1 = deep underwater
-  const diveDepth = Math.min(scrollProgress * 1.4, 1.0); // reaches full dive at ~70% scroll
-
-  // Sky — fades to deep ocean teal as you scroll
-  const skyTop    = diveDepth < 0.5 ? '#010208' : `rgba(0,${Math.round(8 + diveDepth*30)},${Math.round(8 + diveDepth*60)},1)`;
-  const skyMid    = diveDepth < 0.3 ? '#030d14' : `rgba(0,${Math.round(13 + diveDepth*40)},${Math.round(20 + diveDepth*80)},1)`;
-  const skyBot    = diveDepth < 0.2 ? '#041a18' : `rgba(0,${Math.round(26 + diveDepth*50)},${Math.round(24 + diveDepth*90)},1)`;
-
-  const sg = ctx.createLinearGradient(0, 0, 0, H * 0.85);
-  sg.addColorStop(0,   skyTop);
-  sg.addColorStop(0.3, skyMid);
-  sg.addColorStop(0.6, skyBot);
-  sg.addColorStop(1,   '#060e1e');
-  ctx.fillStyle = sg;
-  ctx.fillRect(0, 0, W, H);
-
-  // Underwater teal flood — rises from bottom as you scroll
-  if (diveDepth > 0.1) {
-    const floodH = H * (diveDepth - 0.1) * 1.1;
-    const floodGrad = ctx.createLinearGradient(0, H - floodH, 0, H);
-    floodGrad.addColorStop(0, `rgba(0,40,50,0)`);
-    floodGrad.addColorStop(0.3, `rgba(0,55,65,${diveDepth * 0.6})`);
-    floodGrad.addColorStop(1, `rgba(0,30,45,${diveDepth * 0.9})`);
-    ctx.fillStyle = floodGrad;
-    ctx.fillRect(0, H - floodH, W, floodH);
-  }
-
-  // Caustic light rays when deep enough
-  if (diveDepth > 0.5) {
-    const rayAlpha = (diveDepth - 0.5) * 0.15;
-    for (let r = 0; r < 5; r++) {
-      const rx = W * (0.1 + r * 0.2 + 0.04 * Math.sin(animTime * 0.3 + r));
-      const rg = ctx.createLinearGradient(rx, 0, rx + W * 0.08, H);
-      rg.addColorStop(0, `rgba(100,220,200,${rayAlpha})`);
-      rg.addColorStop(1, 'transparent');
-      ctx.fillStyle = rg;
-      ctx.beginPath();
-      ctx.moveTo(rx - W*0.02, 0);
-      ctx.lineTo(rx + W*0.08, H);
-      ctx.lineTo(rx + W*0.1,  H);
-      ctx.lineTo(rx,          0);
-      ctx.fill();
-    }
-  }
-
-  // Northern lights — subtle green aurora shimmer
-  const auroraTime = animTime * 0.18;
-  const auroraGrad = ctx.createLinearGradient(0, H*0.05, 0, H*0.5);
-  const a1 = 0.055 + 0.025 * Math.sin(auroraTime);
-  const a2 = 0.035 + 0.02  * Math.sin(auroraTime * 1.3 + 1);
-  const a3 = 0.02  + 0.015 * Math.sin(auroraTime * 0.7 + 2);
-  auroraGrad.addColorStop(0,   `rgba(26,107,90,${a1})`);
-  auroraGrad.addColorStop(0.3, `rgba(20,80,70,${a2})`);
-  auroraGrad.addColorStop(0.7, `rgba(10,50,60,${a3})`);
-  auroraGrad.addColorStop(1,   'transparent');
-  ctx.fillStyle = auroraGrad;
-  ctx.fillRect(0, 0, W, H);
-
-  // Second aurora band — slight horizontal drift
-  const auroraGrad2 = ctx.createLinearGradient(
-    W * (0.3 + 0.05 * Math.sin(auroraTime * 0.5)), H*0.1,
-    W * (0.7 + 0.05 * Math.cos(auroraTime * 0.4)), H*0.45
-  );
-  const b1 = 0.03 + 0.015 * Math.sin(auroraTime * 1.1 + 0.5);
-  auroraGrad2.addColorStop(0,   'transparent');
-  auroraGrad2.addColorStop(0.4, `rgba(42,140,100,${b1})`);
-  auroraGrad2.addColorStop(1,   'transparent');
-  ctx.fillStyle = auroraGrad2;
-  ctx.fillRect(0, 0, W, H);
-
-  // Moon — fades out as you dive underwater
-  const moonFade = Math.max(0, 1 - diveDepth * 3.5);
-  if (moonFade > 0.01) {
-    const mx = W * 0.22, my = H * 0.16, mr = 24;
-    const mg = ctx.createRadialGradient(mx, my, 0, mx, my, mr * 4);
-    mg.addColorStop(0, `rgba(180,215,200,${0.28 * moonFade})`);
-    mg.addColorStop(1, 'transparent');
-    ctx.fillStyle = mg;
-    ctx.beginPath(); ctx.arc(mx, my, mr * 4, 0, Math.PI * 2); ctx.fill();
-    ctx.beginPath(); ctx.arc(mx, my, mr, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(255,252,235,${moonFade})`; ctx.fill();
-    ctx.beginPath(); ctx.arc(mx - mr*0.2, my - mr*0.15, mr * 0.85, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(5,12,20,${0.92 * moonFade})`; ctx.fill();
-  }
-  const mx = W * 0.22; // keep mx available for reflection below
-
-  // Stars — fade out as you dive underwater
-  const starVis2 = Math.max(0, 1 - diveDepth * 2.5);
-  if (starVis2 > 0.01) {
-    stars.forEach(s => {
-      const twinkle = 0.55 + 0.45 * Math.sin(s.phase + animTime * s.speed);
-      const a = starVis2 * s.brightness * twinkle;
-      ctx.beginPath();
-      ctx.arc(s.x * W, s.y * H, s.size, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255,255,235,${a})`;
-      ctx.fill();
-      if (s.size > 1.8 && a > 0.4) {
-        ctx.strokeStyle = `rgba(255,255,220,${a * 0.55})`; ctx.lineWidth = 0.7;
-        const cx = s.x*W, cy = s.y*H, len = s.size * 4;
-        ctx.beginPath();
-        ctx.moveTo(cx-len, cy); ctx.lineTo(cx+len, cy);
-        ctx.moveTo(cx, cy-len); ctx.lineTo(cx, cy+len);
-        ctx.stroke();
-      }
-    });
-
-    // Shooting stars
-    nextShoot -= 0.016;
-    if (nextShoot <= 0) {
-      spawnShootingStar();
-      nextShoot = 4 + Math.random() * 7;
-    }
-    for (let i = shootingStars.length - 1; i >= 0; i--) {
-      const ss = shootingStars[i];
-      ss.progress += ss.speed * 0.016;
-      if (ss.progress >= 1) { shootingStars.splice(i, 1); continue; }
-      const fade = ss.progress < 0.2
-        ? ss.progress / 0.2
-        : ss.progress > 0.7
-        ? 1 - (ss.progress - 0.7) / 0.3
-        : 1;
-      const headX = (ss.x + Math.cos(ss.angle) * ss.len * ss.progress) * W;
-      const headY = (ss.y + Math.sin(ss.angle) * ss.len * ss.progress) * H;
-      const tailX = (ss.x + Math.cos(ss.angle) * ss.len * Math.max(0, ss.progress - 0.35)) * W;
-      const tailY = (ss.y + Math.sin(ss.angle) * ss.len * Math.max(0, ss.progress - 0.35)) * H;
-      const grad = ctx.createLinearGradient(tailX, tailY, headX, headY);
-      grad.addColorStop(0, 'rgba(255,255,245,0)');
-      grad.addColorStop(1, `rgba(255,255,245,${ss.alpha * fade * starVis2})`);
-      ctx.beginPath(); ctx.moveTo(tailX, tailY); ctx.lineTo(headX, headY);
-      ctx.strokeStyle = grad; ctx.lineWidth = 1.5; ctx.stroke();
-      ctx.beginPath(); ctx.arc(headX, headY, 1.5, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255,255,245,${ss.alpha * fade * starVis2})`; ctx.fill();
-    }
-  }
-
-  // Horizon glow — teal/green tint
-  const hg = ctx.createLinearGradient(0, H * 0.55, 0, H * 0.82);
-  hg.addColorStop(0, `rgba(26,107,90,0.12)`);
-  hg.addColorStop(1, 'transparent');
-  ctx.fillStyle = hg; ctx.fillRect(0, 0, W, H);
-
-  // (ocean depth handled by the underwater flood gradient above)
-
-  // Waves — fade OUT as you dive (so you feel fully submerged)
-  const waveAlphaScale = Math.max(0, 1 - diveDepth * 3.5);
-  const waveRise = diveDepth * 0.28;
-  if (waveAlphaScale > 0.01) {
-    waves.forEach(wv => {
-      const wy = H * (wv.y - waveRise);
-      ctx.beginPath(); ctx.moveTo(0, wy);
-      for (let x = 0; x <= W; x += 2) {
-        const y = wy + Math.sin(x * wv.freq + animTime * wv.spd) * wv.amp
-                     + Math.sin(x * wv.freq * 1.7 + animTime * wv.spd * 0.6) * wv.amp * 0.4;
-        ctx.lineTo(x, y);
-      }
-      ctx.strokeStyle = `rgba(255,255,255,${wv.alpha * waveAlphaScale})`;
-      ctx.lineWidth = wv.w; ctx.stroke();
-
-      // shimmer highlight
-      ctx.beginPath(); ctx.moveTo(0, wy);
-      for (let x = 0; x <= W; x += 2) {
-        const y = wy + Math.sin(x * wv.freq + animTime * wv.spd) * wv.amp
-                     + Math.sin(x * wv.freq * 1.7 + animTime * wv.spd * 0.6) * wv.amp * 0.4 - 2.5;
-        ctx.lineTo(x, y);
-      }
-      ctx.strokeStyle = `rgba(150,255,220,${wv.alpha * 0.4 * waveAlphaScale})`;
-      ctx.lineWidth = wv.w * 0.4; ctx.stroke();
-    });
-  }
-
-  // Boat — elegant minimal silhouette, fades as you dive
-  const boatAlpha = Math.max(0, 1 - diveDepth * 3.5);
-  if (boatAlpha > 0.01) {
-    const bx = W * 0.82;
-    const topWaveY = H * (waves[0].y - waveRise)
-      + Math.sin(bx * waves[0].freq + animTime * waves[0].spd) * waves[0].amp;
-    const rock = Math.sin(animTime * 0.55) * 1.8;
-    const tilt = Math.sin(animTime * 0.55) * 0.022;
-
-    ctx.save();
-    ctx.globalAlpha = boatAlpha;
-    ctx.translate(bx, topWaveY + rock);
-    ctx.rotate(tilt);
-
-    // Hull — clean tapered shape, filled with a single dark tone
-    ctx.beginPath();
-    ctx.moveTo(-44, 0);
-    ctx.bezierCurveTo(-44, 0, -36, 14, 0, 16);
-    ctx.bezierCurveTo(36, 14, 46, 0, 46, 0);
-    ctx.closePath();
-    ctx.fillStyle = 'rgba(18,32,58,0.95)';
-    ctx.fill();
-
-    // Thin waterline highlight
-    ctx.beginPath();
-    ctx.moveTo(-44, 0);
-    ctx.bezierCurveTo(-36, -2, 36, -2, 46, 0);
-    ctx.strokeStyle = 'rgba(160,210,230,0.35)';
-    ctx.lineWidth = 1;
-    ctx.stroke();
-
-    // Mast — single thin vertical line
-    ctx.beginPath();
-    ctx.moveTo(2, 0);
-    ctx.lineTo(2, -62);
-    ctx.strokeStyle = 'rgba(200,220,240,0.65)';
-    ctx.lineWidth = 1.2;
-    ctx.stroke();
-
-    // Sail — one clean triangle, translucent
-    ctx.beginPath();
-    ctx.moveTo(2, -58);
-    ctx.lineTo(2, -8);
-    ctx.lineTo(34, -28);
-    ctx.closePath();
-    ctx.fillStyle = 'rgba(210,230,245,0.18)';
-    ctx.fill();
-    ctx.strokeStyle = 'rgba(200,220,240,0.3)';
-    ctx.lineWidth = 0.8;
-    ctx.stroke();
-
-    // Forestay — single diagonal rigging line
-    ctx.beginPath();
-    ctx.moveTo(2, -58);
-    ctx.lineTo(-28, 0);
-    ctx.strokeStyle = 'rgba(200,220,240,0.2)';
-    ctx.lineWidth = 0.7;
-    ctx.stroke();
-
-    ctx.restore();
-  }
-
-  requestAnimationFrame(draw);
-}
-requestAnimationFrame(draw);
-
-// Scroll (progress kept for potential future use)
-window.addEventListener('scroll', () => {
-  const max = document.body.scrollHeight - window.innerHeight;
-  scrollProgress = Math.min(window.scrollY / max, 1);
-}, { passive: true });
-
-// Chapters
-const list = document.getElementById('chapter-list');
-for (let i = 1; i <= 29; i++) {
-  const el = document.createElement(i <= 13 ? 'a' : 'div');
-  if (i <= 13) {
-    el.href = `chapter-${i}.html`;
-    el.className = 'chapter-item';
-    el.innerHTML = `
-      <span class="chapter-num">${String(i).padStart(2,'0')}</span>
-      <span class="chapter-title">Chapter ${i}</span>
-      <span class="chapter-arrow">→</span>
-    `;
-  } else {
-    el.className = 'chapter-item chapter-soon';
-    el.innerHTML = `
-      <span class="chapter-num" style="opacity:0.35">${String(i).padStart(2,'0')}</span>
-      <span class="chapter-title" style="opacity:0.35">Chapter ${i}</span>
-      <span class="chapter-arrow" style="opacity:0.35; font-family:'Space Mono',monospace; font-size:0.6rem; letter-spacing:0.15em;">Coming Soon</span>
-    `;
-  }
-  list.appendChild(el);
-}
-
-// Reveal on scroll
-const obs = new IntersectionObserver(es => {
-  es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
-</script>
+    <p class="toc-label">Table of Contents</p>
+    <ul class="chapter-list">
+      <li class="chapter-item"><a href="chapter-1.html" class="chapter-link"><span class="chapter-num">Chapter 1</span><span class="chapter-preview">My father and brother had fled. South Korean troops storming towards our lands…</span></a></li>
+      <li class="chapter-item"><a href="chapter-2.html" class="chapter-link"><span class="chapter-num">Chapter 2</span><span class="chapter-preview">A sound like thunder ripped through the house — the violent crash of wood…</span></a></li>
+      <li class="chapter-item"><a href="chapter-3.html" class="chapter-link"><span class="chapter-num">Chapter 3</span><span class="chapter-preview">Oppa left in the dead of night, when all the nearby houses were still…</span></a></li>
+      <li class="chapter-item"><a href="chapter-4.html" class="chapter-link"><span class="chapter-num">Chapter 4</span><span class="chapter-preview">I was wrong. Hell is not when The Leader condemns you to punishment…</span></a></li>
+      <li class="chapter-item"><a href="chapter-5.html" class="chapter-link"><span class="chapter-num">Chapter 5</span><span class="chapter-preview">I sat in the living room in silence, with Yeomjae in my lap…</span></a></li>
+      <li class="chapter-item"><a href="chapter-6.html" class="chapter-link"><span class="chapter-num">Chapter 6</span><span class="chapter-preview">Frantic yet quiet knocking woke me and Eonni in the dead of night…</span></a></li>
+      <li class="chapter-item"><a href="chapter-7.html" class="chapter-link"><span class="chapter-num">Chapter 7</span><span class="chapter-preview">Rain attacked us like bullets as it struck our bodies, falling so fast…</span></a></li>
+      <li class="chapter-item"><a href="chapter-8.html" class="chapter-link"><span class="chapter-num">Chapter 8</span><span class="chapter-preview">After crossing the second mountain, we finally saw the small village port…</span></a></li>
+      <li class="chapter-item"><a href="chapter-9.html" class="chapter-link"><span class="chapter-num">Chapter 9</span><span class="chapter-preview">The village was crowded with people, its narrow streets packed with merchants…</span></a></li>
+      <li class="chapter-item"><a href="chapter-10.html" class="chapter-link"><span class="chapter-num">Chapter 10</span><span class="chapter-preview">Once we finally got to the village, we noted that it seemed busier than before…</span></a></li>
+      <li class="chapter-item"><a href="chapter-11.html" class="chapter-link"><span class="chapter-num">Chapter 11</span><span class="chapter-preview">By the time we reached the village, the sky had turned dark, shadows pooling…</span></a></li>
+      <li class="chapter-item"><a href="chapter-12.html" class="chapter-link"><span class="chapter-num">Chapter 12</span><span class="chapter-preview">The light from the ship extinguished as multiple guns fired into the air…</span></a></li>
+      <li class="chapter-item"><a href="chapter-13.html" class="chapter-link"><span class="chapter-num">Chapter 13</span><span class="chapter-preview">I landed on top of a young man's back, my legs submerged in the water…</span></a></li>
+      <li class="chapter-item"><a href="chapter-14.html" class="chapter-link"><span class="chapter-num">Chapter 14</span><span class="chapter-preview">We rushed to the edges of the boat, frantically searching the dark sea…</span></a></li>
+      <li class="chapter-item"><a href="chapter-15.html" class="chapter-link"><span class="chapter-num">Chapter 15</span><span class="chapter-preview">The first island we arrived at was bare, with barely any trees nor foliage…</span></a></li>
+      <li class="chapter-item"><a href="chapter-16.html" class="chapter-link"><span class="chapter-num">Chapter 16</span><span class="chapter-preview">Every two days, another tent was left untouched, its flaps rustling in the wind…</span></a></li>
+      <li class="chapter-item"><a href="chapter-17.html" class="chapter-link"><span class="chapter-num">Chapter 17</span><span class="chapter-preview">As we rowed south, we discovered another island which Halmeoni claimed to be…</span></a></li>
+      <li class="chapter-item"><a href="chapter-18.html" class="chapter-link"><span class="chapter-num">Chapter 18</span><span class="chapter-preview">The third island saved us. We were on the boat for hours until we saw land…</span></a></li>
+      <li class="chapter-item"><a href="chapter-19.html" class="chapter-link"><span class="chapter-num">Chapter 19</span><span class="chapter-preview">As we explored the mountains, we found enough material to make a shelter…</span></a></li>
+      <li class="chapter-item"><a href="chapter-20.html" class="chapter-link"><span class="chapter-num">Chapter 20</span><span class="chapter-preview">Eonni placed another stick into my arms, the load becoming larger and larger…</span></a></li>
+      <li class="chapter-item"><a href="chapter-21.html" class="chapter-link"><span class="chapter-num">Chapter 21</span><span class="chapter-preview">It took Abeoji the whole morning to cut down one tree, a small one at that…</span></a></li>
+      <li class="chapter-item"><a href="chapter-22.html" class="chapter-link"><span class="chapter-num">Chapter 22</span><span class="chapter-preview">When we arrived at the beach, we started asking where the new man was…</span></a></li>
+      <li class="chapter-item"><a href="chapter-23.html" class="chapter-link"><span class="chapter-num">Chapter 23</span><span class="chapter-preview">He slept for two days straight, and we almost thought that he really was dead…</span></a></li>
+      <li class="chapter-item"><a href="chapter-24.html" class="chapter-link"><span class="chapter-num">Chapter 24</span><span class="chapter-preview">It was too much for him — struggling to survive while trying to reunite with us…</span></a></li>
+      <li class="chapter-item"><a href="chapter-25.html" class="chapter-link"><span class="chapter-num">Chapter 25</span><span class="chapter-preview">We all scrambled out of the ship. The sunlight burned my eyes and scorched my skin…</span></a></li>
+      <li class="chapter-item"><a href="chapter-26.html" class="chapter-link"><span class="chapter-num">Chapter 26</span><span class="chapter-preview">Our space at the refugee camp consisted of two large straw mats on concrete…</span></a></li>
+      <li class="chapter-item"><a href="chapter-27.html" class="chapter-link"><span class="chapter-num">Chapter 27</span><span class="chapter-preview">Soon after Halmeoni died, Eonni and I found work at a match factory…</span></a></li>
+      <li class="chapter-item"><a href="chapter-28.html" class="chapter-link"><span class="chapter-num">Chapter 28</span><span class="chapter-preview">We finally moved out of the camp after we were able to rent a small house…</span></a></li>
+      <li class="chapter-item"><a href="chapter-29.html" class="chapter-link"><span class="chapter-num">Chapter 29</span><span class="chapter-preview">People call us lucky — survivors. I'm not sure what to do with that word…</span></a></li>
+    </ul>
+  </div>
 </body>
 </html>
