@@ -6,489 +6,157 @@
   <title>Chapter 6 — What Was Carried, What Was Lost</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
-    :root {
-      --ink: #0a0e1a;
-      --fog: #b8c4d8;
-      --salt: #e8edf5;
-      --tide: #2a4a6b;
-      --wave: #1a6b5a;
-      --gold: #c8a84b;
-    }
+    :root { --ink: #0a0e1a; --salt: #e8edf5; --gold: #c8a84b; }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body {
-      background: #0a0e1a;
-      color: var(--salt);
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      overflow-x: hidden;
-      min-height: 100vh;
-    }
-    #sky-canvas {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
+    body { background: #0a0e1a; color: var(--salt); font-family: 'Cormorant Garamond', serif; font-weight: 300; overflow-x: hidden; min-height: 100vh; }
+    #sky-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
     .content { position: relative; z-index: 2; }
-
-    /* NAV */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 1.5rem 10vw;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
-      backdrop-filter: blur(6px);
-    }
-    .nav-brand {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 1.1rem;
-      color: #fff;
-      text-decoration: none;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.6);
-    }
-    .nav-toc {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.75);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.5rem 10vw; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent); backdrop-filter: blur(6px); }
+    .nav-brand { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; color: #fff; text-decoration: none; text-shadow: 0 2px 12px rgba(0,0,0,0.6); }
+    .nav-toc { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.75); text-decoration: none; transition: color 0.3s; }
     .nav-toc:hover { color: #fff; }
-
-    /* CHAPTER PAGE */
-    .chapter-wrapper {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 9rem 2rem 6rem;
-    }
-
-    .chapter-header {
-      text-align: center;
-      margin-bottom: 4rem;
-      opacity: 0;
-      animation: fadeUp 1s 0.3s forwards;
-    }
-    .chapter-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: #7fffda;
-      text-shadow: 0 0 14px rgba(127,255,218,0.5);
-      display: block;
-      margin-bottom: 1rem;
-    }
-    .chapter-number {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
-      font-weight: 400;
-      color: var(--salt);
-      text-shadow: 0 4px 30px rgba(0,0,0,0.6);
-      display: block;
-      margin-bottom: 1.5rem;
-    }
-    .header-rule {
-      width: 60px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      margin: 0 auto;
-    }
-
-    /* GLASS CARD */
-    .glass-card {
-      background: rgba(0,0,0,0.38);
-      backdrop-filter: blur(22px);
-      -webkit-backdrop-filter: blur(22px);
-      border: 1px solid rgba(255,255,255,0.14);
-      padding: 3.5rem 3rem;
-      position: relative;
-      overflow: hidden;
-      opacity: 0;
-      animation: fadeUp 1s 0.5s forwards;
-    }
-    .glass-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0;
-      width: 4px; height: 100%;
-      background: linear-gradient(to bottom, var(--gold), #7fffda);
-    }
-
-    /* CHAPTER TEXT */
-    .chapter-content p {
-      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
-      line-height: 1.95;
-      color: rgba(232,237,245,0.92);
-      margin-bottom: 1.5em;
-      font-weight: 300;
-    }
-    .chapter-content em {
-      font-style: italic;
-      color: rgba(255, 249, 225, 0.95);
-    }
-    .chapter-content strong {
-      font-weight: 600;
-      color: var(--gold);
-    }
-    .section-divider {
-      text-align: center;
-      color: var(--gold);
-      font-size: 1rem;
-      letter-spacing: 0.5em;
-      margin: 2.5rem 0;
-      text-shadow: 0 0 18px rgba(200,168,75,0.5);
-    }
-
-    /* BOTTOM NAV */
-    .bottom-nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 3.5rem;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      opacity: 0;
-      animation: fadeUp 1s 0.7s forwards;
-    }
-    .nav-btn {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.6);
-      text-decoration: none;
-      padding: 0.6rem 1.2rem;
-      border: 1px solid rgba(255,255,255,0.15);
-      transition: all 0.3s;
-      background: rgba(255,255,255,0.05);
-      backdrop-filter: blur(4px);
-    }
-    .nav-btn:not(.disabled):hover {
-      color: var(--gold);
-      border-color: rgba(200,168,75,0.5);
-      background: rgba(200,168,75,0.08);
-      box-shadow: 0 0 20px rgba(200,168,75,0.15);
-    }
-    .nav-btn.disabled {
-      opacity: 0.25;
-      cursor: default;
-    }
-    .nav-btn-toc {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.58rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #7fffda;
-      text-decoration: none;
-      text-shadow: 0 0 10px rgba(127,255,218,0.4);
-      transition: color 0.3s, text-shadow 0.3s;
-    }
-    .nav-btn-toc:hover {
-      color: #fff;
-      text-shadow: 0 0 18px rgba(127,255,218,0.7);
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 600px) {
-      .chapter-wrapper { padding: 7rem 1.2rem 4rem; }
-      .glass-card { padding: 2rem 1.5rem; }
-    }
+    .chapter-wrapper { max-width: 720px; margin: 0 auto; padding: 9rem 2rem 6rem; }
+    .chapter-header { text-align: center; margin-bottom: 4rem; opacity: 0; animation: fadeUp 1s 0.3s forwards; }
+    .chapter-label { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: #7fffda; text-shadow: 0 0 14px rgba(127,255,218,0.5); display: block; margin-bottom: 1rem; }
+    .chapter-number { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; color: var(--salt); text-shadow: 0 4px 30px rgba(0,0,0,0.6); display: block; margin-bottom: 1.5rem; }
+    .header-rule { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 0 auto; }
+    .glass-card { background: rgba(0,0,0,0.38); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(255,255,255,0.14); padding: 3.5rem 3rem; position: relative; overflow: visible; opacity: 0; animation: fadeUp 1s 0.5s forwards; }
+    .glass-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, var(--gold), #7fffda); }
+    .chapter-content p { font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.95; color: rgba(232,237,245,0.92); margin-bottom: 1.5em; font-weight: 300; text-indent: 2em; }
+    .chapter-content p:first-of-type { text-indent: 0; }
+    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
+    .chapter-content strong { font-weight: 600; color: var(--gold); }
+    .section-divider { text-align: center; color: var(--gold); font-size: 1rem; letter-spacing: 0.5em; margin: 2.5rem 0; text-shadow: 0 0 18px rgba(200,168,75,0.5); }
+    .para-with-popup { position: relative; }
+    .glossary-popup { position: absolute; right: -230px; top: 0; width: 210px; background: rgba(5,12,28,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.12); padding: 0.85rem 1rem; z-index: 20; opacity: 0; pointer-events: none; transition: opacity 0.6s ease; }
+    .glossary-popup.visible { opacity: 1; }
+    .popup-entry { font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; line-height: 1.55; color: rgba(232,237,245,0.88); margin-bottom: 0.55rem; }
+    .popup-entry:last-child { margin-bottom: 0; }
+    .popup-word { font-style: italic; color: var(--gold); text-shadow: 0 0 10px rgba(200,168,75,0.4); }
+    .bottom-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.08); }
+    .nav-btn { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.6); text-decoration: none; padding: 0.6rem 1.2rem; border: 1px solid rgba(255,255,255,0.15); transition: all 0.3s; background: rgba(255,255,255,0.05); backdrop-filter: blur(4px); }
+    .nav-btn:not(.disabled):hover { color: var(--gold); border-color: rgba(200,168,75,0.5); background: rgba(200,168,75,0.08); box-shadow: 0 0 20px rgba(200,168,75,0.15); }
+    .nav-btn.disabled { opacity: 0.25; cursor: default; pointer-events: none; }
+    .nav-btn-toc { font-family: 'Space Mono', monospace; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: #7fffda; text-decoration: none; text-shadow: 0 0 10px rgba(127,255,218,0.4); transition: color 0.3s; }
+    .nav-btn-toc:hover { color: #fff; text-shadow: 0 0 18px rgba(127,255,218,0.7); }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 1000px) { .glossary-popup { right: auto; left: 0; top: auto; bottom: calc(100% + 8px); width: 100%; max-width: 100%; } }
+    @media (max-width: 600px) { .chapter-wrapper { padding: 7rem 1.2rem 4rem; } .glass-card { padding: 2rem 1.5rem; } }
   </style>
 </head>
 <body>
-
 <canvas id="sky-canvas"></canvas>
-
 <nav>
   <a href="index.html" class="nav-brand">Irene Lee</a>
-  <a href="index.html#chapters" class="nav-toc">← All Chapters</a>
+  <a href="index.html#chapters" class="nav-toc">&#8592; All Chapters</a>
 </nav>
-
 <div class="content">
   <div class="chapter-wrapper">
-
     <header class="chapter-header">
       <span class="chapter-label">What Was Carried, What Was Lost</span>
       <span class="chapter-number">Chapter 6</span>
       <div class="header-rule"></div>
     </header>
-
     <div class="glass-card">
       <article class="chapter-content">
-        <p>Frantic yet quiet knocking woke me and <em>Eonni</em> in the dead of night. I leapt from my warm blankets and ran to the back door. <em>Eonni</em> was behind me, her hair and eyes wild. We all shared the same thought, even though there were no words exchanged between us. Was <em>Oppa</em> home?</p>
-<p>Quickly opening the wooden door, I nearly screamed out loud when I didn't see <em>Oppa</em> stumble inside, but a strange man whom I had never seen before. His mouth and nose were covered with black cloth, and he towered over me, wearing all black.</p>
-<p>"Who are you?" <em>Eonni</em> bravely announced, pulling me behind her.</p>
-<p>"I'm a messenger." He held out a letter, "From your brother."</p>
-<p><em>Eonni</em> recoiled in shock then wrenched the letter out of his hand, ripping it open. Taejae and <em>Halmeoni</em> joined us from their bedrooms. She quickly skimmed the letter, her eyes widening with bewilderment. I tried to peer over her hunched body to read the contents but she quickly closed the letter and met the messenger's gaze with fiery eyes. I opened my mouth to protest but Halmeoni placed a hand on my shoulder, silencing me.</p>
-<p><em>Eonni</em> opened her mouth to speak. "How did you--"</p>
-<p>"Would you like to stay and rest? Perhaps have a meal?" Halmeoni suddenly interrupted her, taking a small step in front. "You must be very tired."</p>
-<p>"No, I must go. Thank you for the offer, but goodnight." He bowed and quietly snuck out the back door, closing it softly behind him, leaving us in the dark <em>living room</em>.</p>
-<p><em>Eonni</em> whipped her head towards <em>Halmeoni</em> with utter frustration etched into her face.</p>
-<p>"Why did you cut me off, <em>Halmeoni</em>? I was going to ask him very important questions about <em>Oppa</em>." Her hands balled into fists, her voice growing louder.</p>
-<p><em>Halmeoni</em> cut her a sharp look. "For someone who had just received news that her family is alive and safe, you do not sound grateful that the messenger went through that very long and dangerous journey in order to hand over that letter."</p>
-<p>"I-"</p>
-<p>"No, Jungjae," <em>Halmeoni</em> shook her head, "A favor given freely is not something you demand more from. Don't test that."</p>
-<p>In the stillness, I heard <em>Eonni</em>'s breathing settle. "I understand. I'm sorry for raising my voice."</p>
+        <p>Frantic yet quiet knocking woke me and <em>Eonni </em>in the dead of night. I leapt from my warm blankets and ran to the back door. <em>Eonni </em>was behind me, her hair and eyes wild. We all shared the same thought, even though there were no words exchanged between us. Was <em>Oppa </em>home?</p>
+<p>Quickly opening the wooden door, I nearly screamed out loud when I didn’t see <em>Oppa </em>stumble inside, but a strange man whom I had never seen before. His mouth and nose were covered with black cloth, and he towered over me, wearing all black.</p>
+<p>&emsp;“Who are you?” <em>Eonni </em>bravely announced, pulling me behind her.</p>
+<p>&emsp;“I’m a messenger.” He held out a letter, “From your brother.”</p>
+<p><em>Eonni </em>recoiled in shock then wrenched the letter out of his hand, ripping it open. Taejae and <em>Halmeoni</em> joined us from their bedrooms. She quickly skimmed the letter, her eyes widening with bewilderment. I tried to peer over her hunched body to read the contents but she quickly closed the letter and met the messenger’s gaze with fiery eyes. I opened my mouth to protest but Halmeoni placed a hand on my shoulder, silencing me.</p>
+<p>&emsp;<em>Eonni </em>opened her mouth to speak. “How did you–”</p>
+<p>&emsp;“Would you like to stay and rest? Perhaps have a meal?” Halmeoni suddenly interrupted her, taking a small step in front. “You must be very tired.”</p>
+<p>&emsp;“No, I must go. Thank you for the offer, but goodnight.” He bowed and quietly snuck out the back door, closing it softly behind him, leaving us in the dark living room.</p>
+<p><em>Eonni </em>whipped her head towards <em>Halmeoni </em>with utter frustration etched into her face.</p>
+<p>&emsp;“Why did you cut me off, <em>Halmeoni</em>? I was going to ask him very important questions about <em>Oppa</em>.” Her hands balled into fists, her voice growing louder.</p>
+<p>&emsp;<em>Halmeoni</em> cut her a sharp look. “For someone who had just received news that her family is alive and safe, you do not sound grateful that the messenger went through that very long and dangerous journey in order to hand over that letter.”</p>
+<p>“I-”</p>
+<p>“No, Jungjae,” <em>Halmeoni</em> shook her head, “A favor given freely is not something you demand more from. Don’t test that.”</p>
+<p>In the stillness, I heard <em>Eonni</em>’s breathing settle. “I understand. I’m sorry for raising my voice.”</p>
 <p>After a moment of awkward silence, we all huddled around <em>Halmeoni</em> as she read the letter aloud.</p>
-<p><em>Oppa</em> had acquired a boat.</p>
+<p><em>Oppa </em>had acquired a boat.</p>
 <p>He was now coming with <em>Abeoji</em>, and he had written instructions on where to meet.</p>
 <p>They were actually coming.</p>
-<p>I reread the word <em>boat</em> in the letter over and over again, as if I was waiting for something else to show up once I reread it enough. But no tears welled up in my eyes like the rest of my family. My eyes were dry, like I had already spent all the tears that were meant for this moment.</p>
+<p>I reread the word <em>boat </em>in the letter over and over again, as if I was waiting for something else to show up once I reread it enough. But no tears welled up in my eyes like the rest of my family. My eyes were dry, like I had already spent all the tears that were meant for this moment.</p>
 <p>When we got on the boat, it would be all over.</p>
-<p>I couldn't go back to sleep after that. I didn't know if it was because I was excited or just didn't care.</p>
+<p>I couldn’t go back to sleep after that. I didn’t know if it was because I was excited or just didn’t care.</p>
 <div class="section-divider">✦</div>
-<p>The sun seemed to say its farewells as it dipped into the horizon, the sky surrendering its vibrant colors to the dark black of night. We all sat alert in the middle of the living room, our belongings wrapped in swathes of cloth tied around our waists and backs. I had a small pouch around my waist, and Yeomjae wrapped around my back.</p>
-<p>"The villagers are going back home from their fields." Taejae observed from the window as he peeked through the curtains.</p>
-<p>"Good." <em>Eonni</em> said, fidgeting with the folds of her shirt. She then looked up at <em>Halmeoni</em>. "Will you be okay to make this long journey?"</p>
-<p>"What, and leave me behind?" Halmeoni scoffed, "You're funny if you think that."</p>
-<p><em>Eonni</em> snorted. I supported my chin with my hand, my elbow resting on my knee. My eyelids hung heavily, even though I had a good nap during the day. In a few hours, my life would change. For the better, I didn't know. But that was what <em>Oppa</em> and <em>Abeoji</em> promised, so I believed it to be so. Some part of me said that I shouldn't, but I had to.</p>
-<p>I joined Taejae by the window and peeked behind the curtain. It was a moonless night, with dark clouds covering everything. It blanketed the world in such blackness that I almost couldn't see the nearest house in front of me.</p>
-<p>"There will be a storm tonight." Halmeoni murmured from behind. "I can feel it in my bones."</p>
-<p>"Then escaping will be a bit easier, right?" Taejae asked from beside me. "Storms are loud."</p>
-<p>"Perhaps. Hopefully it will stay for the duration of the journey." <em>Eonni</em> nodded from her spot on the floor.</p>
-<p>I walked towards the wooden pitcher that stood on top of a shelf&mdash;the dinner table where it once sat had been destroyed&mdash;and poured water into a drinking cup that was next to it. The clean water swirled in the dark polished wood as I rocked it in my hand, observing the smooth movement of the liquid.</p>
+<p>&emsp;The sun seemed to say its farewells as it dipped into the horizon, the sky surrendering its vibrant colors to the dark black of night. We all sat alert in the middle of the living room, our belongings wrapped in swathes of cloth tied around our waists and backs. I had a small pouch around my waist, and Yeomjae wrapped around my back.</p>
+<p>“The villagers are going back home from their fields.” Taejae observed from the window as he peeked through the curtains.</p>
+<p>“Good.” <em>Eonni </em>said, fidgeting with the folds of her shirt. She then looked up at <em>Halmeoni</em>. “Will you be okay to make this long journey?”</p>
+<p>“What, and leave me behind?” Halmeoni scoffed, “You’re funny if you think that.”</p>
+<p><em>Eonni</em> snorted. I supported my chin with my hand, my elbow resting on my knee. My eyelids hung heavily, even though I had a good nap during the day. In a few hours, my life would change. For the better, I didn’t know. But that was what <em>Oppa</em> and <em>Abeoji</em> promised, so I believed it to be so. Some part of me said that I shouldn’t, but I had to.</p>
+<p>I joined Taejae by the window and peeked behind the curtain. It was a moonless night, with dark clouds covering everything. It blanketed the world in such blackness that I almost couldn’t see the nearest house in front of me.</p>
+<p>“There will be a storm tonight.” Halmeoni murmured from behind. “I can feel it in my bones.”</p>
+<p>“Then escaping will be a bit easier, right?” Taejae asked from beside me. “Storms are loud.”</p>
+<p>“Perhaps. Hopefully it will stay for the duration of the journey.” <em>Eonni </em>nodded from her spot on the floor.</p>
+<p>I walked towards the wooden pitcher that stood on top of a shelf—the dinner table where it once sat had been destroyed—and poured water into a drinking cup that was next to it. The clean water swirled in the dark polished wood as I rocked it in my hand, observing the smooth movement of the liquid.</p>
 <p><em>CRACK</em></p>
-<p>The water nearly toppled out of the cup as a strike of lightning roared in the distance. I heard Halmeoni chuckle, but I didn't know if she was laughing because I was startled or if she was right. Perhaps both.</p>
-<p>Settling myself with a breath, I tipped the cup onto my lips and took a long sip. The cool liquid slid down my throat in a way that made me shudder. It was a reminder of so many things. That this would be the very last time I would take a drink from my grandfather's well. That this would be my last moments in the place I called home.</p>
-<p>"We should pray for our safe travels," Halmeoni murmured.</p>
-<p>I snorted out of disbelief. "To who? The Leader?"</p>
-<p>She clicked her tongue in disapproval. "Don't address The Leader like that! Be ashamed, Hwajae. We had done wrong things, and now we are paying the price. The Leader will surely forgive us once the war is over. What has your school been teaching you?"</p>
-<p>"The wrong thing, apparently." I muttered to myself, quiet enough that <em>Halmeoni</em> didn't hear.</p>
+<p>The water nearly toppled out of the cup as a strike of lightning roared in the distance. I heard Halmeoni chuckle, but I didn’t know if she was laughing because I was startled or if she was right. Perhaps both.</p>
+<p>Settling myself with a breath, I tipped the cup onto my lips and took a long sip. The cool liquid slid down my throat in a way that made me shudder. It was a reminder of so many things. That this would be the very last time I would take a drink from my grandfather’s well. That this would be my last moments in the place I called home.</p>
+<p>&emsp;“We should pray for our safe travels,” Halmeoni murmured.</p>
+<p>&emsp;I snorted out of disbelief. “To who? The Leader?”</p>
+<p>She clicked her tongue in disapproval. “Don’t address The Leader like that! Be ashamed, Hwajae. We had done wrong things, and now we are paying the price. The Leader will surely forgive us once the war is over. What has your school been teaching you?”</p>
+<p>&emsp;“The wrong thing, apparently.” I muttered to myself, quiet enough that <em>Halmeoni</em> didn’t hear.</p>
 <p>The clock finally struck, filling the silence in our home and awakening our senses.</p>
-      </article>
 
+      </article>
       <nav class="bottom-nav">
-        <a href="chapter-5.html" class="nav-btn">← Previous</a>
-        <a href="index.html#chapters" class="nav-btn-toc">↑ Contents</a>
-        <a href="chapter-7.html" class="nav-btn">Next →</a>
+        <a href="chapter-5.html" class="nav-btn">&#8592; Previous</a>
+        <a href="index.html#chapters" class="nav-btn-toc">&#8593; Contents</a>
+        <a href="chapter-7.html" class="nav-btn">Next &#8594;</a>
       </nav>
     </div>
-
   </div>
 </div>
-
 <script>
-// ══════════════════════════════
-//  SKY CANVAS (same as index.html)
-// ══════════════════════════════
-const canvas = document.getElementById('sky-canvas');
-const ctx = canvas.getContext('2d');
-
-function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-resize();
-window.addEventListener('resize', resize);
-
-const stars = Array.from({length: 130}, () => ({
-  x: Math.random(),
-  y: Math.random() * 0.70,
-  size: Math.random() * 2.8 + 0.6,
-  phase: Math.random() * Math.PI * 2,
-  speed: Math.random() * 0.6 + 0.3,
-  brightness: Math.random() * 0.5 + 0.55
-}));
-
-const shootingStars = [];
-let nextShoot = 3 + Math.random() * 5;
-
-function spawnShootingStar() {
-  shootingStars.push({
-    x: Math.random() * 0.7 + 0.05,
-    y: Math.random() * 0.35 + 0.03,
-    len: 0.08 + Math.random() * 0.1,
-    angle: Math.PI / 4 + (Math.random() - 0.5) * 0.4,
-    speed: 0.18 + Math.random() * 0.15,
-    progress: 0,
-    alpha: 0.9 + Math.random() * 0.1,
-  });
-}
-
-const waves = [
-  { y: 0.765, amp: 22, freq: 0.007,  spd: 0.55, alpha: 0.52, w: 3.5 },
-  { y: 0.800, amp: 16, freq: 0.011,  spd: 0.80, alpha: 0.40, w: 2.8 },
-  { y: 0.832, amp: 11, freq: 0.016,  spd: 0.45, alpha: 0.30, w: 2.2 },
-  { y: 0.860, amp:  7, freq: 0.024,  spd: 1.00, alpha: 0.20, w: 1.6 },
-  { y: 0.890, amp:  4, freq: 0.035,  spd: 0.65, alpha: 0.14, w: 1.1 },
-];
-
-let animTime = 0;
-
-function lerp(a, b, t) { return a + (b - a) * t; }
-
-function draw(ts) {
-  animTime = ts / 1000;
-  const W = canvas.width, H = canvas.height;
-
-  // Sky gradient
-  const sg = ctx.createLinearGradient(0, 0, 0, H * 0.85);
-  sg.addColorStop(0,   '#010208');
-  sg.addColorStop(0.3, '#030d14');
-  sg.addColorStop(0.6, '#041a18');
-  sg.addColorStop(1,   '#060e1e');
-  ctx.fillStyle = sg;
-  ctx.fillRect(0, 0, W, H);
-
-  // Northern lights aurora
-  const auroraTime = animTime * 0.18;
-  const auroraGrad = ctx.createLinearGradient(0, H*0.05, 0, H*0.5);
-  const a1 = 0.055 + 0.025 * Math.sin(auroraTime);
-  const a2 = 0.035 + 0.02  * Math.sin(auroraTime * 1.3 + 1);
-  const a3 = 0.02  + 0.015 * Math.sin(auroraTime * 0.7 + 2);
-  auroraGrad.addColorStop(0,   `rgba(26,107,90,${a1})`);
-  auroraGrad.addColorStop(0.3, `rgba(20,80,70,${a2})`);
-  auroraGrad.addColorStop(0.7, `rgba(10,50,60,${a3})`);
-  auroraGrad.addColorStop(1,   'transparent');
-  ctx.fillStyle = auroraGrad;
-  ctx.fillRect(0, 0, W, H);
-
-  const auroraGrad2 = ctx.createLinearGradient(
-    W * (0.3 + 0.05 * Math.sin(auroraTime * 0.5)), H*0.1,
-    W * (0.7 + 0.05 * Math.cos(auroraTime * 0.4)), H*0.45
-  );
-  const b1 = 0.03 + 0.015 * Math.sin(auroraTime * 1.1 + 0.5);
-  auroraGrad2.addColorStop(0,   'transparent');
-  auroraGrad2.addColorStop(0.4, `rgba(42,140,100,${b1})`);
-  auroraGrad2.addColorStop(1,   'transparent');
-  ctx.fillStyle = auroraGrad2;
-  ctx.fillRect(0, 0, W, H);
-
-  // Moon
-  const mx = W * 0.22, my = H * 0.16, mr = 24;
-  const mg = ctx.createRadialGradient(mx, my, 0, mx, my, mr * 4);
-  mg.addColorStop(0, `rgba(180,215,200,0.28)`);
-  mg.addColorStop(1, 'transparent');
-  ctx.fillStyle = mg;
-  ctx.beginPath(); ctx.arc(mx, my, mr * 4, 0, Math.PI * 2); ctx.fill();
-  ctx.beginPath(); ctx.arc(mx, my, mr, 0, Math.PI * 2);
-  ctx.fillStyle = `rgba(255,252,235,1)`; ctx.fill();
-  ctx.beginPath(); ctx.arc(mx - mr*0.2, my - mr*0.15, mr * 0.85, 0, Math.PI * 2);
-  ctx.fillStyle = `rgba(5,12,20,0.92)`; ctx.fill();
-
-  // Stars
-  stars.forEach(s => {
-    const twinkle = 0.55 + 0.45 * Math.sin(s.phase + animTime * s.speed);
-    const a = s.brightness * twinkle;
-    ctx.beginPath();
-    ctx.arc(s.x * W, s.y * H, s.size, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(255,255,235,${a})`;
-    ctx.fill();
-    if (s.size > 1.8 && a > 0.4) {
-      ctx.strokeStyle = `rgba(255,255,220,${a * 0.55})`; ctx.lineWidth = 0.7;
-      const cx = s.x*W, cy = s.y*H, len = s.size * 4;
-      ctx.beginPath();
-      ctx.moveTo(cx-len, cy); ctx.lineTo(cx+len, cy);
-      ctx.moveTo(cx, cy-len); ctx.lineTo(cx, cy+len);
-      ctx.stroke();
-    }
-  });
-
-  // Shooting stars
-  nextShoot -= 0.016;
-  if (nextShoot <= 0) { spawnShootingStar(); nextShoot = 4 + Math.random() * 7; }
-  for (let i = shootingStars.length - 1; i >= 0; i--) {
-    const ss = shootingStars[i];
-    ss.progress += ss.speed * 0.016;
-    if (ss.progress >= 1) { shootingStars.splice(i, 1); continue; }
-    const fade = ss.progress < 0.2 ? ss.progress / 0.2 : ss.progress > 0.7 ? 1 - (ss.progress - 0.7) / 0.3 : 1;
-    const headX = (ss.x + Math.cos(ss.angle) * ss.len * ss.progress) * W;
-    const headY = (ss.y + Math.sin(ss.angle) * ss.len * ss.progress) * H;
-    const tailX = (ss.x + Math.cos(ss.angle) * ss.len * Math.max(0, ss.progress - 0.35)) * W;
-    const tailY = (ss.y + Math.sin(ss.angle) * ss.len * Math.max(0, ss.progress - 0.35)) * H;
-    const grad = ctx.createLinearGradient(tailX, tailY, headX, headY);
-    grad.addColorStop(0, 'rgba(255,255,245,0)');
-    grad.addColorStop(1, `rgba(255,255,245,${ss.alpha * fade})`);
-    ctx.beginPath(); ctx.moveTo(tailX, tailY); ctx.lineTo(headX, headY);
-    ctx.strokeStyle = grad; ctx.lineWidth = 1.5; ctx.stroke();
-    ctx.beginPath(); ctx.arc(headX, headY, 1.5, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(255,255,245,${ss.alpha * fade})`; ctx.fill();
-  }
-
-  // Horizon glow
-  const hg = ctx.createLinearGradient(0, H * 0.55, 0, H * 0.82);
-  hg.addColorStop(0, `rgba(26,107,90,0.12)`);
-  hg.addColorStop(1, 'transparent');
-  ctx.fillStyle = hg; ctx.fillRect(0, 0, W, H);
-
-  // Waves
-  waves.forEach(wv => {
-    const wy = H * wv.y;
-    ctx.beginPath(); ctx.moveTo(0, wy);
-    for (let x = 0; x <= W; x += 2) {
-      const y = wy + Math.sin(x * wv.freq + animTime * wv.spd) * wv.amp
-                   + Math.sin(x * wv.freq * 1.7 + animTime * wv.spd * 0.6) * wv.amp * 0.4;
-      ctx.lineTo(x, y);
-    }
-    ctx.strokeStyle = `rgba(255,255,255,${wv.alpha})`;
-    ctx.lineWidth = wv.w; ctx.stroke();
-
-    ctx.beginPath(); ctx.moveTo(0, wy);
-    for (let x = 0; x <= W; x += 2) {
-      const y = wy + Math.sin(x * wv.freq + animTime * wv.spd) * wv.amp
-                   + Math.sin(x * wv.freq * 1.7 + animTime * wv.spd * 0.6) * wv.amp * 0.4 - 2.5;
-      ctx.lineTo(x, y);
-    }
-    ctx.strokeStyle = `rgba(150,255,220,${wv.alpha * 0.4})`;
-    ctx.lineWidth = wv.w * 0.4; ctx.stroke();
-  });
-
-  // Boat
-  const bx = W * 0.82;
-  const topWaveY = H * waves[0].y + Math.sin(bx * waves[0].freq + animTime * waves[0].spd) * waves[0].amp;
-  const rock = Math.sin(animTime * 0.55) * 1.8;
-  const tilt = Math.sin(animTime * 0.55) * 0.022;
-
-  ctx.save();
-  ctx.translate(bx, topWaveY + rock);
-  ctx.rotate(tilt);
-
-  ctx.beginPath();
-  ctx.moveTo(-44, 0);
-  ctx.bezierCurveTo(-44, 0, -36, 14, 0, 16);
-  ctx.bezierCurveTo(36, 14, 46, 0, 46, 0);
-  ctx.closePath();
-  ctx.fillStyle = 'rgba(18,32,58,0.95)';
-  ctx.fill();
-
-  ctx.beginPath();
-  ctx.moveTo(-44, 0);
-  ctx.bezierCurveTo(-36, -2, 36, -2, 46, 0);
-  ctx.strokeStyle = 'rgba(160,210,230,0.35)';
-  ctx.lineWidth = 1;
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.moveTo(2, 0); ctx.lineTo(2, -62);
-  ctx.strokeStyle = 'rgba(200,220,240,0.65)';
-  ctx.lineWidth = 1.2; ctx.stroke();
-
-  ctx.beginPath();
-  ctx.moveTo(2, -58); ctx.lineTo(2, -8); ctx.lineTo(34, -28);
-  ctx.closePath();
-  ctx.fillStyle = 'rgba(210,230,245,0.18)';
-  ctx.fill();
-  ctx.strokeStyle = 'rgba(200,220,240,0.3)';
-  ctx.lineWidth = 0.8; ctx.stroke();
-
-  ctx.beginPath();
-  ctx.moveTo(2, -58); ctx.lineTo(-28, 0);
-  ctx.strokeStyle = 'rgba(200,220,240,0.2)';
-  ctx.lineWidth = 0.7; ctx.stroke();
-
+const canvas=document.getElementById('sky-canvas'),ctx=canvas.getContext('2d');
+function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+resize();window.addEventListener('resize',resize);
+const stars=Array.from({length:130},()=>({x:Math.random(),y:Math.random()*0.70,size:Math.random()*2.8+0.6,phase:Math.random()*Math.PI*2,speed:Math.random()*0.6+0.3,brightness:Math.random()*0.5+0.55}));
+const shootingStars=[];let nextShoot=3+Math.random()*5;
+function spawnShootingStar(){shootingStars.push({x:Math.random()*0.7+0.05,y:Math.random()*0.35+0.03,len:0.08+Math.random()*0.1,angle:Math.PI/4+(Math.random()-0.5)*0.4,speed:0.18+Math.random()*0.15,progress:0,alpha:0.9+Math.random()*0.1});}
+const waves=[{y:0.765,amp:22,freq:0.007,spd:0.55,alpha:0.52,w:3.5},{y:0.800,amp:16,freq:0.011,spd:0.80,alpha:0.40,w:2.8},{y:0.832,amp:11,freq:0.016,spd:0.45,alpha:0.30,w:2.2},{y:0.860,amp:7,freq:0.024,spd:1.00,alpha:0.20,w:1.6},{y:0.890,amp:4,freq:0.035,spd:0.65,alpha:0.14,w:1.1}];
+let animTime=0;
+function draw(ts){
+  animTime=ts/1000;const W=canvas.width,H=canvas.height;
+  const sg=ctx.createLinearGradient(0,0,0,H*0.85);
+  sg.addColorStop(0,'#010208');sg.addColorStop(0.3,'#030d14');sg.addColorStop(0.6,'#041a18');sg.addColorStop(1,'#060e1e');
+  ctx.fillStyle=sg;ctx.fillRect(0,0,W,H);
+  const at=animTime*0.18;
+  const ag=ctx.createLinearGradient(0,H*0.05,0,H*0.5);
+  ag.addColorStop(0,`rgba(26,107,90,${0.055+0.025*Math.sin(at)})`);ag.addColorStop(0.3,`rgba(20,80,70,${0.035+0.02*Math.sin(at*1.3+1)})`);ag.addColorStop(0.7,`rgba(10,50,60,${0.02+0.015*Math.sin(at*0.7+2)})`);ag.addColorStop(1,'transparent');
+  ctx.fillStyle=ag;ctx.fillRect(0,0,W,H);
+  const ag2=ctx.createLinearGradient(W*(0.3+0.05*Math.sin(at*0.5)),H*0.1,W*(0.7+0.05*Math.cos(at*0.4)),H*0.45);
+  ag2.addColorStop(0,'transparent');ag2.addColorStop(0.4,`rgba(42,140,100,${0.03+0.015*Math.sin(at*1.1+0.5)})`);ag2.addColorStop(1,'transparent');
+  ctx.fillStyle=ag2;ctx.fillRect(0,0,W,H);
+  const mx=W*0.22,my=H*0.16,mr=24;
+  const mg=ctx.createRadialGradient(mx,my,0,mx,my,mr*4);
+  mg.addColorStop(0,'rgba(180,215,200,0.28)');mg.addColorStop(1,'transparent');
+  ctx.fillStyle=mg;ctx.beginPath();ctx.arc(mx,my,mr*4,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.arc(mx,my,mr,0,Math.PI*2);ctx.fillStyle='rgba(255,252,235,1)';ctx.fill();
+  ctx.beginPath();ctx.arc(mx-mr*0.2,my-mr*0.15,mr*0.85,0,Math.PI*2);ctx.fillStyle='rgba(5,12,20,0.92)';ctx.fill();
+  stars.forEach(s=>{const tw=0.55+0.45*Math.sin(s.phase+animTime*s.speed),a=s.brightness*tw;ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.size,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,235,${a})`;ctx.fill();if(s.size>1.8&&a>0.4){ctx.strokeStyle=`rgba(255,255,220,${a*0.55})`;ctx.lineWidth=0.7;const cx=s.x*W,cy=s.y*H,len=s.size*4;ctx.beginPath();ctx.moveTo(cx-len,cy);ctx.lineTo(cx+len,cy);ctx.moveTo(cx,cy-len);ctx.lineTo(cx,cy+len);ctx.stroke();}});
+  nextShoot-=0.016;if(nextShoot<=0){spawnShootingStar();nextShoot=4+Math.random()*7;}
+  for(let i=shootingStars.length-1;i>=0;i--){const ss=shootingStars[i];ss.progress+=ss.speed*0.016;if(ss.progress>=1){shootingStars.splice(i,1);continue;}const fade=ss.progress<0.2?ss.progress/0.2:ss.progress>0.7?1-(ss.progress-0.7)/0.3:1;const hx=(ss.x+Math.cos(ss.angle)*ss.len*ss.progress)*W;const hy=(ss.y+Math.sin(ss.angle)*ss.len*ss.progress)*H;const tx=(ss.x+Math.cos(ss.angle)*ss.len*Math.max(0,ss.progress-0.35))*W;const ty=(ss.y+Math.sin(ss.angle)*ss.len*Math.max(0,ss.progress-0.35))*H;const gr=ctx.createLinearGradient(tx,ty,hx,hy);gr.addColorStop(0,'rgba(255,255,245,0)');gr.addColorStop(1,`rgba(255,255,245,${ss.alpha*fade})`);ctx.beginPath();ctx.moveTo(tx,ty);ctx.lineTo(hx,hy);ctx.strokeStyle=gr;ctx.lineWidth=1.5;ctx.stroke();ctx.beginPath();ctx.arc(hx,hy,1.5,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,245,${ss.alpha*fade})`;ctx.fill();}
+  const hg=ctx.createLinearGradient(0,H*0.55,0,H*0.82);hg.addColorStop(0,'rgba(26,107,90,0.12)');hg.addColorStop(1,'transparent');ctx.fillStyle=hg;ctx.fillRect(0,0,W,H);
+  waves.forEach(wv=>{const wy=H*wv.y;ctx.beginPath();ctx.moveTo(0,wy);for(let x=0;x<=W;x+=2){const y=wy+Math.sin(x*wv.freq+animTime*wv.spd)*wv.amp+Math.sin(x*wv.freq*1.7+animTime*wv.spd*0.6)*wv.amp*0.4;ctx.lineTo(x,y);}ctx.strokeStyle=`rgba(255,255,255,${wv.alpha})`;ctx.lineWidth=wv.w;ctx.stroke();ctx.beginPath();ctx.moveTo(0,wy);for(let x=0;x<=W;x+=2){const y=wy+Math.sin(x*wv.freq+animTime*wv.spd)*wv.amp+Math.sin(x*wv.freq*1.7+animTime*wv.spd*0.6)*wv.amp*0.4-2.5;ctx.lineTo(x,y);}ctx.strokeStyle=`rgba(150,255,220,${wv.alpha*0.4})`;ctx.lineWidth=wv.w*0.4;ctx.stroke();});
+  const bx=W*0.82,twy=H*waves[0].y+Math.sin(bx*waves[0].freq+animTime*waves[0].spd)*waves[0].amp;
+  const rock=Math.sin(animTime*0.55)*1.8,tilt=Math.sin(animTime*0.55)*0.022;
+  ctx.save();ctx.translate(bx,twy+rock);ctx.rotate(tilt);
+  ctx.beginPath();ctx.moveTo(-44,0);ctx.bezierCurveTo(-44,0,-36,14,0,16);ctx.bezierCurveTo(36,14,46,0,46,0);ctx.closePath();ctx.fillStyle='rgba(18,32,58,0.95)';ctx.fill();
+  ctx.beginPath();ctx.moveTo(-44,0);ctx.bezierCurveTo(-36,-2,36,-2,46,0);ctx.strokeStyle='rgba(160,210,230,0.35)';ctx.lineWidth=1;ctx.stroke();
+  ctx.beginPath();ctx.moveTo(2,0);ctx.lineTo(2,-62);ctx.strokeStyle='rgba(200,220,240,0.65)';ctx.lineWidth=1.2;ctx.stroke();
+  ctx.beginPath();ctx.moveTo(2,-58);ctx.lineTo(2,-8);ctx.lineTo(34,-28);ctx.closePath();ctx.fillStyle='rgba(210,230,245,0.18)';ctx.fill();ctx.strokeStyle='rgba(200,220,240,0.3)';ctx.lineWidth=0.8;ctx.stroke();
+  ctx.beginPath();ctx.moveTo(2,-58);ctx.lineTo(-28,0);ctx.strokeStyle='rgba(200,220,240,0.2)';ctx.lineWidth=0.7;ctx.stroke();
   ctx.restore();
-
   requestAnimationFrame(draw);
 }
 requestAnimationFrame(draw);
+document.querySelectorAll('.glossary-popup').forEach(p=>p.style.display='block');
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{const popup=e.target.querySelector('.glossary-popup');if(!popup)return;if(e.isIntersecting)popup.classList.add('visible');else popup.classList.remove('visible');});},{threshold:0.4,rootMargin:'0px 0px -15% 0px'});
+document.querySelectorAll('.para-with-popup').forEach(el=>obs.observe(el));
 </script>
 </body>
 </html>

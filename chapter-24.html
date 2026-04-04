@@ -6,492 +6,159 @@
   <title>Chapter 24 — What Was Carried, What Was Lost</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
-    :root {
-      --ink: #0a0e1a;
-      --fog: #b8c4d8;
-      --salt: #e8edf5;
-      --tide: #2a4a6b;
-      --wave: #1a6b5a;
-      --gold: #c8a84b;
-    }
+    :root { --ink: #0a0e1a; --salt: #e8edf5; --gold: #c8a84b; }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body {
-      background: #0a0e1a;
-      color: var(--salt);
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      overflow-x: hidden;
-      min-height: 100vh;
-    }
-    #sky-canvas {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
+    body { background: #0a0e1a; color: var(--salt); font-family: 'Cormorant Garamond', serif; font-weight: 300; overflow-x: hidden; min-height: 100vh; }
+    #sky-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
     .content { position: relative; z-index: 2; }
-
-    /* NAV */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 1.5rem 10vw;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
-      backdrop-filter: blur(6px);
-    }
-    .nav-brand {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 1.1rem;
-      color: #fff;
-      text-decoration: none;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.6);
-    }
-    .nav-toc {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.75);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.5rem 10vw; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent); backdrop-filter: blur(6px); }
+    .nav-brand { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; color: #fff; text-decoration: none; text-shadow: 0 2px 12px rgba(0,0,0,0.6); }
+    .nav-toc { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.75); text-decoration: none; transition: color 0.3s; }
     .nav-toc:hover { color: #fff; }
-
-    /* CHAPTER PAGE */
-    .chapter-wrapper {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 9rem 2rem 6rem;
-    }
-
-    .chapter-header {
-      text-align: center;
-      margin-bottom: 4rem;
-      opacity: 0;
-      animation: fadeUp 1s 0.3s forwards;
-    }
-    .chapter-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: #7fffda;
-      text-shadow: 0 0 14px rgba(127,255,218,0.5);
-      display: block;
-      margin-bottom: 1rem;
-    }
-    .chapter-number {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
-      font-weight: 400;
-      color: var(--salt);
-      text-shadow: 0 4px 30px rgba(0,0,0,0.6);
-      display: block;
-      margin-bottom: 1.5rem;
-    }
-    .header-rule {
-      width: 60px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      margin: 0 auto;
-    }
-
-    /* GLASS CARD */
-    .glass-card {
-      background: rgba(0,0,0,0.38);
-      backdrop-filter: blur(22px);
-      -webkit-backdrop-filter: blur(22px);
-      border: 1px solid rgba(255,255,255,0.14);
-      padding: 3.5rem 3rem;
-      position: relative;
-      overflow: hidden;
-      opacity: 0;
-      animation: fadeUp 1s 0.5s forwards;
-    }
-    .glass-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0;
-      width: 4px; height: 100%;
-      background: linear-gradient(to bottom, var(--gold), #7fffda);
-    }
-
-    /* CHAPTER TEXT */
-    .chapter-content p {
-      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
-      line-height: 1.95;
-      color: rgba(232,237,245,0.92);
-      margin-bottom: 1.5em;
-      font-weight: 300;
-    }
-    .chapter-content em {
-      font-style: italic;
-      color: rgba(255, 249, 225, 0.95);
-    }
-    .chapter-content strong {
-      font-weight: 600;
-      color: var(--gold);
-    }
-    .section-divider {
-      text-align: center;
-      color: var(--gold);
-      font-size: 1rem;
-      letter-spacing: 0.5em;
-      margin: 2.5rem 0;
-      text-shadow: 0 0 18px rgba(200,168,75,0.5);
-    }
-
-    /* BOTTOM NAV */
-    .bottom-nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 3.5rem;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      opacity: 0;
-      animation: fadeUp 1s 0.7s forwards;
-    }
-    .nav-btn {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.6);
-      text-decoration: none;
-      padding: 0.6rem 1.2rem;
-      border: 1px solid rgba(255,255,255,0.15);
-      transition: all 0.3s;
-      background: rgba(255,255,255,0.05);
-      backdrop-filter: blur(4px);
-    }
-    .nav-btn:not(.disabled):hover {
-      color: var(--gold);
-      border-color: rgba(200,168,75,0.5);
-      background: rgba(200,168,75,0.08);
-      box-shadow: 0 0 20px rgba(200,168,75,0.15);
-    }
-    .nav-btn.disabled {
-      opacity: 0.25;
-      cursor: default;
-    }
-    .nav-btn-toc {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.58rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #7fffda;
-      text-decoration: none;
-      text-shadow: 0 0 10px rgba(127,255,218,0.4);
-      transition: color 0.3s, text-shadow 0.3s;
-    }
-    .nav-btn-toc:hover {
-      color: #fff;
-      text-shadow: 0 0 18px rgba(127,255,218,0.7);
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 600px) {
-      .chapter-wrapper { padding: 7rem 1.2rem 4rem; }
-      .glass-card { padding: 2rem 1.5rem; }
-    }
+    .chapter-wrapper { max-width: 720px; margin: 0 auto; padding: 9rem 2rem 6rem; }
+    .chapter-header { text-align: center; margin-bottom: 4rem; opacity: 0; animation: fadeUp 1s 0.3s forwards; }
+    .chapter-label { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: #7fffda; text-shadow: 0 0 14px rgba(127,255,218,0.5); display: block; margin-bottom: 1rem; }
+    .chapter-number { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; color: var(--salt); text-shadow: 0 4px 30px rgba(0,0,0,0.6); display: block; margin-bottom: 1.5rem; }
+    .header-rule { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 0 auto; }
+    .glass-card { background: rgba(0,0,0,0.38); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(255,255,255,0.14); padding: 3.5rem 3rem; position: relative; overflow: visible; opacity: 0; animation: fadeUp 1s 0.5s forwards; }
+    .glass-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, var(--gold), #7fffda); }
+    .chapter-content p { font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.95; color: rgba(232,237,245,0.92); margin-bottom: 1.5em; font-weight: 300; text-indent: 2em; }
+    .chapter-content p:first-of-type { text-indent: 0; }
+    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
+    .chapter-content strong { font-weight: 600; color: var(--gold); }
+    .section-divider { text-align: center; color: var(--gold); font-size: 1rem; letter-spacing: 0.5em; margin: 2.5rem 0; text-shadow: 0 0 18px rgba(200,168,75,0.5); }
+    .para-with-popup { position: relative; }
+    .glossary-popup { position: absolute; right: -230px; top: 0; width: 210px; background: rgba(5,12,28,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.12); padding: 0.85rem 1rem; z-index: 20; opacity: 0; pointer-events: none; transition: opacity 0.6s ease; }
+    .glossary-popup.visible { opacity: 1; }
+    .popup-entry { font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; line-height: 1.55; color: rgba(232,237,245,0.88); margin-bottom: 0.55rem; }
+    .popup-entry:last-child { margin-bottom: 0; }
+    .popup-word { font-style: italic; color: var(--gold); text-shadow: 0 0 10px rgba(200,168,75,0.4); }
+    .bottom-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.08); }
+    .nav-btn { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.6); text-decoration: none; padding: 0.6rem 1.2rem; border: 1px solid rgba(255,255,255,0.15); transition: all 0.3s; background: rgba(255,255,255,0.05); backdrop-filter: blur(4px); }
+    .nav-btn:not(.disabled):hover { color: var(--gold); border-color: rgba(200,168,75,0.5); background: rgba(200,168,75,0.08); box-shadow: 0 0 20px rgba(200,168,75,0.15); }
+    .nav-btn.disabled { opacity: 0.25; cursor: default; pointer-events: none; }
+    .nav-btn-toc { font-family: 'Space Mono', monospace; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: #7fffda; text-decoration: none; text-shadow: 0 0 10px rgba(127,255,218,0.4); transition: color 0.3s; }
+    .nav-btn-toc:hover { color: #fff; text-shadow: 0 0 18px rgba(127,255,218,0.7); }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 1000px) { .glossary-popup { right: auto; left: 0; top: auto; bottom: calc(100% + 8px); width: 100%; max-width: 100%; } }
+    @media (max-width: 600px) { .chapter-wrapper { padding: 7rem 1.2rem 4rem; } .glass-card { padding: 2rem 1.5rem; } }
   </style>
 </head>
 <body>
-
 <canvas id="sky-canvas"></canvas>
-
 <nav>
   <a href="index.html" class="nav-brand">Irene Lee</a>
-  <a href="index.html#chapters" class="nav-toc">← All Chapters</a>
+  <a href="index.html#chapters" class="nav-toc">&#8592; All Chapters</a>
 </nav>
-
 <div class="content">
   <div class="chapter-wrapper">
-
     <header class="chapter-header">
       <span class="chapter-label">What Was Carried, What Was Lost</span>
       <span class="chapter-number">Chapter 24</span>
       <div class="header-rule"></div>
     </header>
-
     <div class="glass-card">
       <article class="chapter-content">
-        <p>It was too much for him. Struggling to stay alive while trying to reunite with us, he thought he was going to come to his full family. But instead, one had silently disappeared without his knowledge, and he couldn't even say goodbye nor visit his resting place. He spent his days dazing off, after we told him of what happened. His smile faded, and it didn't reappear until days later. But we had to move on, and that\'s what seemed to hurt him most.</p>
+        <p>&emsp;It was too much for him. Struggling to stay alive while trying to reunite with us, he thought he was going to come to his full family. But instead, one had silently disappeared without his knowledge, and he couldn’t even say goodbye nor visit his resting place. He spent his days dazing off, after we told him of what happened. His smile faded, and it didn’t reappear until days later. But we had to move on, and that's what seemed to hurt him most.</p>
 <p>One day, we were sitting behind our pile of firewood when we saw a villager run into the market, rushing towards his friends at a stall. He was holding a leaflet, and he talked to them while waving his arm and rubbing his forehead.</p>
-<p>"What do you think is happening there?" <em>Eonni</em> mumbled to me, "I wager it\'s something about The Leader."</p>
-<p>At this point, other villagers had swarmed around them, talking in hushed voices over the leaflet.</p>
-<p>"Do you think you should go and see what this is about?" Taejae asked <em>Abeoji</em>.</p>
-<p>"I think I should." <em>Abeoji</em> nodded, "Hwajae, come with me."</p>
-<p>"Me?" I furrowed my brows. Usually for something like this, he would ask <em>Oppa</em> or <em>Eonni</em> to come with him. But <em>Abeoji</em> had already started walking briskly towards the crowd, as if he sensed the urgency and did not hear my inquiry. I looked at <em>Oppa</em> but he shrugged, and so I hurriedly followed after him.</p>
-<p>When we got to the crowd, the people didn't jump when they saw us and instead just glanced at us and went back to their conversation. I guess our presence had become normal after being in the market every day.</p>
-<p>"May we see what this is about?" <em>Abeoji</em> asked the man holding the leaflet.</p>
-<p>"Sure. It seems the most relevant to you." The man nodded and handed him the leaflet. Looking at it with <em>Abeoji</em>, I was puzzled to see a leaflet design that I had never seen before, including a logo that was not from The Leader.</p>
-<p>"This is from the United States." <em>Abeoji</em> gasped, "Where did you get this?"</p>
-<p>The man scratched his head, "I'm not sure how, but a fisherman who was passing by the island gave it to me."</p>
-<p>All the while, I was reading. The US Army was able to push back the North Korean and Chinese Army significantly. Since they currently occupied most of the peninsula, it was announced that a US ship would come to our island to pick up the refugees who sought to go to South Korea.</p>
-<p>"They're coming to this island." I whispered under my breath. I couldn't believe it. Could this be our ticket to get to South Korea safely?</p>
-<p><em>Abeoji</em> was talking to the villagers, but I wasn't listening. Instead, I was rereading the leaflet over and over again.</p>
+<p>&emsp;“What do you think is happening there?” <em>Eonni</em> mumbled to me, “I wager it's something about The Leader.”</p>
+<p>&emsp;At this point, other villagers had swarmed around them, talking in hushed voices over the leaflet.</p>
+<p>&emsp;“Do you think you should go and see what this is about?” Taejae asked <em>Abeoji</em>.</p>
+<p>&emsp;“I think I should.” <em>Abeoji</em> nodded, “Hwajae, come with me.”</p>
+<p>&emsp;“Me?” I furrowed my brows. Usually for something like this, he would ask <em>Oppa </em>or <em>Eonni</em> to come with him. But <em>Abeoji</em> had already started walking briskly towards the crowd, as if he sensed the urgency and did not hear my inquiry. I looked at <em>Oppa</em> but he shrugged, and so I hurriedly followed after him.</p>
+<p>When we got to the crowd, the people didn’t jump when they saw us and instead just glanced at us and went back to their conversation. I guess our presence had become normal after being in the market every day.</p>
+<p>&emsp;“May we see what this is about?” <em>Abeoji</em> asked the man holding the leaflet.</p>
+<p>&emsp;“Sure. It seems the most relevant to you.” The man nodded and handed him the leaflet. Looking at it with <em>Abeoji</em>, I was puzzled to see a leaflet design that I had never seen before, including a logo that was not from The Leader.</p>
+<p>&emsp;“This is from the United States.” <em>Abeoji</em> gasped, “Where did you get this?”</p>
+<p>&emsp;The man scratched his head, “I’m not sure how, but a fisherman who was passing by the island gave it to me.”</p>
+<p>&emsp;All the while, I was reading. The US Army was able to push back the North Korean and Chinese Army significantly. Since they currently occupied most of the peninsula, it was announced that a US ship would come to our island to pick up the refugees who sought to go to South Korea.</p>
+<p>“They’re coming to this island.” I whispered under my breath. I couldn’t believe it. Could this be our ticket to get to South Korea safely?</p>
+<p><em>Abeoji</em> was talking to the villagers, but I wasn’t listening. Instead, I was rereading the leaflet over and over again.</p>
 <p>Once we got back to our firewood pile, <em>Abeoji</em> told the news to everyone else.</p>
-<p>"Can we believe them?" <em>Halmeoni</em> questioned, "It\'s the United States of America."</p>
-<p>"Maybe it's not even the United States," <em>Oppa</em> countered, "It could be a trap laid by The Leader to collect all the defectors."</p>
-<p>"But what are the chances that it's real?" I argued, "Then we can get to South Korea safely."</p>
-<p>"Hwajae's right," <em>Eonni</em> nodded, "Even if it could be fake, there's a high chance that it\'s real."</p>
+<p>&emsp;“Can we believe them?” <em>Halmeoni</em> questioned, “It's the United States of America.”</p>
+<p>&emsp;“Maybe it’s not even the United States,” <em>Oppa</em> countered, “It could be a trap laid by The Leader to collect all the defectors.”</p>
+<p>&emsp;  “But what are the chances that it’s real?” I argued, “Then we can get to South Korea safely.”</p>
+<p>&emsp;“Hwajae’s right,” <em>Eonni </em>nodded, “Even if it could be fake, there’s a high chance that it's real.”</p>
 <p>We stopped talking about it, and instead we ate our daily loaf of bread behind our firewood pile, thinking in silence. Only time would tell.</p>
 <p>As time passed, I got tired of thinking about the US ship because it felt like an eternity before it was going to arrive. I almost believed that it was fake at that point.</p>
-<p>Instead, my mind wandered back to the place where I had lived my entire life, the home that was now shattered into pieces. Every time I closed my eyes, I would see the memories flit past behind my eyelids, the voices of my family laughing at the dinner table almost echoing in my ears&mdash;the phantom scent of a dinner feast wafting in the air. It had gotten to a point where I didn't even see the purpose of going to South Korea. If we went there, our lives would immediately be reset to rock bottom. We would be in a completely different place with different people. Before all of this chaos, I wanted to go to university and pursue my dreams. I wanted to become a teacher. I wanted to start a family. I wanted to live with my family&mdash;happy and intact. I didn't even know if that was possible now.</p>
+<p>Instead, my mind wandered back to the place where I had lived my entire life, the home that was now shattered into pieces. Every time I closed my eyes, I would see the memories flit past behind my eyelids, the voices of my family laughing at the dinner table almost echoing in my ears—the phantom scent of a dinner feast wafting in the air. It had gotten to a point where I didn’t even see the purpose of going to South Korea. If we went there, our lives would immediately be reset to rock bottom. We would be in a completely different place with different people. Before all of this chaos, I wanted to go to university and pursue my dreams. I wanted to become a teacher. I wanted to start a family. I wanted to live with my family—happy and intact. I didn’t even know if that was possible now.</p>
 <div class="section-divider">✦</div>
-<p>The day had finally come. The defectors scrambled around the beach, looking for things to bring with them. We didn't have anything to pack. Our axe was broken. We had eaten our bread.</p>
-<p>When we finally arrived at the beach, we saw the defectors gather around at the shoreline, murmuring loudly. We joined the crowd and I craned my neck to see what the commotion was about. I couldn't see because everyone was much taller than me, so I squeezed past a few men until I could. I gasped. Along the blue horizon was a black dot. It was too far away to make out the details, but it had to be the US ship. A nervous excitement spread in my legs, as I returned to my family and stood with them while we watched the black dot become bigger. There seemed to be more than forty defectors on the shores, some I had never seen before. Looking around, my eyes widened when I saw the same eighteen year old boy we saw on <em>Seommaeup</em>. He looked much older, his face more hollow and angled. The people from the other islands must have come to this one as well.</p>
-<p>We all stood, staring at the ship as it got closer. Some people cried with joy, others stared with a smile on their faces. My family and I just stood silently, our eyes never leaving the ship that soon loomed over us&mdash;casting a shadow on the whole crowd.</p>
-<p>"Woah," was all Taejae said, but it seemed to say everything.</p>
-<p>When the ship arrived, we watched it turn its side toward us and drop its huge anchor. Two large gangways slid down the side, their bottoms splashing into the water with a thud. We saw foreign-looking men on the deck securing the gangways with thick white rope. Some had golden hair, and it seemed more glamorous than what I saw on leaflets sent out by The Leader. I stared in awe, afraid to move.</p>
-<p>When the white men finished, silence filled the still air. A ripple of uneasiness spread throughout the large crowd of refugees. Was it safe? What were we supposed to do now?</p>
+<p>&emsp;The day had finally come. The defectors scrambled around the beach, looking for things to bring with them. We didn’t have anything to pack. Our axe was broken. We had eaten our bread.</p>
+<p>When we finally arrived at the beach, we saw the defectors gather around at the shoreline, murmuring loudly. We joined the crowd and I craned my neck to see what the commotion was about. I couldn’t see because everyone was much taller than me, so I squeezed past a few men until I could. I gasped. Along the blue horizon was a black dot. It was too far away to make out the details, but it had to be the US ship. A nervous excitement spread in my legs, as I returned to my family and stood with them while we watched the black dot become bigger. There seemed to be more than forty defectors on the shores, some I had never seen before. Looking around, my eyes widened when I saw the same eighteen year old boy we saw on <em>Seommaeup</em>. He looked much older, his face more hollow and angled. The people from the other islands must have come to this one as well.</p>
+<p>We all stood, staring at the ship as it got closer. Some people cried with joy, others stared with a smile on their faces. My family and I just stood silently, our eyes never leaving the ship that soon loomed over us—casting a shadow on the whole crowd.</p>
+<p>&emsp;“Woah,” was all Taejae said, but it seemed to say everything.</p>
+<p>&emsp;When the ship arrived, we watched it turn its side toward us and drop its huge anchor. Two large gangways slid down the side, their bottoms splashing into the water with a thud. We saw foreign-looking men on the deck securing the gangways with thick white rope. Some had golden hair, and it seemed more glamorous than what I saw on leaflets sent out by The Leader. I stared in awe, afraid to move.</p>
+<p>&emsp;When the white men finished, silence filled the still air. A ripple of uneasiness spread throughout the large crowd of refugees. Was it safe? What were we supposed to do now?</p>
 <p>Suddenly, a familiar looking man appeared from the deck. He leaned over the railings and yelled at the top of his lungs in Korean.</p>
-<p>"This is the US transport ship that is here to evacuate all refugees!" He yelled, his voice ringing in the still air as we embraced his words, "This is the last ship evacuating North Korean refugees. This is the last ship south!"</p>
+<p>“This is the US transport ship that is here to evacuate all refugees!” He yelled, his voice ringing in the still air as we embraced his words, “This is the last ship evacuating North Korean refugees. This is the last ship south!”</p>
 <p>We all cheered and cried, some embracing each other in excitement as soon as we heard those words. The defectors then stampeded into the water and toward the two gangways, their feet making loud thumps as they rushed on board.</p>
 <p>I gathered with my family, linking our arms to prevent ourselves from being swept away by the excited crowd. The white men on the ships spoke an unfamiliar language, but they made it clear that we were to head below deck through hand gestures. The Korean man kept yelling that we had to fill the lowest deck first, and then the next deck. The highest deck was for the American men.</p>
-<p>My family and I were swept to the lowest deck, but our smiles dropped when we saw the state of it. There were no windows, no partitions or separate rooms for each family, nor were there any furniture&mdash;just the cold wooden floor. The only light came from a few dim lamps that hung from the ceiling. There were already many defectors sitting on the floor from other places, so when we sat down, the room was so packed that we could barely move. A few buckets were set out for people to relieve themselves.</p>
-<p>Soon, the ship began to tremble and shake, telling us that it was departing. We couldn't see outside.</p>
+<p>My family and I were swept to the lowest deck, but our smiles dropped when we saw the state of it. There were no windows, no partitions or separate rooms for each family, nor were there any furniture—just the cold wooden floor. The only light came from a few dim lamps that hung from the ceiling. There were already many defectors sitting on the floor from other places, so when we sat down, the room was so packed that we could barely move. A few buckets were set out for people to relieve themselves.</p>
+<p>Soon, the ship began to tremble and shake, telling us that it was departing. We couldn’t see outside.</p>
 <p>The large, singular room was filled with chatter and conversations at first. It seemed like the prospect of being freed and brought to South Korea safely had made the people completely forget and ignore the state of the lowest deck. But after a day, we all sat in silence, the miserable darkness and lack of room making us very uncomfortable. The stench from the makeshift chamber pots became unbearable, and whenever the waves rocked the ship, they would spill over. The white men would come down to clear out the containers once a day, but many people just went on the floor.</p>
-<p>No food and barely any water was given to us, even though we needed it to survive. We didn't know the state of the second deck, but they probably had windows and more room. Most of the refugees were packed on the lowest deck.</p>
+<p>No food and barely any water was given to us, even though we needed it to survive. We didn’t know the state of the second deck, but they probably had windows and more room. Most of the refugees were packed on the lowest deck.</p>
 <p>Seasickness spread through the passengers, and there was someone who was always vomiting. But since we had no food, there was nothing to throw up. All we heard was retching and gagging.</p>
-<p>Thankfully, I was against the cool wall and was able to stay away from most of the sickness and the heat from other peoples' bodies. But with no space to move and no way to breathe, the smell and misery was still overwhelming. Sweat dripped down my back, and my head pounded with every inhale I took. I tried to sleep through most of the day, but a cry from a baby would always wake me. A woman who sat a few feet away from me was itching her head furiously, mumbling something to herself as her shoulders rose and fell rapidly. I heard men argue with others over their space all day. My family was quiet the whole time. Every time I stood up to go to the buckets to relieve ourselves, the floor would be slippery. I refused to think about what the slippery substances may be, but it still made my stomach roil. Then, when I returned to my spot, it always looked like my space became smaller.</p>
-<p>I couldn't keep track of time, but it seemed like we were on the ship for several days. After what felt like eternity, the ship had finally stopped rocking and moving, but we still stayed on the ship for several hours. Some people started shouting, demanding for us to be freed. But, after a few hours, the door of the lowest deck finally cracked open, spreading a glimmer of light into the dark, dank space. A young, white man stood there, and it was clear that he was wrinkling his nose at the scent and stale air. But he announced that we had arrived, and soon, we would be able to leave the ship. Every second we stayed longer on the ship, it felt like the walls of the room were getting closer, suffocating me.</p>
-<p>But the door soon opened again, and I felt like I could breathe again as a rush of cool air entered the room. We were at a place called <em>Gunsan</em> in <em>Jeolla Province.</em></p>
-<p>#</p>
-      </article>
+<p>Thankfully, I was against the cool wall and was able to stay away from most of the sickness and the heat from other peoples’ bodies. But with no space to move and no way to breathe, the smell and misery was still overwhelming. Sweat dripped down my back, and my head pounded with every inhale I took. I tried to sleep through most of the day, but a cry from a baby would always wake me. A woman who sat a few feet away from me was itching her head furiously, mumbling something to herself as her shoulders rose and fell rapidly. I heard men argue with others over their space all day. My family was quiet the whole time. Every time I stood up to go to the buckets to relieve ourselves, the floor would be slippery. I refused to think about what the slippery substances may be, but it still made my stomach roil. Then, when I returned to my spot, it always looked like my space became smaller.</p>
+<p>I couldn’t keep track of time, but it seemed like we were on the ship for several days. After what felt like eternity, the ship had finally stopped rocking and moving, but we still stayed on the ship for several hours. Some people started shouting, demanding for us to be freed. But, after a few hours, the door of the lowest deck finally cracked open, spreading a glimmer of light into the dark, dank space. A young, white man stood there, and it was clear that he was wrinkling his nose at the scent and stale air. But he announced that we had arrived, and soon, we would be able to leave the ship. Every second we stayed longer on the ship, it felt like the walls of the room were getting closer, suffocating me.</p>
+<p>But the door soon opened again, and I felt like I could breathe again as a rush of cool air entered the room. We were at a place called <em>Gunsan</em> in <em>Jeolla Province. </em></p>
 
+      </article>
       <nav class="bottom-nav">
-        <a href="chapter-23.html" class="nav-btn">← Previous</a>
-        <a href="index.html#chapters" class="nav-btn-toc">↑ Contents</a>
-        <a href="chapter-25.html" class="nav-btn">Next →</a>
+        <a href="chapter-23.html" class="nav-btn">&#8592; Previous</a>
+        <a href="index.html#chapters" class="nav-btn-toc">&#8593; Contents</a>
+        <a href="chapter-25.html" class="nav-btn">Next &#8594;</a>
       </nav>
     </div>
-
   </div>
 </div>
-
 <script>
-// ══════════════════════════════
-//  SKY CANVAS (same as index.html)
-// ══════════════════════════════
-const canvas = document.getElementById('sky-canvas');
-const ctx = canvas.getContext('2d');
-
-function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-resize();
-window.addEventListener('resize', resize);
-
-const stars = Array.from({length: 130}, () => ({
-  x: Math.random(),
-  y: Math.random() * 0.70,
-  size: Math.random() * 2.8 + 0.6,
-  phase: Math.random() * Math.PI * 2,
-  speed: Math.random() * 0.6 + 0.3,
-  brightness: Math.random() * 0.5 + 0.55
-}));
-
-const shootingStars = [];
-let nextShoot = 3 + Math.random() * 5;
-
-function spawnShootingStar() {
-  shootingStars.push({
-    x: Math.random() * 0.7 + 0.05,
-    y: Math.random() * 0.35 + 0.03,
-    len: 0.08 + Math.random() * 0.1,
-    angle: Math.PI / 4 + (Math.random() - 0.5) * 0.4,
-    speed: 0.18 + Math.random() * 0.15,
-    progress: 0,
-    alpha: 0.9 + Math.random() * 0.1,
-  });
-}
-
-const waves = [
-  { y: 0.765, amp: 22, freq: 0.007,  spd: 0.55, alpha: 0.52, w: 3.5 },
-  { y: 0.800, amp: 16, freq: 0.011,  spd: 0.80, alpha: 0.40, w: 2.8 },
-  { y: 0.832, amp: 11, freq: 0.016,  spd: 0.45, alpha: 0.30, w: 2.2 },
-  { y: 0.860, amp:  7, freq: 0.024,  spd: 1.00, alpha: 0.20, w: 1.6 },
-  { y: 0.890, amp:  4, freq: 0.035,  spd: 0.65, alpha: 0.14, w: 1.1 },
-];
-
-let animTime = 0;
-
-function lerp(a, b, t) { return a + (b - a) * t; }
-
-function draw(ts) {
-  animTime = ts / 1000;
-  const W = canvas.width, H = canvas.height;
-
-  // Sky gradient
-  const sg = ctx.createLinearGradient(0, 0, 0, H * 0.85);
-  sg.addColorStop(0,   '#010208');
-  sg.addColorStop(0.3, '#030d14');
-  sg.addColorStop(0.6, '#041a18');
-  sg.addColorStop(1,   '#060e1e');
-  ctx.fillStyle = sg;
-  ctx.fillRect(0, 0, W, H);
-
-  // Northern lights aurora
-  const auroraTime = animTime * 0.18;
-  const auroraGrad = ctx.createLinearGradient(0, H*0.05, 0, H*0.5);
-  const a1 = 0.055 + 0.025 * Math.sin(auroraTime);
-  const a2 = 0.035 + 0.02  * Math.sin(auroraTime * 1.3 + 1);
-  const a3 = 0.02  + 0.015 * Math.sin(auroraTime * 0.7 + 2);
-  auroraGrad.addColorStop(0,   `rgba(26,107,90,${a1})`);
-  auroraGrad.addColorStop(0.3, `rgba(20,80,70,${a2})`);
-  auroraGrad.addColorStop(0.7, `rgba(10,50,60,${a3})`);
-  auroraGrad.addColorStop(1,   'transparent');
-  ctx.fillStyle = auroraGrad;
-  ctx.fillRect(0, 0, W, H);
-
-  const auroraGrad2 = ctx.createLinearGradient(
-    W * (0.3 + 0.05 * Math.sin(auroraTime * 0.5)), H*0.1,
-    W * (0.7 + 0.05 * Math.cos(auroraTime * 0.4)), H*0.45
-  );
-  const b1 = 0.03 + 0.015 * Math.sin(auroraTime * 1.1 + 0.5);
-  auroraGrad2.addColorStop(0,   'transparent');
-  auroraGrad2.addColorStop(0.4, `rgba(42,140,100,${b1})`);
-  auroraGrad2.addColorStop(1,   'transparent');
-  ctx.fillStyle = auroraGrad2;
-  ctx.fillRect(0, 0, W, H);
-
-  // Moon
-  const mx = W * 0.22, my = H * 0.16, mr = 24;
-  const mg = ctx.createRadialGradient(mx, my, 0, mx, my, mr * 4);
-  mg.addColorStop(0, `rgba(180,215,200,0.28)`);
-  mg.addColorStop(1, 'transparent');
-  ctx.fillStyle = mg;
-  ctx.beginPath(); ctx.arc(mx, my, mr * 4, 0, Math.PI * 2); ctx.fill();
-  ctx.beginPath(); ctx.arc(mx, my, mr, 0, Math.PI * 2);
-  ctx.fillStyle = `rgba(255,252,235,1)`; ctx.fill();
-  ctx.beginPath(); ctx.arc(mx - mr*0.2, my - mr*0.15, mr * 0.85, 0, Math.PI * 2);
-  ctx.fillStyle = `rgba(5,12,20,0.92)`; ctx.fill();
-
-  // Stars
-  stars.forEach(s => {
-    const twinkle = 0.55 + 0.45 * Math.sin(s.phase + animTime * s.speed);
-    const a = s.brightness * twinkle;
-    ctx.beginPath();
-    ctx.arc(s.x * W, s.y * H, s.size, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(255,255,235,${a})`;
-    ctx.fill();
-    if (s.size > 1.8 && a > 0.4) {
-      ctx.strokeStyle = `rgba(255,255,220,${a * 0.55})`; ctx.lineWidth = 0.7;
-      const cx = s.x*W, cy = s.y*H, len = s.size * 4;
-      ctx.beginPath();
-      ctx.moveTo(cx-len, cy); ctx.lineTo(cx+len, cy);
-      ctx.moveTo(cx, cy-len); ctx.lineTo(cx, cy+len);
-      ctx.stroke();
-    }
-  });
-
-  // Shooting stars
-  nextShoot -= 0.016;
-  if (nextShoot <= 0) { spawnShootingStar(); nextShoot = 4 + Math.random() * 7; }
-  for (let i = shootingStars.length - 1; i >= 0; i--) {
-    const ss = shootingStars[i];
-    ss.progress += ss.speed * 0.016;
-    if (ss.progress >= 1) { shootingStars.splice(i, 1); continue; }
-    const fade = ss.progress < 0.2 ? ss.progress / 0.2 : ss.progress > 0.7 ? 1 - (ss.progress - 0.7) / 0.3 : 1;
-    const headX = (ss.x + Math.cos(ss.angle) * ss.len * ss.progress) * W;
-    const headY = (ss.y + Math.sin(ss.angle) * ss.len * ss.progress) * H;
-    const tailX = (ss.x + Math.cos(ss.angle) * ss.len * Math.max(0, ss.progress - 0.35)) * W;
-    const tailY = (ss.y + Math.sin(ss.angle) * ss.len * Math.max(0, ss.progress - 0.35)) * H;
-    const grad = ctx.createLinearGradient(tailX, tailY, headX, headY);
-    grad.addColorStop(0, 'rgba(255,255,245,0)');
-    grad.addColorStop(1, `rgba(255,255,245,${ss.alpha * fade})`);
-    ctx.beginPath(); ctx.moveTo(tailX, tailY); ctx.lineTo(headX, headY);
-    ctx.strokeStyle = grad; ctx.lineWidth = 1.5; ctx.stroke();
-    ctx.beginPath(); ctx.arc(headX, headY, 1.5, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(255,255,245,${ss.alpha * fade})`; ctx.fill();
-  }
-
-  // Horizon glow
-  const hg = ctx.createLinearGradient(0, H * 0.55, 0, H * 0.82);
-  hg.addColorStop(0, `rgba(26,107,90,0.12)`);
-  hg.addColorStop(1, 'transparent');
-  ctx.fillStyle = hg; ctx.fillRect(0, 0, W, H);
-
-  // Waves
-  waves.forEach(wv => {
-    const wy = H * wv.y;
-    ctx.beginPath(); ctx.moveTo(0, wy);
-    for (let x = 0; x <= W; x += 2) {
-      const y = wy + Math.sin(x * wv.freq + animTime * wv.spd) * wv.amp
-                   + Math.sin(x * wv.freq * 1.7 + animTime * wv.spd * 0.6) * wv.amp * 0.4;
-      ctx.lineTo(x, y);
-    }
-    ctx.strokeStyle = `rgba(255,255,255,${wv.alpha})`;
-    ctx.lineWidth = wv.w; ctx.stroke();
-
-    ctx.beginPath(); ctx.moveTo(0, wy);
-    for (let x = 0; x <= W; x += 2) {
-      const y = wy + Math.sin(x * wv.freq + animTime * wv.spd) * wv.amp
-                   + Math.sin(x * wv.freq * 1.7 + animTime * wv.spd * 0.6) * wv.amp * 0.4 - 2.5;
-      ctx.lineTo(x, y);
-    }
-    ctx.strokeStyle = `rgba(150,255,220,${wv.alpha * 0.4})`;
-    ctx.lineWidth = wv.w * 0.4; ctx.stroke();
-  });
-
-  // Boat
-  const bx = W * 0.82;
-  const topWaveY = H * waves[0].y + Math.sin(bx * waves[0].freq + animTime * waves[0].spd) * waves[0].amp;
-  const rock = Math.sin(animTime * 0.55) * 1.8;
-  const tilt = Math.sin(animTime * 0.55) * 0.022;
-
-  ctx.save();
-  ctx.translate(bx, topWaveY + rock);
-  ctx.rotate(tilt);
-
-  ctx.beginPath();
-  ctx.moveTo(-44, 0);
-  ctx.bezierCurveTo(-44, 0, -36, 14, 0, 16);
-  ctx.bezierCurveTo(36, 14, 46, 0, 46, 0);
-  ctx.closePath();
-  ctx.fillStyle = 'rgba(18,32,58,0.95)';
-  ctx.fill();
-
-  ctx.beginPath();
-  ctx.moveTo(-44, 0);
-  ctx.bezierCurveTo(-36, -2, 36, -2, 46, 0);
-  ctx.strokeStyle = 'rgba(160,210,230,0.35)';
-  ctx.lineWidth = 1;
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.moveTo(2, 0); ctx.lineTo(2, -62);
-  ctx.strokeStyle = 'rgba(200,220,240,0.65)';
-  ctx.lineWidth = 1.2; ctx.stroke();
-
-  ctx.beginPath();
-  ctx.moveTo(2, -58); ctx.lineTo(2, -8); ctx.lineTo(34, -28);
-  ctx.closePath();
-  ctx.fillStyle = 'rgba(210,230,245,0.18)';
-  ctx.fill();
-  ctx.strokeStyle = 'rgba(200,220,240,0.3)';
-  ctx.lineWidth = 0.8; ctx.stroke();
-
-  ctx.beginPath();
-  ctx.moveTo(2, -58); ctx.lineTo(-28, 0);
-  ctx.strokeStyle = 'rgba(200,220,240,0.2)';
-  ctx.lineWidth = 0.7; ctx.stroke();
-
+const canvas=document.getElementById('sky-canvas'),ctx=canvas.getContext('2d');
+function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+resize();window.addEventListener('resize',resize);
+const stars=Array.from({length:130},()=>({x:Math.random(),y:Math.random()*0.70,size:Math.random()*2.8+0.6,phase:Math.random()*Math.PI*2,speed:Math.random()*0.6+0.3,brightness:Math.random()*0.5+0.55}));
+const shootingStars=[];let nextShoot=3+Math.random()*5;
+function spawnShootingStar(){shootingStars.push({x:Math.random()*0.7+0.05,y:Math.random()*0.35+0.03,len:0.08+Math.random()*0.1,angle:Math.PI/4+(Math.random()-0.5)*0.4,speed:0.18+Math.random()*0.15,progress:0,alpha:0.9+Math.random()*0.1});}
+const waves=[{y:0.765,amp:22,freq:0.007,spd:0.55,alpha:0.52,w:3.5},{y:0.800,amp:16,freq:0.011,spd:0.80,alpha:0.40,w:2.8},{y:0.832,amp:11,freq:0.016,spd:0.45,alpha:0.30,w:2.2},{y:0.860,amp:7,freq:0.024,spd:1.00,alpha:0.20,w:1.6},{y:0.890,amp:4,freq:0.035,spd:0.65,alpha:0.14,w:1.1}];
+let animTime=0;
+function draw(ts){
+  animTime=ts/1000;const W=canvas.width,H=canvas.height;
+  const sg=ctx.createLinearGradient(0,0,0,H*0.85);
+  sg.addColorStop(0,'#010208');sg.addColorStop(0.3,'#030d14');sg.addColorStop(0.6,'#041a18');sg.addColorStop(1,'#060e1e');
+  ctx.fillStyle=sg;ctx.fillRect(0,0,W,H);
+  const at=animTime*0.18;
+  const ag=ctx.createLinearGradient(0,H*0.05,0,H*0.5);
+  ag.addColorStop(0,`rgba(26,107,90,${0.055+0.025*Math.sin(at)})`);ag.addColorStop(0.3,`rgba(20,80,70,${0.035+0.02*Math.sin(at*1.3+1)})`);ag.addColorStop(0.7,`rgba(10,50,60,${0.02+0.015*Math.sin(at*0.7+2)})`);ag.addColorStop(1,'transparent');
+  ctx.fillStyle=ag;ctx.fillRect(0,0,W,H);
+  const ag2=ctx.createLinearGradient(W*(0.3+0.05*Math.sin(at*0.5)),H*0.1,W*(0.7+0.05*Math.cos(at*0.4)),H*0.45);
+  ag2.addColorStop(0,'transparent');ag2.addColorStop(0.4,`rgba(42,140,100,${0.03+0.015*Math.sin(at*1.1+0.5)})`);ag2.addColorStop(1,'transparent');
+  ctx.fillStyle=ag2;ctx.fillRect(0,0,W,H);
+  const mx=W*0.22,my=H*0.16,mr=24;
+  const mg=ctx.createRadialGradient(mx,my,0,mx,my,mr*4);
+  mg.addColorStop(0,'rgba(180,215,200,0.28)');mg.addColorStop(1,'transparent');
+  ctx.fillStyle=mg;ctx.beginPath();ctx.arc(mx,my,mr*4,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.arc(mx,my,mr,0,Math.PI*2);ctx.fillStyle='rgba(255,252,235,1)';ctx.fill();
+  ctx.beginPath();ctx.arc(mx-mr*0.2,my-mr*0.15,mr*0.85,0,Math.PI*2);ctx.fillStyle='rgba(5,12,20,0.92)';ctx.fill();
+  stars.forEach(s=>{const tw=0.55+0.45*Math.sin(s.phase+animTime*s.speed),a=s.brightness*tw;ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.size,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,235,${a})`;ctx.fill();if(s.size>1.8&&a>0.4){ctx.strokeStyle=`rgba(255,255,220,${a*0.55})`;ctx.lineWidth=0.7;const cx=s.x*W,cy=s.y*H,len=s.size*4;ctx.beginPath();ctx.moveTo(cx-len,cy);ctx.lineTo(cx+len,cy);ctx.moveTo(cx,cy-len);ctx.lineTo(cx,cy+len);ctx.stroke();}});
+  nextShoot-=0.016;if(nextShoot<=0){spawnShootingStar();nextShoot=4+Math.random()*7;}
+  for(let i=shootingStars.length-1;i>=0;i--){const ss=shootingStars[i];ss.progress+=ss.speed*0.016;if(ss.progress>=1){shootingStars.splice(i,1);continue;}const fade=ss.progress<0.2?ss.progress/0.2:ss.progress>0.7?1-(ss.progress-0.7)/0.3:1;const hx=(ss.x+Math.cos(ss.angle)*ss.len*ss.progress)*W;const hy=(ss.y+Math.sin(ss.angle)*ss.len*ss.progress)*H;const tx=(ss.x+Math.cos(ss.angle)*ss.len*Math.max(0,ss.progress-0.35))*W;const ty=(ss.y+Math.sin(ss.angle)*ss.len*Math.max(0,ss.progress-0.35))*H;const gr=ctx.createLinearGradient(tx,ty,hx,hy);gr.addColorStop(0,'rgba(255,255,245,0)');gr.addColorStop(1,`rgba(255,255,245,${ss.alpha*fade})`);ctx.beginPath();ctx.moveTo(tx,ty);ctx.lineTo(hx,hy);ctx.strokeStyle=gr;ctx.lineWidth=1.5;ctx.stroke();ctx.beginPath();ctx.arc(hx,hy,1.5,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,245,${ss.alpha*fade})`;ctx.fill();}
+  const hg=ctx.createLinearGradient(0,H*0.55,0,H*0.82);hg.addColorStop(0,'rgba(26,107,90,0.12)');hg.addColorStop(1,'transparent');ctx.fillStyle=hg;ctx.fillRect(0,0,W,H);
+  waves.forEach(wv=>{const wy=H*wv.y;ctx.beginPath();ctx.moveTo(0,wy);for(let x=0;x<=W;x+=2){const y=wy+Math.sin(x*wv.freq+animTime*wv.spd)*wv.amp+Math.sin(x*wv.freq*1.7+animTime*wv.spd*0.6)*wv.amp*0.4;ctx.lineTo(x,y);}ctx.strokeStyle=`rgba(255,255,255,${wv.alpha})`;ctx.lineWidth=wv.w;ctx.stroke();ctx.beginPath();ctx.moveTo(0,wy);for(let x=0;x<=W;x+=2){const y=wy+Math.sin(x*wv.freq+animTime*wv.spd)*wv.amp+Math.sin(x*wv.freq*1.7+animTime*wv.spd*0.6)*wv.amp*0.4-2.5;ctx.lineTo(x,y);}ctx.strokeStyle=`rgba(150,255,220,${wv.alpha*0.4})`;ctx.lineWidth=wv.w*0.4;ctx.stroke();});
+  const bx=W*0.82,twy=H*waves[0].y+Math.sin(bx*waves[0].freq+animTime*waves[0].spd)*waves[0].amp;
+  const rock=Math.sin(animTime*0.55)*1.8,tilt=Math.sin(animTime*0.55)*0.022;
+  ctx.save();ctx.translate(bx,twy+rock);ctx.rotate(tilt);
+  ctx.beginPath();ctx.moveTo(-44,0);ctx.bezierCurveTo(-44,0,-36,14,0,16);ctx.bezierCurveTo(36,14,46,0,46,0);ctx.closePath();ctx.fillStyle='rgba(18,32,58,0.95)';ctx.fill();
+  ctx.beginPath();ctx.moveTo(-44,0);ctx.bezierCurveTo(-36,-2,36,-2,46,0);ctx.strokeStyle='rgba(160,210,230,0.35)';ctx.lineWidth=1;ctx.stroke();
+  ctx.beginPath();ctx.moveTo(2,0);ctx.lineTo(2,-62);ctx.strokeStyle='rgba(200,220,240,0.65)';ctx.lineWidth=1.2;ctx.stroke();
+  ctx.beginPath();ctx.moveTo(2,-58);ctx.lineTo(2,-8);ctx.lineTo(34,-28);ctx.closePath();ctx.fillStyle='rgba(210,230,245,0.18)';ctx.fill();ctx.strokeStyle='rgba(200,220,240,0.3)';ctx.lineWidth=0.8;ctx.stroke();
+  ctx.beginPath();ctx.moveTo(2,-58);ctx.lineTo(-28,0);ctx.strokeStyle='rgba(200,220,240,0.2)';ctx.lineWidth=0.7;ctx.stroke();
   ctx.restore();
-
   requestAnimationFrame(draw);
 }
 requestAnimationFrame(draw);
+document.querySelectorAll('.glossary-popup').forEach(p=>p.style.display='block');
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{const popup=e.target.querySelector('.glossary-popup');if(!popup)return;if(e.isIntersecting)popup.classList.add('visible');else popup.classList.remove('visible');});},{threshold:0.4,rootMargin:'0px 0px -15% 0px'});
+document.querySelectorAll('.para-with-popup').forEach(el=>obs.observe(el));
 </script>
 </body>
 </html>

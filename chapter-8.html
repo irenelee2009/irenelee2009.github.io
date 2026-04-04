@@ -6,487 +6,155 @@
   <title>Chapter 8 — What Was Carried, What Was Lost</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
-    :root {
-      --ink: #0a0e1a;
-      --fog: #b8c4d8;
-      --salt: #e8edf5;
-      --tide: #2a4a6b;
-      --wave: #1a6b5a;
-      --gold: #c8a84b;
-    }
+    :root { --ink: #0a0e1a; --salt: #e8edf5; --gold: #c8a84b; }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body {
-      background: #0a0e1a;
-      color: var(--salt);
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      overflow-x: hidden;
-      min-height: 100vh;
-    }
-    #sky-canvas {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
+    body { background: #0a0e1a; color: var(--salt); font-family: 'Cormorant Garamond', serif; font-weight: 300; overflow-x: hidden; min-height: 100vh; }
+    #sky-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
     .content { position: relative; z-index: 2; }
-
-    /* NAV */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 1.5rem 10vw;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
-      backdrop-filter: blur(6px);
-    }
-    .nav-brand {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 1.1rem;
-      color: #fff;
-      text-decoration: none;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.6);
-    }
-    .nav-toc {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.75);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.5rem 10vw; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent); backdrop-filter: blur(6px); }
+    .nav-brand { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; color: #fff; text-decoration: none; text-shadow: 0 2px 12px rgba(0,0,0,0.6); }
+    .nav-toc { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.75); text-decoration: none; transition: color 0.3s; }
     .nav-toc:hover { color: #fff; }
-
-    /* CHAPTER PAGE */
-    .chapter-wrapper {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 9rem 2rem 6rem;
-    }
-
-    .chapter-header {
-      text-align: center;
-      margin-bottom: 4rem;
-      opacity: 0;
-      animation: fadeUp 1s 0.3s forwards;
-    }
-    .chapter-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: #7fffda;
-      text-shadow: 0 0 14px rgba(127,255,218,0.5);
-      display: block;
-      margin-bottom: 1rem;
-    }
-    .chapter-number {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
-      font-weight: 400;
-      color: var(--salt);
-      text-shadow: 0 4px 30px rgba(0,0,0,0.6);
-      display: block;
-      margin-bottom: 1.5rem;
-    }
-    .header-rule {
-      width: 60px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      margin: 0 auto;
-    }
-
-    /* GLASS CARD */
-    .glass-card {
-      background: rgba(0,0,0,0.38);
-      backdrop-filter: blur(22px);
-      -webkit-backdrop-filter: blur(22px);
-      border: 1px solid rgba(255,255,255,0.14);
-      padding: 3.5rem 3rem;
-      position: relative;
-      overflow: hidden;
-      opacity: 0;
-      animation: fadeUp 1s 0.5s forwards;
-    }
-    .glass-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0;
-      width: 4px; height: 100%;
-      background: linear-gradient(to bottom, var(--gold), #7fffda);
-    }
-
-    /* CHAPTER TEXT */
-    .chapter-content p {
-      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
-      line-height: 1.95;
-      color: rgba(232,237,245,0.92);
-      margin-bottom: 1.5em;
-      font-weight: 300;
-    }
-    .chapter-content em {
-      font-style: italic;
-      color: rgba(255, 249, 225, 0.95);
-    }
-    .chapter-content strong {
-      font-weight: 600;
-      color: var(--gold);
-    }
-    .section-divider {
-      text-align: center;
-      color: var(--gold);
-      font-size: 1rem;
-      letter-spacing: 0.5em;
-      margin: 2.5rem 0;
-      text-shadow: 0 0 18px rgba(200,168,75,0.5);
-    }
-
-    /* BOTTOM NAV */
-    .bottom-nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 3.5rem;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      opacity: 0;
-      animation: fadeUp 1s 0.7s forwards;
-    }
-    .nav-btn {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.6);
-      text-decoration: none;
-      padding: 0.6rem 1.2rem;
-      border: 1px solid rgba(255,255,255,0.15);
-      transition: all 0.3s;
-      background: rgba(255,255,255,0.05);
-      backdrop-filter: blur(4px);
-    }
-    .nav-btn:not(.disabled):hover {
-      color: var(--gold);
-      border-color: rgba(200,168,75,0.5);
-      background: rgba(200,168,75,0.08);
-      box-shadow: 0 0 20px rgba(200,168,75,0.15);
-    }
-    .nav-btn.disabled {
-      opacity: 0.25;
-      cursor: default;
-    }
-    .nav-btn-toc {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.58rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #7fffda;
-      text-decoration: none;
-      text-shadow: 0 0 10px rgba(127,255,218,0.4);
-      transition: color 0.3s, text-shadow 0.3s;
-    }
-    .nav-btn-toc:hover {
-      color: #fff;
-      text-shadow: 0 0 18px rgba(127,255,218,0.7);
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 600px) {
-      .chapter-wrapper { padding: 7rem 1.2rem 4rem; }
-      .glass-card { padding: 2rem 1.5rem; }
-    }
+    .chapter-wrapper { max-width: 720px; margin: 0 auto; padding: 9rem 2rem 6rem; }
+    .chapter-header { text-align: center; margin-bottom: 4rem; opacity: 0; animation: fadeUp 1s 0.3s forwards; }
+    .chapter-label { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: #7fffda; text-shadow: 0 0 14px rgba(127,255,218,0.5); display: block; margin-bottom: 1rem; }
+    .chapter-number { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; color: var(--salt); text-shadow: 0 4px 30px rgba(0,0,0,0.6); display: block; margin-bottom: 1.5rem; }
+    .header-rule { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 0 auto; }
+    .glass-card { background: rgba(0,0,0,0.38); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(255,255,255,0.14); padding: 3.5rem 3rem; position: relative; overflow: visible; opacity: 0; animation: fadeUp 1s 0.5s forwards; }
+    .glass-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, var(--gold), #7fffda); }
+    .chapter-content p { font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.95; color: rgba(232,237,245,0.92); margin-bottom: 1.5em; font-weight: 300; text-indent: 2em; }
+    .chapter-content p:first-of-type { text-indent: 0; }
+    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
+    .chapter-content strong { font-weight: 600; color: var(--gold); }
+    .section-divider { text-align: center; color: var(--gold); font-size: 1rem; letter-spacing: 0.5em; margin: 2.5rem 0; text-shadow: 0 0 18px rgba(200,168,75,0.5); }
+    .para-with-popup { position: relative; }
+    .glossary-popup { position: absolute; right: -230px; top: 0; width: 210px; background: rgba(5,12,28,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.12); padding: 0.85rem 1rem; z-index: 20; opacity: 0; pointer-events: none; transition: opacity 0.6s ease; }
+    .glossary-popup.visible { opacity: 1; }
+    .popup-entry { font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; line-height: 1.55; color: rgba(232,237,245,0.88); margin-bottom: 0.55rem; }
+    .popup-entry:last-child { margin-bottom: 0; }
+    .popup-word { font-style: italic; color: var(--gold); text-shadow: 0 0 10px rgba(200,168,75,0.4); }
+    .bottom-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.08); }
+    .nav-btn { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.6); text-decoration: none; padding: 0.6rem 1.2rem; border: 1px solid rgba(255,255,255,0.15); transition: all 0.3s; background: rgba(255,255,255,0.05); backdrop-filter: blur(4px); }
+    .nav-btn:not(.disabled):hover { color: var(--gold); border-color: rgba(200,168,75,0.5); background: rgba(200,168,75,0.08); box-shadow: 0 0 20px rgba(200,168,75,0.15); }
+    .nav-btn.disabled { opacity: 0.25; cursor: default; pointer-events: none; }
+    .nav-btn-toc { font-family: 'Space Mono', monospace; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: #7fffda; text-decoration: none; text-shadow: 0 0 10px rgba(127,255,218,0.4); transition: color 0.3s; }
+    .nav-btn-toc:hover { color: #fff; text-shadow: 0 0 18px rgba(127,255,218,0.7); }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 1000px) { .glossary-popup { right: auto; left: 0; top: auto; bottom: calc(100% + 8px); width: 100%; max-width: 100%; } }
+    @media (max-width: 600px) { .chapter-wrapper { padding: 7rem 1.2rem 4rem; } .glass-card { padding: 2rem 1.5rem; } }
   </style>
 </head>
 <body>
-
 <canvas id="sky-canvas"></canvas>
-
 <nav>
   <a href="index.html" class="nav-brand">Irene Lee</a>
-  <a href="index.html#chapters" class="nav-toc">← All Chapters</a>
+  <a href="index.html#chapters" class="nav-toc">&#8592; All Chapters</a>
 </nav>
-
 <div class="content">
   <div class="chapter-wrapper">
-
     <header class="chapter-header">
       <span class="chapter-label">What Was Carried, What Was Lost</span>
       <span class="chapter-number">Chapter 8</span>
       <div class="header-rule"></div>
     </header>
-
     <div class="glass-card">
       <article class="chapter-content">
         <p>After crossing the second mountain, we finally saw the small village port, the vast ocean stretching behind it. We arrived with hungry stomachs as we had eaten the small amount of food we packed from home. We hoped the village market would have food to buy.</p>
-<p>However, we couldn't just walk into the village, for it would stir suspicion. We were all weather-worn, our bodies dirty. It would look too obvious that we were not normal travellers passing by through the main roads.</p>
+<p>However, we couldn’t just walk into the village, for it would stir suspicion. We were all weather-worn, our bodies dirty. It would look too obvious that we were not normal travellers passing by through the main roads.</p>
 <p>We sat at the top of the small mountain that looked over the village. Watching the bustling streets, I counted the soldiers that were keeping watch.</p>
-<p>"There's around five soldiers on guard duty," I said as I broke the silence, "I don't see any sign of <em>Oppa</em> either."</p>
-<p>"We still have time," <em>Halmeoni</em> murmured behind me, "If Chunjae is still accurately following his letter, we still have a day left until his boat will be near the coast. Until then, we must recover as much as possible."</p>
+<p>&emsp;“There’s around five soldiers on guard duty,” I said as I broke the silence, “I don’t see any sign of <em>Oppa</em> either.”</p>
+<p>&emsp;“We still have time,” <em>Halmeoni </em>murmured behind me, “If Chunjae is still accurately following his letter, we still have a day left until his boat will be near the coast. Until then, we must recover as much as possible.”</p>
 <p>Silence returned, but a heavy blanket weighed our shoulders. It was as if we all knew the important question without saying it out loud. But it was <em>Eonni</em> who started speaking.</p>
-<p>"How much money do we have?"</p>
-<p>"Not much," <em>Halmeoni</em> answered before we could speak, "I believe it will be enough to buy some food for all of us, but that would be it. Unless we sell our belongings..."</p>
-<p>"That's too risky," I shook my head, "The soldiers will definitely notice and question us. Besides, what do we have to sell? They are all old trinkets."</p>
-<p>Taejae turned to me, "We could sell your rings."</p>
-<p><em>What?</em> Is he out of his mind? My eyes widened, but quickly turned to boiling anger. "Sell?" I looked down at the gold rings on my fingers.</p>
-<p>"It's real gold! We can trade it for food."</p>
-<p>"Are you crazy?" I leapt up from the ground with my fingers curled into the palms of my hands, "These are all we have left of <em>Eomeoni</em>. I will never sell them. <em>Ever.</em>"</p>
+<p>&emsp;“How much money do we have?”</p>
+<p>&emsp;“Not much,” <em>Halmeoni </em>answered before we could speak, “I believe it will be enough to buy some food for all of us, but that would be it. Unless we sell our belongings…”</p>
+<p>&emsp;“That’s too risky,” I shook my head, “The soldiers will definitely notice and question us. Besides, what do we have to sell? They are all old trinkets.”</p>
+<p>&emsp;Taejae turned to me, “We could sell your rings.”</p>
+<p>&emsp;<em>What? </em>Is he out of his mind? My eyes widened, but quickly turned to boiling anger. “Sell?” I looked down at the gold rings on my fingers.</p>
+<p>&emsp;“It’s real gold! We can trade it for food.”</p>
+<p>&emsp;“Are you crazy?” I leapt up from the ground with my fingers curled into the palms of my hands, “These are all we have left of <em>Eomeoni</em>. I will never sell them. <em>Ever.</em>”</p>
 <p>I shot a glare at Taejae, opening my mouth to say more, but <em>Eonni</em> caught it and shook her head from beside him. Sighing in frustration, I decided to become quite interested in the grass below me.</p>
 <p>The sun was pleasant today, its warm rays shining gently across the coast. The salty smell of the ocean breeze was not so overwhelming as well, and I thoroughly enjoyed the moment of peace we had on top of the mountain. That is, until <em>Eonni</em> got up from where she sat, quieting the singing birds that were perched on top of tree branches.</p>
-<p>"I will go down to the village in search of food," She announced, looking determined, "I'll go alone. It'll be safer that way."</p>
-<p>"What?" <em>Halmeoni</em> furrowed her brows, "You can't do that. It's too dangerous."</p>
-<p>"Let me come with you." I suggested. <em>Eonni</em>'s eyes widened as she frowned.</p>
-<p>"No. You need to take care of <em>Halmeoni</em>, Taejae, and Yeomjae."</p>
-<p>"<em>Halmeoni</em> can take care of them." I turned to her for confirmation. She hesitated for a moment, but then nodded.</p>
-<p><em>Eonni</em> looked at us both. "You got to be kidding me."</p>
-<p>When she knew that she couldn't talk her way out of it, she sighed.</p>
-<p>"Fine. But I'm gonna do all the talking. Are we clear?"</p>
-<p>I shrugged, "Clear."</p>
+<p>“I will go down to the village in search of food,” She announced, looking determined, “I’ll go alone. It’ll be safer that way.”</p>
+<p>“What?” <em>Halmeoni</em> furrowed her brows, “You can’t do that. It’s too dangerous.”</p>
+<p>“Let me come with you.” I suggested. <em>Eonni</em>’s eyes widened as she frowned.</p>
+<p>“No. You need to take care of <em>Halmeoni</em>, Taejae, and Yeomjae.”</p>
+<p>“<em>Halmeoni</em> can take care of them.” I turned to her for confirmation. She hesitated for a moment, but then nodded.</p>
+<p><em>Eonni</em> looked at us both. “You got to be kidding me.”</p>
+<p>When she knew that she couldn’t talk her way out of it, she sighed.</p>
+<p>“Fine. But I’m gonna do all the talking. Are we clear?”</p>
+<p>I shrugged, “Clear.”</p>
 <div class="section-divider">✦</div>
-<p>My shoes were brittle after hiking through the rain-flooded paths on the mountain for days. The sun had dried the caked mud on it, and my legs were stained with dirt as well. We had to first get cleaned up before we entered the village, and half the time we looked for a stream on the mountain.</p>
+<p>&emsp;My shoes were brittle after hiking through the rain-flooded paths on the mountain for days. The sun had dried the caked mud on it, and my legs were stained with dirt as well. We had to first get cleaned up before we entered the village, and half the time we looked for a stream on the mountain.</p>
 <p>The trees rustled in the wind as we combed through rows and rows of trees, stopping periodically to listen for running water. Instead, we only heard the distant shouts and noises from the village below. My arms had started to bake into a slightly red hue, the top of my head hot to the touch.</p>
-<p>"There has to be a stream," <em>Eonni</em> furrowed her brow as she examined my arm, "Any longer in the sun and you'll get burnt."</p>
+<p>&emsp;“There has to be a stream,” <em>Eonni</em> furrowed her brow as she examined my arm, “Any longer in the sun and you’ll get burnt.”</p>
 <p>She lightly flicked my arm which made me hiss in pain, glaring at her when she grinned. We were quite far from where <em>Halmeoni</em> and the others were, but we made a few markers to follow back if we ever got lost.</p>
-<p>After what felt like hours, <em>Eonni</em> finally heard running water after moving a bit down the mountain. Hauling myself across a few more obstacles, I finally beheld what <em>Eonni</em> was so excited about. A large rushing river knitted around trees, its clear water so cold that my skin burned when I dipped my foot inside in excitement.</p>
-<p>I unwrapped the cloth pouch that hung limp around my waist and laid its contents on a large flat rock next to the river. It had one more pair of clothes all rolled up in a tight bundle, a bit weather-worn from the rain but clean enough. <em>Eonni</em> had done the same. With all the excitement of finally having the chance to clean ourselves, <em>Eonni</em> and I had completely forgotten our initial plan for the moment.</p>
+<p>After what felt like hours, <em>Eonni</em> finally heard running water after moving a bit down the mountain. Hauling myself across a few more obstacles, I finally beheld what <em>Eonni </em>was so excited about. A large rushing river knitted around trees, its clear water so cold that my skin burned when I dipped my foot inside in excitement.</p>
+<p>I unwrapped the cloth pouch that hung limp around my waist and laid its contents on a large flat rock next to the river. It had one more pair of clothes all rolled up in a tight bundle, a bit weather-worn from the rain but clean enough. <em>Eonni </em>had done the same. With all the excitement of finally having the chance to clean ourselves, <em>Eonni </em>and I had completely forgotten our initial plan for the moment.</p>
 <p>Peeling off our dirty clothes, we jumped into the water with the clothes fisted in our hands. The water rose to the top of our stomachs in the deepest part, and there were soft pebbles below that were pleasant to walk on. <em>Eonni</em> had completely submerged her body. With the dirty clothes in my hands, I shook them in the water till it was clean, the dirt pieces following down the stream. When I was done, I laid them on top of another large rock, the sun bathing its surface. Then, jumping back into the water, I swam back and forth until my skin was sleek and shiny.</p>
-<p><em>Eonni</em> looked better than ever as color returned to her cheeks and her eyes glowed with satisfaction. "I can't remember the last time I ever felt this clean."</p>
-<p>"Me neither," I answered as I chased minnows, "I wish we could stay here forever."</p>
-<p>"That's silly. Why would you want to stay in a river forever?" she laughed and squeezed the water out of her hair.</p>
-<p>"I obviously didn't mean in the river," I rolled my eyes as I watched <em>Eonni</em> step out of the water.</p>
-<p>"Hm," she mused, her back towards me, "Get out and dry yourself. We need to get going."</p>
-<p>Sometimes her authoritative entitlement annoyed me.</p>
-      </article>
+<p>&emsp;<em>Eonni </em>looked better than ever as color returned to her cheeks and her eyes glowed with satisfaction. “I can’t remember the last time I ever felt this clean.”</p>
+<p>&emsp;“Me neither,” I answered as I chased minnows, “I wish we could stay here forever.”</p>
+<p>&emsp;“That’s silly. Why would you want to stay in a river forever?” she laughed and squeezed the water out of her hair.</p>
+<p>&emsp;“I obviously didn’t mean in the river,” I rolled my eyes as I watched <em>Eonni </em>step out of the water.</p>
+<p>&emsp;“Hm,” she mused, her back towards me, “Get out and dry yourself. We need to get going.”</p>
+<p>&emsp;Sometimes her authoritative entitlement annoyed me.</p>
 
+      </article>
       <nav class="bottom-nav">
-        <a href="chapter-7.html" class="nav-btn">← Previous</a>
-        <a href="index.html#chapters" class="nav-btn-toc">↑ Contents</a>
-        <a href="chapter-9.html" class="nav-btn">Next →</a>
+        <a href="chapter-7.html" class="nav-btn">&#8592; Previous</a>
+        <a href="index.html#chapters" class="nav-btn-toc">&#8593; Contents</a>
+        <a href="chapter-9.html" class="nav-btn">Next &#8594;</a>
       </nav>
     </div>
-
   </div>
 </div>
-
 <script>
-// ══════════════════════════════
-//  SKY CANVAS (same as index.html)
-// ══════════════════════════════
-const canvas = document.getElementById('sky-canvas');
-const ctx = canvas.getContext('2d');
-
-function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-resize();
-window.addEventListener('resize', resize);
-
-const stars = Array.from({length: 130}, () => ({
-  x: Math.random(),
-  y: Math.random() * 0.70,
-  size: Math.random() * 2.8 + 0.6,
-  phase: Math.random() * Math.PI * 2,
-  speed: Math.random() * 0.6 + 0.3,
-  brightness: Math.random() * 0.5 + 0.55
-}));
-
-const shootingStars = [];
-let nextShoot = 3 + Math.random() * 5;
-
-function spawnShootingStar() {
-  shootingStars.push({
-    x: Math.random() * 0.7 + 0.05,
-    y: Math.random() * 0.35 + 0.03,
-    len: 0.08 + Math.random() * 0.1,
-    angle: Math.PI / 4 + (Math.random() - 0.5) * 0.4,
-    speed: 0.18 + Math.random() * 0.15,
-    progress: 0,
-    alpha: 0.9 + Math.random() * 0.1,
-  });
-}
-
-const waves = [
-  { y: 0.765, amp: 22, freq: 0.007,  spd: 0.55, alpha: 0.52, w: 3.5 },
-  { y: 0.800, amp: 16, freq: 0.011,  spd: 0.80, alpha: 0.40, w: 2.8 },
-  { y: 0.832, amp: 11, freq: 0.016,  spd: 0.45, alpha: 0.30, w: 2.2 },
-  { y: 0.860, amp:  7, freq: 0.024,  spd: 1.00, alpha: 0.20, w: 1.6 },
-  { y: 0.890, amp:  4, freq: 0.035,  spd: 0.65, alpha: 0.14, w: 1.1 },
-];
-
-let animTime = 0;
-
-function lerp(a, b, t) { return a + (b - a) * t; }
-
-function draw(ts) {
-  animTime = ts / 1000;
-  const W = canvas.width, H = canvas.height;
-
-  // Sky gradient
-  const sg = ctx.createLinearGradient(0, 0, 0, H * 0.85);
-  sg.addColorStop(0,   '#010208');
-  sg.addColorStop(0.3, '#030d14');
-  sg.addColorStop(0.6, '#041a18');
-  sg.addColorStop(1,   '#060e1e');
-  ctx.fillStyle = sg;
-  ctx.fillRect(0, 0, W, H);
-
-  // Northern lights aurora
-  const auroraTime = animTime * 0.18;
-  const auroraGrad = ctx.createLinearGradient(0, H*0.05, 0, H*0.5);
-  const a1 = 0.055 + 0.025 * Math.sin(auroraTime);
-  const a2 = 0.035 + 0.02  * Math.sin(auroraTime * 1.3 + 1);
-  const a3 = 0.02  + 0.015 * Math.sin(auroraTime * 0.7 + 2);
-  auroraGrad.addColorStop(0,   `rgba(26,107,90,${a1})`);
-  auroraGrad.addColorStop(0.3, `rgba(20,80,70,${a2})`);
-  auroraGrad.addColorStop(0.7, `rgba(10,50,60,${a3})`);
-  auroraGrad.addColorStop(1,   'transparent');
-  ctx.fillStyle = auroraGrad;
-  ctx.fillRect(0, 0, W, H);
-
-  const auroraGrad2 = ctx.createLinearGradient(
-    W * (0.3 + 0.05 * Math.sin(auroraTime * 0.5)), H*0.1,
-    W * (0.7 + 0.05 * Math.cos(auroraTime * 0.4)), H*0.45
-  );
-  const b1 = 0.03 + 0.015 * Math.sin(auroraTime * 1.1 + 0.5);
-  auroraGrad2.addColorStop(0,   'transparent');
-  auroraGrad2.addColorStop(0.4, `rgba(42,140,100,${b1})`);
-  auroraGrad2.addColorStop(1,   'transparent');
-  ctx.fillStyle = auroraGrad2;
-  ctx.fillRect(0, 0, W, H);
-
-  // Moon
-  const mx = W * 0.22, my = H * 0.16, mr = 24;
-  const mg = ctx.createRadialGradient(mx, my, 0, mx, my, mr * 4);
-  mg.addColorStop(0, `rgba(180,215,200,0.28)`);
-  mg.addColorStop(1, 'transparent');
-  ctx.fillStyle = mg;
-  ctx.beginPath(); ctx.arc(mx, my, mr * 4, 0, Math.PI * 2); ctx.fill();
-  ctx.beginPath(); ctx.arc(mx, my, mr, 0, Math.PI * 2);
-  ctx.fillStyle = `rgba(255,252,235,1)`; ctx.fill();
-  ctx.beginPath(); ctx.arc(mx - mr*0.2, my - mr*0.15, mr * 0.85, 0, Math.PI * 2);
-  ctx.fillStyle = `rgba(5,12,20,0.92)`; ctx.fill();
-
-  // Stars
-  stars.forEach(s => {
-    const twinkle = 0.55 + 0.45 * Math.sin(s.phase + animTime * s.speed);
-    const a = s.brightness * twinkle;
-    ctx.beginPath();
-    ctx.arc(s.x * W, s.y * H, s.size, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(255,255,235,${a})`;
-    ctx.fill();
-    if (s.size > 1.8 && a > 0.4) {
-      ctx.strokeStyle = `rgba(255,255,220,${a * 0.55})`; ctx.lineWidth = 0.7;
-      const cx = s.x*W, cy = s.y*H, len = s.size * 4;
-      ctx.beginPath();
-      ctx.moveTo(cx-len, cy); ctx.lineTo(cx+len, cy);
-      ctx.moveTo(cx, cy-len); ctx.lineTo(cx, cy+len);
-      ctx.stroke();
-    }
-  });
-
-  // Shooting stars
-  nextShoot -= 0.016;
-  if (nextShoot <= 0) { spawnShootingStar(); nextShoot = 4 + Math.random() * 7; }
-  for (let i = shootingStars.length - 1; i >= 0; i--) {
-    const ss = shootingStars[i];
-    ss.progress += ss.speed * 0.016;
-    if (ss.progress >= 1) { shootingStars.splice(i, 1); continue; }
-    const fade = ss.progress < 0.2 ? ss.progress / 0.2 : ss.progress > 0.7 ? 1 - (ss.progress - 0.7) / 0.3 : 1;
-    const headX = (ss.x + Math.cos(ss.angle) * ss.len * ss.progress) * W;
-    const headY = (ss.y + Math.sin(ss.angle) * ss.len * ss.progress) * H;
-    const tailX = (ss.x + Math.cos(ss.angle) * ss.len * Math.max(0, ss.progress - 0.35)) * W;
-    const tailY = (ss.y + Math.sin(ss.angle) * ss.len * Math.max(0, ss.progress - 0.35)) * H;
-    const grad = ctx.createLinearGradient(tailX, tailY, headX, headY);
-    grad.addColorStop(0, 'rgba(255,255,245,0)');
-    grad.addColorStop(1, `rgba(255,255,245,${ss.alpha * fade})`);
-    ctx.beginPath(); ctx.moveTo(tailX, tailY); ctx.lineTo(headX, headY);
-    ctx.strokeStyle = grad; ctx.lineWidth = 1.5; ctx.stroke();
-    ctx.beginPath(); ctx.arc(headX, headY, 1.5, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(255,255,245,${ss.alpha * fade})`; ctx.fill();
-  }
-
-  // Horizon glow
-  const hg = ctx.createLinearGradient(0, H * 0.55, 0, H * 0.82);
-  hg.addColorStop(0, `rgba(26,107,90,0.12)`);
-  hg.addColorStop(1, 'transparent');
-  ctx.fillStyle = hg; ctx.fillRect(0, 0, W, H);
-
-  // Waves
-  waves.forEach(wv => {
-    const wy = H * wv.y;
-    ctx.beginPath(); ctx.moveTo(0, wy);
-    for (let x = 0; x <= W; x += 2) {
-      const y = wy + Math.sin(x * wv.freq + animTime * wv.spd) * wv.amp
-                   + Math.sin(x * wv.freq * 1.7 + animTime * wv.spd * 0.6) * wv.amp * 0.4;
-      ctx.lineTo(x, y);
-    }
-    ctx.strokeStyle = `rgba(255,255,255,${wv.alpha})`;
-    ctx.lineWidth = wv.w; ctx.stroke();
-
-    ctx.beginPath(); ctx.moveTo(0, wy);
-    for (let x = 0; x <= W; x += 2) {
-      const y = wy + Math.sin(x * wv.freq + animTime * wv.spd) * wv.amp
-                   + Math.sin(x * wv.freq * 1.7 + animTime * wv.spd * 0.6) * wv.amp * 0.4 - 2.5;
-      ctx.lineTo(x, y);
-    }
-    ctx.strokeStyle = `rgba(150,255,220,${wv.alpha * 0.4})`;
-    ctx.lineWidth = wv.w * 0.4; ctx.stroke();
-  });
-
-  // Boat
-  const bx = W * 0.82;
-  const topWaveY = H * waves[0].y + Math.sin(bx * waves[0].freq + animTime * waves[0].spd) * waves[0].amp;
-  const rock = Math.sin(animTime * 0.55) * 1.8;
-  const tilt = Math.sin(animTime * 0.55) * 0.022;
-
-  ctx.save();
-  ctx.translate(bx, topWaveY + rock);
-  ctx.rotate(tilt);
-
-  ctx.beginPath();
-  ctx.moveTo(-44, 0);
-  ctx.bezierCurveTo(-44, 0, -36, 14, 0, 16);
-  ctx.bezierCurveTo(36, 14, 46, 0, 46, 0);
-  ctx.closePath();
-  ctx.fillStyle = 'rgba(18,32,58,0.95)';
-  ctx.fill();
-
-  ctx.beginPath();
-  ctx.moveTo(-44, 0);
-  ctx.bezierCurveTo(-36, -2, 36, -2, 46, 0);
-  ctx.strokeStyle = 'rgba(160,210,230,0.35)';
-  ctx.lineWidth = 1;
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.moveTo(2, 0); ctx.lineTo(2, -62);
-  ctx.strokeStyle = 'rgba(200,220,240,0.65)';
-  ctx.lineWidth = 1.2; ctx.stroke();
-
-  ctx.beginPath();
-  ctx.moveTo(2, -58); ctx.lineTo(2, -8); ctx.lineTo(34, -28);
-  ctx.closePath();
-  ctx.fillStyle = 'rgba(210,230,245,0.18)';
-  ctx.fill();
-  ctx.strokeStyle = 'rgba(200,220,240,0.3)';
-  ctx.lineWidth = 0.8; ctx.stroke();
-
-  ctx.beginPath();
-  ctx.moveTo(2, -58); ctx.lineTo(-28, 0);
-  ctx.strokeStyle = 'rgba(200,220,240,0.2)';
-  ctx.lineWidth = 0.7; ctx.stroke();
-
+const canvas=document.getElementById('sky-canvas'),ctx=canvas.getContext('2d');
+function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+resize();window.addEventListener('resize',resize);
+const stars=Array.from({length:130},()=>({x:Math.random(),y:Math.random()*0.70,size:Math.random()*2.8+0.6,phase:Math.random()*Math.PI*2,speed:Math.random()*0.6+0.3,brightness:Math.random()*0.5+0.55}));
+const shootingStars=[];let nextShoot=3+Math.random()*5;
+function spawnShootingStar(){shootingStars.push({x:Math.random()*0.7+0.05,y:Math.random()*0.35+0.03,len:0.08+Math.random()*0.1,angle:Math.PI/4+(Math.random()-0.5)*0.4,speed:0.18+Math.random()*0.15,progress:0,alpha:0.9+Math.random()*0.1});}
+const waves=[{y:0.765,amp:22,freq:0.007,spd:0.55,alpha:0.52,w:3.5},{y:0.800,amp:16,freq:0.011,spd:0.80,alpha:0.40,w:2.8},{y:0.832,amp:11,freq:0.016,spd:0.45,alpha:0.30,w:2.2},{y:0.860,amp:7,freq:0.024,spd:1.00,alpha:0.20,w:1.6},{y:0.890,amp:4,freq:0.035,spd:0.65,alpha:0.14,w:1.1}];
+let animTime=0;
+function draw(ts){
+  animTime=ts/1000;const W=canvas.width,H=canvas.height;
+  const sg=ctx.createLinearGradient(0,0,0,H*0.85);
+  sg.addColorStop(0,'#010208');sg.addColorStop(0.3,'#030d14');sg.addColorStop(0.6,'#041a18');sg.addColorStop(1,'#060e1e');
+  ctx.fillStyle=sg;ctx.fillRect(0,0,W,H);
+  const at=animTime*0.18;
+  const ag=ctx.createLinearGradient(0,H*0.05,0,H*0.5);
+  ag.addColorStop(0,`rgba(26,107,90,${0.055+0.025*Math.sin(at)})`);ag.addColorStop(0.3,`rgba(20,80,70,${0.035+0.02*Math.sin(at*1.3+1)})`);ag.addColorStop(0.7,`rgba(10,50,60,${0.02+0.015*Math.sin(at*0.7+2)})`);ag.addColorStop(1,'transparent');
+  ctx.fillStyle=ag;ctx.fillRect(0,0,W,H);
+  const ag2=ctx.createLinearGradient(W*(0.3+0.05*Math.sin(at*0.5)),H*0.1,W*(0.7+0.05*Math.cos(at*0.4)),H*0.45);
+  ag2.addColorStop(0,'transparent');ag2.addColorStop(0.4,`rgba(42,140,100,${0.03+0.015*Math.sin(at*1.1+0.5)})`);ag2.addColorStop(1,'transparent');
+  ctx.fillStyle=ag2;ctx.fillRect(0,0,W,H);
+  const mx=W*0.22,my=H*0.16,mr=24;
+  const mg=ctx.createRadialGradient(mx,my,0,mx,my,mr*4);
+  mg.addColorStop(0,'rgba(180,215,200,0.28)');mg.addColorStop(1,'transparent');
+  ctx.fillStyle=mg;ctx.beginPath();ctx.arc(mx,my,mr*4,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.arc(mx,my,mr,0,Math.PI*2);ctx.fillStyle='rgba(255,252,235,1)';ctx.fill();
+  ctx.beginPath();ctx.arc(mx-mr*0.2,my-mr*0.15,mr*0.85,0,Math.PI*2);ctx.fillStyle='rgba(5,12,20,0.92)';ctx.fill();
+  stars.forEach(s=>{const tw=0.55+0.45*Math.sin(s.phase+animTime*s.speed),a=s.brightness*tw;ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.size,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,235,${a})`;ctx.fill();if(s.size>1.8&&a>0.4){ctx.strokeStyle=`rgba(255,255,220,${a*0.55})`;ctx.lineWidth=0.7;const cx=s.x*W,cy=s.y*H,len=s.size*4;ctx.beginPath();ctx.moveTo(cx-len,cy);ctx.lineTo(cx+len,cy);ctx.moveTo(cx,cy-len);ctx.lineTo(cx,cy+len);ctx.stroke();}});
+  nextShoot-=0.016;if(nextShoot<=0){spawnShootingStar();nextShoot=4+Math.random()*7;}
+  for(let i=shootingStars.length-1;i>=0;i--){const ss=shootingStars[i];ss.progress+=ss.speed*0.016;if(ss.progress>=1){shootingStars.splice(i,1);continue;}const fade=ss.progress<0.2?ss.progress/0.2:ss.progress>0.7?1-(ss.progress-0.7)/0.3:1;const hx=(ss.x+Math.cos(ss.angle)*ss.len*ss.progress)*W;const hy=(ss.y+Math.sin(ss.angle)*ss.len*ss.progress)*H;const tx=(ss.x+Math.cos(ss.angle)*ss.len*Math.max(0,ss.progress-0.35))*W;const ty=(ss.y+Math.sin(ss.angle)*ss.len*Math.max(0,ss.progress-0.35))*H;const gr=ctx.createLinearGradient(tx,ty,hx,hy);gr.addColorStop(0,'rgba(255,255,245,0)');gr.addColorStop(1,`rgba(255,255,245,${ss.alpha*fade})`);ctx.beginPath();ctx.moveTo(tx,ty);ctx.lineTo(hx,hy);ctx.strokeStyle=gr;ctx.lineWidth=1.5;ctx.stroke();ctx.beginPath();ctx.arc(hx,hy,1.5,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,245,${ss.alpha*fade})`;ctx.fill();}
+  const hg=ctx.createLinearGradient(0,H*0.55,0,H*0.82);hg.addColorStop(0,'rgba(26,107,90,0.12)');hg.addColorStop(1,'transparent');ctx.fillStyle=hg;ctx.fillRect(0,0,W,H);
+  waves.forEach(wv=>{const wy=H*wv.y;ctx.beginPath();ctx.moveTo(0,wy);for(let x=0;x<=W;x+=2){const y=wy+Math.sin(x*wv.freq+animTime*wv.spd)*wv.amp+Math.sin(x*wv.freq*1.7+animTime*wv.spd*0.6)*wv.amp*0.4;ctx.lineTo(x,y);}ctx.strokeStyle=`rgba(255,255,255,${wv.alpha})`;ctx.lineWidth=wv.w;ctx.stroke();ctx.beginPath();ctx.moveTo(0,wy);for(let x=0;x<=W;x+=2){const y=wy+Math.sin(x*wv.freq+animTime*wv.spd)*wv.amp+Math.sin(x*wv.freq*1.7+animTime*wv.spd*0.6)*wv.amp*0.4-2.5;ctx.lineTo(x,y);}ctx.strokeStyle=`rgba(150,255,220,${wv.alpha*0.4})`;ctx.lineWidth=wv.w*0.4;ctx.stroke();});
+  const bx=W*0.82,twy=H*waves[0].y+Math.sin(bx*waves[0].freq+animTime*waves[0].spd)*waves[0].amp;
+  const rock=Math.sin(animTime*0.55)*1.8,tilt=Math.sin(animTime*0.55)*0.022;
+  ctx.save();ctx.translate(bx,twy+rock);ctx.rotate(tilt);
+  ctx.beginPath();ctx.moveTo(-44,0);ctx.bezierCurveTo(-44,0,-36,14,0,16);ctx.bezierCurveTo(36,14,46,0,46,0);ctx.closePath();ctx.fillStyle='rgba(18,32,58,0.95)';ctx.fill();
+  ctx.beginPath();ctx.moveTo(-44,0);ctx.bezierCurveTo(-36,-2,36,-2,46,0);ctx.strokeStyle='rgba(160,210,230,0.35)';ctx.lineWidth=1;ctx.stroke();
+  ctx.beginPath();ctx.moveTo(2,0);ctx.lineTo(2,-62);ctx.strokeStyle='rgba(200,220,240,0.65)';ctx.lineWidth=1.2;ctx.stroke();
+  ctx.beginPath();ctx.moveTo(2,-58);ctx.lineTo(2,-8);ctx.lineTo(34,-28);ctx.closePath();ctx.fillStyle='rgba(210,230,245,0.18)';ctx.fill();ctx.strokeStyle='rgba(200,220,240,0.3)';ctx.lineWidth=0.8;ctx.stroke();
+  ctx.beginPath();ctx.moveTo(2,-58);ctx.lineTo(-28,0);ctx.strokeStyle='rgba(200,220,240,0.2)';ctx.lineWidth=0.7;ctx.stroke();
   ctx.restore();
-
   requestAnimationFrame(draw);
 }
 requestAnimationFrame(draw);
+document.querySelectorAll('.glossary-popup').forEach(p=>p.style.display='block');
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{const popup=e.target.querySelector('.glossary-popup');if(!popup)return;if(e.isIntersecting)popup.classList.add('visible');else popup.classList.remove('visible');});},{threshold:0.4,rootMargin:'0px 0px -15% 0px'});
+document.querySelectorAll('.para-with-popup').forEach(el=>obs.observe(el));
 </script>
 </body>
 </html>
