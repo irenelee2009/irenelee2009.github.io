@@ -3,345 +3,206 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Chapter 13 — Irene Lee</title>
+  <title>Chapter 13 — What Was Carried, What Was Lost</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --gold: #c8a84b;
-      --salt: #e8edf5;
-      --fog: #b8c4d8;
       --ink: #0a0e1a;
+      --fog: #b8c4d8;
+      --salt: #e8edf5;
+      --tide: #2a4a6b;
+      --wave: #1a6b5a;
+      --gold: #c8a84b;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-
     body {
-      background: #06090f;
+      background: #0a0e1a;
       color: var(--salt);
       font-family: 'Cormorant Garamond', serif;
       font-weight: 300;
       overflow-x: hidden;
       min-height: 100vh;
     }
-
-    /* SKY CANVAS */
     #sky-canvas {
-      position: fixed; inset: 0;
-      z-index: 0; pointer-events: none;
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
     }
+    .content { position: relative; z-index: 2; }
 
     /* NAV */
     nav {
-      position: fixed; top: 0; left: 0; right: 0;
+      position: fixed;
+      top: 0; left: 0; right: 0;
       z-index: 100;
-      padding: 1.2rem 6vw;
-      display: flex; justify-content: space-between; align-items: center;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.55), transparent);
+      padding: 1.5rem 10vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
       backdrop-filter: blur(6px);
     }
     .nav-brand {
       font-family: 'Playfair Display', serif;
-      font-style: italic; font-size: 1rem; color: #fff;
-      text-decoration: none; text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: #fff;
+      text-decoration: none;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.6);
     }
-    .nav-chapter {
+    .nav-toc {
       font-family: 'Space Mono', monospace;
-      font-size: 0.58rem; letter-spacing: 0.22em;
-      text-transform: uppercase; color: rgba(255,255,255,0.5);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      transition: color 0.3s;
     }
-    .nav-home {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.58rem; letter-spacing: 0.18em;
-      text-transform: uppercase; color: rgba(255,255,255,0.5);
-      text-decoration: none; transition: color 0.3s;
-    }
-    .nav-home:hover { color: var(--gold); }
+    .nav-toc:hover { color: #fff; }
 
-    /* MAIN CONTENT */
-    .page-wrapper {
-      position: relative; z-index: 2;
-      max-width: 780px;
+    /* CHAPTER PAGE */
+    .chapter-wrapper {
+      max-width: 720px;
       margin: 0 auto;
-      padding: 8rem 4vw 6rem;
+      padding: 9rem 2rem 6rem;
     }
 
-    /* CHAPTER HEADER */
     .chapter-header {
       text-align: center;
-      margin-bottom: 5rem;
-      padding-bottom: 3rem;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 4rem;
+      opacity: 0;
+      animation: fadeUp 1s 0.3s forwards;
+    }
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #7fffda;
+      text-shadow: 0 0 14px rgba(127,255,218,0.5);
+      display: block;
+      margin-bottom: 1rem;
     }
     .chapter-number {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem; letter-spacing: 0.35em;
-      text-transform: uppercase; color: var(--gold);
-      margin-bottom: 1.5rem;
-      text-shadow: 0 0 20px rgba(200,168,75,0.6);
-      display: block;
-    }
-    .chapter-title-display {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 400; line-height: 1.15;
-      text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 400;
+      color: var(--salt);
+      text-shadow: 0 4px 30px rgba(0,0,0,0.6);
+      display: block;
       margin-bottom: 1.5rem;
     }
-    .chapter-title-display em { font-style: italic; color: #ffd98a; }
-    .chapter-divider {
-      display: flex; align-items: center; justify-content: center;
-      gap: 1rem; margin-top: 2rem;
-    }
-    .chapter-divider-line {
-      width: 60px; height: 1px;
-      background: linear-gradient(to right, transparent, rgba(200,168,75,0.5));
-    }
-    .chapter-divider-line.r {
-      background: linear-gradient(to left, transparent, rgba(200,168,75,0.5));
-    }
-    .chapter-divider-icon { color: var(--gold); font-size: 0.9rem; }
-
-    /* BOOK PAGES — FLIP CONTAINER */
-    .book-container {
-      perspective: 2000px;
-      margin-bottom: 6rem;
+    .header-rule {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto;
     }
 
-    .pages-wrapper {
+    /* GLASS CARD */
+    .glass-card {
+      background: rgba(0,0,0,0.38);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border: 1px solid rgba(255,255,255,0.14);
+      padding: 3.5rem 3rem;
       position: relative;
-      min-height: 200px;
+      overflow: hidden;
+      opacity: 0;
+      animation: fadeUp 1s 0.5s forwards;
     }
-
-    /* Each "page" is a screen of text */
-    .book-page {
-      background: rgba(8, 14, 28, 0.72);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 2px;
-      padding: 4rem 4.5rem;
-      position: relative;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08);
-      transform-origin: left center;
-      transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000),
-                  opacity 0.4s ease;
-      /* Page turn crease */
-    }
-    .book-page::before {
+    .glass-card::before {
       content: '';
       position: absolute; top: 0; left: 0;
-      width: 3px; height: 100%;
-      background: linear-gradient(to right, rgba(0,0,0,0.4), transparent);
-      border-radius: 2px 0 0 2px;
-    }
-    .book-page::after {
-      content: '';
-      position: absolute; top: 0; right: 0;
-      width: 40px; height: 100%;
-      background: linear-gradient(to left, rgba(0,0,0,0.15), transparent);
-      pointer-events: none;
+      width: 4px; height: 100%;
+      background: linear-gradient(to bottom, var(--gold), #7fffda);
     }
 
-    /* Flip animation states */
-    .book-page.flip-out {
-      animation: flipOut 0.5s ease-in forwards;
-    }
-    .book-page.flip-in {
-      animation: flipIn 0.5s ease-out forwards;
-    }
-    .book-page.flip-out-back {
-      animation: flipOutBack 0.5s ease-in forwards;
-    }
-    .book-page.flip-in-back {
-      animation: flipInBack 0.5s ease-out forwards;
-    }
-
-    @keyframes flipOut {
-      0%   { transform: rotateY(0deg); opacity: 1; }
-      100% { transform: rotateY(-90deg); opacity: 0; }
-    }
-    @keyframes flipIn {
-      0%   { transform: rotateY(90deg); opacity: 0; }
-      100% { transform: rotateY(0deg); opacity: 1; }
-    }
-    @keyframes flipOutBack {
-      0%   { transform: rotateY(0deg); opacity: 1; }
-      100% { transform: rotateY(90deg); opacity: 0; }
-    }
-    @keyframes flipInBack {
-      0%   { transform: rotateY(-90deg); opacity: 0; }
-      100% { transform: rotateY(0deg); opacity: 1; }
-    }
-
-    /* PAGE CONTENT */
-    .page-text {
-      font-size: clamp(1.1rem, 1.8vw, 1.3rem);
-      line-height: 2.0;
+    /* CHAPTER TEXT */
+    .chapter-content p {
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      line-height: 1.95;
       color: rgba(232,237,245,0.92);
+      margin-bottom: 1.5em;
+      font-weight: 300;
     }
-    .page-text p { margin-bottom: 1.8em; }
-    .page-text p:last-child { margin-bottom: 0; }
-
-    /* Opening drop cap */
-    .page-text.first-page p:first-child::first-letter {
-      font-family: 'Playfair Display', serif;
-      font-size: 4.5em;
-      float: left;
-      line-height: 0.75;
-      margin-right: 0.1em;
-      margin-top: 0.08em;
+    .chapter-content em {
+      font-style: italic;
+      color: rgba(255, 249, 225, 0.95);
+    }
+    .chapter-content strong {
+      font-weight: 600;
       color: var(--gold);
-      text-shadow: 0 0 30px rgba(200,168,75,0.5);
+    }
+    .section-divider {
+      text-align: center;
+      color: var(--gold);
+      font-size: 1rem;
+      letter-spacing: 0.5em;
+      margin: 2.5rem 0;
+      text-shadow: 0 0 18px rgba(200,168,75,0.5);
     }
 
-    /* PAGE COUNTER */
-    .page-counter {
-      text-align: center;
-      margin: 1.5rem 0 2rem;
+    /* BOTTOM NAV */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 3.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      opacity: 0;
+      animation: fadeUp 1s 0.7s forwards;
+    }
+    .nav-btn {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      padding: 0.6rem 1.2rem;
+      border: 1px solid rgba(255,255,255,0.15);
+      transition: all 0.3s;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(4px);
+    }
+    .nav-btn:not(.disabled):hover {
+      color: var(--gold);
+      border-color: rgba(200,168,75,0.5);
+      background: rgba(200,168,75,0.08);
+      box-shadow: 0 0 20px rgba(200,168,75,0.15);
+    }
+    .nav-btn.disabled {
+      opacity: 0.25;
+      cursor: default;
+    }
+    .nav-btn-toc {
       font-family: 'Space Mono', monospace;
       font-size: 0.58rem;
       letter-spacing: 0.2em;
-      color: rgba(255,255,255,0.3);
-    }
-    .page-dot {
-      display: inline-block;
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.2);
-      margin: 0 3px;
-      transition: all 0.3s;
-      vertical-align: middle;
-    }
-    .page-dot.active {
-      background: var(--gold);
-      box-shadow: 0 0 8px rgba(200,168,75,0.7);
-      transform: scale(1.3);
-    }
-
-    /* IN-PAGE NAV (prev/next page within chapter) */
-    .page-nav {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-top: 1rem; gap: 1rem;
-    }
-    .page-btn {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.62rem; letter-spacing: 0.15em;
       text-transform: uppercase;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.15);
-      color: rgba(255,255,255,0.6);
-      padding: 0.7rem 1.4rem;
-      cursor: pointer;
-      transition: all 0.3s;
-      backdrop-filter: blur(4px);
-      display: flex; align-items: center; gap: 0.6rem;
+      color: #7fffda;
+      text-decoration: none;
+      text-shadow: 0 0 10px rgba(127,255,218,0.4);
+      transition: color 0.3s, text-shadow 0.3s;
     }
-    .page-btn:hover:not(:disabled) {
-      background: rgba(255,255,255,0.12);
-      border-color: rgba(255,255,255,0.35);
+    .nav-btn-toc:hover {
       color: #fff;
-      transform: translateX(0) scale(1.02);
-    }
-    .page-btn:disabled { opacity: 0.25; cursor: default; }
-    .page-btn.prev:hover:not(:disabled) { transform: translateX(-3px); }
-    .page-btn.next:hover:not(:disabled) { transform: translateX(3px); }
-    .page-btn-arrow { font-size: 1rem; }
-
-    /* END OF CHAPTER */
-    .chapter-end {
-      display: none;
-      text-align: center;
-      padding: 5rem 2rem;
-      background: rgba(8,14,28,0.6);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-    .chapter-end.visible { display: block; }
-    .chapter-end-symbol {
-      font-size: 2rem; color: var(--gold); margin-bottom: 2rem;
-      text-shadow: 0 0 25px rgba(200,168,75,0.6);
-      animation: pulse 2s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%,100% { opacity: 0.8; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.1); }
-    }
-    .chapter-end h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem; font-weight: 400;
-      margin-bottom: 0.8rem;
-    }
-    .chapter-end p {
-      font-size: 1.1rem; color: var(--fog);
-      margin-bottom: 3rem; font-style: italic;
-    }
-    .chapter-nav-btns {
-      display: flex; justify-content: center;
-      align-items: center; gap: 1.5rem; flex-wrap: wrap;
-    }
-    .chapter-nav-btn {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem; letter-spacing: 0.18em;
-      text-transform: uppercase; text-decoration: none;
-      padding: 1rem 2rem;
-      transition: all 0.3s; display: flex; align-items: center; gap: 0.8rem;
-    }
-    .chapter-nav-btn.prev-ch {
-      background: transparent;
-      border: 1px solid rgba(255,255,255,0.25);
-      color: rgba(255,255,255,0.7);
-    }
-    .chapter-nav-btn.prev-ch:hover {
-      border-color: rgba(255,255,255,0.6); color: #fff;
-      transform: translateX(-4px);
-    }
-    .chapter-nav-btn.next-ch {
-      background: var(--gold); color: var(--ink);
-      box-shadow: 0 0 30px rgba(200,168,75,0.45);
-    }
-    .chapter-nav-btn.next-ch:hover {
-      background: #ffd060;
-      transform: translateX(4px);
-      box-shadow: 0 0 45px rgba(200,168,75,0.65);
-    }
-    .chapter-nav-btn.toc {
-      background: transparent;
-      border: 1px solid rgba(200,168,75,0.35);
-      color: var(--gold);
-    }
-    .chapter-nav-btn.toc:hover {
-      border-color: var(--gold);
-      box-shadow: 0 0 15px rgba(200,168,75,0.2);
+      text-shadow: 0 0 18px rgba(127,255,218,0.7);
     }
 
-    /* PROGRESS BAR */
-    .reading-progress {
-      position: fixed; top: 0; left: 0; right: 0;
-      height: 2px; z-index: 200;
-      background: rgba(255,255,255,0.08);
-    }
-    .reading-progress-bar {
-      height: 100%;
-      background: linear-gradient(to right, var(--gold), #7fffda);
-      transition: width 0.4s ease;
-      box-shadow: 0 0 8px rgba(200,168,75,0.7);
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    /* KEYBOARD HINT */
-    .keyboard-hint {
-      text-align: center;
-      margin-top: 1rem;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.52rem; letter-spacing: 0.15em;
-      color: rgba(255,255,255,0.2);
-    }
-    kbd {
-      display: inline-block;
-      padding: 0.15rem 0.4rem;
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 3px;
-      font-size: 0.5rem;
-      margin: 0 2px;
+    @media (max-width: 600px) {
+      .chapter-wrapper { padding: 7rem 1.2rem 4rem; }
+      .glass-card { padding: 2rem 1.5rem; }
     }
   </style>
 </head>
@@ -349,348 +210,277 @@
 
 <canvas id="sky-canvas"></canvas>
 
-<!-- Reading progress bar -->
-<div class="reading-progress">
-  <div class="reading-progress-bar" id="progress-bar"></div>
-</div>
-
-<!-- NAV -->
 <nav>
   <a href="index.html" class="nav-brand">Irene Lee</a>
-  <span class="nav-chapter" id="nav-chapter-label">Chapter 1</span>
-  <a href="index.html" class="nav-home">← Home</a>
+  <a href="index.html#chapters" class="nav-toc">← All Chapters</a>
 </nav>
 
-<!-- MAIN -->
-<div class="page-wrapper">
+<div class="content">
+  <div class="chapter-wrapper">
 
-  <!-- Chapter header -->
-  <div class="chapter-header">
-    <span class="chapter-number" id="chapter-number-label">Chapter 1</span>
-    <h1 class="chapter-title-display" id="chapter-title-display">
-      <!-- Title goes here, or just "Chapter 1" -->
-    </h1>
-    <div class="chapter-divider">
-      <div class="chapter-divider-line"></div>
-      <span class="chapter-divider-icon">✦</span>
-      <div class="chapter-divider-line r"></div>
+    <header class="chapter-header">
+      <span class="chapter-label">What Was Carried, What Was Lost</span>
+      <span class="chapter-number">Chapter 13</span>
+      <div class="header-rule"></div>
+    </header>
+
+    <div class="glass-card">
+      <article class="chapter-content">
+        <p>I landed on top of a young man's back, my legs soon submerged in the water as he sprinted in. Others chased after him, but immediately gave up once the water reached my lower back.</p>
+<p>"I'm going to let go of your legs. Once I do that, put your arms around my neck, alright? Try to keep your brother around your neck too," The man said as we went deeper and deeper.</p>
+<p>"Okay," I said, but my voice quavered. I didn't notice that I had been crying until now.</p>
+<p>As soon as I replied, he let go of my legs and I felt my body drifting in the open sea, my arms wrapped around the man's neck tightly.</p>
+<p>"Kick under the water with me."</p>
+<p>I suddenly felt the force of his kicks as he started to swim forward, and I nearly got torn away from his neck. But I hung on, kicking my feet with him. So this was the strength of an adult.</p>
+<p>As if on cue, a wave that would have pushed me back to the shore loomed ahead of us, but the man just told me to tighten my grip and to hold my breath. So I did, and when the wave crashed into us, I felt my fingers slipping. But immediately after we hit it, we made it out the other side, the man still propelling us towards the boat.</p>
+<p>The gunshots immediately resumed, and shouts were heard from behind us.</p>
+<p>"Don't look back," The man whispered between his heavy breaths.</p>
+<p>Still, I snuck a glance behind me, my body tensing. The soldiers finally made it through the mountain of rocks, and were grabbing the people like they did back at my house&mdash;but more violent, tearing them down and beating them with a large black baton. Some tried to flee, but were then shot in the back. The man let out a grunt.</p>
+<p>"Hey. Eyes forward." He said in frustration. But his voice wavered.</p>
+<p>There was nobody in the water now, with only two dead corpses floating with the current toward the shore. The water around us was stained red, the reek of blood and death taking over the salty ocean smell and filling my senses. Yeomjae squirmed relentlessly between me and the man, screaming out in discomfort. The boat was not so far away now, but his screams alerted the soldiers on shore. Bullets rained towards us.</p>
+<p>The man cursed loudly as he warned me to hold my breath. He then plunged under the water's surface, swimming as fast and as deep as he could as bullets pierced into the water, trying to hide from the soldiers' view. But after a few seconds, we had to go back up for a breath, and then go down again. It was a constant pattern, and after diving underwater for around five more times, the bullets stopped as we got closer to the boat.</p>
+<p>I didn't even have time to wipe the water from my eyes to get a good view when we were above the water's surface before we plunged back under.</p>
+<p>When I thought that it was never going to end, I suddenly felt familiar hands haul me out and onto a hard surface. The boat. The man got on next, immediately collapsing on the floor from exhaustion. As soon as my feet touched the wood, my feet slipped and I fell onto the floor. That was when I noticed a burning pain that erupted on the bottom of my feet. My shoes were gone&mdash;my feet were red and raw, soaked in blood, skin peeling. I gritted my teeth. Looking up, I saw familiar faces look down on me. <em>Halmeoni</em>, <em>Eonni</em>, Taejae, <em>Oppa</em>, and...<em>Abeoji</em>. My eyes widened when I saw the face of my father, and I nearly jumped into his arms. It had almost been a year since I last saw him. I also noticed unfamiliar faces on the boat, but I ignored them.</p>
+<p>Tears welled up in my eyes. I tried to wipe them away, but ended up dragging salt into my eyes. I tried to get up, but my arms and legs failed me as I fell back onto the floor. With some help, I managed to sit up.</p>
+<p>Our moment of reunion was cut short when bullets lashed towards us again. I screamed as everyone ducked low against the floor, and <em>Oppa</em> immediately started to row away from the shore with the help of a different man.</p>
+<p>However, the gunfire was slowing. A bullet whizzed past my head as I curled up on the ground, covering my ears. One struck a stranger that was on the boat with us and knocked her overboard, then another. The boat was too crowded, we could barely move.</p>
+<p><em>THUNK</em></p>
+<p>The boat rocked as we all looked at the floor. Water rushed in.</p>
+<p>Everyone rushed to find something to plug the bullet hole, but found nothing. My small pouch of my belongings were gone, and so were everyone else\'s. Panic seized us, and we all rushed to scoop the water out&mdash;doing nothing.</p>
+<p>"Here!" <em>Oppa</em>'s voice rang amidst the panic with his shirt crumpled up in his hands. He then stuffed it into the hole, "This might not do much but keep scooping out the water!"</p>
+<p>The water was up to our calves now as we scooped the water out with our hands. Everyone worked relentlessly as <em>Oppa</em> rowed even harder with the same stranger. The bullets were now all missing the boat, splashing into the water around us instead. It was as if something was protecting us.</p>
+<p>But right as it started, everything stopped. The bullets ceased, and silence blanketed us. We were too far from the shore for the <em>inmingun</em> to aim. We all froze, the silence strange to our ears.</p>
+<p>The shirt that <em>Oppa</em> had stuffed into the hole was holding well enough, but we all knew it wouldn't last long.</p>
+<p>I looked up to see if everyone was still safely on the boat. <em>Eonni</em> covered both Taejae and Yeomjae with her body while <em>Halmeoni</em> was curled up beside her. <em>Abeoji</em> was helping a wounded man. Two more strangers were also on the boat. The man who had saved me was gone.</p>
+<p>Blood dripped from our limbs, staining the oak wood. The waves rolled gently against the hull. Rays of sunlight spilled across the water, a cool breeze kissing our skin.</p>
+<p>It felt cruel that the world could look so beautiful while we bled inside a broken boat.</p>
+<p>And yet it was strangely comforting too.</p>
+<p>It meant we were still alive.</p>
+<p>But something felt missing. The boat was too still. As we all looked around us, my stomach dropped, and for a moment we couldn't move or speak as we stared at the empty bench.</p>
+<p><em>Oppa</em> was missing.</p>
+      </article>
+
+      <nav class="bottom-nav">
+        <a href="chapter-12.html" class="nav-btn">← Previous</a>
+        <a href="index.html#chapters" class="nav-btn-toc">↑ Contents</a>
+        <a href="chapter-14.html" class="nav-btn">Next →</a>
+      </nav>
     </div>
+
   </div>
-
-  <!-- Book pages -->
-  <div class="book-container">
-    <div class="pages-wrapper">
-      <div class="book-page" id="current-page">
-        <div class="page-text" id="page-text"></div>
-      </div>
-    </div>
-
-    <!-- Page dots -->
-    <div class="page-counter" id="page-counter"></div>
-
-    <!-- Page navigation -->
-    <div class="page-nav">
-      <button class="page-btn prev" id="btn-prev-page" onclick="changePage(-1)">
-        <span class="page-btn-arrow">←</span> Previous page
-      </button>
-      <button class="page-btn next" id="btn-next-page" onclick="changePage(1)">
-        Next page <span class="page-btn-arrow">→</span>
-      </button>
-    </div>
-    <div class="keyboard-hint">
-      Use <kbd>←</kbd> <kbd>→</kbd> arrow keys or swipe to turn pages
-    </div>
-  </div>
-
-  <!-- End of chapter -->
-  <div class="chapter-end" id="chapter-end">
-    <div class="chapter-end-symbol">⚓</div>
-    <h3>End of Chapter <span id="end-chapter-num"></span></h3>
-    <p>The journey continues...</p>
-    <div class="chapter-nav-btns">
-      <a href="#" class="chapter-nav-btn prev-ch" id="btn-prev-chapter">← Previous Chapter</a>
-      <a href="index.html" class="chapter-nav-btn toc">📖 Table of Contents</a>
-      <a href="#" class="chapter-nav-btn next-ch" id="btn-next-chapter">Next Chapter →</a>
-    </div>
-  </div>
-
-</div><!-- end page-wrapper -->
+</div>
 
 <script>
-// ══════════════════════════════════════════
-//  CONFIGURATION — change this per chapter
-// ══════════════════════════════════════════
-const CHAPTER_NUM = 13;   // ← change this number for each chapter
-const TOTAL_CHAPTERS = 29;
-const CHAPTER_TITLE = ''; // ← add title here when ready, e.g. "The Departure"
-
-// ══════════════════════════════════════════
-//  CHAPTER TEXT — paste content here
-// ══════════════════════════════════════════
-const CHAPTER_TEXT = `
-  <p>I landed on top of a young man's back, my legs soon submerged in the water as he sprinted in. Others chased after him, but immediately gave up once the water reached my lower back.</p>
-  <p>"I'm going to let go of your legs. Once I do that, put your arms around my neck, alright? Try to keep your brother around your neck too," The man said as we went deeper and deeper.</p>
-  <p>"Okay," I said, but my voice quavered. I didn't notice that I had been crying until now.</p>
-  <p>As soon as I replied, he let go of my legs and I felt my body drifting in the open sea, my arms wrapped around the man's neck tightly.</p>
-  <p>"Kick under the water with me."</p>
-  <p>I suddenly felt the force of his kicks as he started to swim forward, and I nearly got torn away from his neck. But I hung on, kicking my feet with him. So this was the strength of an adult. No wonder they all made it through the waves, but not me.</p>
-  <p>As if on cue, a wave that would have pushed me back to the shore loomed ahead of us, but the man just told me to tighten my grip and to hold my breath. So I did, and when the wave crashed into us, I felt my fingers slipping. But as soon as we hit it, we made it out the other side, the man still propelling us towards the boat.</p>
-  <p>The gunshots immediately resumed, and shouts were heard from behind us.</p>
-  <p>"Don't look back," The man whispered between his heavy breaths.</p>
-  <p>Still, I snuck a glance behind me, and I froze. The soldiers finally made it through the mountain of rocks, and were grabbing the people like they did back at my house—but more violent, tearing them down and beating them with a large black baton. Some tried to flee, but were then shot in the back. The man let out a grunt.</p>
-  <p>There was nobody in the water now, with only two dead corpses floating with the current toward the shore. The water around us was stained red, the reek of blood and death taking over the salty ocean smell and filling my senses. Yeomjae squirmed relentlessly between me and the man, screaming out in discomfort. The boat was not so far away now, but his screams alerted the soldiers on shore. Bullets rained towards us.</p>
-  <p>The man cursed loudly as he warned me to hold my breath. He then plunged under the water's surface, swimming as fast and as deep as he could as bullets pierced into the water, trying to hide from the soldiers' view. But after a few seconds, we had to go back up for a breath, and then go down again. It was a constant pattern, and after diving underwater for around five more times, the bullets stopped as we got closer to the boat.</p>
-  <p>I didn't even have time to wipe the water from my eyes to get a good view when we were above the water's surface before we plunged back under.</p>
-  <p>When I thought that it was never going to end, I suddenly felt familiar hands haul me out and onto a hard surface. The boat. The man got on next, immediately collapsing on the floor from exhaustion. As soon as my feet touched the wood, my feet slipped and I fell onto the floor. That was when I noticed a burning pain that erupted on the bottom of my feet. My shoes were gone—my feet were red and raw, soaked in blood, skin peeling. I gritted my teeth. Looking up, I saw familiar faces look down on me. Halmeoni, Eonni, Taejae, Oppa, and…Abeoji. My eyes widened when I saw the face of my father, and I nearly jumped into his arms to embrace him. It had almost been a year since I last saw him. Some strangers who made it before us were also on the boat, exhaustion and fear written across their faces.</p>
-  <p>Tears welled up in my eyes. I tried to wipe them away, but ended up dragging salt into my eyes. I tried to get up, but my arms and legs failed me as I fell back onto the floor. With some help, I managed to sit up.</p>
-  <p>Our moment of reunion was cut short when bullets razed towards us again. I screamed as everyone ducked low against the floor, and Oppa immediately started to row away from the shore with the help of a different man.</p>
-  <p>However, the gunfire was slowing. A bullet whizzed past above my head as I curled up on the ground, covering my ears. One struck a stranger that was on the boat with us and knocked her overboard, then another. The boat was too crowded, we could barely move.</p>
-  <p>THUNK</p>
-  <p>The boat rocked as we all looked at the floor. Water rushed in.</p>
-  <p>Everyone rushed to find something to plug the bullet hole, but found nothing. My small pouch of my belongings were gone, and so were everyone else's. Panic seized us, and we all rushed to scoop the water out—doing nothing.</p>
-  <p>"Here!" My brother's voice rang amidst the panic with his shirt crumpled up in his hands. He then stuffed it into the hole, "This might not do much but keep scooping out the water!"</p>
-  <p>The water was up to our calves now as we scooped the water out with our hands. Everyone worked mercilessly as Oppa rowed even harder with the same stranger. The bullets were now all missing the boat, splashing into the water around us instead. It was as if something was protecting us.</p>
-  <p>But as soon as it started, everything stopped. The bullets ceased, and silence blanketed us. We were too far from the shore for the inmingun to aim. We all froze, the silence strange to our ears.</p>
-  <p>The shirt that Oppa had stuffed into the hole was holding well enough, but we all knew it wouldn't last long.</p>
-  <p>I looked up to see if everyone was still safely on the boat. Eonni covered both Taejae and Yeomjae with her body while Halmeoni was curled up beside her. Abeoji was helping a wounded man. Two more strangers were also on the boat. The man who had saved me was gone.</p>
-  <p>Blood dripped from our limbs, staining the oak wood that held us together for the most part.</p>
-  <p>The waves rolled gently against the hull. Rays of sunlight spilled across the water, a cool breeze kissing our skin.</p>
-  <p>It felt cruel that the world could look so beautiful while we bled inside a broken boat.</p>
-  <p>And yet it was strangely comforting too.</p>
-  <p>It meant we were still alive.</p>
-  <p>But something felt missing. The boat was too still. As we all looked around us, my stomach dropped, and for a moment we couldn't move or speak as we stared at the empty bench.</p>
-  <p>Oppa was missing.</p>
-`;
-
-// ══════════════════════════════════════════
-//  PAGE SPLIT — break text into pages
-// ══════════════════════════════════════════
-function splitIntoPages(html, wordsPerPage = 180) {
-  const temp = document.createElement('div');
-  temp.innerHTML = html;
-  const paragraphs = Array.from(temp.querySelectorAll('p')).map(p => p.outerHTML);
-
-  const pages = [];
-  let current = [];
-  let wordCount = 0;
-
-  paragraphs.forEach(p => {
-    const words = p.replace(/<[^>]+>/g, '').split(/\s+/).length;
-    if (wordCount + words > wordsPerPage && current.length > 0) {
-      pages.push(current.join(''));
-      current = [p];
-      wordCount = words;
-    } else {
-      current.push(p);
-      wordCount += words;
-    }
-  });
-  if (current.length > 0) pages.push(current.join(''));
-  return pages;
-}
-
-const pages = splitIntoPages(CHAPTER_TEXT);
-let currentPage = 0;
-let isAnimating = false;
-
-// ── Setup ──
-document.getElementById('chapter-number-label').textContent = `Chapter ${CHAPTER_NUM}`;
-document.getElementById('nav-chapter-label').textContent = `Chapter ${CHAPTER_NUM}`;
-document.title = `Chapter ${CHAPTER_NUM} — Irene Lee`;
-
-const titleEl = document.getElementById('chapter-title-display');
-if (CHAPTER_TITLE) {
-  titleEl.textContent = CHAPTER_TITLE;
-} else {
-  titleEl.textContent = `Chapter ${CHAPTER_NUM}`;
-}
-
-document.getElementById('end-chapter-num').textContent = CHAPTER_NUM;
-
-// Chapter nav links
-const prevChBtn = document.getElementById('btn-prev-chapter');
-const nextChBtn = document.getElementById('btn-next-chapter');
-if (CHAPTER_NUM > 1) {
-  prevChBtn.href = `chapter-${CHAPTER_NUM - 1}.html`;
-} else {
-  prevChBtn.style.display = 'none';
-}
-if (CHAPTER_NUM < TOTAL_CHAPTERS) {
-  nextChBtn.href = `chapter-${CHAPTER_NUM + 1}.html`;
-} else {
-  nextChBtn.textContent = '🎉 The End';
-  nextChBtn.href = 'index.html';
-}
-
-function renderPage() {
-  const pageEl = document.getElementById('current-page');
-  const textEl = document.getElementById('page-text');
-  textEl.innerHTML = pages[currentPage];
-  if (currentPage === 0) textEl.classList.add('first-page');
-  else textEl.classList.remove('first-page');
-
-  // Dots
-  const counter = document.getElementById('page-counter');
-  counter.innerHTML = pages.map((_, i) =>
-    `<span class="page-dot ${i === currentPage ? 'active' : ''}"></span>`
-  ).join('') + `&nbsp; <span style="opacity:0.4">${currentPage + 1} / ${pages.length}</span>`;
-
-  // Buttons
-  document.getElementById('btn-prev-page').disabled = currentPage === 0;
-  document.getElementById('btn-next-page').disabled = currentPage === pages.length - 1;
-
-  // Show chapter end on last page
-  const endEl = document.getElementById('chapter-end');
-  if (currentPage === pages.length - 1) {
-    endEl.classList.add('visible');
-  } else {
-    endEl.classList.remove('visible');
-  }
-
-  // Progress bar
-  const progress = ((currentPage + 1) / pages.length) * 100;
-  document.getElementById('progress-bar').style.width = progress + '%';
-}
-
-function changePage(dir, instant = false) {
-  if (isAnimating) return;
-  const next = currentPage + dir;
-  if (next < 0 || next >= pages.length) return;
-
-  isAnimating = true;
-  const pageEl = document.getElementById('current-page');
-
-  const outClass = dir > 0 ? 'flip-out' : 'flip-out-back';
-  const inClass  = dir > 0 ? 'flip-in'  : 'flip-in-back';
-
-  pageEl.classList.add(outClass);
-
-  setTimeout(() => {
-    currentPage = next;
-    pageEl.classList.remove(outClass);
-    renderPage();
-    pageEl.classList.add(inClass);
-    setTimeout(() => {
-      pageEl.classList.remove(inClass);
-      isAnimating = false;
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 500);
-  }, 450);
-}
-
-// Keyboard navigation
-document.addEventListener('keydown', e => {
-  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changePage(1);
-  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   changePage(-1);
-});
-
-// Touch/swipe navigation
-let touchStartX = 0;
-document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
-document.addEventListener('touchend', e => {
-  const dx = e.changedTouches[0].clientX - touchStartX;
-  if (Math.abs(dx) > 60) changePage(dx < 0 ? 1 : -1);
-}, { passive: true });
-
-// Init
-renderPage();
-
-// ══════════════════════════════════════════
-//  SKY CANVAS (same as homepage, always night/dusk for reading)
-// ══════════════════════════════════════════
+// ══════════════════════════════
+//  SKY CANVAS (same as index.html)
+// ══════════════════════════════
 const canvas = document.getElementById('sky-canvas');
 const ctx = canvas.getContext('2d');
+
 function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
 resize();
 window.addEventListener('resize', resize);
 
-const stars = Array.from({length: 160}, () => ({
-  x: Math.random(), y: Math.random() * 0.72,
-  size: Math.random() * 2.2 + 0.4,
+const stars = Array.from({length: 130}, () => ({
+  x: Math.random(),
+  y: Math.random() * 0.70,
+  size: Math.random() * 2.8 + 0.6,
   phase: Math.random() * Math.PI * 2,
-  speed: Math.random() * 0.7 + 0.3,
-  brightness: Math.random() * 0.6 + 0.4
+  speed: Math.random() * 0.6 + 0.3,
+  brightness: Math.random() * 0.5 + 0.55
 }));
+
+const shootingStars = [];
+let nextShoot = 3 + Math.random() * 5;
+
+function spawnShootingStar() {
+  shootingStars.push({
+    x: Math.random() * 0.7 + 0.05,
+    y: Math.random() * 0.35 + 0.03,
+    len: 0.08 + Math.random() * 0.1,
+    angle: Math.PI / 4 + (Math.random() - 0.5) * 0.4,
+    speed: 0.18 + Math.random() * 0.15,
+    progress: 0,
+    alpha: 0.9 + Math.random() * 0.1,
+  });
+}
+
 const waves = [
-  { y:0.77, amp:14, freq:0.007, spd:0.5, alpha:0.28, w:2.8 },
-  { y:0.81, amp:10, freq:0.011, spd:0.75, alpha:0.20, w:2.0 },
-  { y:0.84, amp:7,  freq:0.016, spd:0.4,  alpha:0.14, w:1.5 },
-  { y:0.88, amp:4,  freq:0.025, spd:0.9,  alpha:0.09, w:1.0 },
+  { y: 0.765, amp: 22, freq: 0.007,  spd: 0.55, alpha: 0.52, w: 3.5 },
+  { y: 0.800, amp: 16, freq: 0.011,  spd: 0.80, alpha: 0.40, w: 2.8 },
+  { y: 0.832, amp: 11, freq: 0.016,  spd: 0.45, alpha: 0.30, w: 2.2 },
+  { y: 0.860, amp:  7, freq: 0.024,  spd: 1.00, alpha: 0.20, w: 1.6 },
+  { y: 0.890, amp:  4, freq: 0.035,  spd: 0.65, alpha: 0.14, w: 1.1 },
 ];
 
-function drawChapterSky(ts) {
-  const t = ts / 1000;
+let animTime = 0;
+
+function lerp(a, b, t) { return a + (b - a) * t; }
+
+function draw(ts) {
+  animTime = ts / 1000;
   const W = canvas.width, H = canvas.height;
 
-  // Deep night sky
+  // Sky gradient
   const sg = ctx.createLinearGradient(0, 0, 0, H * 0.85);
-  sg.addColorStop(0, '#010206');
-  sg.addColorStop(0.5, '#020810');
-  sg.addColorStop(1, '#060e1e');
-  ctx.fillStyle = sg; ctx.fillRect(0, 0, W, H);
+  sg.addColorStop(0,   '#010208');
+  sg.addColorStop(0.3, '#030d14');
+  sg.addColorStop(0.6, '#041a18');
+  sg.addColorStop(1,   '#060e1e');
+  ctx.fillStyle = sg;
+  ctx.fillRect(0, 0, W, H);
+
+  // Northern lights aurora
+  const auroraTime = animTime * 0.18;
+  const auroraGrad = ctx.createLinearGradient(0, H*0.05, 0, H*0.5);
+  const a1 = 0.055 + 0.025 * Math.sin(auroraTime);
+  const a2 = 0.035 + 0.02  * Math.sin(auroraTime * 1.3 + 1);
+  const a3 = 0.02  + 0.015 * Math.sin(auroraTime * 0.7 + 2);
+  auroraGrad.addColorStop(0,   `rgba(26,107,90,${a1})`);
+  auroraGrad.addColorStop(0.3, `rgba(20,80,70,${a2})`);
+  auroraGrad.addColorStop(0.7, `rgba(10,50,60,${a3})`);
+  auroraGrad.addColorStop(1,   'transparent');
+  ctx.fillStyle = auroraGrad;
+  ctx.fillRect(0, 0, W, H);
+
+  const auroraGrad2 = ctx.createLinearGradient(
+    W * (0.3 + 0.05 * Math.sin(auroraTime * 0.5)), H*0.1,
+    W * (0.7 + 0.05 * Math.cos(auroraTime * 0.4)), H*0.45
+  );
+  const b1 = 0.03 + 0.015 * Math.sin(auroraTime * 1.1 + 0.5);
+  auroraGrad2.addColorStop(0,   'transparent');
+  auroraGrad2.addColorStop(0.4, `rgba(42,140,100,${b1})`);
+  auroraGrad2.addColorStop(1,   'transparent');
+  ctx.fillStyle = auroraGrad2;
+  ctx.fillRect(0, 0, W, H);
 
   // Moon
-  const mx = W * 0.75, my = H * 0.14, mr = 22;
+  const mx = W * 0.22, my = H * 0.16, mr = 24;
   const mg = ctx.createRadialGradient(mx, my, 0, mx, my, mr * 4);
-  mg.addColorStop(0, 'rgba(180,200,255,0.22)');
+  mg.addColorStop(0, `rgba(180,215,200,0.28)`);
   mg.addColorStop(1, 'transparent');
-  ctx.fillStyle = mg; ctx.beginPath(); ctx.arc(mx, my, mr*4, 0, Math.PI*2); ctx.fill();
-  ctx.beginPath(); ctx.arc(mx, my, mr, 0, Math.PI*2);
-  ctx.fillStyle = 'rgba(255,252,235,0.95)'; ctx.fill();
-  ctx.beginPath(); ctx.arc(mx - mr*0.2, my - mr*0.15, mr*0.85, 0, Math.PI*2);
-  ctx.fillStyle = 'rgba(5,8,20,0.92)'; ctx.fill();
+  ctx.fillStyle = mg;
+  ctx.beginPath(); ctx.arc(mx, my, mr * 4, 0, Math.PI * 2); ctx.fill();
+  ctx.beginPath(); ctx.arc(mx, my, mr, 0, Math.PI * 2);
+  ctx.fillStyle = `rgba(255,252,235,1)`; ctx.fill();
+  ctx.beginPath(); ctx.arc(mx - mr*0.2, my - mr*0.15, mr * 0.85, 0, Math.PI * 2);
+  ctx.fillStyle = `rgba(5,12,20,0.92)`; ctx.fill();
 
   // Stars
   stars.forEach(s => {
-    const tw = 0.45 + 0.55 * Math.sin(s.phase + t * s.speed);
-    const a = s.brightness * tw * 0.92;
-    ctx.beginPath(); ctx.arc(s.x*W, s.y*H, s.size, 0, Math.PI*2);
-    ctx.fillStyle = `rgba(255,255,235,${a})`; ctx.fill();
-    if (s.size > 1.5 && a > 0.5) {
-      ctx.strokeStyle = `rgba(255,255,220,${a*0.4})`; ctx.lineWidth = 0.5;
-      const len = s.size * 3;
+    const twinkle = 0.55 + 0.45 * Math.sin(s.phase + animTime * s.speed);
+    const a = s.brightness * twinkle;
+    ctx.beginPath();
+    ctx.arc(s.x * W, s.y * H, s.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255,255,235,${a})`;
+    ctx.fill();
+    if (s.size > 1.8 && a > 0.4) {
+      ctx.strokeStyle = `rgba(255,255,220,${a * 0.55})`; ctx.lineWidth = 0.7;
+      const cx = s.x*W, cy = s.y*H, len = s.size * 4;
       ctx.beginPath();
-      ctx.moveTo(s.x*W-len, s.y*H); ctx.lineTo(s.x*W+len, s.y*H);
-      ctx.moveTo(s.x*W, s.y*H-len); ctx.lineTo(s.x*W, s.y*H+len);
+      ctx.moveTo(cx-len, cy); ctx.lineTo(cx+len, cy);
+      ctx.moveTo(cx, cy-len); ctx.lineTo(cx, cy+len);
       ctx.stroke();
     }
   });
 
-  // Ocean
-  const ot = H * 0.74;
-  const og = ctx.createLinearGradient(0, ot, 0, H);
-  og.addColorStop(0, 'rgba(5,10,35,0.97)');
-  og.addColorStop(1, 'rgba(3,6,20,1)');
-  ctx.fillStyle = og; ctx.fillRect(0, ot, W, H - ot);
+  // Shooting stars
+  nextShoot -= 0.016;
+  if (nextShoot <= 0) { spawnShootingStar(); nextShoot = 4 + Math.random() * 7; }
+  for (let i = shootingStars.length - 1; i >= 0; i--) {
+    const ss = shootingStars[i];
+    ss.progress += ss.speed * 0.016;
+    if (ss.progress >= 1) { shootingStars.splice(i, 1); continue; }
+    const fade = ss.progress < 0.2 ? ss.progress / 0.2 : ss.progress > 0.7 ? 1 - (ss.progress - 0.7) / 0.3 : 1;
+    const headX = (ss.x + Math.cos(ss.angle) * ss.len * ss.progress) * W;
+    const headY = (ss.y + Math.sin(ss.angle) * ss.len * ss.progress) * H;
+    const tailX = (ss.x + Math.cos(ss.angle) * ss.len * Math.max(0, ss.progress - 0.35)) * W;
+    const tailY = (ss.y + Math.sin(ss.angle) * ss.len * Math.max(0, ss.progress - 0.35)) * H;
+    const grad = ctx.createLinearGradient(tailX, tailY, headX, headY);
+    grad.addColorStop(0, 'rgba(255,255,245,0)');
+    grad.addColorStop(1, `rgba(255,255,245,${ss.alpha * fade})`);
+    ctx.beginPath(); ctx.moveTo(tailX, tailY); ctx.lineTo(headX, headY);
+    ctx.strokeStyle = grad; ctx.lineWidth = 1.5; ctx.stroke();
+    ctx.beginPath(); ctx.arc(headX, headY, 1.5, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255,255,245,${ss.alpha * fade})`; ctx.fill();
+  }
 
-  // Moon reflection
-  const mrg = ctx.createLinearGradient(mx, ot, mx, H);
-  mrg.addColorStop(0, 'rgba(180,200,255,0.22)');
-  mrg.addColorStop(1, 'transparent');
-  ctx.fillStyle = mrg; ctx.fillRect(mx-18, ot, 36, H-ot);
+  // Horizon glow
+  const hg = ctx.createLinearGradient(0, H * 0.55, 0, H * 0.82);
+  hg.addColorStop(0, `rgba(26,107,90,0.12)`);
+  hg.addColorStop(1, 'transparent');
+  ctx.fillStyle = hg; ctx.fillRect(0, 0, W, H);
 
   // Waves
   waves.forEach(wv => {
     const wy = H * wv.y;
     ctx.beginPath(); ctx.moveTo(0, wy);
     for (let x = 0; x <= W; x += 2) {
-      const y = wy + Math.sin(x*wv.freq + t*wv.spd)*wv.amp
-                   + Math.sin(x*wv.freq*1.7 + t*wv.spd*0.6)*wv.amp*0.4;
+      const y = wy + Math.sin(x * wv.freq + animTime * wv.spd) * wv.amp
+                   + Math.sin(x * wv.freq * 1.7 + animTime * wv.spd * 0.6) * wv.amp * 0.4;
       ctx.lineTo(x, y);
     }
-    ctx.strokeStyle = `rgba(255,255,255,${wv.alpha})`; ctx.lineWidth = wv.w; ctx.stroke();
+    ctx.strokeStyle = `rgba(255,255,255,${wv.alpha})`;
+    ctx.lineWidth = wv.w; ctx.stroke();
+
     ctx.beginPath(); ctx.moveTo(0, wy);
     for (let x = 0; x <= W; x += 2) {
-      const y = wy + Math.sin(x*wv.freq + t*wv.spd)*wv.amp
-                   + Math.sin(x*wv.freq*1.7 + t*wv.spd*0.6)*wv.amp*0.4 - 2.5;
+      const y = wy + Math.sin(x * wv.freq + animTime * wv.spd) * wv.amp
+                   + Math.sin(x * wv.freq * 1.7 + animTime * wv.spd * 0.6) * wv.amp * 0.4 - 2.5;
       ctx.lineTo(x, y);
     }
-    ctx.strokeStyle = `rgba(255,255,255,${wv.alpha*0.3})`; ctx.lineWidth = wv.w*0.4; ctx.stroke();
+    ctx.strokeStyle = `rgba(150,255,220,${wv.alpha * 0.4})`;
+    ctx.lineWidth = wv.w * 0.4; ctx.stroke();
   });
 
-  requestAnimationFrame(drawChapterSky);
+  // Boat
+  const bx = W * 0.82;
+  const topWaveY = H * waves[0].y + Math.sin(bx * waves[0].freq + animTime * waves[0].spd) * waves[0].amp;
+  const rock = Math.sin(animTime * 0.55) * 1.8;
+  const tilt = Math.sin(animTime * 0.55) * 0.022;
+
+  ctx.save();
+  ctx.translate(bx, topWaveY + rock);
+  ctx.rotate(tilt);
+
+  ctx.beginPath();
+  ctx.moveTo(-44, 0);
+  ctx.bezierCurveTo(-44, 0, -36, 14, 0, 16);
+  ctx.bezierCurveTo(36, 14, 46, 0, 46, 0);
+  ctx.closePath();
+  ctx.fillStyle = 'rgba(18,32,58,0.95)';
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.moveTo(-44, 0);
+  ctx.bezierCurveTo(-36, -2, 36, -2, 46, 0);
+  ctx.strokeStyle = 'rgba(160,210,230,0.35)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(2, 0); ctx.lineTo(2, -62);
+  ctx.strokeStyle = 'rgba(200,220,240,0.65)';
+  ctx.lineWidth = 1.2; ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(2, -58); ctx.lineTo(2, -8); ctx.lineTo(34, -28);
+  ctx.closePath();
+  ctx.fillStyle = 'rgba(210,230,245,0.18)';
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(200,220,240,0.3)';
+  ctx.lineWidth = 0.8; ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(2, -58); ctx.lineTo(-28, 0);
+  ctx.strokeStyle = 'rgba(200,220,240,0.2)';
+  ctx.lineWidth = 0.7; ctx.stroke();
+
+  ctx.restore();
+
+  requestAnimationFrame(draw);
 }
-requestAnimationFrame(drawChapterSky);
+requestAnimationFrame(draw);
 </script>
 </body>
 </html>
