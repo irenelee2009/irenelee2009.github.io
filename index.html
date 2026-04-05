@@ -790,4 +790,10 @@ for (let i = 1; i <= 29; i++) {
 }
 
 // Reveal on scroll
-const obs = new IntersectionO
+const obs = new IntersectionObserver(es => {
+  es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+</script>
+</body>
+</html>
