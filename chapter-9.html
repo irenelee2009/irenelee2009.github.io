@@ -24,7 +24,18 @@
     .glass-card { background: rgba(0,0,0,0.38); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(255,255,255,0.14); padding: 3.5rem 3rem; position: relative; overflow: visible; opacity: 0; animation: fadeUp 1s 0.5s forwards; display: flex; flex-direction: column; }
     .glass-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, var(--gold), #7fffda); pointer-events: none; }
     .chapter-content { flex: 1; }
-    .chapter-content p { font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.95; color: rgba(232,237,245,0.92); margin-bottom: 1.5em; font-weight: 300; text-indent: 2em; }    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
+
+    /* Consistent indent via CSS — applies to every paragraph uniformly */
+    .chapter-content p {
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      line-height: 1.95;
+      color: rgba(232,237,245,0.92);
+      margin-bottom: 1.5em;
+      font-weight: 300;
+      text-indent: 1.8em;
+    }
+
+    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
     .chapter-content strong { font-weight: 600; color: var(--gold); }
     .section-divider { text-align: center; color: var(--gold); font-size: 1rem; letter-spacing: 0.5em; margin: 2.5rem 0; text-shadow: 0 0 18px rgba(200,168,75,0.5); }
     .para-with-popup { position: relative; }
@@ -62,22 +73,22 @@
         <p>The village was crowded with people, its narrow streets packed with merchants. Objects and food were laid out on top of large pieces of cloth on the ground, some with a small canopy above their heads to protect themselves from the sun.</p>
 <p><em>Eonni</em> gave me fifty won, which I had tightly in my hand. My other hand was firmly locked with <em>Eonni</em>’s. She didn’t want me to get lost, especially in crowded streets like this.</p>
 <p>“Bread for ten won! Freshly baked bread for ten won!” An old woman’s voice cried out. Looking over my shoulder, I examined the bread that was on top of the woman’s cloth. They looked small, and most definitely not freshly baked. Looking over a few more stalls, a different one had bigger and fresher bread for ten won.</p>
-<p>&emsp;“Should we buy these? Five for fifty won is perfect. One for all of us.” I whispered to <em>Eonni</em> without the seller noticing. If they thought you were interested in their goods, they would <em>never</em> let you go.</p>
-<p>&emsp;“Perhaps.” She nodded and beckoned me to buy five. Walking towards the stall, the seller noticed me and immediately waved to come closer. She was an old woman with white hair and dark wrinkly skin from life-long sun exposure. Her teeth were yellow, but her fingers were clean and not stained from dirt.</p>
-<p>&emsp;“Five for fifty won?” I asked as I inspected the loaves that were piled on top of a large wooden plate. They looked fresh, the warm scent of newly baked bread wafting up to my nose. My stomach grumbled.</p>
-<p>&emsp;“Yes, yes! I’ll gather them up for you.” The woman eagerly stored five large loaves into a wrapped cloth bundle. “You’re lucky, girl. This is my first batch that I made just now. Usually my customers would flood my stall, but you came before all of them.” She gave me a large yellow smile.</p>
-<p>&emsp;I smiled awkwardly and accepted the bundle with two hands and a small bow. It was important to always show respect to elders. Taking out the small folded paper of fifty won, I flinched when she yanked it out of my hand.</p>
-<p>&emsp;“Sorry for that, girl! You know people here steal the second they see won in the air. It disappears like <em>poof</em>!” She pocketed the bill and made a fake explosion with her hands.</p>
+<p>“Should we buy these? Five for fifty won is perfect. One for all of us.” I whispered to <em>Eonni</em> without the seller noticing. If they thought you were interested in their goods, they would <em>never</em> let you go.</p>
+<p>“Perhaps.” She nodded and beckoned me to buy five. Walking towards the stall, the seller noticed me and immediately waved to come closer. She was an old woman with white hair and dark wrinkly skin from life-long sun exposure. Her teeth were yellow, but her fingers were clean and not stained from dirt.</p>
+<p>“Five for fifty won?” I asked as I inspected the loaves that were piled on top of a large wooden plate. They looked fresh, the warm scent of newly baked bread wafting up to my nose. My stomach grumbled.</p>
+<p>“Yes, yes! I’ll gather them up for you.” The woman eagerly stored five large loaves into a wrapped cloth bundle. “You’re lucky, girl. This is my first batch that I made just now. Usually my customers would flood my stall, but you came before all of them.” She gave me a large yellow smile.</p>
+<p>I smiled awkwardly and accepted the bundle with two hands and a small bow. It was important to always show respect to elders. Taking out the small folded paper of fifty won, I flinched when she yanked it out of my hand.</p>
+<p>“Sorry for that, girl! You know people here steal the second they see won in the air. It disappears like <em>poof</em>!” She pocketed the bill and made a fake explosion with her hands.</p>
 <p>I chuckled nervously and thanked her again. Briskly walking back, I saw <em>Eonni</em> with crossed arms, staring at me with disapproval.</p>
-<p>&emsp;“Why did you strike up a conversation with her? We have to keep a low profile.” She frowned as she whispered into my ear.</p>
-<p>&emsp;“It’s fine,” I rolled my eyes as I handed her the bundle of bread, “She was the one who talked, I barely said anything. If we look scared, they’ll notice.”</p>
-<p>&emsp;<em>Eonni </em>sighed but gave me a sharp glance. “Do you think this will be enough? We still have two hundred won from <em>Halmeoni</em>’s savings.”</p>
-<p>&emsp;“Maybe something more filling?” I suggested, “I’m starving.”</p>
-<p>&emsp;“Yes, let's.” <em>Eonni</em> nodded and we both set off deeper into the market.</p>
-<p>&emsp;The sun was falling over the horizon when we made our way back to <em>Halmeoni </em>and the others, painting the sky with streaks of orange and gold. The market had died down into a quiet buzz as sellers closed up for the night. My arms were full of goods, as were <em>Eonni</em>’s. Tonight would be a feast.</p>
+<p>“Why did you strike up a conversation with her? We have to keep a low profile.” She frowned as she whispered into my ear.</p>
+<p>“It’s fine,” I rolled my eyes as I handed her the bundle of bread, “She was the one who talked, I barely said anything. If we look scared, they’ll notice.”</p>
+<p><em>Eonni </em>sighed but gave me a sharp glance. “Do you think this will be enough? We still have two hundred won from <em>Halmeoni</em>’s savings.”</p>
+<p>“Maybe something more filling?” I suggested, “I’m starving.”</p>
+<p>“Yes, let's.” <em>Eonni</em> nodded and we both set off deeper into the market.</p>
+<p>The sun was falling over the horizon when we made our way back to <em>Halmeoni </em>and the others, painting the sky with streaks of orange and gold. The market had died down into a quiet buzz as sellers closed up for the night. My arms were full of goods, as were <em>Eonni</em>’s. Tonight would be a feast.</p>
 <p>We had spent one hundred won after buying the bread, and with that we were able to buy many things. My mouth watered as I smelled the sweet and savory aromas of the food, and <em>Eonni </em>was complaining about starving the whole way up.</p>
-<p>&emsp;Taejae was the first to see us arrive, and ran to see what we bought. The sky was now turning a dark hue, and the crickets started their scratchy tune.</p>
-<div class="para-with-popup" data-popup-id="popup-9-0"><p class="">&emsp;“<em>Sikhye</em>!” He squealed when he took a bundle out of my arms. Inside were two small cans of cold <em>sikhye</em>, a traditional rice drink that was sweet and refreshing. He snatched another bundle, the smallest one, and would have screamed with delight had <em>Halmeoni </em>not shushed him. It was a rare sight: a small bag of colorful hard candy.</p><div class="glossary-popup" id="popup-9-0"><div class="popup-entry"><em class="popup-word">Sikhye</em> — A traditional Korean sweet rice drink, served cold and often enjoyed as a refreshing treat.</div></div></div>
+<p>Taejae was the first to see us arrive, and ran to see what we bought. The sky was now turning a dark hue, and the crickets started their scratchy tune.</p>
+<div class="para-with-popup" data-popup-id="popup-9-0"><p>“<em>Sikhye</em>!” He squealed when he took a bundle out of my arms. Inside were two small cans of cold <em>sikhye</em>, a traditional rice drink that was sweet and refreshing. He snatched another bundle, the smallest one, and would have screamed with delight had <em>Halmeoni </em>not shushed him. It was a rare sight: a small bag of colorful hard candy.</p><div class="glossary-popup" id="popup-9-0"><div class="popup-entry"><em class="popup-word">Sikhye</em> — A traditional Korean sweet rice drink, served cold and often enjoyed as a refreshing treat.</div></div></div>
 <p>“How did you get candy and <em>sikhye</em>? You didn’t spend all the money, did you?” <em>Halmeoni </em>raised her eyebrows as she beheld the goods. She had Yeomjae on her back, and did not have hands to comb through the packages as well.</p>
 <p>“No, <em>Halmeoni</em>. We still have one hundred won.” <em>Eonni </em>handed her the bills as Taejae rummaged through the rest of the goods. I took Yeomjae from <em>Halmeoni </em>and placed him on my lap as I sat down on the grass. Everyone followed and we sat in a circle, with all the food inside it.</p>
 <p>Bread, <em>sikhye</em>, candy, and one large roasted mackerel sat in the center of us all, its rich scents making us all drool. It felt like forever since we had a proper meal together. My fingers twitched to grab a loaf of bread, but I held back as <em>Halmeoni </em>reached for one herself. The eldest always took the first bite before everyone dug in. Usually, I had waited patiently with much respect, but now it felt like eternity as I watched her bring the bread to her mouth and take a large bite. As soon as she took a bite, I lunged for my loaf, nearly stuffing my face with it as everyone else reached for theirs. Well, everyone except Yeomjae.</p>

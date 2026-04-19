@@ -24,7 +24,18 @@
     .glass-card { background: rgba(0,0,0,0.38); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(255,255,255,0.14); padding: 3.5rem 3rem; position: relative; overflow: visible; opacity: 0; animation: fadeUp 1s 0.5s forwards; display: flex; flex-direction: column; }
     .glass-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, var(--gold), #7fffda); pointer-events: none; }
     .chapter-content { flex: 1; }
-    .chapter-content p { font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.95; color: rgba(232,237,245,0.92); margin-bottom: 1.5em; font-weight: 300; text-indent: 2em; }    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
+
+    /* Consistent indent via CSS — applies to every paragraph uniformly */
+    .chapter-content p {
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      line-height: 1.95;
+      color: rgba(232,237,245,0.92);
+      margin-bottom: 1.5em;
+      font-weight: 300;
+      text-indent: 1.8em;
+    }
+
+    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
     .chapter-content strong { font-weight: 600; color: var(--gold); }
     .section-divider { text-align: center; color: var(--gold); font-size: 1rem; letter-spacing: 0.5em; margin: 2.5rem 0; text-shadow: 0 0 18px rgba(200,168,75,0.5); }
     .para-with-popup { position: relative; }
@@ -68,7 +79,7 @@
 <p>I ran out and caught him off-guard. He expected <em>Eonni</em> to come out and punish him, not me. His eyes widened as I pushed him down roughly onto the ground, dirt and dust flying into the air as I kept him down with my arms. He coughed from the dirt and yelled in pain. I then flipped him onto his stomach, his face in the dirt, and I sat on his back, my weight making his tiny body gasp. His voice seemed to rise a pitch higher as he squealed with discomfort.</p>
 <p>Everyone gathered around and watched me with wide eyes, but deep down they all knew why I was treating my younger brother so roughly. They knew how he treated <em>Eonni</em>, so nobody stepped in to intervene.</p>
 <p>Gritting my teeth, I sat rooted on his back as he tried squirming to escape, but I didn’t budge.</p>
-<p>&emsp;“If you don’t listen to your sister, I’ll punish you just like this in front of everyone. I can sit here all day, Taejae, while your friends watch you getting humiliated like this. You must respect her,” I said loudly, making sure that Taejae heard every word to the bone.</p>
+<p>“If you don’t listen to your sister, I’ll punish you just like this in front of everyone. I can sit here all day, Taejae, while your friends watch you getting humiliated like this. You must respect her,” I said loudly, making sure that Taejae heard every word to the bone.</p>
 <p>I wanted to teach him discipline, since <em>Halmeoni</em> was no longer with us, and <em>Abeoji</em> didn’t have time to teach him anymore. Taejae stayed stubbornly quiet, but I lightly slapped the back of his head and he immediately blurted, “Fine!”.</p>
 <p>I stayed on his back for a few more minutes before I returned to our tent—leaving him lying on the dirt.</p>
 

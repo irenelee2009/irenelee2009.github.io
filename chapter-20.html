@@ -24,7 +24,18 @@
     .glass-card { background: rgba(0,0,0,0.38); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(255,255,255,0.14); padding: 3.5rem 3rem; position: relative; overflow: visible; opacity: 0; animation: fadeUp 1s 0.5s forwards; display: flex; flex-direction: column; }
     .glass-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, var(--gold), #7fffda); pointer-events: none; }
     .chapter-content { flex: 1; }
-    .chapter-content p { font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.95; color: rgba(232,237,245,0.92); margin-bottom: 1.5em; font-weight: 300; text-indent: 2em; }    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
+
+    /* Consistent indent via CSS — applies to every paragraph uniformly */
+    .chapter-content p {
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      line-height: 1.95;
+      color: rgba(232,237,245,0.92);
+      margin-bottom: 1.5em;
+      font-weight: 300;
+      text-indent: 1.8em;
+    }
+
+    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
     .chapter-content strong { font-weight: 600; color: var(--gold); }
     .section-divider { text-align: center; color: var(--gold); font-size: 1rem; letter-spacing: 0.5em; margin: 2.5rem 0; text-shadow: 0 0 18px rgba(200,168,75,0.5); }
     .para-with-popup { position: relative; }
@@ -59,7 +70,7 @@
     </header>
     <div class="glass-card">
       <article class="chapter-content">
-        <p>E<em>onni</em> placed another stick into my arms, the load becoming larger and larger. I grunted with annoyance. Everyone else had a decently sized portion to carry, but I seemed to have the largest of all after <em>Abeoji</em>.</p>
+        <p><em>Eonni</em> placed another stick into my arms, the load becoming larger and larger. I grunted with annoyance. Everyone else had a decently sized portion to carry, but I seemed to have the largest of all after <em>Abeoji</em>.</p>
 <p>“Why do I have to carry more than you?” I mumbled.</p>
 <p>“Because I said so,” <em>Eonni</em> replied with a playful grin, “Besides, you’re strong, no? Or are you still a baby like Taejae?”</p>
 <p>I grumbled as I glared at her. I shouldn’t have told her about my complaints earlier today. She grinned even wider and placed another heavy stick into my arms.</p>
@@ -67,47 +78,47 @@
 <p>With each of us carrying large sticks, we braced for the journey to the village market, though the distance wasn’t as far. As <em>Halmeoni</em> predicted, it hadn’t rained a single drop last night. But there was a slight chill in the air—a sign that the season was now changing. For better or for worse, I did not know. But cold meant winter, and winter meant trouble.</p>
 <p>When we entered the market, we were welcomed with suspicious glances by the vendors. Their shops were mostly a large piece of thick cloth on the ground with their goods laid out in front of them, some with an overhead canopy. There were also a few one-room wooden buildings for stores. As we looked around to get accustomed to the market’s layout, most people ignored us.</p>
 <p>We found a dry area near the corner of the market, and neatly piled our sticks so that it was clearly visible to every passerby. When everything was set up, we all sat behind the sticks, watching every person that walked by.</p>
-<p>&emsp;“Firewood for sale! Only thirty won for ten big sticks!” <em>Abeoji</em> shouted as heartily as he could with a smile, “Firewood! Thirty won!”</p>
+<p>“Firewood for sale! Only thirty won for ten big sticks!” <em>Abeoji</em> shouted as heartily as he could with a smile, “Firewood! Thirty won!”</p>
 <p>For a while, nobody came. We took turns yelling out to catch people’s attention and interest, but nobody seemed to want any. The passerbys who looked at our sticks had scoffed, walking away. Of course they wouldn’t buy from us; they needed proper kindling—not…sticks.</p>
 <p>I watched with annoyance as <em>Abeoji</em> signaled for <em>Eonni</em>, and<em> Halmeoni</em> to have another private conversation. This was ridiculous. We were a family, and we needed to share the burden together. How could they push me and Taejae away to deal with these ‘adult’ issues? Standing up, I walked over to their little huddle and pushed myself in to be part of it. They immediately stopped talking and <em>Abeoji</em> opened his mouth to shoo me away when I interrupted him.</p>
-<p>&emsp;“Why don’t we lower the price?” I suggested, giving <em>Abeoji</em> a subtle yet sharp look, “After all, we aren’t even selling proper firewood but sticks. I think we should make ten sticks for ten won.”
-&emsp;“Listen to Hwajae!” <em>Eonni</em> exclaimed with a look of amused disbelief, “That’s barely any money. We probably won’t be able to buy a loaf of bread with that price due to the war. It takes so much energy and time to even gather these sticks. We need to sell it at a reasonable price.”</p>
-<p>&emsp;“No we can’t,” I argued, “We can’t be reasonable right now. We’re defectors, trying to sell firewood that nobody wants to buy. We need to lower the price.”</p>
-<p>&emsp;Silence blanketed us all. My stomach churned when I saw everyone exchange glances that I couldn’t really understand. Did I say something wrong? Were they going to laugh at me? I carefully examined each change in their faces while my hands became clammy until <em>Abeoji</em> laughed aloud.</p>
+<p>“Why don’t we lower the price?” I suggested, giving <em>Abeoji</em> a subtle yet sharp look, “After all, we aren’t even selling proper firewood but sticks. I think we should make ten sticks for ten won.”
+“Listen to Hwajae!” <em>Eonni</em> exclaimed with a look of amused disbelief, “That’s barely any money. We probably won’t be able to buy a loaf of bread with that price due to the war. It takes so much energy and time to even gather these sticks. We need to sell it at a reasonable price.”</p>
+<p>“No we can’t,” I argued, “We can’t be reasonable right now. We’re defectors, trying to sell firewood that nobody wants to buy. We need to lower the price.”</p>
+<p>Silence blanketed us all. My stomach churned when I saw everyone exchange glances that I couldn’t really understand. Did I say something wrong? Were they going to laugh at me? I carefully examined each change in their faces while my hands became clammy until <em>Abeoji</em> laughed aloud.</p>
 <p>“There you go! Problem solved. Let’s do that.”</p>
 <p>My eyes widened and I looked at <em>Eonni</em> who recoiled at <em>Aeboji</em>. Her brows were furrowed as she opened her mouth to protest, but <em>Abeoji</em> shook his head and smiled.</p>
 <p>“Once we get real firewood, we’ll bring the prices up.” <em>Abeoji</em> said to <em>Eonni</em>. She frowned but nodded.</p>
 <p>I looked at <em>Halmeoni</em> next but she only gave me a shrug. I beamed in response as we all returned to the untouched pile of sticks. The clamminess had disappeared, and I felt proud for speaking up. I felt like a proper adult.</p>
 <p>We began yelling about the price change to see if anyone would catch interest.</p>
 <p>Sure enough, one old man came up to us with a warm smile. His face and hands were lined with deep wrinkles, his back a bit bent forward. He wore long clothes as if the slight chill in the weather was too much for his body to bear.</p>
-<p>&emsp;“Hello,” He said, “I’ve never seen folks as ardent as you all! You’re defectors, no?”</p>
+<p>“Hello,” He said, “I’ve never seen folks as ardent as you all! You’re defectors, no?”</p>
 <p>We all gave him a nervous nod. Was knowing that we were defectors going to change anything?</p>
 <p>“With the war going on, everyone is leaving their homes to hide in these islands until the war is over to escape enlisting, but you all are the first I’ve seen trying to start a business.”</p>
 <p>I sighed in relief, feeling the nervousness fade.</p>
-<p>&emsp;“Yes, we believed that we needed as much support to keep us healthy,” <em>Abeoji</em> replied, “In fact, are you interested in buying some kindling?”</p>
-<p>&emsp;“Yes, I am, actually,” The old man nodded, “I can’t chop wood for my wife like I used to. We would be grateful even if we had just sticks. We can’t sustain ourselves by paying others to chop wood for us everyday. Everyone is always suggesting such extraordinarily ridiculous prices, it's quite funny now.”</p>
-<p>&emsp;<em>Abeoji</em> agreed, “Would you like just a bundle of ten?”</p>
-<p>&emsp;“Oh no, that’s too little, son,” He chuckled, “We need lots of warmth to keep these brittle bones from getting cold. I’ll buy all the sticks you have as long as you carry them to my house.”</p>
-<p>&emsp;“Of course! Thank you so much,” <em>Eonni</em> exclaimed, grabbing the old man’s hands and gently shaking it, making the man laugh again.</p>
-<p>&emsp;“We’ll get them to your house right away,” <em>Abeoji</em> nodded and began picking up as many sticks as possible. Everyone else followed while <em>Halmeoni</em> collected the money from the man. We agreed that while everyone else would carry the load of sticks to the man’s house, <em>Halmeoni</em> and I would go around the market to buy what we needed. As I watched their excited figures disappear behind trees, I followed <em>Halmeoni</em> to the first store that caught our eyes. It was one of the few built store buildings in the market, and as we stepped inside the smell of sawdust and metal filled my nostrils.</p>
-<p>&emsp;“A toolshop?” I questioned, looking at <em>Halmeoni</em>.</p>
-<p>&emsp;She nodded, “For an axe.”</p>
-<p>&emsp;I hadn’t thought of that. After we got the money, the first thing I thought of was food. I was slightly disappointed, but I didn’t say anything.</p>
+<p>“Yes, we believed that we needed as much support to keep us healthy,” <em>Abeoji</em> replied, “In fact, are you interested in buying some kindling?”</p>
+<p>“Yes, I am, actually,” The old man nodded, “I can’t chop wood for my wife like I used to. We would be grateful even if we had just sticks. We can’t sustain ourselves by paying others to chop wood for us everyday. Everyone is always suggesting such extraordinarily ridiculous prices, it's quite funny now.”</p>
+<p><em>Abeoji</em> agreed, “Would you like just a bundle of ten?”</p>
+<p>“Oh no, that’s too little, son,” He chuckled, “We need lots of warmth to keep these brittle bones from getting cold. I’ll buy all the sticks you have as long as you carry them to my house.”</p>
+<p>“Of course! Thank you so much,” <em>Eonni</em> exclaimed, grabbing the old man’s hands and gently shaking it, making the man laugh again.</p>
+<p>“We’ll get them to your house right away,” <em>Abeoji</em> nodded and began picking up as many sticks as possible. Everyone else followed while <em>Halmeoni</em> collected the money from the man. We agreed that while everyone else would carry the load of sticks to the man’s house, <em>Halmeoni</em> and I would go around the market to buy what we needed. As I watched their excited figures disappear behind trees, I followed <em>Halmeoni</em> to the first store that caught our eyes. It was one of the few built store buildings in the market, and as we stepped inside the smell of sawdust and metal filled my nostrils.</p>
+<p>“A toolshop?” I questioned, looking at <em>Halmeoni</em>.</p>
+<p>She nodded, “For an axe.”</p>
+<p>I hadn’t thought of that. After we got the money, the first thing I thought of was food. I was slightly disappointed, but I didn’t say anything.</p>
 <p>Tools lined the walls behind a small man who stood behind a long counter. He looked like he was in his mid-forties, and though he was shorter than <em>Oppa</em>, his arms were as thick as <em>Abeoji</em>’s.</p>
-<p>&emsp;“Hello, we would like to buy an axe please,” <em>Halmeoni</em> replied.</p>
-<p>&emsp;“Metal? Steel? Wood?”</p>
-<p>&emsp;“Metal.”</p>
-<p>&emsp;The man turned around and brought out all the metal axes that he had, which were only three. To me, each one looked identical. I stared in confusion as I watched <em>Halmeoni</em> pick up each one and feel it for a while before choosing the second one.</p>
+<p>“Hello, we would like to buy an axe please,” <em>Halmeoni</em> replied.</p>
+<p>“Metal? Steel? Wood?”</p>
+<p>“Metal.”</p>
+<p>The man turned around and brought out all the metal axes that he had, which were only three. To me, each one looked identical. I stared in confusion as I watched <em>Halmeoni</em> pick up each one and feel it for a while before choosing the second one.</p>
 <p>When <em>Halmeoni</em> paid for the axe, we walked out of the store with only a few won left. It was barely enough for us to buy anything.</p>
-<p>&emsp;“Why did you choose the second axe?” I asked while we walked through the market, looking at each food vendor’s bread.</p>
-<p>&emsp;“Because the first one was too heavy, and the third one was starting to rust. The second one was not that great either, but it was the best out of the three.”</p>
-<p>&emsp;“Oh,” was all I said as a reply. I looked away to see if there were any more vendors who sold bread.</p>
-<p>&emsp;As we walked in silence, we finally found a man who sold fresh bread for a cheaper price. With the money we had, we could only buy one small loaf. But it was a delicacy that we carried like gold back to our tent.</p>
+<p>“Why did you choose the second axe?” I asked while we walked through the market, looking at each food vendor’s bread.</p>
+<p>“Because the first one was too heavy, and the third one was starting to rust. The second one was not that great either, but it was the best out of the three.”</p>
+<p>“Oh,” was all I said as a reply. I looked away to see if there were any more vendors who sold bread.</p>
+<p>As we walked in silence, we finally found a man who sold fresh bread for a cheaper price. With the money we had, we could only buy one small loaf. But it was a delicacy that we carried like gold back to our tent.</p>
 <div class="section-divider">✦</div>
-<p>&emsp;“What did you buy? Rice? Fruit? <em>Meat</em>?” Taejae jumped around us with joy when he saw us. Everyone was already back at the tent by the time we came back from the market.</p>
-<p>&emsp;“No,” <em>Halmeoni</em> chuckled as she placed a hand on his shoulder to calm him down, “We bought a metal axe and a loaf of bread.”</p>
-<p>&emsp;“Oh.” Taejae’s smile faded.</p>
-<p>&emsp;“A metal axe!” <em>Abeoji</em> smiled warmly as he took the axe from <em>Halmeoni</em> and ran his hand along the wooden handle, “I’ll start chopping wood tomorrow.”</p>
+<p>“What did you buy? Rice? Fruit? <em>Meat</em>?” Taejae jumped around us with joy when he saw us. Everyone was already back at the tent by the time we came back from the market.</p>
+<p>“No,” <em>Halmeoni</em> chuckled as she placed a hand on his shoulder to calm him down, “We bought a metal axe and a loaf of bread.”</p>
+<p>“Oh.” Taejae’s smile faded.</p>
+<p>“A metal axe!” <em>Abeoji</em> smiled warmly as he took the axe from <em>Halmeoni</em> and ran his hand along the wooden handle, “I’ll start chopping wood tomorrow.”</p>
 <p><em>Eonni</em> had already made a fire with the sticks that we had kept for ourselves. It was bright, warming my skin from the cold that was already creeping in the air. We all sat around the fire and shared the loaf of bread between us. It was a nice change, even though it wasn’t filling like meat or rice. Taejae had already eaten all of his bread as fast as he could and now sat in dismay, watching us savor each piece. We ate in silence, watching the sun dip into the horizon and the sky turning a bright orange and gold.</p>
 <p>Our stomachs still grumbled angrily, but we didn’t want to make the soup again.</p>
 <p>With nothing to do or say, we went straight to bed.</p>

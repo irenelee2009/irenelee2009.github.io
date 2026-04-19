@@ -24,7 +24,18 @@
     .glass-card { background: rgba(0,0,0,0.38); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(255,255,255,0.14); padding: 3.5rem 3rem; position: relative; overflow: visible; opacity: 0; animation: fadeUp 1s 0.5s forwards; display: flex; flex-direction: column; }
     .glass-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, var(--gold), #7fffda); pointer-events: none; }
     .chapter-content { flex: 1; }
-    .chapter-content p { font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.95; color: rgba(232,237,245,0.92); margin-bottom: 1.5em; font-weight: 300; text-indent: 2em; }    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
+
+    /* Consistent indent via CSS — applies to every paragraph uniformly */
+    .chapter-content p {
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      line-height: 1.95;
+      color: rgba(232,237,245,0.92);
+      margin-bottom: 1.5em;
+      font-weight: 300;
+      text-indent: 1.8em;
+    }
+
+    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
     .chapter-content strong { font-weight: 600; color: var(--gold); }
     .section-divider { text-align: center; color: var(--gold); font-size: 1rem; letter-spacing: 0.5em; margin: 2.5rem 0; text-shadow: 0 0 18px rgba(200,168,75,0.5); }
     .para-with-popup { position: relative; }
@@ -66,7 +77,7 @@
 <p>They were all afraid.</p>
 <p>I thought of <em>Oppa</em>. If there were no problems, he would have arrived at the islands by now. Maybe not long enough to find <em>Abeoji</em> again, but enough to escape safely. Finding him would take around a few more days, maybe weeks, and bringing back a boat for us to use could take more time than we could ever imagine. The future didn’t look that great, but we planned to make the best out of it.</p>
 <p>I quickly walked towards the back door and stepped outside. The cool sharp air nipped at my bare face as I closed the door behind me. The soft rustling of the trees around the house was the only noise that disrupted the silence. It was too quiet. Looking around the house and towards the fields, I saw <em>Eonni </em>standing in the middle of the rice paddies—motionless—while staring up at the blue sky.</p>
-<div class="para-with-popup" data-popup-id="popup-5-0"><p class="">Walking towards the well in our backyard, I peered into the deep dark hole and saw a faint reflection of myself. Under my eyes were large dark sags of skin, my skin pale and eyes wide and frightened. My black hair stuck out in uneven strands, and my pale chapped lips twitched at the sight. I couldn’t recognize myself as the girl I used to be a few months ago. Gritting my teeth, I grabbed the bucket and threw it down the well while holding the end of the coarse rope that was tied to the bucket’s wooden handle. The loud splash of cold water below roared in my ears as I quickly pulled it back up. Even in the cool air, my chest raged with heat and anger. <em>Harabeoji</em> dug up this very well. He worked on it for days, and told the whole village they could take water for free, even after his death. Such kindness. Generosity.</p><div class="glossary-popup" id="popup-5-0"><div class="popup-entry"><em class="popup-word">Harabeoji</em> — Grandfather; a term of endearment and respect for one's grandfather.</div></div></div>
+<div class="para-with-popup" data-popup-id="popup-5-0"><p>Walking towards the well in our backyard, I peered into the deep dark hole and saw a faint reflection of myself. Under my eyes were large dark sags of skin, my skin pale and eyes wide and frightened. My black hair stuck out in uneven strands, and my pale chapped lips twitched at the sight. I couldn’t recognize myself as the girl I used to be a few months ago. Gritting my teeth, I grabbed the bucket and threw it down the well while holding the end of the coarse rope that was tied to the bucket’s wooden handle. The loud splash of cold water below roared in my ears as I quickly pulled it back up. Even in the cool air, my chest raged with heat and anger. <em>Harabeoji</em> dug up this very well. He worked on it for days, and told the whole village they could take water for free, even after his death. Such kindness. Generosity.</p><div class="glossary-popup" id="popup-5-0"><div class="popup-entry"><em class="popup-word">Harabeoji</em> — Grandfather; a term of endearment and respect for one's grandfather.</div></div></div>
 <p>And yet when the <em>inmingun</em> came to our home, the people were so quick to abandon us. In the dead of night, I would hear the bucket splash into the well every few hours, even to this day. During the day, however, nobody came to collect water for themselves. I clenched my fingers around the bucket handle as I dragged it out of the well until my knuckles turned white.</p>
 <p>With the water in the bucket, I could see my reflection even clearer now. As the sun cast a bright flash against the water’s surface, my mind wandered back to what happened long ago. The rough hands closing around my throat. The slimy breath of the men as they nearly squeezed the life out of me. I stared and stared and stared at the bright reflection on the water. My breathing stopped.</p>
 <p>I needed air.</p>

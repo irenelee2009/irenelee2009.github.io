@@ -24,7 +24,18 @@
     .glass-card { background: rgba(0,0,0,0.38); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(255,255,255,0.14); padding: 3.5rem 3rem; position: relative; overflow: visible; opacity: 0; animation: fadeUp 1s 0.5s forwards; display: flex; flex-direction: column; }
     .glass-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, var(--gold), #7fffda); pointer-events: none; }
     .chapter-content { flex: 1; }
-    .chapter-content p { font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.95; color: rgba(232,237,245,0.92); margin-bottom: 1.5em; font-weight: 300; text-indent: 2em; }    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
+
+    /* Consistent indent via CSS — applies to every paragraph uniformly */
+    .chapter-content p {
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      line-height: 1.95;
+      color: rgba(232,237,245,0.92);
+      margin-bottom: 1.5em;
+      font-weight: 300;
+      text-indent: 1.8em;
+    }
+
+    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
     .chapter-content strong { font-weight: 600; color: var(--gold); }
     .section-divider { text-align: center; color: var(--gold); font-size: 1rem; letter-spacing: 0.5em; margin: 2.5rem 0; text-shadow: 0 0 18px rgba(200,168,75,0.5); }
     .para-with-popup { position: relative; }
@@ -69,10 +80,10 @@
 <p>“Excuse me, sir, where is the smoke coming from?” She asked. The defector looked up at her from the sand, squinting.</p>
 <p>“People and their nice big homes. Not defectors like us, see?” He said <em>defectors</em> as if it was something reviling. <em>Halmeoni</em> thanked him and rejoined us while <em>Abeoji</em> and <em>Eonni</em> pushed the boat into the trees. People. Houses. It was the first time I heard those words aloud, and if I still had the energy I would be jumping for joy. No more tents. No more seawater soup. No more suffering. I found a newfound surge of energy shoot through my legs, and a weight on my shoulders seemed to lift. Maybe we were closer to freedom than we thought.</p>
 <p>The island was huge, and houses were scattered along the mountains. As we walked up a dirt path, we passed small paths that, from the main road, branched out to where we assumed were houses. When we explored the island well enough, we sat down in a hidden area covered by shade.</p>
-<p>&emsp;“I’m exhausted,” <em>Eonni</em> sighed as she sat against a tree trunk. I sat against the same tree as her, yanking through the knots in my hair with my calloused fingers. After trying to get through my second knot, I gave up and dropped my arms to the ground.</p>
-<p>&emsp;“What’s the plan now?” Taejae asked in the dead silence. He laid on his stomach in front of me.</p>
-<p>&emsp;“Sleep?” I groaned, leaning my head back against the trunk. I heard everyone shuffle in agreement, as if they were trying to get comfortable to go to sleep themselves.</p>
-<p>&emsp;Without waiting for a distinct response, I closed my eyes.</p>
+<p>“I’m exhausted,” <em>Eonni</em> sighed as she sat against a tree trunk. I sat against the same tree as her, yanking through the knots in my hair with my calloused fingers. After trying to get through my second knot, I gave up and dropped my arms to the ground.</p>
+<p>“What’s the plan now?” Taejae asked in the dead silence. He laid on his stomach in front of me.</p>
+<p>“Sleep?” I groaned, leaning my head back against the trunk. I heard everyone shuffle in agreement, as if they were trying to get comfortable to go to sleep themselves.</p>
+<p>Without waiting for a distinct response, I closed my eyes.</p>
 <div class="section-divider">✦</div>
 <p>I woke up with the melodious chirping of birds, and soon realized that I had slept the whole day and woke up the next. Looking around, it seemed like everyone had done the same.</p>
 <p>Everyone else was still asleep, so I decided to go on a walk. But as I tried to get up, my knees failed and I crumpled onto the ground, my legs throbbing with pain and my head swirling with nausea. I grunted and looked up to see if my noise had woken anyone up. It didn’t.</p>
@@ -84,18 +95,18 @@
 <p>It took me more time to get on the dirt path that was a few steps away from our hideout, and even longer to get to a house. I groaned with each step, my body trembling and threatening to  collapse. Waddling towards the nearest house, my jaw slackened when I saw the large familiar—yet at the same time, unfamiliar—structure. It was made of glossy oak wood, and had a small garden in front. And in that garden were potato bushes, stalks of tomatoes, and so much more. My mouth watered at the sight—at the colors—but I kept walking forward because I knew that if I stopped, I wouldn’t be able to move again.</p>
 <p>It felt like ages since I last saw a house, especially one this beautiful. Making my way towards the door, I knocked three times as loud as I could, my arms lurching at each impact.</p>
 <p>A woman opened the door and gasped when she saw me. At first her eyes were filled with shock, but then her gaze softened. I stared at her, at her bright blue dress, at the red flush in her cheeks, at the crisp white apron that was tied around her waist with beautiful green and gold embroidery. My chest tightened and my face burned with shame as I looked at myself in rags—in the most pitiful and pathetic state ever in my life.</p>
-<p>&emsp;“You’re nothing but a child!” She asked, but her body seemed to fill up the whole doorway, “How old are you?”</p>
-<p>&emsp;“I’m thirteen,” I answered, but my voice sounded strange to me—I was shocked that I was able to talk when I couldn’t before, “I’m sorry to bother you, ma’am, but is it possible if I can get some water and something to clean my wounds with?”</p>
-<p>&emsp;I cringed. I never needed to ask for help before. After all, I used to be the top student at my school; I did everything on my own. I even saved my family with that stupid certificate. And yet, here I was, begging for water and alcohol from a woman I just met.</p>
+<p>“You’re nothing but a child!” She asked, but her body seemed to fill up the whole doorway, “How old are you?”</p>
+<p>“I’m thirteen,” I answered, but my voice sounded strange to me—I was shocked that I was able to talk when I couldn’t before, “I’m sorry to bother you, ma’am, but is it possible if I can get some water and something to clean my wounds with?”</p>
+<p>I cringed. I never needed to ask for help before. After all, I used to be the top student at my school; I did everything on my own. I even saved my family with that stupid certificate. And yet, here I was, begging for water and alcohol from a woman I just met.</p>
 <p>The woman nodded and asked me to wait by a certain tree far from the door, saying that I should stay in the shade after she pointed out the sunburns on my arms. My face heated as I knew the real reason, but I obeyed.</p>
 <p>She then came out with a cup of water and a bottle half-filled with alcohol.</p>
-<p>&emsp;“Drink this, and then take this bottle and pour it gently on your wounds. It will sting, but the infections will get killed.”</p>
-<p>&emsp;Taking the cup, I savored the cool liquid as it slid down my throat, feeling the smooth porcelain against my lips—a sleekness that felt foreign. Then, I took the bottle and located one particularly bad wound on my leg and poured a bit over it. I hissed, nearly collapsing by the sudden wave of pain as the bloody wound fizzled and burned. The woman winced with me, but she just took the cup and went back inside after I thanked her. The bottle was still in my hands, and there was still some alcohol left. So, I dragged my bare feet back to where my family rested to give them the rest.</p>
-<p>&emsp;When I came back, everyone was awake by then, their startled expression turning to confusion when they saw the bottle of alcohol in my hands. I found the strength to smile, telling them that a kind lady gave it to clean my wounds. Relieved, they all took turns cleaning their infections with what was left.</p>
-<p>&emsp;“I’ve thought of a way for us to earn money,” <em>Abeoji</em> announced after they all cleaned themselves, “We’ll sell firewood to the villagers so that we can buy food and water at the village market.”</p>
+<p>“Drink this, and then take this bottle and pour it gently on your wounds. It will sting, but the infections will get killed.”</p>
+<p>Taking the cup, I savored the cool liquid as it slid down my throat, feeling the smooth porcelain against my lips—a sleekness that felt foreign. Then, I took the bottle and located one particularly bad wound on my leg and poured a bit over it. I hissed, nearly collapsing by the sudden wave of pain as the bloody wound fizzled and burned. The woman winced with me, but she just took the cup and went back inside after I thanked her. The bottle was still in my hands, and there was still some alcohol left. So, I dragged my bare feet back to where my family rested to give them the rest.</p>
+<p>When I came back, everyone was awake by then, their startled expression turning to confusion when they saw the bottle of alcohol in my hands. I found the strength to smile, telling them that a kind lady gave it to clean my wounds. Relieved, they all took turns cleaning their infections with what was left.</p>
+<p>“I’ve thought of a way for us to earn money,” <em>Abeoji</em> announced after they all cleaned themselves, “We’ll sell firewood to the villagers so that we can buy food and water at the village market.”</p>
 <p>The village market was a small area near the middle of the island where lots of shops were set up, mostly by the residents themselves. When we explored the island the day before, the people who owned stalls looked at us with suspicion—so I doubted that we would be welcomed there if we were to sell firewood.</p>
-<p>&emsp;“Firewood? But how would we cut down trees? We’re barely in the condition to even walk.” <em>Halmeoni</em> sighed, massaging her knees, “Chunjae is also not with us, so how will you do it yourself?”</p>
-<p>&emsp;The mention of <em>Oppa</em> made us all fall silent, remembering him. Remembering what <em>could</em> be him now. <em>Halmeoni</em> opened her mouth but closed it immediately, her face wrung with instant regret. I saw Taejae’s head droop and watched <em>Eonni</em> look away. I then closed my eyes and tried to fight the thoughts and memories from reappearing in my mind. I didn’t want to believe it. But it was hard not to.</p>
+<p>“Firewood? But how would we cut down trees? We’re barely in the condition to even walk.” <em>Halmeoni</em> sighed, massaging her knees, “Chunjae is also not with us, so how will you do it yourself?”</p>
+<p>The mention of <em>Oppa</em> made us all fall silent, remembering him. Remembering what <em>could</em> be him now. <em>Halmeoni</em> opened her mouth but closed it immediately, her face wrung with instant regret. I saw Taejae’s head droop and watched <em>Eonni</em> look away. I then closed my eyes and tried to fight the thoughts and memories from reappearing in my mind. I didn’t want to believe it. But it was hard not to.</p>
 <p>After a moment of silence, <em>Abeoji</em> sighed.</p>
 <p>“I’ll manage. Jungjae can also help me here and then,” <em>Abeoji</em> answered, giving her a reassuring nod.</p>
 <p>“Yes,” <em>Eonni</em> replied, “It’s a great idea. If this works, then we might have real food and water soon enough.”</p>

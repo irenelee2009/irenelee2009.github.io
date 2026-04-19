@@ -24,7 +24,18 @@
     .glass-card { background: rgba(0,0,0,0.38); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(255,255,255,0.14); padding: 3.5rem 3rem; position: relative; overflow: visible; opacity: 0; animation: fadeUp 1s 0.5s forwards; display: flex; flex-direction: column; }
     .glass-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, var(--gold), #7fffda); pointer-events: none; }
     .chapter-content { flex: 1; }
-    .chapter-content p { font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.95; color: rgba(232,237,245,0.92); margin-bottom: 1.5em; font-weight: 300; text-indent: 2em; }    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
+
+    /* Consistent indent via CSS — applies to every paragraph uniformly */
+    .chapter-content p {
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      line-height: 1.95;
+      color: rgba(232,237,245,0.92);
+      margin-bottom: 1.5em;
+      font-weight: 300;
+      text-indent: 1.8em;
+    }
+
+    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
     .chapter-content strong { font-weight: 600; color: var(--gold); }
     .section-divider { text-align: center; color: var(--gold); font-size: 1rem; letter-spacing: 0.5em; margin: 2.5rem 0; text-shadow: 0 0 18px rgba(200,168,75,0.5); }
     .para-with-popup { position: relative; }
@@ -61,9 +72,9 @@
       <article class="chapter-content">
         <p>A sound like thunder ripped through the house—the violent crash of wood giving way. The front door blew inwards, torn from its very hinges, flooding the dim room with harsh, blinding sunlight. Dust motes, usually dancing lazily in the air, now swirled in panicked clouds. Then, men in drab olive uniforms came in—shadows in the light, their boots heavy on our floor. Hands seized us before I could breathe. Panic choked my throat when the realization dawned on me. They were here for <em>Oppa</em>. It took them two weeks.</p>
 <p>Two soldiers lunged past, grabbing <em>Eonni </em>and Taejae. <em>Eonni</em> screamed, a raw sound of terror, as rough hands tangled in her hair. Another soldier snatched my arm before I could react, yanking me off my feet with ease and tossing me aside. My head struck the wooden floor, sparks exploding behind my eyes. Through the blur, I saw the other soldier kick <em>Halmeoni</em> to the floor. She groaned at the impact. I tried to get up, but the soldier who had thrown me put his heavy foot on my back.</p>
-<p>&emsp;Another soldier, a general, then stepped through the doorway. He stalked towards <em>Eonni</em>, who knelt trembling where she’d been thrown.</p>
+<p>Another soldier, a general, then stepped through the doorway. He stalked towards <em>Eonni</em>, who knelt trembling where she’d been thrown.</p>
 <p>“Where is he?” He spat, flecks of saliva hitting her face.</p>
-<p>&emsp;“I don’t know what you mean, sir.” <em>Eonni </em>said, trembling.</p>
+<p>“I don’t know what you mean, sir.” <em>Eonni </em>said, trembling.</p>
 <p>CRACK.</p>
 <p>The sharp, ugly sound of his open palm striking her cheek echoed in the silence. <em>Eonni</em> cried out, collapsing on her side onto the floorboards.</p>
 <p>The general sneered, grabbing a fistful of her hair, forcing her head up mercilessly. “Your brother. The traitor. Where is he hiding?”</p>
@@ -76,16 +87,16 @@
 <p>The general’s eyes darkened but he let go of <em>Eonni</em>. He then looked up at the rest of his men. “Search the house.”</p>
 <p>As dull uniforms dispersed, the sounds of crashing and ripping started almost immediately from other rooms. The general turned his menacing attention back to <em>Eonni</em>. He grabbed her by the front of her blouse, hauling her roughly to her feet and slamming her back against the nearest wall with terrifying force. His fingers clasped around her neck. A breath whooshed out of her in a strangled gasp.</p>
 <p>“<em>Eonni</em>!” I screamed, lunging forward instinctively. But the soldier behind me dug his feet painfully into my back, holding me fast.</p>
-<p>&emsp;“Sir, they have a baby.” A different man called out from the bedroom that used to be <em>Eomeoni</em>’s. Yeomjae’s soft cries echoed in the air.</p>
+<p>“Sir, they have a baby.” A different man called out from the bedroom that used to be <em>Eomeoni</em>’s. Yeomjae’s soft cries echoed in the air.</p>
 <p>The general glanced towards the sound, then his cold eyes fell on Taejae, who was huddled near <em>Halmeoni</em>, face buried in her skirt, shaking with silent tears.</p>
 <p>“You,” he commanded, jerking his chin dismissively. “Go before I silence it myself.”</p>
 <p>Taejae flinched as if he was struck, but sprinted into the bedroom, his sobs muffled beneath his hands.</p>
 <p>The general turned back to <em>Eonni</em>, pressing her neck harder against the wall, his face inches from hers. "Last chance, I know you’re lying. Where is he, or you’ll die while we look for him."</p>
 <p><em>Eonni</em> gasped, her face turning an alarming shade of purple beneath his grasp, her eyes bulging. She coughed, her body shaking with so much force as tears started trailing down her face.</p>
-<p>&emsp;“Stop! Let her go! We really don’t know!” I screamed. With a sudden, desperate surge of strength fueled by panic, I twisted violently under the soldier's hold, breaking away from him. I scrambled towards the general, launching myself at him, beating uselessly at his back with the small, inadequate fists of a twelve year old girl. I knew it did nothing. A chill ran down my spine as he turned around, his piercing black eyes narrowing in frustration. But he unknowingly loosened his grasp on <em>Eonni</em>’s throat as he twisted around, letting her gulp for air.</p>
-<p>&emsp;“Little girl, stay out of it if you want to live. Be smart like your little brother and stand far away.” He clenched his jaws as he spat every word out at me with every breath.</p>
+<p>“Stop! Let her go! We really don’t know!” I screamed. With a sudden, desperate surge of strength fueled by panic, I twisted violently under the soldier's hold, breaking away from him. I scrambled towards the general, launching myself at him, beating uselessly at his back with the small, inadequate fists of a twelve year old girl. I knew it did nothing. A chill ran down my spine as he turned around, his piercing black eyes narrowing in frustration. But he unknowingly loosened his grasp on <em>Eonni</em>’s throat as he twisted around, letting her gulp for air.</p>
+<p>“Little girl, stay out of it if you want to live. Be smart like your little brother and stand far away.” He clenched his jaws as he spat every word out at me with every breath.</p>
 <p>“No! Let her go!” I screamed, my voice cracking. He barely seemed to notice the blows until, in a raw animal instinct born of terror, I lunged and sank my teeth hard into his exposed forearm, biting down with all my might. He roared, letting out a guttural sound, yanking his arm in pain. He dropped <em>Eonni</em>. Red liquid trickled down his tan skin, and I quickly wiped my mouth of any remnants of his disgusting blood. It tasted metallic and sour. Retreating back, I nearly toppled over to duck as the general swiped at my face, and I gasped when I saw that what he had in his hands was a glinting knife. My face had barely grazed it. I spared a quick glance at <em>Eonni</em>, coughing as each breath entered her body, saliva dripping down her chin.</p>
-<p>&emsp;“Get rid of her, and keep searching the house!” The general roared<em>. </em>But before I could react, the soldier behind me grabbed me by the arms and slammed me onto the wall, squeezing my throat with both his hands. Air rushed out of me like a bullet.</p>
+<p>“Get rid of her, and keep searching the house!” The general roared<em>. </em>But before I could react, the soldier behind me grabbed me by the arms and slammed me onto the wall, squeezing my throat with both his hands. Air rushed out of me like a bullet.</p>
 <p>My head felt like it was going to explode, the incomprehensible pain making my body convulse and shake. The general’s voice started to become distant, then shapeless. I clawed at the soldier’s wrists, nails splitting. My vision spun—colors streaking, sound flattening—until only a roaring was left in my ears. Then the pain became distant. Then everything did.</p>
 <p>My knees went first. Then the floor.</p>
 <div class="section-divider">✦</div>
@@ -96,22 +107,22 @@
 <p><em>Halmeoni</em> huddled in the corner, still whispering frantic prayers, her knuckles white. Alive.</p>
 <p>That was when I noticed the general holding a piece of colorful paper in his hand. My eyes widened; I recognized it.</p>
 <p>My school certificate.</p>
-<p>&emsp;“Sir! She’s awake.” The soldier said beside me. I froze, my stomach clenching. The general’s boots slammed towards me with such force that the ground shook. He grabbed the back of my shirt and hauled me up. He crouched right in front of me, his rotting, cigarette breath huffing into my face with every rise and fall of his shoulders. He then lifted up the certificate to the side of his face.</p>
-<p>&emsp;“I found this in your drawers.” He said, “Do you know the meaning of this?”</p>
-<p>&emsp;“Of course,” My voice came out in a hoarse whisper, “It is given to the top student of the school by The Leader himself.”</p>
-<p>&emsp;He nodded, “The people who receive this top honor are the pride and joy for our country. For The Leader. You have done well.”</p>
+<p>“Sir! She’s awake.” The soldier said beside me. I froze, my stomach clenching. The general’s boots slammed towards me with such force that the ground shook. He grabbed the back of my shirt and hauled me up. He crouched right in front of me, his rotting, cigarette breath huffing into my face with every rise and fall of his shoulders. He then lifted up the certificate to the side of his face.</p>
+<p>“I found this in your drawers.” He said, “Do you know the meaning of this?”</p>
+<p>“Of course,” My voice came out in a hoarse whisper, “It is given to the top student of the school by The Leader himself.”</p>
+<p>He nodded, “The people who receive this top honor are the pride and joy for our country. For The Leader. You have done well.”</p>
 <p>He smiled. My stomach roiled. He then stood up and placed the certificate gently on the cabinets and started to walk towards the torn-down door.</p>
-<p>&emsp;I felt sick.</p>
+<p>I felt sick.</p>
 <p>“I apologize for the rough behavior. You’re a good kid. But I’d advise you to put your certificate somewhere visible so that next time this will not happen again.” Then, he walked out of our home with all his men trailing behind him.</p>
 <p>I was speechless, my mouth agape, ignoring the fresh tears that now trailed down my face. My wide eyes roamed around the room but I didn't really see anything, blinded by fury. Then, they landed on a mirror. I jerked backward, startled at the sight. My eyes were bloodshot and puffy, with smudges of dark purple forming a ring around my neck. Staring at myself, my skin crawled. I frantically grabbed the bottom of my shirt and rubbed my face to get that lingering feeling off of me. I couldn’t get it off, and my skin burned like fire.</p>
-<div class="para-with-popup" data-popup-id="popup-2-0"><p class="">Taejae shuffled out into the living room and towards <em>Eonni </em>who sat motionless on the floor, his eyes bleary with tears. “<em>Noona</em>, are you okay?”</p><div class="glossary-popup" id="popup-2-0"><div class="popup-entry"><em class="popup-word">Noona</em> — Older sister; used by males to address or refer to an older female sibling.</div></div></div>
+<div class="para-with-popup" data-popup-id="popup-2-0"><p>Taejae shuffled out into the living room and towards <em>Eonni </em>who sat motionless on the floor, his eyes bleary with tears. “<em>Noona</em>, are you okay?”</p><div class="glossary-popup" id="popup-2-0"><div class="popup-entry"><em class="popup-word">Noona</em> — Older sister; used by males to address or refer to an older female sibling.</div></div></div>
 <p>She didn’t answer nor did she acknowledge him with a glance. Her blank eyes stared into space, with nothing behind them.</p>
 <p>Wobbling to my feet, I stumbled in the direction of the storage room, dragging my heavy feet.</p>
-<p>&emsp;“No.”</p>
-<p>&emsp;I turned around and stared at <em>Eonni</em>.</p>
-<p>&emsp;“They’re waiting.”</p>
-<p>&emsp;“And? I need to see if he’s still there. He needs to see what he brought to all of us.” The last part of the sentence cracked as my dry lips trembled. “You were–”</p>
-<p>&emsp;“Stop.” <em>Eonni </em>quickly turned her head to me, her eyes dripping with venom. “Don’t you dare finish that sentence.”</p>
+<p>“No.”</p>
+<p>I turned around and stared at <em>Eonni</em>.</p>
+<p>“They’re waiting.”</p>
+<p>“And? I need to see if he’s still there. He needs to see what he brought to all of us.” The last part of the sentence cracked as my dry lips trembled. “You were–”</p>
+<p>“Stop.” <em>Eonni </em>quickly turned her head to me, her eyes dripping with venom. “Don’t you dare finish that sentence.”</p>
 <p>The cabinets were all raided, our fine china and silverware missing.</p>
 <p>Muddy footprints led out the door.</p>
 <p>The house was silent.</p>

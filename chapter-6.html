@@ -24,7 +24,18 @@
     .glass-card { background: rgba(0,0,0,0.38); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(255,255,255,0.14); padding: 3.5rem 3rem; position: relative; overflow: visible; opacity: 0; animation: fadeUp 1s 0.5s forwards; display: flex; flex-direction: column; }
     .glass-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, var(--gold), #7fffda); pointer-events: none; }
     .chapter-content { flex: 1; }
-    .chapter-content p { font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.95; color: rgba(232,237,245,0.92); margin-bottom: 1.5em; font-weight: 300; text-indent: 2em; }    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
+
+    /* Consistent indent via CSS — applies to every paragraph uniformly */
+    .chapter-content p {
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      line-height: 1.95;
+      color: rgba(232,237,245,0.92);
+      margin-bottom: 1.5em;
+      font-weight: 300;
+      text-indent: 1.8em;
+    }
+
+    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
     .chapter-content strong { font-weight: 600; color: var(--gold); }
     .section-divider { text-align: center; color: var(--gold); font-size: 1rem; letter-spacing: 0.5em; margin: 2.5rem 0; text-shadow: 0 0 18px rgba(200,168,75,0.5); }
     .para-with-popup { position: relative; }
@@ -61,15 +72,15 @@
       <article class="chapter-content">
         <p>Frantic yet quiet knocking woke me and <em>Eonni </em>in the dead of night. I leapt from my warm blankets and ran to the back door. <em>Eonni </em>was behind me, her hair and eyes wild. We all shared the same thought, even though there were no words exchanged between us. Was <em>Oppa </em>home?</p>
 <p>Quickly opening the wooden door, I nearly screamed out loud when I didn’t see <em>Oppa </em>stumble inside, but a strange man whom I had never seen before. His mouth and nose were covered and he towered over me, wearing all black.</p>
-<p>&emsp;“Who are you?” <em>Eonni </em>bravely announced, pulling me behind her.</p>
-<p>&emsp;“I’m a messenger.” He held out a letter, “From your brother and father.”</p>
+<p>“Who are you?” <em>Eonni </em>bravely announced, pulling me behind her.</p>
+<p>“I’m a messenger.” He held out a letter, “From your brother and father.”</p>
 <p><em>Eonni </em>recoiled in shock then wrenched the letter out of his hand, ripping it open. Taejae and <em>Halmeoni</em> joined us from their bedrooms. She quickly skimmed the letter, her eyes widening with bewilderment. I tried to peer over her hunched body to read the contents but she quickly closed the letter and met the messenger’s gaze with fiery eyes. I opened my mouth to protest but <em>Halmeoni </em>placed a hand on my shoulder, silencing me.</p>
-<p>&emsp;<em>Eonni </em>opened her mouth to speak. “How did you–”</p>
-<p>&emsp;“Would you like to stay and rest? Perhaps have a meal?” <em>Halmeoni </em>suddenly interrupted her, taking a small step in front. “You must be very tired.”</p>
-<p>&emsp;“No, I must go. Thank you for the offer, but goodnight.” He bowed and quietly snuck out the back door, closing it softly behind him, leaving us in the dark living room.</p>
+<p><em>Eonni </em>opened her mouth to speak. “How did you–”</p>
+<p>“Would you like to stay and rest? Perhaps have a meal?” <em>Halmeoni </em>suddenly interrupted her, taking a small step in front. “You must be very tired.”</p>
+<p>“No, I must go. Thank you for the offer, but goodnight.” He bowed and quietly snuck out the back door, closing it softly behind him, leaving us in the dark living room.</p>
 <p><em>Eonni </em>whipped her head towards <em>Halmeoni </em>with utter frustration etched into her face.</p>
-<p>&emsp;“Why did you cut me off, <em>Halmeoni</em>? I was going to ask him very important questions about <em>Oppa</em>.” Her hands balled into fists, her voice growing louder.</p>
-<p>&emsp;<em>Halmeoni</em> cut her a sharp look. “For someone who had just received news that her family is alive and safe, you do not sound grateful that the messenger went through that very long and dangerous journey in order to hand over that letter.”</p>
+<p>“Why did you cut me off, <em>Halmeoni</em>? I was going to ask him very important questions about <em>Oppa</em>.” Her hands balled into fists, her voice growing louder.</p>
+<p><em>Halmeoni</em> cut her a sharp look. “For someone who had just received news that her family is alive and safe, you do not sound grateful that the messenger went through that very long and dangerous journey in order to hand over that letter.”</p>
 <p>“I-”</p>
 <p>“No, Jungjae,” <em>Halmeoni</em> shook her head, “A favor given freely is not something you demand more from. Don’t test that.”</p>
 <p>In the stillness, I heard <em>Eonni</em>’s breathing settle. “I understand. I’m sorry for raising my voice.”</p>
@@ -81,7 +92,7 @@
 <p>When we got on the boat, it would be all over.</p>
 <p>I couldn’t go back to sleep after that. I didn’t know if it was because I was excited or just didn’t care.</p>
 <div class="section-divider">✦</div>
-<p>&emsp;The sun seemed to say its farewells as it dipped into the horizon, the sky surrendering its vibrant colors to the dark black of night. We all sat alert in the middle of the living room, our belongings wrapped in swathes of cloth tied around our waists and backs. I had a small pouch around my waist, and Yeomjae wrapped around my back.</p>
+<p>The sun seemed to say its farewells as it dipped into the horizon, the sky surrendering its vibrant colors to the dark black of night. We all sat alert in the middle of the living room, our belongings wrapped in swathes of cloth tied around our waists and backs. I had a small pouch around my waist, and Yeomjae wrapped around my back.</p>
 <p>“The villagers are going back home from their fields.” Taejae observed from the window as he peeked through the curtains.</p>
 <p>“Good.” <em>Eonni </em>said, fidgeting with the folds of her shirt. She then looked up at <em>Halmeoni</em>. “Will you be okay to make this long journey?”</p>
 <p>“What, and leave me behind?” <em>Halmeoni </em>scoffed, “You’re funny if you think that.”</p>
@@ -94,10 +105,10 @@
 <p><em>CRACK</em></p>
 <p>The water nearly toppled out of the cup as a strike of lightning roared in the distance. I heard Halmeoni chuckle, but I didn’t know if she was laughing because I was startled or if she was right. Perhaps both.</p>
 <p>Settling myself with a breath, I tipped the cup onto my lips and took a long sip. The cool liquid slid down my throat in a way that made me shudder. It was a reminder of so many things. That this would be the very last time I would take a drink from my grandfather’s well. That this would be my last moments in the place I called home.</p>
-<p>&emsp;“We should pray for our safe travels,” <em>Halmeoni </em>murmured.</p>
-<p>&emsp;I snorted out of disbelief. “To who? The Leader?”</p>
+<p>“We should pray for our safe travels,” <em>Halmeoni </em>murmured.</p>
+<p>I snorted out of disbelief. “To who? The Leader?”</p>
 <p>She clicked her tongue in disapproval. “Don’t address The Leader like that! Be ashamed, Hwajae. We had done wrong things, and now we are paying the price. The Leader will surely forgive us once the war is over. What has your school been teaching you?”</p>
-<p>&emsp;“The wrong thing, apparently.” I muttered to myself, quiet enough that <em>Halmeoni</em> didn’t hear.</p>
+<p>“The wrong thing, apparently.” I muttered to myself, quiet enough that <em>Halmeoni</em> didn’t hear.</p>
 <p>The clock finally struck, filling the silence in our home and awakening our senses.</p>
 
       </article>

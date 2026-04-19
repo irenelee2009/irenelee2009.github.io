@@ -24,7 +24,18 @@
     .glass-card { background: rgba(0,0,0,0.38); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(255,255,255,0.14); padding: 3.5rem 3rem; position: relative; overflow: visible; opacity: 0; animation: fadeUp 1s 0.5s forwards; display: flex; flex-direction: column; }
     .glass-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, var(--gold), #7fffda); pointer-events: none; }
     .chapter-content { flex: 1; }
-    .chapter-content p { font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.95; color: rgba(232,237,245,0.92); margin-bottom: 1.5em; font-weight: 300; text-indent: 2em; }    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
+
+    /* Consistent indent via CSS — applies to every paragraph uniformly */
+    .chapter-content p {
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      line-height: 1.95;
+      color: rgba(232,237,245,0.92);
+      margin-bottom: 1.5em;
+      font-weight: 300;
+      text-indent: 1.8em;
+    }
+
+    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
     .chapter-content strong { font-weight: 600; color: var(--gold); }
     .section-divider { text-align: center; color: var(--gold); font-size: 1rem; letter-spacing: 0.5em; margin: 2.5rem 0; text-shadow: 0 0 18px rgba(200,168,75,0.5); }
     .para-with-popup { position: relative; }
@@ -61,35 +72,35 @@
       <article class="chapter-content">
         <p>It was too much for him. Struggling to stay alive while trying to reunite with us, he thought he was going to come to his full family. But instead, one had silently disappeared without his knowledge, and he couldn’t even say goodbye nor visit his resting place. He spent his days dazing off, after we told him of what happened. His smile faded, and it didn’t reappear until days later. But we had to move on, and that's what seemed to hurt him most.</p>
 <p>One day, we were sitting behind our pile of firewood when we saw a villager run into the market, rushing towards his friends at a stall. He was holding a leaflet, and he talked to them while waving his arm and rubbing his forehead.</p>
-<p>&emsp;“What do you think is happening there?” <em>Eonni</em> mumbled to me, “I wager it's something from The Leader.”</p>
-<p>&emsp;At this point, other villagers had swarmed around them, talking in hushed voices over the leaflet.</p>
-<p>&emsp;“Do you think you should go and see what this is about?” Taejae asked <em>Abeoji</em>.</p>
-<p>&emsp;“I think I should.” <em>Abeoji</em> nodded, “Hwajae, come with me.”</p>
-<p>&emsp;“Me?” I furrowed my brows. Usually for something like this, he would ask <em>Oppa </em>or <em>Eonni</em> to come with him. But <em>Abeoji</em> had already started walking briskly towards the crowd, as if he sensed the urgency and did not hear my inquiry. I looked at <em>Oppa</em> but he shrugged, and so I hurriedly followed after him.</p>
+<p>“What do you think is happening there?” <em>Eonni</em> mumbled to me, “I wager it's something from The Leader.”</p>
+<p>At this point, other villagers had swarmed around them, talking in hushed voices over the leaflet.</p>
+<p>“Do you think you should go and see what this is about?” Taejae asked <em>Abeoji</em>.</p>
+<p>“I think I should.” <em>Abeoji</em> nodded, “Hwajae, come with me.”</p>
+<p>“Me?” I furrowed my brows. Usually for something like this, he would ask <em>Oppa </em>or <em>Eonni</em> to come with him. But <em>Abeoji</em> had already started walking briskly towards the crowd, as if he sensed the urgency and did not hear my inquiry. I looked at <em>Oppa</em> but he shrugged, and so I hurriedly followed after him.</p>
 <p>When we got to the crowd, the people didn’t react and instead just glanced at us and went back to their conversation. I guess our presence had become normal after being in the market every day.</p>
-<p>&emsp;“May we see what this is about?” <em>Abeoji</em> asked the man holding the leaflet.</p>
-<p>&emsp;“Sure. It seems the most relevant to you.” The man nodded and handed him the leaflet. Looking at it with <em>Abeoji</em>, I was puzzled to see a leaflet design that I had never seen before, including a logo that was not from The Leader.</p>
-<p>&emsp;“This is from the United States.” <em>Abeoji</em> gasped, “Where did you get this?”</p>
-<p>&emsp;The man scratched his head, “I’m not sure how, but a fisherman who was passing by the island gave it to me.”</p>
-<p>&emsp;All the while, I was reading. The US Army was able to push back the North Korean and Chinese Army significantly. Since they currently occupied most of the peninsula, it was announced that a US ship would come to our island to pick up the refugees who sought to go to South Korea.</p>
+<p>“May we see what this is about?” <em>Abeoji</em> asked the man holding the leaflet.</p>
+<p>“Sure. It seems the most relevant to you.” The man nodded and handed him the leaflet. Looking at it with <em>Abeoji</em>, I was puzzled to see a leaflet design that I had never seen before, including a logo that was not from The Leader.</p>
+<p>“This is from the United States.” <em>Abeoji</em> gasped, “Where did you get this?”</p>
+<p>The man scratched his head, “I’m not sure how, but a fisherman who was passing by the island gave it to me.”</p>
+<p>All the while, I was reading. The US Army was able to push back the North Korean and Chinese Army significantly. Since they currently occupied most of the peninsula, it was announced that a US ship would come to our island to pick up the refugees who sought to go to South Korea.</p>
 <p>“They’re coming to this island.” I whispered under my breath. I couldn’t believe it. Could this be our ticket to get to South Korea safely?</p>
 <p><em>Abeoji</em> was talking to the villagers, but I wasn’t listening. Instead, I was rereading the leaflet over and over again.</p>
 <p>Once we got back to our firewood pile, <em>Abeoji</em> told the news to everyone else.</p>
-<p>&emsp;“Can we believe them?” <em>Halmeoni</em> questioned, “It's the United States of America.”</p>
-<p>&emsp;“Maybe it’s not even the United States,” <em>Oppa</em> countered, “It could be a trap laid by The Leader to collect all the defectors.”</p>
-<p>&emsp;  “But what are the chances that it’s real?” I argued, “Then we can get to South Korea safely.”</p>
-<p>&emsp;“Hwajae’s right,” <em>Eonni </em>nodded, “Even if it could be fake, there’s a high chance that it's real.”</p>
+<p>“Can we believe them?” <em>Halmeoni</em> questioned, “It's the United States of America.”</p>
+<p>“Maybe it’s not even the United States,” <em>Oppa</em> countered, “It could be a trap laid by The Leader to collect all the defectors.”</p>
+<p>“But what are the chances that it’s real?” I argued, “Then we can get to South Korea safely.”</p>
+<p>“Hwajae’s right,” <em>Eonni </em>nodded, “Even if it could be fake, there’s a high chance that it's real.”</p>
 <p>We stopped talking about it, and instead we ate our daily loaf of bread behind our firewood pile, thinking in silence. Only time would tell.</p>
 <p>As time passed, I got tired of thinking about the US ship because it felt like an eternity before it was going to arrive. I almost believed that it was fake at that point.</p>
 <p>Instead, my mind wandered back to the place where I had lived my entire life, the home that was now lost. Every time I closed my eyes, I would see the memories flit past behind my eyelids, the voices of my family laughing at the dinner table almost echoing in my ears—the phantom scent of a dinner feast wafting in the air. It had gotten to a point where I didn’t even see the purpose of going to South Korea. If we went there, our lives would immediately be reset. We would be in a completely different place with different people. Before all of this chaos, I wanted to go to university and pursue my dreams. I wanted to become a teacher. I wanted to start a family. I wanted to live with my family—happy and intact. I didn’t even know if that was possible now.</p>
 <div class="section-divider">✦</div>
-<p>&emsp;The day had finally come. The defectors scrambled around the beach, looking for things to bring with them. We didn’t have anything to pack. Our axe was broken. We had eaten our bread.</p>
+<p>The day had finally come. The defectors scrambled around the beach, looking for things to bring with them. We didn’t have anything to pack. Our axe was broken. We had eaten our bread.</p>
 <p>When we finally arrived at the beach, we saw the defectors gather around at the shoreline, murmuring loudly. We joined the crowd and I craned my neck to see what the commotion was about. I couldn’t see because everyone was much taller than me, so I squeezed past a few men until I could.</p>
 <p>Along the blue horizon was a black dot. It was too far away to make out the details, but it had to be the US ship. A nervous excitement spread in my stomach as I returned to my family and stood with them while we watched the black dot become bigger. There seemed to be more than fifty defectors on the shores, some I had never seen before. Looking around, my eyes widened when I saw the same eighteen year old boy we saw on <em>Seommaeup</em>. He looked much older, his face more hollow and angled. The people from the other islands must have come to this one as well.</p>
 <p>We all stood, staring at the ship as it got closer. Some people cried with joy, others stared with a smile on their faces. My family and I just stood silently, our eyes never leaving the ship that soon loomed over us—casting a shadow on the whole crowd.</p>
-<p>&emsp;“Woah,” was all Taejae said, but it seemed to say everything.</p>
-<p>&emsp;I never forgot the moment when the ship arrived. We watched it turn so that its side faced us and dropped its huge anchor. Two large gangways slid down the side, their bottoms splashing into the water with a thud. We saw foreign-looking men on the deck securing the gangways with thick white rope. Some had golden hair, and it seemed more glamorous than what I saw on leaflets sent out by The Leader. I stared in awe, afraid to move.</p>
-<p>&emsp;When the white men finished, silence filled the still air. A ripple of uneasiness spread throughout the large crowd of refugees. Was it safe? What were we supposed to do now?</p>
+<p>“Woah,” was all Taejae said, but it seemed to say everything.</p>
+<p>I never forgot the moment when the ship arrived. We watched it turn so that its side faced us and dropped its huge anchor. Two large gangways slid down the side, their bottoms splashing into the water with a thud. We saw foreign-looking men on the deck securing the gangways with thick white rope. Some had golden hair, and it seemed more glamorous than what I saw on leaflets sent out by The Leader. I stared in awe, afraid to move.</p>
+<p>When the white men finished, silence filled the still air. A ripple of uneasiness spread throughout the large crowd of refugees. Was it safe? What were we supposed to do now?</p>
 <p>Suddenly, a familiar looking man appeared from the deck. He leaned over the railings and yelled at the top of his lungs in Korean.</p>
 <p>“This is the US transport ship that is here to evacuate all refugees!” He yelled, his voice ringing in the still air as we embraced his words, “This is the last ship evacuating North Korean refugees. This is the last ship south!”</p>
 <p>We all cheered and cried, some embracing each other in excitement as soon as we heard those words. The defectors then stampeded into the water and toward the two gangways, their feet making loud thumps as they rushed on board.</p>

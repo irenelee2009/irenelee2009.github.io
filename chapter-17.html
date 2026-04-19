@@ -24,7 +24,18 @@
     .glass-card { background: rgba(0,0,0,0.38); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(255,255,255,0.14); padding: 3.5rem 3rem; position: relative; overflow: visible; opacity: 0; animation: fadeUp 1s 0.5s forwards; display: flex; flex-direction: column; }
     .glass-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, var(--gold), #7fffda); pointer-events: none; }
     .chapter-content { flex: 1; }
-    .chapter-content p { font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.95; color: rgba(232,237,245,0.92); margin-bottom: 1.5em; font-weight: 300; text-indent: 2em; }    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
+
+    /* Consistent indent via CSS — applies to every paragraph uniformly */
+    .chapter-content p {
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      line-height: 1.95;
+      color: rgba(232,237,245,0.92);
+      margin-bottom: 1.5em;
+      font-weight: 300;
+      text-indent: 1.8em;
+    }
+
+    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
     .chapter-content strong { font-weight: 600; color: var(--gold); }
     .section-divider { text-align: center; color: var(--gold); font-size: 1rem; letter-spacing: 0.5em; margin: 2.5rem 0; text-shadow: 0 0 18px rgba(200,168,75,0.5); }
     .para-with-popup { position: relative; }
@@ -60,22 +71,22 @@
     <div class="glass-card">
       <article class="chapter-content">
         <p>As we rowed south, we discovered another island which <em>Halmeoni</em> claimed to be <em>Changnyeong-do</em>. She said that on maps this island was right below <em>Seommaeup</em>. <em>Changnyeong-do</em> was not much bigger, but it definitely looked more habitable—it was very green.</p>
-<p>&emsp;“There might be more defectors living there.” <em>Abeoji</em> said as he steered the boat closer to the shore. The island was quiet; I didn’t even hear any birds nor a rustling of trees by the wind. It was eerie, but I’d rather be on an eerie island than stay in the ocean on a small boat.</p>
+<p>“There might be more defectors living there.” <em>Abeoji</em> said as he steered the boat closer to the shore. The island was quiet; I didn’t even hear any birds nor a rustling of trees by the wind. It was eerie, but I’d rather be on an eerie island than stay in the ocean on a small boat.</p>
 <p>As soon as we took a step onto the sand, I detected movement within the trees. We all froze when we saw a man emerge. He was tall with broad shoulders and arms. He looked strong, but I could tell that something was wrong, noticing the deep hollows in his cheeks. It was a common sight nowadays, but I couldn’t help but remember how Yeomjae had similar cheeks.</p>
-<p>&emsp;“Who are you?” A man narrowed his eyes. He kept his distance, but his voice rang loud and clear, “I don’t believe you are the <em>inmingun</em>.”</p>
-<p>&emsp;“This is my family. We left North Korea and came from <em>Seommaeup</em>.” <em>Abeoji</em> explained, “We come in peace and in need of rest.”</p>
+<p>“Who are you?” A man narrowed his eyes. He kept his distance, but his voice rang loud and clear, “I don’t believe you are the <em>inmingun</em>.”</p>
+<p>“This is my family. We left North Korea and came from <em>Seommaeup</em>.” <em>Abeoji</em> explained, “We come in peace and in need of rest.”</p>
 <p>The man looked us up and down for a moment, “Alright. Follow me.”</p>
-<p>&emsp;The man turned around and beckoned us to follow. After dragging our boat deep into the forest, we made our way towards their own hideout, which was similar to <em>Seommaeup</em>, but maybe even worse.</p>
+<p>The man turned around and beckoned us to follow. After dragging our boat deep into the forest, we made our way towards their own hideout, which was similar to <em>Seommaeup</em>, but maybe even worse.</p>
 <p>People didn’t look like they had much food themselves.</p>
 <p>Instead of tents, the defectors had dug two deep, long pits in the ground where they slept in, separated by men and women with their children. In the large pits, the dirt ground was layered with grass and leaves. It was something I have never seen before. I frowned at the sight of it; it must be very uncomfortable. Why not sleep in tents?</p>
 <p>I tried not to stare at the people but I couldn’t help but notice how thin they were. Their skin was gray and pale, and there was no lively chatter. Everyone only whispered, their voices airy. Nobody had silver utensils or pots lying around. There wasn’t even the crackle of a fire.</p>
-<p>&emsp;“You came from <em>Seommaeup</em>, right?” The man asked and we nodded, “Then you must know about the food issue. It happened to us too, but much earlier. I’m sorry, but we won’t be of much help if you are hungry.”</p>
-<p>&emsp;I exchanged worried glances with <em>Eonni</em>, but it was <em>Abeoji </em>who spoke first.</p>
-<p>&emsp;“It’s quite alright. We don’t plan to stay here for long.” He said, giving the man a reassuring smile.</p>
-<p>&emsp;“Really?” The man furrowed his brows, “Where are you off to?”</p>
-<p>&emsp;“South Korea.” <em>Abeoji</em> answered with a curt nod, “We can’t waste more time, so we will be leaving after a good night’s rest.”</p>
-<p>&emsp;“Alright, I’ll let the others know,” The man said and pointed to a small plot of grass above ground, “You can rest there for the night.”</p>
-<p>&emsp;“Thank you,” <em>Abeoji</em> said. Everyone quickly walked to the grassy area and immediately collapsed on top of it. Thankfully, the grass was dry and soft, and I didn’t need to sleep in a long hole full of strangers. Lying down, I closed my eyes. The warmth of the sun against my face almost made me doze off when a phantom chill brushed against my back. Without thinking, I sat up and counted. Four. Where was the fifth? I jumped up and almost said his name out loud when I remembered. Oh. Right.</p>
+<p>“You came from <em>Seommaeup</em>, right?” The man asked and we nodded, “Then you must know about the food issue. It happened to us too, but much earlier. I’m sorry, but we won’t be of much help if you are hungry.”</p>
+<p>I exchanged worried glances with <em>Eonni</em>, but it was <em>Abeoji </em>who spoke first.</p>
+<p>“It’s quite alright. We don’t plan to stay here for long.” He said, giving the man a reassuring smile.</p>
+<p>“Really?” The man furrowed his brows, “Where are you off to?”</p>
+<p>“South Korea.” <em>Abeoji</em> answered with a curt nod, “We can’t waste more time, so we will be leaving after a good night’s rest.”</p>
+<p>“Alright, I’ll let the others know,” The man said and pointed to a small plot of grass above ground, “You can rest there for the night.”</p>
+<p>“Thank you,” <em>Abeoji</em> said. Everyone quickly walked to the grassy area and immediately collapsed on top of it. Thankfully, the grass was dry and soft, and I didn’t need to sleep in a long hole full of strangers. Lying down, I closed my eyes. The warmth of the sun against my face almost made me doze off when a phantom chill brushed against my back. Without thinking, I sat up and counted. Four. Where was the fifth? I jumped up and almost said his name out loud when I remembered. Oh. Right.</p>
 <p><em>Halmeoni</em> looked at me as if I grew another head, but I smiled weakly and sat back down.</p>
 <p>We were still lying in the same place when the sky became dark. <em>Halmeoni</em> and <em>Abeoji</em> had already fallen asleep, but the rest of us couldn’t.</p>
 <p>“Tell me a story about <em>Eomeoni</em>.” Taejae asked <em>Eonni</em>. We all sat in a small huddle, whispering to each other.</p>
@@ -84,7 +95,7 @@
 <p>“I have an idea,” <em>Eonni</em> whispered to us, “Let’s go to the shore.”</p>
 <p>The defectors were fast asleep, so we had no problem going out, and the crashing waves muffled any noises we made as well. Taejae and I sat on the sand as we watched <em>Eonni</em> wade into the dark waters, looking as if she was searching for something. After a moment of silence, she plunged her hands into the water and drew something out of it, cupping it in her hands.</p>
 <p>“I saw these when we came ashore,” <em>Eonni</em> said as she came to us, holding out her hand. We took a peek inside and gasped. Inside her cupped hands was a small crab, no bigger than a pebble. “It’s not much, but I think it’ll do.”</p>
-<p>&emsp;Taejae immediately bolted towards the water, his pants soaking through instantly. I hesitated, looking at the dark waters glimmering in the moonlight, but followed.</p>
+<p>Taejae immediately bolted towards the water, his pants soaking through instantly. I hesitated, looking at the dark waters glimmering in the moonlight, but followed.</p>
 <p><em>Eonni</em> set up a small fire while we searched for crabs, and soon we gathered a handful of them.</p>
 <p>I sat by the small fire, as I watched <em>Eonni</em> spear the crabs and dangle it above the flames. As small droplets of their juices and seawater dripped into the fire and sizzled, a tiny yet present aroma of cooking crab wafted in the air. It made my stomach growl more.</p>
 <p>When they turned a color we thought was right, we all took one and nibbled it. It was mostly shell with barely any meat inside. I frowned with disappointment, but I still gnawed on the crabs until the hunger in my stomach settled a bit.</p>

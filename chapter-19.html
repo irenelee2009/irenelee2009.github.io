@@ -24,7 +24,18 @@
     .glass-card { background: rgba(0,0,0,0.38); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(255,255,255,0.14); padding: 3.5rem 3rem; position: relative; overflow: visible; opacity: 0; animation: fadeUp 1s 0.5s forwards; display: flex; flex-direction: column; }
     .glass-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, var(--gold), #7fffda); pointer-events: none; }
     .chapter-content { flex: 1; }
-    .chapter-content p { font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.95; color: rgba(232,237,245,0.92); margin-bottom: 1.5em; font-weight: 300; text-indent: 2em; }    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
+
+    /* Consistent indent via CSS — applies to every paragraph uniformly */
+    .chapter-content p {
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      line-height: 1.95;
+      color: rgba(232,237,245,0.92);
+      margin-bottom: 1.5em;
+      font-weight: 300;
+      text-indent: 1.8em;
+    }
+
+    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
     .chapter-content strong { font-weight: 600; color: var(--gold); }
     .section-divider { text-align: center; color: var(--gold); font-size: 1rem; letter-spacing: 0.5em; margin: 2.5rem 0; text-shadow: 0 0 18px rgba(200,168,75,0.5); }
     .para-with-popup { position: relative; }
@@ -62,27 +73,27 @@
         <p>As we explored the mountains, we found enough material to make a structure similar to a tent. We scrounged for thick, strong sticks, pulled grass, moss, and even found frayed straw mats that were found abandoned. Soon, the tent became quite nice. Crawling inside, I noted the earthy scents of the moss that warmed my senses as I sat in the tent, admiring the work we had created. A gentle silence filled the tent, blocking out the liveliness of nature surrounding us. It was peaceful—liveable, even.</p>
 <p>While we were exploring, Taejae had found a dented pot that was left in a bush. It was probably from a resident who didn’t need it. It was the first time we ever rejoiced about littering.</p>
 <p>After we dumped all of our discoveries next to our tent, I collapsed onto my back, staring up at the sky with my limbs sprawled out.</p>
-<p>&emsp;“We need food,” <em>Eonni</em> complained.</p>
-<p>&emsp;I didn’t even bother replying, and neither did anyone else. Looking up, I saw that everyone else had done the same, lying on their backs and not moving an inch. Seeing how nobody was going to respond nor move, <em>Eonni</em> sighed and laid on her back as well.</p>
+<p>“We need food,” <em>Eonni</em> complained.</p>
+<p>I didn’t even bother replying, and neither did anyone else. Looking up, I saw that everyone else had done the same, lying on their backs and not moving an inch. Seeing how nobody was going to respond nor move, <em>Eonni</em> sighed and laid on her back as well.</p>
 <p>When sleep threatened to overcome me, <em>Abeoji</em> suddenly bolted from his position.</p>
-<p>&emsp;“Get up! Jungjae is right. We need to find food.” He declared with his hands on his hips, making us all jump.</p>
-<p>&emsp;<em>Halmeoni</em> groaned. “You all go without me. It's my knees; they’re swollen.”</p>
-<p>&emsp;I turned and looked at her knees, my eyes widening. Not only were her knees swollen red, her entire legs were too. They looked hot to the touch. Cuts and bruises were everywhere, and I watched her tenderly massage her legs with a face full of dejection.</p>
-<p>&emsp;<em>Abeoji</em> cleared his throat, “It’s alright. Get some rest, and we’ll be back with food.”</p>
+<p>“Get up! Jungjae is right. We need to find food.” He declared with his hands on his hips, making us all jump.</p>
+<p><em>Halmeoni</em> groaned. “You all go without me. It's my knees; they’re swollen.”</p>
+<p>I turned and looked at her knees, my eyes widening. Not only were her knees swollen red, her entire legs were too. They looked hot to the touch. Cuts and bruises were everywhere, and I watched her tenderly massage her legs with a face full of dejection.</p>
+<p><em>Abeoji</em> cleared his throat, “It’s alright. Get some rest, and we’ll be back with food.”</p>
 <p>Then, <em>Abeoji</em> told the rest of us to follow him, and so we obeyed. I was at the very back as we left our tent, watching the frames of <em>Abeoji</em>, <em>Eonni</em>, and Taejae. My face fell once I saw how thin they were. Their bones jutted out from their hunched shoulders, their arms and ankles as frail as a twig. The once mighty <em>Abeoji</em> that I always looked up to and respected now looked like a regular old man. That was all I could see. I blinked away tears as I tore my eyes from them.</p>
 <p>We then arrived at the shore. The day was fine—the sun shining its radiant beams and the ocean waves dazzling as usual. Using our collective strength, we flipped over rocks to collect sea snails that we could cook. After an hour of digging around, we were only able to forage a little more than a handful’s worth of sea snails. When we got back to the tent, <em>Halmeoni</em> in fact did not rest and had gathered wild greens to make the soup again.</p>
-<p>&emsp;“I needed to make myself useful,” <em>Halmeoni</em> replied when we asked her why she did not rest, “Don’t worry. My legs feel better already.”</p>
+<p>“I needed to make myself useful,” <em>Halmeoni</em> replied when we asked her why she did not rest, “Don’t worry. My legs feel better already.”</p>
 <p>Her legs did not look any better. <em>Halmeoni</em> seemed to have noticed my stares because she gave me a slow reassuring blink. Then, she turned away to cook the sea snails that <em>Abeoji</em> had placed in a small fire.</p>
 <p>We all sat in silence as we ate as much as we could, even though it was all tasteless now. To cook the food, <em>Eonni </em>built a makeshift furnace by placing flat stones in a ring formation, four stones high. Wood was then placed in the middle of that circle for the actual fire. Then, the pot was placed on top of stones. I didn’t know how she thought of that, but she did, and we all watched in awe as she skillfully assembled it together.</p>
 <p>The fire that we had made was quite small, and soon died quickly after we ate everything, leaving a pile of ash and dirt in the center of our furnace.</p>
-<p>&emsp;“I hate this,” Taejae complained, shriveling up his face as he spat out the last of his soup, “It’s so disgusting! I want <em>real</em> food. I feel sick whenever I eat this.”</p>
-<p>&emsp;“Taejae, you know we can’t have that just yet. Besides, we’re all thinking the same thing,” <em>Eonni</em> said as she patted him on the back, “Once we start selling firewood, we’ll save enough money to buy food.”</p>
+<p>“I hate this,” Taejae complained, shriveling up his face as he spat out the last of his soup, “It’s so disgusting! I want <em>real</em> food. I feel sick whenever I eat this.”</p>
+<p>“Taejae, you know we can’t have that just yet. Besides, we’re all thinking the same thing,” <em>Eonni</em> said as she patted him on the back, “Once we start selling firewood, we’ll save enough money to buy food.”</p>
 <p>Taejae glowered, giving the dented metal pot once filled with the soup a distasteful look, but remained silent. I couldn’t blame him. We had been eating the same thing for months, and most days we didn’t even eat at all. Water was scarce, and I couldn’t remember the last time I had a proper hot meal. To be frank, I couldn’t even remember the last time I had a nice bath either.</p>
 <p><em>Abeoji</em> soon left our little camp to look for work to be able to buy tools to chop wood. While he did that, the rest of us began collecting sticks and large pieces of dry wood to begin selling them.</p>
 <p>Walking through the trees, I picked up any stick I could lay my hands on, then lugged them back to the campsite, where <em>Halmeoni</em> sorted the sticks out and plucked any leaves or oddly shaped branches to create neat, somewhat straight firewood. We worked until the sun went down, and when I came back with another armful of large sticks, there was already a huge pile of them that <em>Halmeoni</em> tidied up.</p>
-<p>&emsp;“Would we need anything to cover the sticks? What happens if it rains?” <em>Eonni</em> asked,</p>
-<p>&emsp;“I don’t believe it will rain tonight,” <em>Halmeoni</em> responded, “The air is quite dry. We’ll try to sell these all tomorrow morning.”</p>
-<p>&emsp;<em>Eonni</em> sat silently for a moment, then nodded. We all waited around a small crackling fire for <em>Abeoji</em> to return, perhaps with some good news.</p>
+<p>“Would we need anything to cover the sticks? What happens if it rains?” <em>Eonni</em> asked,</p>
+<p>“I don’t believe it will rain tonight,” <em>Halmeoni</em> responded, “The air is quite dry. We’ll try to sell these all tomorrow morning.”</p>
+<p><em>Eonni</em> sat silently for a moment, then nodded. We all waited around a small crackling fire for <em>Abeoji</em> to return, perhaps with some good news.</p>
 <p>When he did come back, it was obvious that there was no good news. A solemn look was etched across <em>Abeoji</em>’s face, his hands empty. He signaled <em>Halmeoni</em> and <em>Eonni</em> to talk.</p>
 <p>I watched as they exchanged hushed words from afar. Though it wasn’t so clear, I was still able to hear them.</p>
 <p>“They all threw me out,” <em>Abeoji</em> began, “I guess they don’t want defectors to handle their property.”</p>

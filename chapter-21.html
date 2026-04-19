@@ -24,7 +24,18 @@
     .glass-card { background: rgba(0,0,0,0.38); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(255,255,255,0.14); padding: 3.5rem 3rem; position: relative; overflow: visible; opacity: 0; animation: fadeUp 1s 0.5s forwards; display: flex; flex-direction: column; }
     .glass-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, var(--gold), #7fffda); pointer-events: none; }
     .chapter-content { flex: 1; }
-    .chapter-content p { font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.95; color: rgba(232,237,245,0.92); margin-bottom: 1.5em; font-weight: 300; text-indent: 2em; }    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
+
+    /* Consistent indent via CSS — applies to every paragraph uniformly */
+    .chapter-content p {
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      line-height: 1.95;
+      color: rgba(232,237,245,0.92);
+      margin-bottom: 1.5em;
+      font-weight: 300;
+      text-indent: 1.8em;
+    }
+
+    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
     .chapter-content strong { font-weight: 600; color: var(--gold); }
     .section-divider { text-align: center; color: var(--gold); font-size: 1rem; letter-spacing: 0.5em; margin: 2.5rem 0; text-shadow: 0 0 18px rgba(200,168,75,0.5); }
     .para-with-popup { position: relative; }
@@ -70,22 +81,22 @@
 <p>I picked out ten pieces and handed them to <em>Eonni</em>. She gave <em>Abeoji </em>the money and walked with <em>Eonni</em> who took it to her house. It had become a thing, apparently—us delivering the firewood to the customers’ homes. <em>Eonni </em>didn’t come back until after the sun started going down.</p>
 <p>Nobody else came that day. Again, we ate a loaf of bread for dinner.</p>
 <div class="section-divider">✦</div>
-<p>&emsp;A week had passed and nobody seemed to want our firewood anymore. As we expected, many people already had their own firewood stash, and would cut it down themselves rather than buy it. The only customers would be the elderly, but even then they didn’t want a lot—often leaving us with just enough won to buy another loaf of bread.</p>
+<p>A week had passed and nobody seemed to want our firewood anymore. As we expected, many people already had their own firewood stash, and would cut it down themselves rather than buy it. The only customers would be the elderly, but even then they didn’t want a lot—often leaving us with just enough won to buy another loaf of bread.</p>
 <p>We were still hungry.</p>
 <p>Our days soon were taken up by a single routine: chopping wood, selling some, buying bread, and then coming back home for the night, mostly with a growing supply of leftover firewood. Nothing really exciting or new happened, just the fact that we were still skin and bones, even when we had a loaf of bread—and sometimes two—everyday. I watched each resident walk past our pile of firewood, our calls and shouts becoming quieter and weaker. <em>Abeoji</em> had stopped cutting down trees, as we no longer needed to—and we didn’t want to either.</p>
-<p>&emsp;One day, as we were walking back to our tent after a normal day of sales, we were blocked by two villagers who were walking very slowly on the dirt path. Instead of excusing ourselves, their conversation piqued our interest. Walking from a distance, we were still able to listen to them without them knowing of our presence.</p>
-<p>&emsp;“Did you hear about that crazy defector that came to our island the other day?” A villager mumbled to his friend, “He was yelling like a madman, searching for something.”</p>
-<p>&emsp;“Yes, I did hear! Apparently, he looked like he was just skin and bones, and his eyes were bloodshot like he didn’t sleep for months,” His friend replied, “He had wounds all over his body.”</p>
-<p>&emsp;The other shook his head, “Poor fellow, he must be really desperate to search for whatever he was mumbling about.”</p>
-<p>&emsp;“I hope somebody gave that man something to eat or drink—he looked starved.”</p>
-<p>&emsp;They both fell silent as they turned the corner, splitting off onto a small path. We all turned to each other, our eyes wide and asking the same question.</p>
+<p>One day, as we were walking back to our tent after a normal day of sales, we were blocked by two villagers who were walking very slowly on the dirt path. Instead of excusing ourselves, their conversation piqued our interest. Walking from a distance, we were still able to listen to them without them knowing of our presence.</p>
+<p>“Did you hear about that crazy defector that came to our island the other day?” A villager mumbled to his friend, “He was yelling like a madman, searching for something.”</p>
+<p>“Yes, I did hear! Apparently, he looked like he was just skin and bones, and his eyes were bloodshot like he didn’t sleep for months,” His friend replied, “He had wounds all over his body.”</p>
+<p>The other shook his head, “Poor fellow, he must be really desperate to search for whatever he was mumbling about.”</p>
+<p>“I hope somebody gave that man something to eat or drink—he looked starved.”</p>
+<p>They both fell silent as they turned the corner, splitting off onto a small path. We all turned to each other, our eyes wide and asking the same question.</p>
 <p>Could it be?</p>
 <p>For the past month we had been here, there were numerous stories of defectors arriving in a crazed, malnourished state—and we went to see if it was <em>Oppa</em>, but none of them were him.</p>
-<p>&emsp;“Do you think it could really be him?” <em>Eonni</em> spoke up first as we all stopped walking.</p>
-<p>&emsp;“It’s unlikely,” <em>Halmeoni</em> sighed, “We’ve encountered so many stories similar to this, but none were him. Besides, it’s already been months since we last saw him… Do you really think he’s even alive?”</p>
-<p>&emsp;“He must be.” <em>Abeoji</em> said firmly, “He’s my son, and I know my children. Let’s go see if it's him.”</p>
+<p>“Do you think it could really be him?” <em>Eonni</em> spoke up first as we all stopped walking.</p>
+<p>“It’s unlikely,” <em>Halmeoni</em> sighed, “We’ve encountered so many stories similar to this, but none were him. Besides, it’s already been months since we last saw him… Do you really think he’s even alive?”</p>
+<p>“He must be.” <em>Abeoji</em> said firmly, “He’s my son, and I know my children. Let’s go see if it's him.”</p>
 <p>We all followed his hurried steps as we made our way down the mountain and towards the shore. We didn’t utter a single word on the way there, as if the suspense in the air had choked all the words that were in our throats. I walked behind everyone else, my gait a bit slower than the rest. I was tired of walking back and forth to the beach after hearing every whisper about a single defector arriving just to see a stranger—not the familiar face of <em>Oppa</em>. I was tired of constantly thinking about him and the fact that he was probably dead. We were all exhausted. We barely survived even when all of us were together as a family—I didn’t think <em>Oppa</em> would make it alone.</p>
-<p>&emsp;Either way, I followed the rest of my family towards the beach. If it was really <em>Oppa</em>, how would he react when he saw us? Would he ask if we ever tried to look for him?</p>
+<p>Either way, I followed the rest of my family towards the beach. If it was really <em>Oppa</em>, how would he react when he saw us? Would he ask if we ever tried to look for him?</p>
 <p>Guilt grabbed at my chest as these questions flooded my mind. In fact—to answer that question—we <em>hadn’t</em> looked for him at all. We hadn’t given him a sign of where we were. We never even looked among the defectors on this island to see if it was <em>Oppa</em>. It was like we accepted his death and moved on within hours.</p>
 <p>My face burned with shame at the fact that I had been complaining just a moment ago. We had abandoned him, and while we didn’t know if he was alive or not, the thought still punched me in the gut.</p>
 <p>I almost wished that the defector who came wouldn’t be <em>Oppa</em> at all.</p>

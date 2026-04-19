@@ -24,7 +24,18 @@
     .glass-card { background: rgba(0,0,0,0.38); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(255,255,255,0.14); padding: 3.5rem 3rem; position: relative; overflow: visible; opacity: 0; animation: fadeUp 1s 0.5s forwards; display: flex; flex-direction: column; }
     .glass-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, var(--gold), #7fffda); pointer-events: none; }
     .chapter-content { flex: 1; }
-    .chapter-content p { font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.95; color: rgba(232,237,245,0.92); margin-bottom: 1.5em; font-weight: 300; text-indent: 2em; }    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
+
+    /* Consistent indent via CSS — applies to every paragraph uniformly */
+    .chapter-content p {
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      line-height: 1.95;
+      color: rgba(232,237,245,0.92);
+      margin-bottom: 1.5em;
+      font-weight: 300;
+      text-indent: 1.8em;
+    }
+
+    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
     .chapter-content strong { font-weight: 600; color: var(--gold); }
     .section-divider { text-align: center; color: var(--gold); font-size: 1rem; letter-spacing: 0.5em; margin: 2.5rem 0; text-shadow: 0 0 18px rgba(200,168,75,0.5); }
     .para-with-popup { position: relative; }
@@ -64,15 +75,15 @@
 <p>It took me a second before I realized that I was thrust into the ravaging ocean. I thrashed under the violent currents as I tried to regain my balance, but the waves pushed back, throwing me around like a rag.</p>
 <p>I suddenly felt my arms graze something hard and gritty. Land. I immediately thrust my hands out, clawing my way out of the frenzy of waves, coughing seawater from my lungs. I crawled my way out, my body trembling as I touched the cool sand. My limbs felt heavy. Looking up, I would have screamed aloud if I had the energy to do so. Rushing down the mountain was a moving mass which was unmistakably a group of soldiers—a patrol—with rifles raised. There were more voices around us. Strangers. Looking around, I finally noticed a group of people—around twelve—racing towards our boat. Who were they?</p>
 <p>Climbing onto my feet, I quickly surveyed my surroundings, my head finally clear and ringing with urgency. I was on sand. The rocks stood in between me and the mountain where the soldiers were now coming down from, their endless gunshots waking the whole village far away. Suddenly, I felt a hand grab my arm. I shrieked and tried to push away, but <em>Halmeoni</em>’s voice shouted to stop.</p>
-<p>&emsp;“You need to swim, Hwajae. Swim to the boat,” She said, shaking me roughly to regain my senses.</p>
-<p>&emsp;“Who are these people? Where–”</p>
-<p>&emsp;“I saw them. They’re defectors who were hiding in a cave,” <em>Halmeoni</em> said, “They must have seen the boat.”</p>
-<p>&emsp;“What about you?” I asked, flinching as a gunshot, too close, rang in the air.</p>
-<p>&emsp;“I’ll swim just fine. But I need you to swim with Yeomjae.”</p>
-<p>&emsp;I looked at Yeomjae who was on <em>Halmeoni</em>’s back and nodded, “I will.”</p>
-<p>&emsp;“You must hurry. The sun is rising.”</p>
-<p>&emsp;I nodded again as I took Yeomjae and tied him onto my back. He was wide awake and had his arms tightly around my neck.</p>
-<p>&emsp;<em>Halmeoni</em> then started running as fast as she could towards the water. The sight was heartbreaking, but I didn’t spare a moment to feel...<em>anything</em> really. Rushing into the water, I stretched my arms and legs to fight against the current. I was able to clearly see the boat now. I was also able to see the other people in the water swimming towards the boat.</p>
+<p>“You need to swim, Hwajae. Swim to the boat,” She said, shaking me roughly to regain my senses.</p>
+<p>“Who are these people? Where–”</p>
+<p>“I saw them. They’re defectors who were hiding in a cave,” <em>Halmeoni</em> said, “They must have seen the boat.”</p>
+<p>“What about you?” I asked, flinching as a gunshot, too close, rang in the air.</p>
+<p>“I’ll swim just fine. But I need you to swim with Yeomjae.”</p>
+<p>I looked at Yeomjae who was on <em>Halmeoni</em>’s back and nodded, “I will.”</p>
+<p>“You must hurry. The sun is rising.”</p>
+<p>I nodded again as I took Yeomjae and tied him onto my back. He was wide awake and had his arms tightly around my neck.</p>
+<p><em>Halmeoni</em> then started running as fast as she could towards the water. The sight was heartbreaking, but I didn’t spare a moment to feel...<em>anything</em> really. Rushing into the water, I stretched my arms and legs to fight against the current. I was able to clearly see the boat now. I was also able to see the other people in the water swimming towards the boat.</p>
 <p>The gunshots kept coming, and one person in the water screamed as he leaked red, his head drooping under the water’s surface. But I didn’t stop fighting against the current. Soon, my feet lost contact with the ocean floor, and a shiver went down my spine, my toes grazing nothing.</p>
 <p>The ocean felt like it was trying to tear me apart, its waves constantly slamming me under. I panicked, fearing that Yeomjae would get lost. I didn’t know where <em>Halmeoni</em> was anymore as I soon was pushed under the surface more often than actually getting closer to the boat. My whole body felt like it was on the brink of collapse.</p>
 <p>As soon as I broke the surface to take a deep breath, a giant wave suddenly crashed down on me, sending me deep down into the abyss. I blubbered as the waves felt more formidable under the surface, shoving me backwards as I reached behind my back to grab onto Yeomjae, who also clung to me with his nails painfully digging into my skin. I tumbled and tumbled, sand burning against my skin, my ears ringing, my head nearly bursting from nausea as I finally felt my head slam onto land, my neck nearly cracking on impact. My head finally reached the air as I gasped, throwing up. My whole body racked with pain as I sprawled onto the sand, my bones splitting.</p>
@@ -90,7 +101,7 @@
 <p>This was impossible.</p>
 <p>I had now endangered not my own life but my whole family because I just couldn’t <em>swim</em>. But then, I froze and listened. The only sound I could hear now was the crashing of waves against the shore. Even the large trees on the mountain had stopped rustling their leaves as if they were…hiding. An eerie silence had blanketed us, but there was something small still ringing in the air. Not gunshots, but the metallic clicks of boots hitting stone. Many of them.</p>
 <p>Too close.</p>
-<p>&emsp;It was them. I jumped up from the ground and ran towards the waves once more. But as soon as I took a step forward, my knees buckled. No, no, no. My body couldn’t betray me now. Not <em>yet</em>.</p>
+<p>It was them. I jumped up from the ground and ran towards the waves once more. But as soon as I took a step forward, my knees buckled. No, no, no. My body couldn’t betray me now. Not <em>yet</em>.</p>
 <p>I tried to pull myself up, but my arms gave out and I laid on the ground, breathing hard.</p>
 <p><em>Move.</em></p>
 <p>Maybe if I fell asleep now, I wouldn’t feel it when they found me.</p>
@@ -104,7 +115,7 @@
 <p>My mother’s rings.</p>
 <p>My eyes widened, my jaw slackening. The rings were gone, my bare fingers twitching awkwardly, noticing the heavy weight of them gone. I never noticed.</p>
 <p>My throat choked and tears threatened to form in my eyes. She was lost—lost in the relentless sea or in the crevices of the stones, I did not know. It felt like she passed away all over again. The panicked voices of other defectors near me started to drown away, my eyes slowly starting to close for the last time. But suddenly, a familiar voice pierced over the others.</p>
-<p>&emsp;“The girl!” <em>Oppa </em>shouted. “The girl and the baby!”</p>
+<p>“The girl!” <em>Oppa </em>shouted. “The girl and the baby!”</p>
 <p>I looked up. He pointed straight at me.</p>
 <p>“Bring them to the boat and you can come with us!”</p>
 <p>The people on shore with me froze. It was as if the focus of the whole world had now zoomed onto me and Yeomjae, their stares boring down on us.</p>
