@@ -24,8 +24,36 @@
     .glass-card { background: rgba(0,0,0,0.38); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(255,255,255,0.14); padding: 3.5rem 3rem; position: relative; overflow: visible; opacity: 0; animation: fadeUp 1s 0.5s forwards; display: flex; flex-direction: column; }
     .glass-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, var(--gold), #7fffda); pointer-events: none; }
     .chapter-content { flex: 1; }
-    .chapter-content p { font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.95; color: rgba(232,237,245,0.92); margin-bottom: 1.5em; font-weight: 300; text-indent: 2em; }
-    .chapter-content p:first-of-type { text-indent: 0; }
+
+    /* All paragraphs */
+    .chapter-content p {
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      line-height: 1.95;
+      color: rgba(232,237,245,0.92);
+      margin-bottom: 1.5em;
+      font-weight: 300;
+      text-indent: 2em;
+    }
+
+    /* First paragraph — no indent, makes room for drop cap */
+    .chapter-content p.first-para {
+      text-indent: 0;
+    }
+
+    /* Drop cap — large golden first letter */
+    .drop-cap {
+      float: left;
+      font-family: 'Playfair Display', serif;
+      font-size: 5.2em;
+      font-weight: 400;
+      line-height: 0.72;
+      color: var(--gold);
+      text-shadow: 0 0 28px rgba(200,168,75,0.55);
+      margin-right: 0.07em;
+      margin-top: 0.1em;
+      padding-bottom: 0.05em;
+    }
+
     .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
     .chapter-content strong { font-weight: 600; color: var(--gold); }
     .section-divider { text-align: center; color: var(--gold); font-size: 1rem; letter-spacing: 0.5em; margin: 2.5rem 0; text-shadow: 0 0 18px rgba(200,168,75,0.5); }
@@ -43,7 +71,11 @@
     .nav-btn-toc:hover { color: #fff; text-shadow: 0 0 18px rgba(127,255,218,0.7); }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
     @media (max-width: 1000px) { .glossary-popup { right: auto; left: 0; top: auto; bottom: calc(100% + 8px); width: 100%; max-width: 100%; } }
-    @media (max-width: 600px) { .chapter-wrapper { padding: 7rem 1.2rem 4rem; } .glass-card { padding: 2rem 1.5rem; } }
+    @media (max-width: 600px) {
+      .chapter-wrapper { padding: 7rem 1.2rem 4rem; }
+      .glass-card { padding: 2rem 1.5rem; }
+      .drop-cap { font-size: 4em; }
+    }
   </style>
 </head>
 <body>
@@ -61,7 +93,7 @@
     </header>
     <div class="glass-card">
       <article class="chapter-content">
-        <p>&emsp;My father and brother had fled. South Korean troops storming towards us had ordered every able man into the North Korean army, no matter the circumstances.</p>
+        <p class="first-para">&<span class="drop-cap">e</span>msp;My father and brother had fled. South Korean troops storming towards us had ordered every able man into the North Korean army, no matter the circumstances.</p>
 <p>But if you were sent to the army, you would die. That was the end of the story. There were no exceptions, no mercy, no second chance—this was war.</p>
 <div class="para-with-popup" data-popup-id="popup-1-0"><p>Sitting on the cold wooden floor of my living room, I cradled my one-year-old brother–Yeomjae–in my arms. Since <em>Abeoji</em> and <em>Oppa</em> were gone, <em>Eonni </em>was in the fields outside, tending to the rice paddies and garden. I heard the rhythmic thwack of the hoe as she slammed it onto the ground to dig out the weeds. Taejae, my younger brother of ten, lay beside me, staring up at the ceiling while reciting his arithmetic.</p><div class="glossary-popup" id="popup-1-0"><div class="popup-entry"><em class="popup-word">Abeoji</em> — Father; a respectful term of address used within the family.</div><div class="popup-entry"><em class="popup-word">Oppa</em> — Older brother; used by females to address or refer to an older male sibling.</div><div class="popup-entry"><em class="popup-word">Eonni</em> — Older sister; used by females to address or refer to an older female sibling.</div></div></div>
 <div class="para-with-popup" data-popup-id="popup-1-1"><p>My eyes wandered to our bookshelf, admiring the books that filled each level. On the highest shelf, however, was a straw doll. <em>Eomeoni</em> had made it for <em>Eonni</em> when she was younger. I let out a heavy sigh as I remembered the faint memories of <em>Eomeoni</em>. She died ten days after giving birth to the child that was now sleeping in my arms. Our home felt hollow with the echoes of <em>Eomeoni</em>’s witty jokes lingering faintly in its corners, nearly forgotten.</p><div class="glossary-popup" id="popup-1-1"><div class="popup-entry"><em class="popup-word">Eomeoni</em> — Mother; a respectful term of address used within the family.</div></div></div>

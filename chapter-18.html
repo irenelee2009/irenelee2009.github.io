@@ -24,8 +24,36 @@
     .glass-card { background: rgba(0,0,0,0.38); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(255,255,255,0.14); padding: 3.5rem 3rem; position: relative; overflow: visible; opacity: 0; animation: fadeUp 1s 0.5s forwards; display: flex; flex-direction: column; }
     .glass-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, var(--gold), #7fffda); pointer-events: none; }
     .chapter-content { flex: 1; }
-    .chapter-content p { font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.95; color: rgba(232,237,245,0.92); margin-bottom: 1.5em; font-weight: 300; text-indent: 2em; }
-    .chapter-content p:first-of-type { text-indent: 0; }
+
+    /* All paragraphs */
+    .chapter-content p {
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      line-height: 1.95;
+      color: rgba(232,237,245,0.92);
+      margin-bottom: 1.5em;
+      font-weight: 300;
+      text-indent: 2em;
+    }
+
+    /* First paragraph — no indent, makes room for drop cap */
+    .chapter-content p.first-para {
+      text-indent: 0;
+    }
+
+    /* Drop cap — large golden first letter */
+    .drop-cap {
+      float: left;
+      font-family: 'Playfair Display', serif;
+      font-size: 5.2em;
+      font-weight: 400;
+      line-height: 0.72;
+      color: var(--gold);
+      text-shadow: 0 0 28px rgba(200,168,75,0.55);
+      margin-right: 0.07em;
+      margin-top: 0.1em;
+      padding-bottom: 0.05em;
+    }
+
     .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
     .chapter-content strong { font-weight: 600; color: var(--gold); }
     .section-divider { text-align: center; color: var(--gold); font-size: 1rem; letter-spacing: 0.5em; margin: 2.5rem 0; text-shadow: 0 0 18px rgba(200,168,75,0.5); }
@@ -43,7 +71,11 @@
     .nav-btn-toc:hover { color: #fff; text-shadow: 0 0 18px rgba(127,255,218,0.7); }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
     @media (max-width: 1000px) { .glossary-popup { right: auto; left: 0; top: auto; bottom: calc(100% + 8px); width: 100%; max-width: 100%; } }
-    @media (max-width: 600px) { .chapter-wrapper { padding: 7rem 1.2rem 4rem; } .glass-card { padding: 2rem 1.5rem; } }
+    @media (max-width: 600px) {
+      .chapter-wrapper { padding: 7rem 1.2rem 4rem; }
+      .glass-card { padding: 2rem 1.5rem; }
+      .drop-cap { font-size: 4em; }
+    }
   </style>
 </head>
 <body>
@@ -61,7 +93,7 @@
     </header>
     <div class="glass-card">
       <article class="chapter-content">
-        <p>&emsp;The third island saved us. We were on the boat for hours until we saw a large island, the biggest I’ve ever seen, appear on the horizon. I sat on the hard surface of the boat, staring at the green among the blinding blue.. My skin was hot to the touch, and my throat burned like sawdust, but none of it registered in my head as I watched the island come closer and closer.</p>
+        <p class="first-para">&<span class="drop-cap">e</span>msp;The third island saved us. We were on the boat for hours until we saw a large island, the biggest I’ve ever seen, appear on the horizon. I sat on the hard surface of the boat, staring at the green among the blinding blue.. My skin was hot to the touch, and my throat burned like sawdust, but none of it registered in my head as I watched the island come closer and closer.</p>
 <p>As we neared the shore, I squinted my eyes, staring at something I thought was unreal. Within the plentiful trees were lines of smoke trailing out from their tops.</p>
 <p>“I see a lot of smoke,” I observed, my voice flat as I dully stared without a thought.</p>
 <p>“Smoke?” Taejae cried out, jumping from where he lay. It was nice to see that somebody still had energy, “Doesn’t that mean there’s houses?”</p>

@@ -24,8 +24,36 @@
     .glass-card { background: rgba(0,0,0,0.38); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(255,255,255,0.14); padding: 3.5rem 3rem; position: relative; overflow: visible; opacity: 0; animation: fadeUp 1s 0.5s forwards; display: flex; flex-direction: column; }
     .glass-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, var(--gold), #7fffda); pointer-events: none; }
     .chapter-content { flex: 1; }
-    .chapter-content p { font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.95; color: rgba(232,237,245,0.92); margin-bottom: 1.5em; font-weight: 300; text-indent: 2em; }
-    .chapter-content p:first-of-type { text-indent: 0; }
+
+    /* All paragraphs */
+    .chapter-content p {
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      line-height: 1.95;
+      color: rgba(232,237,245,0.92);
+      margin-bottom: 1.5em;
+      font-weight: 300;
+      text-indent: 2em;
+    }
+
+    /* First paragraph — no indent, makes room for drop cap */
+    .chapter-content p.first-para {
+      text-indent: 0;
+    }
+
+    /* Drop cap — large golden first letter */
+    .drop-cap {
+      float: left;
+      font-family: 'Playfair Display', serif;
+      font-size: 5.2em;
+      font-weight: 400;
+      line-height: 0.72;
+      color: var(--gold);
+      text-shadow: 0 0 28px rgba(200,168,75,0.55);
+      margin-right: 0.07em;
+      margin-top: 0.1em;
+      padding-bottom: 0.05em;
+    }
+
     .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
     .chapter-content strong { font-weight: 600; color: var(--gold); }
     .section-divider { text-align: center; color: var(--gold); font-size: 1rem; letter-spacing: 0.5em; margin: 2.5rem 0; text-shadow: 0 0 18px rgba(200,168,75,0.5); }
@@ -43,7 +71,11 @@
     .nav-btn-toc:hover { color: #fff; text-shadow: 0 0 18px rgba(127,255,218,0.7); }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
     @media (max-width: 1000px) { .glossary-popup { right: auto; left: 0; top: auto; bottom: calc(100% + 8px); width: 100%; max-width: 100%; } }
-    @media (max-width: 600px) { .chapter-wrapper { padding: 7rem 1.2rem 4rem; } .glass-card { padding: 2rem 1.5rem; } }
+    @media (max-width: 600px) {
+      .chapter-wrapper { padding: 7rem 1.2rem 4rem; }
+      .glass-card { padding: 2rem 1.5rem; }
+      .drop-cap { font-size: 4em; }
+    }
   </style>
 </head>
 <body>
@@ -61,7 +93,7 @@
     </header>
     <div class="glass-card">
       <article class="chapter-content">
-        <p>A sound like thunder ripped through the house—the violent crash of wood giving way. The front door blew inwards, torn from its very hinges, flooding the dim room with harsh, blinding sunlight. Dust motes, usually dancing lazily in the air, now swirled in panicked clouds. Then, men in drab olive uniforms came in—shadows in the light, their boots heavy on our floor. Hands seized us before I could breathe. Panic choked my throat when the realization dawned on me. They were here for <em>Oppa</em>. It took them two weeks.</p>
+        <p class="first-para"><span class="drop-cap">A</span> sound like thunder ripped through the house—the violent crash of wood giving way. The front door blew inwards, torn from its very hinges, flooding the dim room with harsh, blinding sunlight. Dust motes, usually dancing lazily in the air, now swirled in panicked clouds. Then, men in drab olive uniforms came in—shadows in the light, their boots heavy on our floor. Hands seized us before I could breathe. Panic choked my throat when the realization dawned on me. They were here for <em>Oppa</em>. It took them two weeks.</p>
 <p>Two soldiers lunged past, grabbing <em>Eonni </em>and Taejae. <em>Eonni</em> screamed, a raw sound of terror, as rough hands tangled in her hair. Another soldier snatched my arm before I could react, yanking me off my feet with ease and tossing me aside. My head struck the wooden floor, sparks exploding behind my eyes. Through the blur, I saw the other soldier kick <em>Halmeoni</em> to the floor. She groaned at the impact. I tried to get up, but the soldier who had thrown me put his heavy foot on my back.</p>
 <p>&emsp;Another soldier, a general, then stepped through the doorway. He stalked towards <em>Eonni</em>, who knelt trembling where she’d been thrown.</p>
 <p>“Where is he?” He spat, flecks of saliva hitting her face.</p>
