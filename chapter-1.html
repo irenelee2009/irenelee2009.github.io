@@ -24,37 +24,7 @@
     .glass-card { background: rgba(0,0,0,0.38); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(255,255,255,0.14); padding: 3.5rem 3rem; position: relative; overflow: visible; opacity: 0; animation: fadeUp 1s 0.5s forwards; display: flex; flex-direction: column; }
     .glass-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, var(--gold), #7fffda); pointer-events: none; }
     .chapter-content { flex: 1; }
-
-    /* All paragraphs */
-    .chapter-content p {
-      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
-      line-height: 1.95;
-      color: rgba(232,237,245,0.92);
-      margin-bottom: 1.5em;
-      font-weight: 300;
-      text-indent: 2em;
-    }
-
-    /* First paragraph — no indent, makes room for drop cap */
-    .chapter-content p.first-para {
-      text-indent: 0;
-    }
-
-    /* Drop cap — large golden first letter */
-    .drop-cap {
-      float: left;
-      font-family: 'Playfair Display', serif;
-      font-size: 5.2em;
-      font-weight: 400;
-      line-height: 0.72;
-      color: var(--gold);
-      text-shadow: 0 0 28px rgba(200,168,75,0.55);
-      margin-right: 0.07em;
-      margin-top: 0.1em;
-      padding-bottom: 0.05em;
-    }
-
-    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
+    .chapter-content p { font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.95; color: rgba(232,237,245,0.92); margin-bottom: 1.5em; font-weight: 300; text-indent: 2em; }    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
     .chapter-content strong { font-weight: 600; color: var(--gold); }
     .section-divider { text-align: center; color: var(--gold); font-size: 1rem; letter-spacing: 0.5em; margin: 2.5rem 0; text-shadow: 0 0 18px rgba(200,168,75,0.5); }
     .para-with-popup { position: relative; }
@@ -71,11 +41,7 @@
     .nav-btn-toc:hover { color: #fff; text-shadow: 0 0 18px rgba(127,255,218,0.7); }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
     @media (max-width: 1000px) { .glossary-popup { right: auto; left: 0; top: auto; bottom: calc(100% + 8px); width: 100%; max-width: 100%; } }
-    @media (max-width: 600px) {
-      .chapter-wrapper { padding: 7rem 1.2rem 4rem; }
-      .glass-card { padding: 2rem 1.5rem; }
-      .drop-cap { font-size: 4em; }
-    }
+    @media (max-width: 600px) { .chapter-wrapper { padding: 7rem 1.2rem 4rem; } .glass-card { padding: 2rem 1.5rem; } }
   </style>
 </head>
 <body>
@@ -93,11 +59,11 @@
     </header>
     <div class="glass-card">
       <article class="chapter-content">
-        <p class="first-para">&<span class="drop-cap">e</span>msp;My father and brother had fled. South Korean troops storming towards us had ordered every able man into the North Korean army, no matter the circumstances.</p>
+        <p>My father and brother had fled. South Korean troops storming towards us had ordered every able man into the North Korean army, no matter the circumstances.</p>
 <p>But if you were sent to the army, you would die. That was the end of the story. There were no exceptions, no mercy, no second chance—this was war.</p>
-<div class="para-with-popup" data-popup-id="popup-1-0"><p>Sitting on the cold wooden floor of my living room, I cradled my one-year-old brother–Yeomjae–in my arms. Since <em>Abeoji</em> and <em>Oppa</em> were gone, <em>Eonni </em>was in the fields outside, tending to the rice paddies and garden. I heard the rhythmic thwack of the hoe as she slammed it onto the ground to dig out the weeds. Taejae, my younger brother of ten, lay beside me, staring up at the ceiling while reciting his arithmetic.</p><div class="glossary-popup" id="popup-1-0"><div class="popup-entry"><em class="popup-word">Abeoji</em> — Father; a respectful term of address used within the family.</div><div class="popup-entry"><em class="popup-word">Oppa</em> — Older brother; used by females to address or refer to an older male sibling.</div><div class="popup-entry"><em class="popup-word">Eonni</em> — Older sister; used by females to address or refer to an older female sibling.</div></div></div>
-<div class="para-with-popup" data-popup-id="popup-1-1"><p>My eyes wandered to our bookshelf, admiring the books that filled each level. On the highest shelf, however, was a straw doll. <em>Eomeoni</em> had made it for <em>Eonni</em> when she was younger. I let out a heavy sigh as I remembered the faint memories of <em>Eomeoni</em>. She died ten days after giving birth to the child that was now sleeping in my arms. Our home felt hollow with the echoes of <em>Eomeoni</em>’s witty jokes lingering faintly in its corners, nearly forgotten.</p><div class="glossary-popup" id="popup-1-1"><div class="popup-entry"><em class="popup-word">Eomeoni</em> — Mother; a respectful term of address used within the family.</div></div></div>
-<div class="para-with-popup" data-popup-id="popup-1-2"><p>Soon after she passed, <em>Halmeoni</em> took over the household chores, doing as much as her body could allow.</p><div class="glossary-popup" id="popup-1-2"><div class="popup-entry"><em class="popup-word">Halmeoni</em> — Grandmother; a term of endearment and respect for one's grandmother.</div></div></div>
+<div class="para-with-popup" data-popup-id="popup-1-0"><p class="">Sitting on the cold wooden floor of my living room, I cradled my one-year-old brother–Yeomjae–in my arms. Since <em>Abeoji</em> and <em>Oppa</em> were gone, <em>Eonni </em>was in the fields outside, tending to the rice paddies and garden. I heard the rhythmic thwack of the hoe as she slammed it onto the ground to dig out the weeds. Taejae, my younger brother of ten, lay beside me, staring up at the ceiling while reciting his arithmetic.</p><div class="glossary-popup" id="popup-1-0"><div class="popup-entry"><em class="popup-word">Abeoji</em> — Father; a respectful term of address used within the family.</div><div class="popup-entry"><em class="popup-word">Oppa</em> — Older brother; used by females to address or refer to an older male sibling.</div><div class="popup-entry"><em class="popup-word">Eonni</em> — Older sister; used by females to address or refer to an older female sibling.</div></div></div>
+<div class="para-with-popup" data-popup-id="popup-1-1"><p class="">My eyes wandered to our bookshelf, admiring the books that filled each level. On the highest shelf, however, was a straw doll. <em>Eomeoni</em> had made it for <em>Eonni</em> when she was younger. I let out a heavy sigh as I remembered the faint memories of <em>Eomeoni</em>. She died ten days after giving birth to the child that was now sleeping in my arms. Our home felt hollow with the echoes of <em>Eomeoni</em>’s witty jokes lingering faintly in its corners, nearly forgotten.</p><div class="glossary-popup" id="popup-1-1"><div class="popup-entry"><em class="popup-word">Eomeoni</em> — Mother; a respectful term of address used within the family.</div></div></div>
+<div class="para-with-popup" data-popup-id="popup-1-2"><p class="">Soon after she passed, <em>Halmeoni</em> took over the household chores, doing as much as her body could allow.</p><div class="glossary-popup" id="popup-1-2"><div class="popup-entry"><em class="popup-word">Halmeoni</em> — Grandmother; a term of endearment and respect for one's grandmother.</div></div></div>
 <p>My responsibility was Yeomjae. After school, I always carried him on my back, my nose buried in my schoolbook as I walked from house to house. Women would feed him because he was too young for normal food that we ate.</p>
 <p>Compared to the other civilians of Hwanghae province, we were lucky. Wealthier. Our home had five rooms and an outhouse; our fields kept us well fed. We owned cattle, though they were used for the millstone and not for food.</p>
 <p>I gently laid Yeomjae on his blankets and listened to <em>Halmeoni</em>’s loud shuffling as she slept in the next room. After taking over most of the household chores, she needed an afternoon nap just to stay upright.</p>
@@ -111,7 +77,7 @@
 <p>&emsp;“Hwajae,” a deep yet familiar voice whispered. Cold ice ran down my spine. No. He shouldn’t be here, “It’s me. Let me in, quick!”</p>
 <p>My hands fumbled for the latch. The door flew open, and my older brother stumbled in, slamming it behind him. He collapsed onto the floor, his back against the door. Taejae’s mouth was ajar.</p>
 <p>&emsp;“<em>Oppa</em>! What are you doing here? You’re supposed to be with <em>Abeoji</em>, heading to the islands.” I blurted, forgetting that Yeomjae was still asleep. He suddenly awoke with a start and began to cry. <em>Oppa </em>sighed with fatigue. Taejae rushed to the baby and rocked him to silence, and eventually back to sleep.</p>
-<div class="para-with-popup" data-popup-id="popup-1-3"><p>&emsp;“The <em>inmingun</em> almost caught us,” he said. “<em>Abeoji</em> told me to run. I ran and hid for days.”</p><div class="glossary-popup" id="popup-1-3"><div class="popup-entry"><em class="popup-word">inmingun</em> — The Korean People's Army; the military force of North Korea.</div></div></div>
+<div class="para-with-popup" data-popup-id="popup-1-3"><p class="">&emsp;“The <em>inmingun</em> almost caught us,” he said. “<em>Abeoji</em> told me to run. I ran and hid for days.”</p><div class="glossary-popup" id="popup-1-3"><div class="popup-entry"><em class="popup-word">inmingun</em> — The Korean People's Army; the military force of North Korea.</div></div></div>
 <p>&emsp;I tried not to frown in confusion, but he saw it anyway.</p>
 <p>&emsp;“He told me it was important to split up. I didn’t know where else to go.” His eyes flashed with…panic?</p>
 <p>My mouth became dry, and I stared at <em>Oppa</em>, not knowing how to react. He brought danger to our door. He left <em>Abeoji </em>alone.</p>

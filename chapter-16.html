@@ -24,37 +24,7 @@
     .glass-card { background: rgba(0,0,0,0.38); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(255,255,255,0.14); padding: 3.5rem 3rem; position: relative; overflow: visible; opacity: 0; animation: fadeUp 1s 0.5s forwards; display: flex; flex-direction: column; }
     .glass-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, var(--gold), #7fffda); pointer-events: none; }
     .chapter-content { flex: 1; }
-
-    /* All paragraphs */
-    .chapter-content p {
-      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
-      line-height: 1.95;
-      color: rgba(232,237,245,0.92);
-      margin-bottom: 1.5em;
-      font-weight: 300;
-      text-indent: 2em;
-    }
-
-    /* First paragraph — no indent, makes room for drop cap */
-    .chapter-content p.first-para {
-      text-indent: 0;
-    }
-
-    /* Drop cap — large golden first letter */
-    .drop-cap {
-      float: left;
-      font-family: 'Playfair Display', serif;
-      font-size: 5.2em;
-      font-weight: 400;
-      line-height: 0.72;
-      color: var(--gold);
-      text-shadow: 0 0 28px rgba(200,168,75,0.55);
-      margin-right: 0.07em;
-      margin-top: 0.1em;
-      padding-bottom: 0.05em;
-    }
-
-    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
+    .chapter-content p { font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.95; color: rgba(232,237,245,0.92); margin-bottom: 1.5em; font-weight: 300; text-indent: 2em; }    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
     .chapter-content strong { font-weight: 600; color: var(--gold); }
     .section-divider { text-align: center; color: var(--gold); font-size: 1rem; letter-spacing: 0.5em; margin: 2.5rem 0; text-shadow: 0 0 18px rgba(200,168,75,0.5); }
     .para-with-popup { position: relative; }
@@ -71,11 +41,7 @@
     .nav-btn-toc:hover { color: #fff; text-shadow: 0 0 18px rgba(127,255,218,0.7); }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
     @media (max-width: 1000px) { .glossary-popup { right: auto; left: 0; top: auto; bottom: calc(100% + 8px); width: 100%; max-width: 100%; } }
-    @media (max-width: 600px) {
-      .chapter-wrapper { padding: 7rem 1.2rem 4rem; }
-      .glass-card { padding: 2rem 1.5rem; }
-      .drop-cap { font-size: 4em; }
-    }
+    @media (max-width: 600px) { .chapter-wrapper { padding: 7rem 1.2rem 4rem; } .glass-card { padding: 2rem 1.5rem; } }
   </style>
 </head>
 <body>
@@ -93,7 +59,7 @@
     </header>
     <div class="glass-card">
       <article class="chapter-content">
-        <p class="first-para"><span class="drop-cap">E</span>very two days, another tent was left untouched, its flaps rustling in the wind. The usual voices I heard from every corner of the village were gone, the only noise on the island being the grumblings of everyone' s stomachs. It was early in the morning, and I sat outside our own tent, staring at one that was empty—its wooden bowl still sitting outside of it. If I had remembered correctly, a family lived in that tent and occupied it even until last night.</p>
+        <p>Every two days, another tent was left untouched, its flaps rustling in the wind. The usual voices I heard from every corner of the village were gone, the only noise on the island being the grumblings of everyone' s stomachs. It was early in the morning, and I sat outside our own tent, staring at one that was empty—its wooden bowl still sitting outside of it. If I had remembered correctly, a family lived in that tent and occupied it even until last night.</p>
 <p>A cool breeze whipped past me, my matted hair hitting my face. Frowning, I tugged it away and saw <em>Halmeoni</em> coming back from the shore with a pot filled with seawater. It was time to make breakfast.</p>
 <p>With no access to real food, we all resorted to making soup from scarce wild greens. When we first made it, it was incredibly bitter and bland. But to fix that, <em>Halmeoni</em> had an idea. Usually, we would have had clean water to make the soup, but she decided that it would be better if we also added seawater so that its salt could be used as seasoning.</p>
 <p>I had already roamed the small island, plucking wild greens that seemed edible and carried it back to our tent. <em>Eonni</em> had washed it, and now we watched as <em>Halmeoni</em> placed the pot full of seawater on top of a roaring fire.</p>

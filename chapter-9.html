@@ -24,37 +24,7 @@
     .glass-card { background: rgba(0,0,0,0.38); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(255,255,255,0.14); padding: 3.5rem 3rem; position: relative; overflow: visible; opacity: 0; animation: fadeUp 1s 0.5s forwards; display: flex; flex-direction: column; }
     .glass-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, var(--gold), #7fffda); pointer-events: none; }
     .chapter-content { flex: 1; }
-
-    /* All paragraphs */
-    .chapter-content p {
-      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
-      line-height: 1.95;
-      color: rgba(232,237,245,0.92);
-      margin-bottom: 1.5em;
-      font-weight: 300;
-      text-indent: 2em;
-    }
-
-    /* First paragraph — no indent, makes room for drop cap */
-    .chapter-content p.first-para {
-      text-indent: 0;
-    }
-
-    /* Drop cap — large golden first letter */
-    .drop-cap {
-      float: left;
-      font-family: 'Playfair Display', serif;
-      font-size: 5.2em;
-      font-weight: 400;
-      line-height: 0.72;
-      color: var(--gold);
-      text-shadow: 0 0 28px rgba(200,168,75,0.55);
-      margin-right: 0.07em;
-      margin-top: 0.1em;
-      padding-bottom: 0.05em;
-    }
-
-    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
+    .chapter-content p { font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.95; color: rgba(232,237,245,0.92); margin-bottom: 1.5em; font-weight: 300; text-indent: 2em; }    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
     .chapter-content strong { font-weight: 600; color: var(--gold); }
     .section-divider { text-align: center; color: var(--gold); font-size: 1rem; letter-spacing: 0.5em; margin: 2.5rem 0; text-shadow: 0 0 18px rgba(200,168,75,0.5); }
     .para-with-popup { position: relative; }
@@ -71,11 +41,7 @@
     .nav-btn-toc:hover { color: #fff; text-shadow: 0 0 18px rgba(127,255,218,0.7); }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
     @media (max-width: 1000px) { .glossary-popup { right: auto; left: 0; top: auto; bottom: calc(100% + 8px); width: 100%; max-width: 100%; } }
-    @media (max-width: 600px) {
-      .chapter-wrapper { padding: 7rem 1.2rem 4rem; }
-      .glass-card { padding: 2rem 1.5rem; }
-      .drop-cap { font-size: 4em; }
-    }
+    @media (max-width: 600px) { .chapter-wrapper { padding: 7rem 1.2rem 4rem; } .glass-card { padding: 2rem 1.5rem; } }
   </style>
 </head>
 <body>
@@ -93,7 +59,7 @@
     </header>
     <div class="glass-card">
       <article class="chapter-content">
-        <p class="first-para">&<span class="drop-cap">e</span>msp;The village was crowded with people, its narrow streets packed with merchants. Objects and food were laid out on top of large pieces of cloth on the ground, some with a small canopy above their heads to protect themselves from the sun.</p>
+        <p>The village was crowded with people, its narrow streets packed with merchants. Objects and food were laid out on top of large pieces of cloth on the ground, some with a small canopy above their heads to protect themselves from the sun.</p>
 <p><em>Eonni</em> gave me fifty won, which I had tightly in my hand. My other hand was firmly locked with <em>Eonni</em>’s. She didn’t want me to get lost, especially in crowded streets like this.</p>
 <p>“Bread for ten won! Freshly baked bread for ten won!” An old woman’s voice cried out. Looking over my shoulder, I examined the bread that was on top of the woman’s cloth. They looked small, and most definitely not freshly baked. Looking over a few more stalls, a different one had bigger and fresher bread for ten won.</p>
 <p>&emsp;“Should we buy these? Five for fifty won is perfect. One for all of us.” I whispered to <em>Eonni</em> without the seller noticing. If they thought you were interested in their goods, they would <em>never</em> let you go.</p>
@@ -111,7 +77,7 @@
 <p>&emsp;The sun was falling over the horizon when we made our way back to <em>Halmeoni </em>and the others, painting the sky with streaks of orange and gold. The market had died down into a quiet buzz as sellers closed up for the night. My arms were full of goods, as were <em>Eonni</em>’s. Tonight would be a feast.</p>
 <p>We had spent one hundred won after buying the bread, and with that we were able to buy many things. My mouth watered as I smelled the sweet and savory aromas of the food, and <em>Eonni </em>was complaining about starving the whole way up.</p>
 <p>&emsp;Taejae was the first to see us arrive, and ran to see what we bought. The sky was now turning a dark hue, and the crickets started their scratchy tune.</p>
-<div class="para-with-popup" data-popup-id="popup-9-0"><p>&emsp;“<em>Sikhye</em>!” He squealed when he took a bundle out of my arms. Inside were two small cans of cold <em>sikhye</em>, a traditional rice drink that was sweet and refreshing. He snatched another bundle, the smallest one, and would have screamed with delight had <em>Halmeoni </em>not shushed him. It was a rare sight: a small bag of colorful hard candy.</p><div class="glossary-popup" id="popup-9-0"><div class="popup-entry"><em class="popup-word">Sikhye</em> — A traditional Korean sweet rice drink, served cold and often enjoyed as a refreshing treat.</div></div></div>
+<div class="para-with-popup" data-popup-id="popup-9-0"><p class="">&emsp;“<em>Sikhye</em>!” He squealed when he took a bundle out of my arms. Inside were two small cans of cold <em>sikhye</em>, a traditional rice drink that was sweet and refreshing. He snatched another bundle, the smallest one, and would have screamed with delight had <em>Halmeoni </em>not shushed him. It was a rare sight: a small bag of colorful hard candy.</p><div class="glossary-popup" id="popup-9-0"><div class="popup-entry"><em class="popup-word">Sikhye</em> — A traditional Korean sweet rice drink, served cold and often enjoyed as a refreshing treat.</div></div></div>
 <p>“How did you get candy and <em>sikhye</em>? You didn’t spend all the money, did you?” <em>Halmeoni </em>raised her eyebrows as she beheld the goods. She had Yeomjae on her back, and did not have hands to comb through the packages as well.</p>
 <p>“No, <em>Halmeoni</em>. We still have one hundred won.” <em>Eonni </em>handed her the bills as Taejae rummaged through the rest of the goods. I took Yeomjae from <em>Halmeoni </em>and placed him on my lap as I sat down on the grass. Everyone followed and we sat in a circle, with all the food inside it.</p>
 <p>Bread, <em>sikhye</em>, candy, and one large roasted mackerel sat in the center of us all, its rich scents making us all drool. It felt like forever since we had a proper meal together. My fingers twitched to grab a loaf of bread, but I held back as <em>Halmeoni </em>reached for one herself. The eldest always took the first bite before everyone dug in. Usually, I had waited patiently with much respect, but now it felt like eternity as I watched her bring the bread to her mouth and take a large bite. As soon as she took a bite, I lunged for my loaf, nearly stuffing my face with it as everyone else reached for theirs. Well, everyone except Yeomjae.</p>

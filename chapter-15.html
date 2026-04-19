@@ -24,37 +24,7 @@
     .glass-card { background: rgba(0,0,0,0.38); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(255,255,255,0.14); padding: 3.5rem 3rem; position: relative; overflow: visible; opacity: 0; animation: fadeUp 1s 0.5s forwards; display: flex; flex-direction: column; }
     .glass-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, var(--gold), #7fffda); pointer-events: none; }
     .chapter-content { flex: 1; }
-
-    /* All paragraphs */
-    .chapter-content p {
-      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
-      line-height: 1.95;
-      color: rgba(232,237,245,0.92);
-      margin-bottom: 1.5em;
-      font-weight: 300;
-      text-indent: 2em;
-    }
-
-    /* First paragraph — no indent, makes room for drop cap */
-    .chapter-content p.first-para {
-      text-indent: 0;
-    }
-
-    /* Drop cap — large golden first letter */
-    .drop-cap {
-      float: left;
-      font-family: 'Playfair Display', serif;
-      font-size: 5.2em;
-      font-weight: 400;
-      line-height: 0.72;
-      color: var(--gold);
-      text-shadow: 0 0 28px rgba(200,168,75,0.55);
-      margin-right: 0.07em;
-      margin-top: 0.1em;
-      padding-bottom: 0.05em;
-    }
-
-    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
+    .chapter-content p { font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.95; color: rgba(232,237,245,0.92); margin-bottom: 1.5em; font-weight: 300; text-indent: 2em; }    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
     .chapter-content strong { font-weight: 600; color: var(--gold); }
     .section-divider { text-align: center; color: var(--gold); font-size: 1rem; letter-spacing: 0.5em; margin: 2.5rem 0; text-shadow: 0 0 18px rgba(200,168,75,0.5); }
     .para-with-popup { position: relative; }
@@ -71,11 +41,7 @@
     .nav-btn-toc:hover { color: #fff; text-shadow: 0 0 18px rgba(127,255,218,0.7); }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
     @media (max-width: 1000px) { .glossary-popup { right: auto; left: 0; top: auto; bottom: calc(100% + 8px); width: 100%; max-width: 100%; } }
-    @media (max-width: 600px) {
-      .chapter-wrapper { padding: 7rem 1.2rem 4rem; }
-      .glass-card { padding: 2rem 1.5rem; }
-      .drop-cap { font-size: 4em; }
-    }
+    @media (max-width: 600px) { .chapter-wrapper { padding: 7rem 1.2rem 4rem; } .glass-card { padding: 2rem 1.5rem; } }
   </style>
 </head>
 <body>
@@ -93,9 +59,9 @@
     </header>
     <div class="glass-card">
       <article class="chapter-content">
-        <p class="first-para"><span class="drop-cap">T</span>he first island we arrived at was bare. It had barely any trees and wild foliage, but instead had a small village. Well, it wasn’t really a village, but a large cluster of tents with people like me—defectors. Most people here were hiding from the <em>inmingun</em> until the war was over.</p>
+        <p>The first island we arrived at was bare. It had barely any trees and wild foliage, but instead had a small village. Well, it wasn’t really a village, but a large cluster of tents with people like me—defectors. Most people here were hiding from the <em>inmingun</em> until the war was over.</p>
 <p>The villagers greeted us warmly and supplied us with fresh drinking water. It was an abrupt change in scenery—with no tension or violence in sight. They even cooked us a large portion of rice and vegetables, which we gratefully accepted. But as I swallowed the morsels of sweet rice, my chest knotted. I couldn’t stomach the fact that we were all safe with food, and <em>Oppa</em> was somewhere out there alone and probably starving. I couldn’t even think of the possibility that he could be…gone.</p>
-<div class="para-with-popup" data-popup-id="popup-15-0"><p>&emsp;“How do you get food?” <em>Abeoji</em> asked one of the villagers as she handed him another wooden plate of rice. As I examined my own plate, I realized that it was roughly crafted, its raw edges still jutting out. Curiously, I ran my finger lightly against the edges, but felt my skin get caught in a splinter. Picking it out, I then looked around the camp, and noticed that some people were eating out of porcelain plates with silver utensils that glimmered in the sunlight. Some even had metal pots over a burning fire that bubbled with <em>kalguksu</em>. I stared at an old woman who cut a soft roll of noodle dough with a dull knife, each chewy clump of dough dropping into the tasty boiling broth. I looked back down to the wood on my lap.</p><div class="glossary-popup" id="popup-15-0"><div class="popup-entry"><em class="popup-word">kalguksu</em> — A Korean noodle dish made with knife-cut wheat flour noodles, typically served in a warm broth.</div></div></div>
+<div class="para-with-popup" data-popup-id="popup-15-0"><p class="">&emsp;“How do you get food?” <em>Abeoji</em> asked one of the villagers as she handed him another wooden plate of rice. As I examined my own plate, I realized that it was roughly crafted, its raw edges still jutting out. Curiously, I ran my finger lightly against the edges, but felt my skin get caught in a splinter. Picking it out, I then looked around the camp, and noticed that some people were eating out of porcelain plates with silver utensils that glimmered in the sunlight. Some even had metal pots over a burning fire that bubbled with <em>kalguksu</em>. I stared at an old woman who cut a soft roll of noodle dough with a dull knife, each chewy clump of dough dropping into the tasty boiling broth. I looked back down to the wood on my lap.</p><div class="glossary-popup" id="popup-15-0"><div class="popup-entry"><em class="popup-word">kalguksu</em> — A Korean noodle dish made with knife-cut wheat flour noodles, typically served in a warm broth.</div></div></div>
 <p>&emsp;“The men sneak back to the mainland at night to take food from their homes to bring here—on <em>Seommaeup</em>. That’s how we’ve been able to survive for so long,” She answered with a smile.</p>
 <p>&emsp;<em>Seommaeup</em><em>. </em>It was a small island far off the coast of the mainland.</p>
 <p>&emsp;The woman dumped another wad of steaming rice and vegetables on my plate. After I thanked her and ate as much as I could stomach, we asked around if there was anything to do.</p>

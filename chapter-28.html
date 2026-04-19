@@ -24,37 +24,7 @@
     .glass-card { background: rgba(0,0,0,0.38); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(255,255,255,0.14); padding: 3.5rem 3rem; position: relative; overflow: visible; opacity: 0; animation: fadeUp 1s 0.5s forwards; display: flex; flex-direction: column; }
     .glass-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, var(--gold), #7fffda); pointer-events: none; }
     .chapter-content { flex: 1; }
-
-    /* All paragraphs */
-    .chapter-content p {
-      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
-      line-height: 1.95;
-      color: rgba(232,237,245,0.92);
-      margin-bottom: 1.5em;
-      font-weight: 300;
-      text-indent: 2em;
-    }
-
-    /* First paragraph — no indent, makes room for drop cap */
-    .chapter-content p.first-para {
-      text-indent: 0;
-    }
-
-    /* Drop cap — large golden first letter */
-    .drop-cap {
-      float: left;
-      font-family: 'Playfair Display', serif;
-      font-size: 5.2em;
-      font-weight: 400;
-      line-height: 0.72;
-      color: var(--gold);
-      text-shadow: 0 0 28px rgba(200,168,75,0.55);
-      margin-right: 0.07em;
-      margin-top: 0.1em;
-      padding-bottom: 0.05em;
-    }
-
-    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
+    .chapter-content p { font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.95; color: rgba(232,237,245,0.92); margin-bottom: 1.5em; font-weight: 300; text-indent: 2em; }    .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
     .chapter-content strong { font-weight: 600; color: var(--gold); }
     .section-divider { text-align: center; color: var(--gold); font-size: 1rem; letter-spacing: 0.5em; margin: 2.5rem 0; text-shadow: 0 0 18px rgba(200,168,75,0.5); }
     .para-with-popup { position: relative; }
@@ -71,11 +41,7 @@
     .nav-btn-toc:hover { color: #fff; text-shadow: 0 0 18px rgba(127,255,218,0.7); }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
     @media (max-width: 1000px) { .glossary-popup { right: auto; left: 0; top: auto; bottom: calc(100% + 8px); width: 100%; max-width: 100%; } }
-    @media (max-width: 600px) {
-      .chapter-wrapper { padding: 7rem 1.2rem 4rem; }
-      .glass-card { padding: 2rem 1.5rem; }
-      .drop-cap { font-size: 4em; }
-    }
+    @media (max-width: 600px) { .chapter-wrapper { padding: 7rem 1.2rem 4rem; } .glass-card { padding: 2rem 1.5rem; } }
   </style>
 </head>
 <body>
@@ -93,7 +59,7 @@
     </header>
     <div class="glass-card">
       <article class="chapter-content">
-        <p class="first-para">&<span class="drop-cap">e</span>msp;We finally moved out of the camp after we were able to rent a small house that was next to the sea in <em>Incheon</em>. Even though we had a lot of money saved, we still had a difficult time finding work to sustain ourselves once we got there. <em>Oppa</em> was able to get a job on a fishing boat, but he told us that he would often get seasick very easily, so he would spend most of the evening sleeping. The rest of us, including <em>Abeoji</em>, went to the <em>Songdo sea</em> to catch fish, clams, and shellfish for a fishing company. But the salt from the ocean would irritate my hands and nails, my legs would ache from walking along the coast and bending down everyday. After a long day of work, I would often soak my hands in fresh warm water while <em>Eonni</em> cooked dinner. Though the pay was meager, we were able to survive like this for one to two years.</p>
+        <p>We finally moved out of the camp after we were able to rent a small house that was next to the sea in <em>Incheon</em>. Even though we had a lot of money saved, we still had a difficult time finding work to sustain ourselves once we got there. <em>Oppa</em> was able to get a job on a fishing boat, but he told us that he would often get seasick very easily, so he would spend most of the evening sleeping. The rest of us, including <em>Abeoji</em>, went to the <em>Songdo sea</em> to catch fish, clams, and shellfish for a fishing company. But the salt from the ocean would irritate my hands and nails, my legs would ache from walking along the coast and bending down everyday. After a long day of work, I would often soak my hands in fresh warm water while <em>Eonni</em> cooked dinner. Though the pay was meager, we were able to survive like this for one to two years.</p>
 <p>Later, we were finally able to buy a house for ourselves in <em>Manseok-dong</em>, where we moved right away. But of course, we needed to find another job in the new area.</p>
 <p>To do this, <em>Abeoji</em>, <em>Oppa</em>, and I went to <em>Namyang</em>, where there were big salt fields. We worked there, but we were hungry all the time. Compared to our jobs at <em>Incheon</em>, we weren’t paid in money, but in rice rations. This made saving up money very difficult, but we had to make do. Once we started working again, I had to cook rice everyday to pack lunch for <em>Abeoji</em>, and feed the rest of the family. Oftentimes, all the rice would be gone by then, so I would go hungry. It didn’t bother me too much, as the others did the brunt of the work.</p>
 <p>My hair had grown very long throughout the years of our escape, and so I wore it in two braids throughout the day—mainly to keep my hair out of my face as I carried water jars. Whenever I went out to get water, the local boys would always stare at me or follow me around.</p>
