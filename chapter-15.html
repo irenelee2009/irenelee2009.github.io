@@ -12,44 +12,35 @@
     body { background: #0a0e1a; color: var(--salt); font-family: 'Cormorant Garamond', serif; font-weight: 300; overflow-x: hidden; min-height: 100vh; }
     #sky-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
     .content { position: relative; z-index: 2; }
-
     nav.top-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.5rem 10vw; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent); backdrop-filter: blur(6px); }
     .nav-brand { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; color: #fff; text-decoration: none; text-shadow: 0 2px 12px rgba(0,0,0,0.6); }
     .nav-toc { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.75); text-decoration: none; transition: color 0.3s; }
     .nav-toc:hover { color: #fff; }
-
     .chapter-wrapper { max-width: 720px; margin: 0 auto; padding: 9rem 2rem 6rem; }
-
     .chapter-header { text-align: center; margin-bottom: 4rem; opacity: 0; animation: fadeUp 1s 0.3s forwards; }
     .chapter-label { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: #7fffda; text-shadow: 0 0 14px rgba(127,255,218,0.5); display: block; margin-bottom: 1rem; }
     .chapter-number { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; color: var(--salt); text-shadow: 0 4px 30px rgba(0,0,0,0.6); display: block; margin-bottom: 1.5rem; }
     .header-rule { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 0 auto; }
-
     .glass-card { background: rgba(0,0,0,0.38); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(255,255,255,0.14); padding: 3.5rem 3rem; position: relative; overflow: visible; opacity: 0; animation: fadeUp 1s 0.5s forwards; display: flex; flex-direction: column; }
     .glass-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, var(--gold), #7fffda); pointer-events: none; }
-
     .chapter-content { flex: 1; }
     .chapter-content p { font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.95; color: rgba(232,237,245,0.92); margin-bottom: 1.5em; font-weight: 300; text-indent: 2em; }
     .chapter-content p:first-of-type { text-indent: 0; }
     .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
     .chapter-content strong { font-weight: 600; color: var(--gold); }
     .section-divider { text-align: center; color: var(--gold); font-size: 1rem; letter-spacing: 0.5em; margin: 2.5rem 0; text-shadow: 0 0 18px rgba(200,168,75,0.5); }
-
     .para-with-popup { position: relative; }
     .glossary-popup { position: absolute; right: -230px; top: 0; width: 210px; background: rgba(5,12,28,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.12); padding: 0.85rem 1rem; z-index: 20; opacity: 0; pointer-events: none; transition: opacity 0.6s ease; }
     .glossary-popup.visible { opacity: 1; }
     .popup-entry { font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; line-height: 1.55; color: rgba(232,237,245,0.88); margin-bottom: 0.55rem; }
     .popup-entry:last-child { margin-bottom: 0; }
     .popup-word { font-style: italic; color: var(--gold); text-shadow: 0 0 10px rgba(200,168,75,0.4); }
-
-    /* BOTTOM NAV — always at the very bottom of the glass card, never overlapping text */
     .bottom-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.08); flex-shrink: 0; position: static; }
     .nav-btn { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.6); text-decoration: none; padding: 0.6rem 1.2rem; border: 1px solid rgba(255,255,255,0.15); transition: all 0.3s; background: rgba(255,255,255,0.05); backdrop-filter: blur(4px); }
     .nav-btn:not(.disabled):hover { color: var(--gold); border-color: rgba(200,168,75,0.5); background: rgba(200,168,75,0.08); box-shadow: 0 0 20px rgba(200,168,75,0.15); }
     .nav-btn.disabled { opacity: 0.25; cursor: default; pointer-events: none; }
     .nav-btn-toc { font-family: 'Space Mono', monospace; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: #7fffda; text-decoration: none; text-shadow: 0 0 10px rgba(127,255,218,0.4); transition: color 0.3s; }
     .nav-btn-toc:hover { color: #fff; text-shadow: 0 0 18px rgba(127,255,218,0.7); }
-
     @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
     @media (max-width: 1000px) { .glossary-popup { right: auto; left: 0; top: auto; bottom: calc(100% + 8px); width: 100%; max-width: 100%; } }
     @media (max-width: 600px) { .chapter-wrapper { padding: 7rem 1.2rem 4rem; } .glass-card { padding: 2rem 1.5rem; } }
@@ -57,62 +48,59 @@
 </head>
 <body>
 <canvas id="sky-canvas"></canvas>
-
 <nav class="top-nav">
   <a href="index.html" class="nav-brand">Irene Lee</a>
   <a href="index.html#chapters" class="nav-toc">&#8592; All Chapters</a>
 </nav>
-
 <div class="content">
   <div class="chapter-wrapper">
-
     <header class="chapter-header">
       <span class="chapter-label">What Was Carried, What Was Lost</span>
       <span class="chapter-number">Chapter 15</span>
       <div class="header-rule"></div>
     </header>
-
     <div class="glass-card">
       <article class="chapter-content">
-        <p>The first island we arrived at was bare. It had barely any trees nor wild foliage, but a small village. Well, it wasn’t really quite a village, but a large cluster of tents of people like us—defectors. Most people here were hiding from the <em>inmingun</em> until the war was over.</p>
-<p>The villagers greeted us warmly and supplied us with fresh drinking water. It was an abrupt change in scenery—with no tension or violence in sight. They even cooked us a large portion of rice and vegetables for us to eat, which we gratefully accepted. After eating, however, I felt sick. I couldn’t stomach the fact that we were all safe with food in our stomachs, and <em>Oppa</em> was somewhere out there alone and probably starving. I couldn’t even think about the possibility that he could be…gone.</p>
-<div class="para-with-popup" data-popup-id="popup-15-0"><p>&emsp;“How do you get food?” <em>Abeoji</em> asked one of the villagers as she handed him another wooden plate of rice. As I examined my own plate, I realized that it was roughly crafted, its raw edges still jutting out. Curiously, I ran my finger lightly against the edges, but saw my skin get caught in a splinter. Picking it out, I then looked around the camp, and noticed that some people were eating out of porcelain plates with silver utensils that glimmered in the sunlight. Some even had metal pots over a burning fire that bubbled with <em>kalguksu</em>. I stared at an old woman who cut a soft roll of noodle dough with a dull knife, each chewy clump of dough dropping into the boiling tasty broth. I looked back down to the wood on my lap.</p><div class="glossary-popup" id="popup-15-0"><div class="popup-entry"><em class="popup-word">kalguksu</em> — A Korean noodle dish made with knife-cut wheat flour noodles, typically served in a warm broth.</div></div></div>
-<p>&emsp;“The men here sneak back on the mainland at night to take food from their homes to bring back here—on <em>Seommaeup</em>. That’s how we’ve been able to survive for so long,” She answered with a smile.</p>
+        <p>The first island we arrived at was bare. It had barely any trees and wild foliage, but instead had a small village. Well, it wasn’t really a village, but a large cluster of tents with people like me—defectors. Most people here were hiding from the <em>inmingun</em> until the war was over.</p>
+<p>The villagers greeted us warmly and supplied us with fresh drinking water. It was an abrupt change in scenery—with no tension or violence in sight. They even cooked us a large portion of rice and vegetables, which we gratefully accepted. But as I swallowed the morsels of sweet rice, my chest knotted. I couldn’t stomach the fact that we were all safe with food, and <em>Oppa</em> was somewhere out there alone and probably starving. I couldn’t even think of the possibility that he could be…gone.</p>
+<div class="para-with-popup" data-popup-id="popup-15-0"><p>&emsp;“How do you get food?” <em>Abeoji</em> asked one of the villagers as she handed him another wooden plate of rice. As I examined my own plate, I realized that it was roughly crafted, its raw edges still jutting out. Curiously, I ran my finger lightly against the edges, but felt my skin get caught in a splinter. Picking it out, I then looked around the camp, and noticed that some people were eating out of porcelain plates with silver utensils that glimmered in the sunlight. Some even had metal pots over a burning fire that bubbled with <em>kalguksu</em>. I stared at an old woman who cut a soft roll of noodle dough with a dull knife, each chewy clump of dough dropping into the tasty boiling broth. I looked back down to the wood on my lap.</p><div class="glossary-popup" id="popup-15-0"><div class="popup-entry"><em class="popup-word">kalguksu</em> — A Korean noodle dish made with knife-cut wheat flour noodles, typically served in a warm broth.</div></div></div>
+<p>&emsp;“The men sneak back to the mainland at night to take food from their homes to bring here—on <em>Seommaeup</em>. That’s how we’ve been able to survive for so long,” She answered with a smile.</p>
 <p>&emsp;<em>Seommaeup</em><em>. </em>It was a small island far off the coast of the mainland.</p>
 <p>&emsp;The woman dumped another wad of steaming rice and vegetables on my plate. After I thanked her and ate as much as I could stomach, we asked around if there was anything to do.</p>
 <p>&emsp;“There’s nothing really, unless you want to set up a tent. The men’ll be going back to their homes tonight, so they’re preparing. Do you have any of your belongings?” One man asked.</p>
-<p>&emsp;Looking down, I noticed that the cloth bundle carrying my things was gone. My rings were gone, and my clothes were basically rags. I frowned. I watched everyone else look down at the same state. Looking back at the man, I just shook my head. He clicked his tongue and limped away. Furrowing my brow, my face heated. I guess not all residents here were as nice.</p>
-<p>We didn’t have anything to set up as a makeshift tent, so we just found a dry spot on the grass and laid down to rest. It wasn’t the most comfortable, but it was better than nothing. Closing my eyes, I tried to block out any thoughts about everything that just happened, and forced my body to fall asleep.</p>
-<p>When night arrived, my family and I followed the residents who all went to the shore to wish the men who were venturing back onto the mainland good luck. They had their own boat, but did not have a sail, but three pairs of oars. It was slim and fast, and the men had enough room beneath their small benches to store a few sacks of rice and food. Three men were going back, their faces glowing with what looked like confidence. They were young, probably in their mid twenties, and one who looked like he was just eighteen years old. I didn’t do much other than watch them depart, but <em>Abeoji</em> went up and talked to them.</p>
+<p>&emsp;Looking down, my cloth bundle was gone. My rings were too, and my clothes were basically rags. I frowned. I watched everyone else look down at the same state. Looking back at the man, I just shook my head. He clicked his tongue and limped away. Furrowing my brow, my face heated. I guess not all residents here were as nice.</p>
+<p>We didn’t have anything to set up as a makeshift tent, so we just found a dry spot on the grass and laid down to rest. It wasn’t the most comfortable, but it was better than nothing. A bug crawled onto my arm, and I immediately swatted it away. Closing my eyes, I tried to block out any thoughts about everything that just happened, and forced my body to fall asleep.</p>
+<p>When night arrived, my family and I followed the residents to the shore to wish good luck to the men who were venturing onto the mainland. They had their own boat that did not have a sail, but three pairs of oars. It was slim and fast, and the men had enough room beneath their small benches to store a few sacks of rice and food. Three men were going back, their faces glowing with what looked like confidence. They were young, probably in their mid twenties, and one looked like he was just eighteen years old. I didn’t do much other than watch them depart, but <em>Abeoji</em> went up and talked to them.</p>
 <div class="section-divider">✦</div>
 <p>&emsp;We ended up staying on <em>Seommaeup</em> for three months. I had memorized every flash and pattern of light on the water—the flat gray of twilight, the blinding white of noon—because staring at the horizon had become the only way I knew how to look for him without saying his name. He still hadn’t returned—if he was still alive.</p>
-<p>Life was manageable in the small village of tents. At night, though, it would get significantly colder, and while <em>Abeoji</em>, <em>Eonni</em>, and <em>Halmeoni</em> were able to withstand the cold, Taejae and I could not. We didn’t have anything to shield us from the night air, so <em>Halmeoni</em> unraveled her tattered skirt to serve as a blanket. Her skirt was a long thick piece of fabric that she wrapped around her waist, so when she unraveled it, it was quite long. She had long pants underneath.</p>
+<p>Life was manageable in the small village of tents. At night, though, it would get significantly colder. And while <em>Abeoji</em>, <em>Eonni</em>, and <em>Halmeoni</em> were able to withstand the cold, Taejae and I could not. We didn’t have anything to shield us from the night air, so <em>Halmeoni</em> unraveled her tattered skirt to serve as a blanket. Her skirt was a long thick piece of fabric that she wrapped around her waist, so when she unraveled it, it was quite long. She had long pants underneath. She insisted that the pants kept her warm enough, but I could tell by the staunchness of her shoulders that she was cold. But she kept quiet.</p>
 <p><em>Abeoji</em> had found a way to return to our house to sneak food back onto the island, so we had plenty of food. My belly never felt a pang of hunger the whole span of our stay. We were living in comfort. <em>Oppa </em>was never mentioned in our conversations.</p>
 <p>Laying down on the green grass, I stared up at the blue sky with a smile on my face. The men who left would be returning from the mainland tonight. They bragged about having pounds of frozen meat stored in their cellars. A ring of laughter echoed in the air, and looking up, I saw a trio of adults chattering close by. Rolling over to my stomach, I watched them as they talked loudly.</p>
 <p>&emsp;“The meat will be a nice change,” The woman said, “I’m tired of eating plain rice with vegetables.”</p>
 <p>&emsp;“Yes, me too,” The man replied, “It’s nice of them to offer it to us all.”</p>
 <p>&emsp;The other man nodded. His large eyes blinked slowly, reminding me of an owl. “We’ll have a feast! A celebration, perhaps, of getting this far. What do you think?”</p>
 <p>&emsp;“A celebration!” The woman smiled, “What a brilliant idea.”</p>
-<p>&emsp;“We can make a large bonfire and eat the meat together while singing songs,” The owl man added.</p>
+<p>&emsp;“We can eat meat together while singing songs and sharing stories,” The owl man added.</p>
 <p>&emsp;“If we get the meat.” The other man interrupted.</p>
-<p>&emsp;The owl man and the woman both looked at him. The woman looked confused, but the owl man just cooly grinned, his long neck eerily disproportionate from his short stature.</p>
+<p>&emsp;The owl man and the woman both looked at him. The woman looked confused, but the owl man just cooly snorted, his long neck eerily disproportionate from his short stature.</p>
 <p>&emsp;“What do you mean, if? Of course we’ll get the meat. Have you seen how far we’ve come? I may not have been on these islands for as long as all of you, but I sure know how successful your system is.” The owl man said.</p>
 <p>&emsp;“Well, we won’t know until they come back.” The man argued.</p>
 <p>&emsp;“Yes, that’s true,” The owl man nodded slowly, “But everything will go to plan. Everything always works out in the end.”</p>
 <p>I always felt an odd chill creep against my skin whenever I heard him speak. The way he presented himself, the way he moved, and the way he smiled was very eerie, but I didn’t think much of it. After all, all I thought of was how delicious the roasted meat would taste.</p>
 <p>I started to salivate. I couldn’t wait.</p>
-<p>However, when we went to the beach late at night to welcome their return, we waited on the sandy shore for hours before we caught sight of the boat returning. But something was off. My stomach pitted before my mind could even name why; the boat came in too slowly, too weakly. My mouth parted. And then I counted. One.</p>
+<p>When we went to the beach late at night to welcome their return, we waited on the sandy shore for hours before we caught sight of the boat returning. But something was off. My stomach pitted before my mind could even name why; the boat came in too slowly, too weakly. My mouth parted. And then I counted. One.</p>
 <p>Where there used to be four men, there was only the same eighteen year old I saw when we first arrived. His eyes were red with tears, his clothes stained with blood. The boat only contained a single sack of rice and a single bundle of the meat. But without the three other men.</p>
 <p>&emsp;“Where are the others?” The owl man helped the boy out as he motioned the other to quickly pull the boat in.</p>
-<p>&emsp;“The <em>inmingun</em> knew we were coming,” His body trembled as he sank to his knees, “They were waiting for us by the boat, and killed the three others when we brought back the food. They tried to protect me—told me to run, to row as fast as I could while they tried to fight off the soldiers.” I watched everyone look at each other with grim faces. Then I stared at the boy who was on his knees, trembling. Was this fear? Guilt?</p>
+<p>&emsp;“The <em>inmingun</em> knew we were coming,” His body trembled as he sank to his knees, “They were waiting for us by the boat by the time we came with the food and killed the three others. They tried to protect me—told me to run, to row as fast as I could while they tried to fight off the soldiers.” I watched everyone look at each other with grim faces. Then I stared at the boy who was on his knees, trembling. Was this fear? Guilt?</p>
 <p>&emsp;“I tried to bring them with me, I swear! I tried to fight them off—tried to keep everyone alive. But…they pushed me on and shoved the boat in the water and screamed at me to row—to row like a damned demon was chasing after me.</p>
 <p>I tried to jump back onto the shore, but before I could, the <em>inmingun</em> shot them all down. Just like that. They then aimed towards me, but I was already far out that I was able to get out before their bullets did any damage. I’m so sorry.”</p>
-<p>&emsp;<em>Abeoji</em> walked up and got him back onto his feet, “I’m sorry. It’s not your fault. We will mourn the loss, but first we must make sure the <em>inmingun</em> did not follow you.”</p>
-<p>&emsp;“They didn’t,” The boy got back onto his feet, but his body tensed, as if he realized something. I held my breath as he began to speak, “They’re <em>waiting </em>for us. They know we’ll have to go back eventually or starve to death. I bet it was those people who returned to their homes who ratted us out. I heard the soldiers saying something about the report being accurate.”</p>
+<p>&emsp;<em>Abeoji</em> walked up and lent him a hand to get back onto his feet, “I’m sorry. It’s not your fault. We will mourn the loss, but first we must make sure the <em>inmingun</em> did not follow you.”</p>
+<p>&emsp;“They didn’t,” The boy accepted <em>Abeoji</em>’s hand, but his body tensed, as if he realized something. I held my breath as he began to speak, “They’re <em>waiting </em>for us. They know we’ll have to go back eventually or starve to death. I bet it was those people, who returned to their homes, who ratted us out. I heard the soldiers saying something about the report being accurate.”</p>
 <p>My eyebrows furrowed. They <em>knew</em>? And people who had lived on the island had returned to their homes? The owl man walked up and placed his hands on the boy’s shoulders, his voice giving me the chills as he brushed past me. “It’s okay, let’s get you some water. We’ll form a plan to find some way to find—”</p>
-<p>&emsp;“They <em>know</em> we’re here, and it's a matter of time until they come and get us,” The boy repeated. I was close enough to see that his lips were trembling, but I couldn’t tell exactly why. Silence fell among the crowd, and I watched as the boy’s face seemed to contort into different emotions all at once. He looked down at his feet, clenched his hands into fists, and then looked back up again, his eyes frantically searching through the defectors as if looking for someone or some<em>thing</em>. I felt nauseous as I watched his wild, intense eyes scan the crowd, and my knees almost buckled when I saw them land on me for a second. Then, his eyes met the owl man’s, widened, and then his face turned a mottled shade of red that I’d never seen before.</p>
-<p>“Stop acting all wise, old man. I don’t know how you’re able to order us around, make us think the same things you think with your sweet, hopeful, <em>empty</em> words. Do you know how long <em>we’ve</em> been on this horrible island, surviving off of chance and luck? We’ve been here for <em>years</em>, so stop acting like you know everything and back off,” His eyes were wild as he shouted at the owl man, “Stop trying to avoid reality. We’ve been through it way more than you have.” He then stomped towards the village, his mouth muttering words I couldn’t hear.</p>
-<p>The owl man looked like he had been just slapped, and my mind flashed back to when the <em>inmingun</em> raided our home. My body went still, and I watched him as his shoulders sagged. I had almost forgotten that day, and turning to <em>Eonni</em>, I saw her face darken. She turned away from the crowd and hurried back to the village, never looking back. I didn’t even think of following after her. Turning my attention back to the others, I watched as the other defectors looked at the owl man with hesitation before they walked back to the village. The rest of us just stood there. One person shook his head, giving the owl man a reassuring smile that looked…sad.</p>
+<p>&emsp;“They <em>know</em> we’re here, and it's a matter of time until they come and get us,” The boy repeated. I was close enough to see that his lips were trembling, but I couldn’t tell exactly why. Silence fell among the crowd, and I watched as the boy’s face seemed to contort into different emotions all at once. He looked down at his feet, clenched and unclenched his hands, and then looked back up again, his eyes frantically searching through the defectors as if looking for someone or some<em>thing</em>. I felt nauseous as I watched his wild, intense eyes scan the crowd, and my knees almost buckled when I saw them land on me for a second. Then, his eyes met the owl man’s, widened, and then his face turned a mottled shade of red that I’d never seen before.</p>
+<p>“Stop acting all wise, old man. I don’t know how you’re able to order us around, make us think the same things you think with your sweet, <em>empty</em> words. Do you know how long <em>we’ve</em> been on this horrible island, surviving off of chance and luck? Stop acting like you know everything and back off,” His eyes were wild as he shouted at the owl man, “Stop trying to avoid reality. We’ve been through it way more than you have.” He then stomped towards the village, his mouth muttering words I couldn’t hear.</p>
+<p>The owl man looked like he had been just slapped, the face all too familiar. My body went still, and I watched him as his shoulders sagged. I turned to <em>Eonni</em> and saw her face darken. She turned away from the crowd and hurried back to the village, not looking back. The thought of following after her had never crossed my mind.</p>
+<p>Turning my attention back to the others, I watched as the other defectors looked at the owl man with hesitation before they walked back to the village. The rest of us just stood there. One person shook his head, giving the owl man a reassuring smile that looked…sad.</p>
 <p>&emsp;“He doesn't know what he’s saying. He’s just shaken up, is all. You’re a great addition to the village, and we’ll find a solution to this fast,” He said to the owl man before walking back with him to the village; the rest of the bystanders followed.</p>
 <p><em>Abeoji</em>, <em>Halmeoni</em>, Taejae, and I just stood on the sandy beach, all alone in the dark.</p>
 
@@ -123,18 +111,16 @@
         <a href="chapter-16.html" class="nav-btn">Next &#8594;</a>
       </div>
     </div>
-
   </div>
 </div>
-
 <script>
 const canvas=document.getElementById('sky-canvas'),ctx=canvas.getContext('2d');
 function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
 resize();window.addEventListener('resize',resize);
-const stars=Array.from({length:130},()=>({x:Math.random(),y:Math.random()*0.70,size:Math.random()*2.8+0.6,phase:Math.random()*Math.PI*2,speed:Math.random()*0.6+0.3,brightness:Math.random()*0.5+0.55}));
+const stars=Array.from({length:60},()=>({x:Math.random(),y:Math.random()*0.70,size:Math.random()*1.4+0.3,phase:Math.random()*Math.PI*2,speed:Math.random()*0.6+0.3,brightness:Math.random()*0.5+0.55}));
 const shootingStars=[];let nextShoot=3+Math.random()*5;
-function spawnShootingStar(){shootingStars.push({x:Math.random()*0.7+0.05,y:Math.random()*0.35+0.03,len:0.08+Math.random()*0.1,angle:Math.PI/4+(Math.random()-0.5)*0.4,speed:0.18+Math.random()*0.15,progress:0,alpha:0.9+Math.random()*0.1});}
-const waves=[{y:0.765,amp:22,freq:0.007,spd:0.55,alpha:0.52,w:3.5},{y:0.800,amp:16,freq:0.011,spd:0.80,alpha:0.40,w:2.8},{y:0.832,amp:11,freq:0.016,spd:0.45,alpha:0.30,w:2.2},{y:0.860,amp:7,freq:0.024,spd:1.00,alpha:0.20,w:1.6},{y:0.890,amp:4,freq:0.035,spd:0.65,alpha:0.14,w:1.1}];
+function spawnShootingStar(){shootingStars.push({x:Math.random()*0.7+0.05,y:Math.random()*0.35+0.03,len:0.08+Math.random()*0.1,angle:Math.PI/8+(Math.random()-0.5)*0.2,speed:0.18+Math.random()*0.15,progress:0,alpha:0.9+Math.random()*0.1});}
+const waves=[{y:0.765,amp:22,freq:0.007,spd:0.55,alpha:0.22,w:3.5},{y:0.800,amp:16,freq:0.011,spd:0.80,alpha:0.17,w:2.8},{y:0.832,amp:11,freq:0.016,spd:0.45,alpha:0.13,w:2.2},{y:0.860,amp:7,freq:0.024,spd:1.00,alpha:0.08,w:1.6},{y:0.890,amp:4,freq:0.035,spd:0.65,alpha:0.06,w:1.1}];
 let animTime=0;
 function draw(ts){
   animTime=ts/1000;const W=canvas.width,H=canvas.height;
@@ -154,7 +140,7 @@ function draw(ts){
   ctx.fillStyle=mg;ctx.beginPath();ctx.arc(mx,my,mr*4,0,Math.PI*2);ctx.fill();
   ctx.beginPath();ctx.arc(mx,my,mr,0,Math.PI*2);ctx.fillStyle='rgba(255,252,235,1)';ctx.fill();
   ctx.beginPath();ctx.arc(mx-mr*0.2,my-mr*0.15,mr*0.85,0,Math.PI*2);ctx.fillStyle='rgba(5,12,20,0.92)';ctx.fill();
-  stars.forEach(s=>{const tw=0.55+0.45*Math.sin(s.phase+animTime*s.speed),a=s.brightness*tw;ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.size,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,235,${a})`;ctx.fill();if(s.size>1.8&&a>0.4){ctx.strokeStyle=`rgba(255,255,220,${a*0.55})`;ctx.lineWidth=0.7;const cx=s.x*W,cy=s.y*H,len=s.size*4;ctx.beginPath();ctx.moveTo(cx-len,cy);ctx.lineTo(cx+len,cy);ctx.moveTo(cx,cy-len);ctx.lineTo(cx,cy+len);ctx.stroke();}});
+  stars.forEach(s=>{const tw=0.55+0.45*Math.sin(s.phase+animTime*s.speed),a=s.brightness*tw;ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.size,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,235,${a})`;ctx.fill();});
   nextShoot-=0.016;if(nextShoot<=0){spawnShootingStar();nextShoot=4+Math.random()*7;}
   for(let i=shootingStars.length-1;i>=0;i--){const ss=shootingStars[i];ss.progress+=ss.speed*0.016;if(ss.progress>=1){shootingStars.splice(i,1);continue;}const fade=ss.progress<0.2?ss.progress/0.2:ss.progress>0.7?1-(ss.progress-0.7)/0.3:1;const hx=(ss.x+Math.cos(ss.angle)*ss.len*ss.progress)*W;const hy=(ss.y+Math.sin(ss.angle)*ss.len*ss.progress)*H;const tx=(ss.x+Math.cos(ss.angle)*ss.len*Math.max(0,ss.progress-0.35))*W;const ty=(ss.y+Math.sin(ss.angle)*ss.len*Math.max(0,ss.progress-0.35))*H;const gr=ctx.createLinearGradient(tx,ty,hx,hy);gr.addColorStop(0,'rgba(255,255,245,0)');gr.addColorStop(1,`rgba(255,255,245,${ss.alpha*fade})`);ctx.beginPath();ctx.moveTo(tx,ty);ctx.lineTo(hx,hy);ctx.strokeStyle=gr;ctx.lineWidth=1.5;ctx.stroke();ctx.beginPath();ctx.arc(hx,hy,1.5,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,245,${ss.alpha*fade})`;ctx.fill();}
   const hg=ctx.createLinearGradient(0,H*0.55,0,H*0.82);hg.addColorStop(0,'rgba(26,107,90,0.12)');hg.addColorStop(1,'transparent');ctx.fillStyle=hg;ctx.fillRect(0,0,W,H);

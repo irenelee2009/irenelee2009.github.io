@@ -12,44 +12,35 @@
     body { background: #0a0e1a; color: var(--salt); font-family: 'Cormorant Garamond', serif; font-weight: 300; overflow-x: hidden; min-height: 100vh; }
     #sky-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
     .content { position: relative; z-index: 2; }
-
     nav.top-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.5rem 10vw; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent); backdrop-filter: blur(6px); }
     .nav-brand { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; color: #fff; text-decoration: none; text-shadow: 0 2px 12px rgba(0,0,0,0.6); }
     .nav-toc { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.75); text-decoration: none; transition: color 0.3s; }
     .nav-toc:hover { color: #fff; }
-
     .chapter-wrapper { max-width: 720px; margin: 0 auto; padding: 9rem 2rem 6rem; }
-
     .chapter-header { text-align: center; margin-bottom: 4rem; opacity: 0; animation: fadeUp 1s 0.3s forwards; }
     .chapter-label { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: #7fffda; text-shadow: 0 0 14px rgba(127,255,218,0.5); display: block; margin-bottom: 1rem; }
     .chapter-number { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; color: var(--salt); text-shadow: 0 4px 30px rgba(0,0,0,0.6); display: block; margin-bottom: 1.5rem; }
     .header-rule { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 0 auto; }
-
     .glass-card { background: rgba(0,0,0,0.38); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(255,255,255,0.14); padding: 3.5rem 3rem; position: relative; overflow: visible; opacity: 0; animation: fadeUp 1s 0.5s forwards; display: flex; flex-direction: column; }
     .glass-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, var(--gold), #7fffda); pointer-events: none; }
-
     .chapter-content { flex: 1; }
     .chapter-content p { font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.95; color: rgba(232,237,245,0.92); margin-bottom: 1.5em; font-weight: 300; text-indent: 2em; }
     .chapter-content p:first-of-type { text-indent: 0; }
     .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
     .chapter-content strong { font-weight: 600; color: var(--gold); }
     .section-divider { text-align: center; color: var(--gold); font-size: 1rem; letter-spacing: 0.5em; margin: 2.5rem 0; text-shadow: 0 0 18px rgba(200,168,75,0.5); }
-
     .para-with-popup { position: relative; }
     .glossary-popup { position: absolute; right: -230px; top: 0; width: 210px; background: rgba(5,12,28,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.12); padding: 0.85rem 1rem; z-index: 20; opacity: 0; pointer-events: none; transition: opacity 0.6s ease; }
     .glossary-popup.visible { opacity: 1; }
     .popup-entry { font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; line-height: 1.55; color: rgba(232,237,245,0.88); margin-bottom: 0.55rem; }
     .popup-entry:last-child { margin-bottom: 0; }
     .popup-word { font-style: italic; color: var(--gold); text-shadow: 0 0 10px rgba(200,168,75,0.4); }
-
-    /* BOTTOM NAV — always at the very bottom of the glass card, never overlapping text */
     .bottom-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.08); flex-shrink: 0; position: static; }
     .nav-btn { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.6); text-decoration: none; padding: 0.6rem 1.2rem; border: 1px solid rgba(255,255,255,0.15); transition: all 0.3s; background: rgba(255,255,255,0.05); backdrop-filter: blur(4px); }
     .nav-btn:not(.disabled):hover { color: var(--gold); border-color: rgba(200,168,75,0.5); background: rgba(200,168,75,0.08); box-shadow: 0 0 20px rgba(200,168,75,0.15); }
     .nav-btn.disabled { opacity: 0.25; cursor: default; pointer-events: none; }
     .nav-btn-toc { font-family: 'Space Mono', monospace; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: #7fffda; text-decoration: none; text-shadow: 0 0 10px rgba(127,255,218,0.4); transition: color 0.3s; }
     .nav-btn-toc:hover { color: #fff; text-shadow: 0 0 18px rgba(127,255,218,0.7); }
-
     @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
     @media (max-width: 1000px) { .glossary-popup { right: auto; left: 0; top: auto; bottom: calc(100% + 8px); width: 100%; max-width: 100%; } }
     @media (max-width: 600px) { .chapter-wrapper { padding: 7rem 1.2rem 4rem; } .glass-card { padding: 2rem 1.5rem; } }
@@ -57,30 +48,26 @@
 </head>
 <body>
 <canvas id="sky-canvas"></canvas>
-
 <nav class="top-nav">
   <a href="index.html" class="nav-brand">Irene Lee</a>
   <a href="index.html#chapters" class="nav-toc">&#8592; All Chapters</a>
 </nav>
-
 <div class="content">
   <div class="chapter-wrapper">
-
     <header class="chapter-header">
       <span class="chapter-label">What Was Carried, What Was Lost</span>
       <span class="chapter-number">Chapter 2</span>
       <div class="header-rule"></div>
     </header>
-
     <div class="glass-card">
       <article class="chapter-content">
-        <p>A sound like thunder ripped through the house—the violent crash of wood giving way. The front door blew inwards, torn from its very hinges, flooding the dim room with harsh, blinding sunlight. Dust motes, usually dancing lazily in the air, now swirled in panicked clouds. Then, men in drab olive uniforms came in—shadows in the light, their boots heavy on our floor. Hands seized us before I could breathe. Panic seized my throat when the realization dawned on me. They were here for <em>Oppa</em>. It took them two weeks.</p>
-<p>Two soldiers lunged past, grabbing <em>Eonni </em>and Taejae. <em>Eonni</em> screamed, a raw sound of terror, as rough hands tangled in her hair. Another soldier seized my arm before I could react, yanking me off my feet with ease and tossing me aside. My head struck the wooden floor, sparks exploding behind my eyes. Through the blur, I saw the other soldier kick <em>Halmeoni</em> to the floor. She groaned at the impact. I tried to get up, but the soldier who had thrown me put his heavy foot on my back.</p>
+        <p>A sound like thunder ripped through the house—the violent crash of wood giving way. The front door blew inwards, torn from its very hinges, flooding the dim room with harsh, blinding sunlight. Dust motes, usually dancing lazily in the air, now swirled in panicked clouds. Then, men in drab olive uniforms came in—shadows in the light, their boots heavy on our floor. Hands seized us before I could breathe. Panic choked my throat when the realization dawned on me. They were here for <em>Oppa</em>. It took them two weeks.</p>
+<p>Two soldiers lunged past, grabbing <em>Eonni </em>and Taejae. <em>Eonni</em> screamed, a raw sound of terror, as rough hands tangled in her hair. Another soldier snatched my arm before I could react, yanking me off my feet with ease and tossing me aside. My head struck the wooden floor, sparks exploding behind my eyes. Through the blur, I saw the other soldier kick <em>Halmeoni</em> to the floor. She groaned at the impact. I tried to get up, but the soldier who had thrown me put his heavy foot on my back.</p>
 <p>&emsp;Another soldier, a general, then stepped through the doorway. He stalked towards <em>Eonni</em>, who knelt trembling where she’d been thrown.</p>
 <p>“Where is he?” He spat, flecks of saliva hitting her face.</p>
 <p>&emsp;“I don’t know what you mean, sir.” <em>Eonni </em>said, trembling.</p>
 <p>CRACK.</p>
-<p>The sharp, ugly sound of his open palm striking her cheek echoed in the silence. <em>Eonni</em> cried out, collapsing sideways onto the floorboards.</p>
+<p>The sharp, ugly sound of his open palm striking her cheek echoed in the silence. <em>Eonni</em> cried out, collapsing on her side onto the floorboards.</p>
 <p>The general sneered, grabbing a fistful of her hair, forcing her head up mercilessly. “Your brother. The traitor. Where is he hiding?”</p>
 <p>Just then, a sharp voice cut through the tension from the doorway. The room seemed to still for a second. My head snapped around. Peering in from the outside, her face radiant with a mixture of fear and self-importance, was the woman from two houses down.</p>
 <p>“I saw him!” she declared, her voice carrying clearly into the room, ensuring all the soldiers heard. “Two weeks ago. He’s here! Hiding like the coward traitor he is!”</p>
@@ -89,27 +76,27 @@
 <p>“Tell us,” The general said again, his grip on <em>Eonni</em>’s hair tightened, “Then perhaps the rest of you will live to see the sunset.” As if we would believe him.</p>
 <p>“He left!” <em>Eonni</em> blurted, tears streaming down her face, a red mark blooming on her cheek. “He left at night without telling us! We don't know where he went! I swear it!”</p>
 <p>The general’s eyes darkened but he let go of <em>Eonni</em>. He then looked up at the rest of his men. “Search the house.”</p>
-<p>As dull uniforms dispersed, the sounds of crashing and ripping starting almost immediately from other rooms, the general turned his menacing attention back to <em>Eonni</em>. He grabbed her by the front of her blouse, hauling her roughly to her feet and slamming her back against the nearest wall with terrifying force. His fingers clasped around her neck. A breath whooshed out of her in a strangled gasp.</p>
+<p>As dull uniforms dispersed, the sounds of crashing and ripping started almost immediately from other rooms. The general turned his menacing attention back to <em>Eonni</em>. He grabbed her by the front of her blouse, hauling her roughly to her feet and slamming her back against the nearest wall with terrifying force. His fingers clasped around her neck. A breath whooshed out of her in a strangled gasp.</p>
 <p>“<em>Eonni</em>!” I screamed, lunging forward instinctively. But the soldier behind me dug his feet painfully into my back, holding me fast.</p>
 <p>&emsp;“Sir, they have a baby.” A different man called out from the bedroom that used to be <em>Eomeoni</em>’s. Yeomjae’s soft cries echoed in the air.</p>
 <p>The general glanced towards the sound, then his cold eyes fell on Taejae, who was huddled near <em>Halmeoni</em>, face buried in her skirt, shaking with silent tears.</p>
-<p>“You,” he commanded, jerking his chin dismissively. “Go keep it quiet before I silence it myself.”</p>
+<p>“You,” he commanded, jerking his chin dismissively. “Go before I silence it myself.”</p>
 <p>Taejae flinched as if he was struck, but sprinted into the bedroom, his sobs muffled beneath his hands.</p>
 <p>The general turned back to <em>Eonni</em>, pressing her neck harder against the wall, his face inches from hers. "Last chance, I know you’re lying. Where is he, or you’ll die while we look for him."</p>
 <p><em>Eonni</em> gasped, her face turning an alarming shade of purple beneath his grasp, her eyes bulging. She coughed, her body shaking with so much force as tears started trailing down her face.</p>
 <p>&emsp;“Stop! Let her go! We really don’t know!” I screamed. With a sudden, desperate surge of strength fueled by panic, I twisted violently under the soldier's hold, breaking away from him. I scrambled towards the general, launching myself at him, beating uselessly at his back with the small, inadequate fists of a twelve year old girl. I knew it did nothing. A chill ran down my spine as he turned around, his piercing black eyes narrowing in frustration. But he unknowingly loosened his grasp on <em>Eonni</em>’s throat as he twisted around, letting her gulp for air.</p>
 <p>&emsp;“Little girl, stay out of it if you want to live. Be smart like your little brother and stand far away.” He clenched his jaws as he spat every word out at me with every breath.</p>
 <p>“No! Let her go!” I screamed, my voice cracking. He barely seemed to notice the blows until, in a raw animal instinct born of terror, I lunged and sank my teeth hard into his exposed forearm, biting down with all my might. He roared, letting out a guttural sound, yanking his arm in pain. He dropped <em>Eonni</em>. Red liquid trickled down his tan skin, and I quickly wiped my mouth of any remnants of his disgusting blood. It tasted metallic and sour. Retreating back, I nearly toppled over to duck as the general swiped at my face, and I gasped when I saw that what he had in his hands was a glinting knife. My face had barely grazed it. I spared a quick glance at <em>Eonni</em>, coughing as each breath entered her body, saliva dripping down her chin.</p>
-<p>&emsp;“Get rid of her, and keep searching the house!” The general roared<em>. </em>But before I could react, the soldier behind me grabbed me by the arms and slammed me onto the wall, squeezing my throat with both his hands. Air rushed out of me like a bullet. I squirmed under the man’s hands.</p>
+<p>&emsp;“Get rid of her, and keep searching the house!” The general roared<em>. </em>But before I could react, the soldier behind me grabbed me by the arms and slammed me onto the wall, squeezing my throat with both his hands. Air rushed out of me like a bullet.</p>
 <p>My head felt like it was going to explode, the incomprehensible pain making my body convulse and shake. The general’s voice started to become distant, then shapeless. I clawed at the soldier’s wrists, nails splitting. My vision spun—colors streaking, sound flattening—until only a roaring was left in my ears. Then the pain became distant. Then everything did.</p>
 <p>My knees went first. Then the floor.</p>
 <div class="section-divider">✦</div>
-<p>Darkness ripped away like a bandage. I was sprawled on the floor, dragging in huge, shuddering gasps of air that scraped my raw throat. My face felt stiff and sticky with dried tears. How long had I been unconscious? My head throbbed violently.</p>
+<p>Darkness ripped away in a flash. I was sprawled on the floor, dragging in huge, shuddering gasps of air that scraped my raw throat. My face felt stiff and sticky with dried tears. How long had I been unconscious? My head throbbed violently.</p>
 <p>As soon as I regained my senses, I noticed that the general wasn’t with <em>Eonni</em>; he was destroying the dinner table with his black boots. He swore loudly, his gruff voice shaking the whole house as he demolished the table.</p>
 <p>The other soldiers stood silently along the walls, their search apparently concluded. Their faces were grim, watchful, empty-handed.</p>
 <p>My stomach dropped. <em>Oppa</em>. Where was he? Panic surged anew, cold and sharp. I scanned the room frantically. <em>Eonni</em> sat slumped against the wall where she’d fallen, vacant eyes staring into nothing, blood dried like rust on her face and blouse. Alive.</p>
 <p><em>Halmeoni</em> huddled in the corner, still whispering frantic prayers, her knuckles white. Alive.</p>
-<p>That was when I saw the man holding a piece of colorful paper in his hand. I nearly gasped when I recognized it.</p>
+<p>That was when I noticed the general holding a piece of colorful paper in his hand. My eyes widened; I recognized it.</p>
 <p>My school certificate.</p>
 <p>&emsp;“Sir! She’s awake.” The soldier said beside me. I froze, my stomach clenching. The general’s boots slammed towards me with such force that the ground shook. He grabbed the back of my shirt and hauled me up. He crouched right in front of me, his rotting, cigarette breath huffing into my face with every rise and fall of his shoulders. He then lifted up the certificate to the side of his face.</p>
 <p>&emsp;“I found this in your drawers.” He said, “Do you know the meaning of this?”</p>
@@ -121,7 +108,7 @@
 <p>I was speechless, my mouth agape, ignoring the fresh tears that now trailed down my face. My wide eyes roamed around the room but I didn't really see anything, blinded by fury. Then, they landed on a mirror. I jerked backward, startled at the sight. My eyes were bloodshot and puffy, with smudges of dark purple forming a ring around my neck. Staring at myself, my skin crawled. I frantically grabbed the bottom of my shirt and rubbed my face to get that lingering feeling off of me. I couldn’t get it off, and my skin burned like fire.</p>
 <div class="para-with-popup" data-popup-id="popup-2-0"><p>Taejae shuffled out into the living room and towards <em>Eonni </em>who sat motionless on the floor, his eyes bleary with tears. “<em>Noona</em>, are you okay?”</p><div class="glossary-popup" id="popup-2-0"><div class="popup-entry"><em class="popup-word">Noona</em> — Older sister; used by males to address or refer to an older female sibling.</div></div></div>
 <p>She didn’t answer nor did she acknowledge him with a glance. Her blank eyes stared into space, with nothing behind them.</p>
-<p>Wobbling to my feet, I stumbled in the direction to the storage room, dragging my heavy feet.</p>
+<p>Wobbling to my feet, I stumbled in the direction of the storage room, dragging my heavy feet.</p>
 <p>&emsp;“No.”</p>
 <p>&emsp;I turned around and stared at <em>Eonni</em>.</p>
 <p>&emsp;“They’re waiting.”</p>
@@ -138,18 +125,16 @@
         <a href="chapter-3.html" class="nav-btn">Next &#8594;</a>
       </div>
     </div>
-
   </div>
 </div>
-
 <script>
 const canvas=document.getElementById('sky-canvas'),ctx=canvas.getContext('2d');
 function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
 resize();window.addEventListener('resize',resize);
-const stars=Array.from({length:130},()=>({x:Math.random(),y:Math.random()*0.70,size:Math.random()*2.8+0.6,phase:Math.random()*Math.PI*2,speed:Math.random()*0.6+0.3,brightness:Math.random()*0.5+0.55}));
+const stars=Array.from({length:60},()=>({x:Math.random(),y:Math.random()*0.70,size:Math.random()*1.4+0.3,phase:Math.random()*Math.PI*2,speed:Math.random()*0.6+0.3,brightness:Math.random()*0.5+0.55}));
 const shootingStars=[];let nextShoot=3+Math.random()*5;
-function spawnShootingStar(){shootingStars.push({x:Math.random()*0.7+0.05,y:Math.random()*0.35+0.03,len:0.08+Math.random()*0.1,angle:Math.PI/4+(Math.random()-0.5)*0.4,speed:0.18+Math.random()*0.15,progress:0,alpha:0.9+Math.random()*0.1});}
-const waves=[{y:0.765,amp:22,freq:0.007,spd:0.55,alpha:0.52,w:3.5},{y:0.800,amp:16,freq:0.011,spd:0.80,alpha:0.40,w:2.8},{y:0.832,amp:11,freq:0.016,spd:0.45,alpha:0.30,w:2.2},{y:0.860,amp:7,freq:0.024,spd:1.00,alpha:0.20,w:1.6},{y:0.890,amp:4,freq:0.035,spd:0.65,alpha:0.14,w:1.1}];
+function spawnShootingStar(){shootingStars.push({x:Math.random()*0.7+0.05,y:Math.random()*0.35+0.03,len:0.08+Math.random()*0.1,angle:Math.PI/8+(Math.random()-0.5)*0.2,speed:0.18+Math.random()*0.15,progress:0,alpha:0.9+Math.random()*0.1});}
+const waves=[{y:0.765,amp:22,freq:0.007,spd:0.55,alpha:0.22,w:3.5},{y:0.800,amp:16,freq:0.011,spd:0.80,alpha:0.17,w:2.8},{y:0.832,amp:11,freq:0.016,spd:0.45,alpha:0.13,w:2.2},{y:0.860,amp:7,freq:0.024,spd:1.00,alpha:0.08,w:1.6},{y:0.890,amp:4,freq:0.035,spd:0.65,alpha:0.06,w:1.1}];
 let animTime=0;
 function draw(ts){
   animTime=ts/1000;const W=canvas.width,H=canvas.height;
@@ -169,7 +154,7 @@ function draw(ts){
   ctx.fillStyle=mg;ctx.beginPath();ctx.arc(mx,my,mr*4,0,Math.PI*2);ctx.fill();
   ctx.beginPath();ctx.arc(mx,my,mr,0,Math.PI*2);ctx.fillStyle='rgba(255,252,235,1)';ctx.fill();
   ctx.beginPath();ctx.arc(mx-mr*0.2,my-mr*0.15,mr*0.85,0,Math.PI*2);ctx.fillStyle='rgba(5,12,20,0.92)';ctx.fill();
-  stars.forEach(s=>{const tw=0.55+0.45*Math.sin(s.phase+animTime*s.speed),a=s.brightness*tw;ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.size,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,235,${a})`;ctx.fill();if(s.size>1.8&&a>0.4){ctx.strokeStyle=`rgba(255,255,220,${a*0.55})`;ctx.lineWidth=0.7;const cx=s.x*W,cy=s.y*H,len=s.size*4;ctx.beginPath();ctx.moveTo(cx-len,cy);ctx.lineTo(cx+len,cy);ctx.moveTo(cx,cy-len);ctx.lineTo(cx,cy+len);ctx.stroke();}});
+  stars.forEach(s=>{const tw=0.55+0.45*Math.sin(s.phase+animTime*s.speed),a=s.brightness*tw;ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.size,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,235,${a})`;ctx.fill();});
   nextShoot-=0.016;if(nextShoot<=0){spawnShootingStar();nextShoot=4+Math.random()*7;}
   for(let i=shootingStars.length-1;i>=0;i--){const ss=shootingStars[i];ss.progress+=ss.speed*0.016;if(ss.progress>=1){shootingStars.splice(i,1);continue;}const fade=ss.progress<0.2?ss.progress/0.2:ss.progress>0.7?1-(ss.progress-0.7)/0.3:1;const hx=(ss.x+Math.cos(ss.angle)*ss.len*ss.progress)*W;const hy=(ss.y+Math.sin(ss.angle)*ss.len*ss.progress)*H;const tx=(ss.x+Math.cos(ss.angle)*ss.len*Math.max(0,ss.progress-0.35))*W;const ty=(ss.y+Math.sin(ss.angle)*ss.len*Math.max(0,ss.progress-0.35))*H;const gr=ctx.createLinearGradient(tx,ty,hx,hy);gr.addColorStop(0,'rgba(255,255,245,0)');gr.addColorStop(1,`rgba(255,255,245,${ss.alpha*fade})`);ctx.beginPath();ctx.moveTo(tx,ty);ctx.lineTo(hx,hy);ctx.strokeStyle=gr;ctx.lineWidth=1.5;ctx.stroke();ctx.beginPath();ctx.arc(hx,hy,1.5,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,245,${ss.alpha*fade})`;ctx.fill();}
   const hg=ctx.createLinearGradient(0,H*0.55,0,H*0.82);hg.addColorStop(0,'rgba(26,107,90,0.12)');hg.addColorStop(1,'transparent');ctx.fillStyle=hg;ctx.fillRect(0,0,W,H);

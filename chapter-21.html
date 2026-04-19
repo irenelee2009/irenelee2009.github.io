@@ -12,44 +12,35 @@
     body { background: #0a0e1a; color: var(--salt); font-family: 'Cormorant Garamond', serif; font-weight: 300; overflow-x: hidden; min-height: 100vh; }
     #sky-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
     .content { position: relative; z-index: 2; }
-
     nav.top-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.5rem 10vw; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent); backdrop-filter: blur(6px); }
     .nav-brand { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; color: #fff; text-decoration: none; text-shadow: 0 2px 12px rgba(0,0,0,0.6); }
     .nav-toc { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.75); text-decoration: none; transition: color 0.3s; }
     .nav-toc:hover { color: #fff; }
-
     .chapter-wrapper { max-width: 720px; margin: 0 auto; padding: 9rem 2rem 6rem; }
-
     .chapter-header { text-align: center; margin-bottom: 4rem; opacity: 0; animation: fadeUp 1s 0.3s forwards; }
     .chapter-label { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: #7fffda; text-shadow: 0 0 14px rgba(127,255,218,0.5); display: block; margin-bottom: 1rem; }
     .chapter-number { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; color: var(--salt); text-shadow: 0 4px 30px rgba(0,0,0,0.6); display: block; margin-bottom: 1.5rem; }
     .header-rule { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 0 auto; }
-
     .glass-card { background: rgba(0,0,0,0.38); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(255,255,255,0.14); padding: 3.5rem 3rem; position: relative; overflow: visible; opacity: 0; animation: fadeUp 1s 0.5s forwards; display: flex; flex-direction: column; }
     .glass-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, var(--gold), #7fffda); pointer-events: none; }
-
     .chapter-content { flex: 1; }
     .chapter-content p { font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.95; color: rgba(232,237,245,0.92); margin-bottom: 1.5em; font-weight: 300; text-indent: 2em; }
     .chapter-content p:first-of-type { text-indent: 0; }
     .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
     .chapter-content strong { font-weight: 600; color: var(--gold); }
     .section-divider { text-align: center; color: var(--gold); font-size: 1rem; letter-spacing: 0.5em; margin: 2.5rem 0; text-shadow: 0 0 18px rgba(200,168,75,0.5); }
-
     .para-with-popup { position: relative; }
     .glossary-popup { position: absolute; right: -230px; top: 0; width: 210px; background: rgba(5,12,28,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.12); padding: 0.85rem 1rem; z-index: 20; opacity: 0; pointer-events: none; transition: opacity 0.6s ease; }
     .glossary-popup.visible { opacity: 1; }
     .popup-entry { font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; line-height: 1.55; color: rgba(232,237,245,0.88); margin-bottom: 0.55rem; }
     .popup-entry:last-child { margin-bottom: 0; }
     .popup-word { font-style: italic; color: var(--gold); text-shadow: 0 0 10px rgba(200,168,75,0.4); }
-
-    /* BOTTOM NAV — always at the very bottom of the glass card, never overlapping text */
     .bottom-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.08); flex-shrink: 0; position: static; }
     .nav-btn { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.6); text-decoration: none; padding: 0.6rem 1.2rem; border: 1px solid rgba(255,255,255,0.15); transition: all 0.3s; background: rgba(255,255,255,0.05); backdrop-filter: blur(4px); }
     .nav-btn:not(.disabled):hover { color: var(--gold); border-color: rgba(200,168,75,0.5); background: rgba(200,168,75,0.08); box-shadow: 0 0 20px rgba(200,168,75,0.15); }
     .nav-btn.disabled { opacity: 0.25; cursor: default; pointer-events: none; }
     .nav-btn-toc { font-family: 'Space Mono', monospace; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: #7fffda; text-decoration: none; text-shadow: 0 0 10px rgba(127,255,218,0.4); transition: color 0.3s; }
     .nav-btn-toc:hover { color: #fff; text-shadow: 0 0 18px rgba(127,255,218,0.7); }
-
     @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
     @media (max-width: 1000px) { .glossary-popup { right: auto; left: 0; top: auto; bottom: calc(100% + 8px); width: 100%; max-width: 100%; } }
     @media (max-width: 600px) { .chapter-wrapper { padding: 7rem 1.2rem 4rem; } .glass-card { padding: 2rem 1.5rem; } }
@@ -57,34 +48,31 @@
 </head>
 <body>
 <canvas id="sky-canvas"></canvas>
-
 <nav class="top-nav">
   <a href="index.html" class="nav-brand">Irene Lee</a>
   <a href="index.html#chapters" class="nav-toc">&#8592; All Chapters</a>
 </nav>
-
 <div class="content">
   <div class="chapter-wrapper">
-
     <header class="chapter-header">
       <span class="chapter-label">What Was Carried, What Was Lost</span>
       <span class="chapter-number">Chapter 21</span>
       <div class="header-rule"></div>
     </header>
-
     <div class="glass-card">
       <article class="chapter-content">
         <p>It took <em>Abeoji</em> the whole morning to cut down one tree. It was a small one compared to the others in the forest, but it was enough.</p>
-<p>Dividing it into sections, he cut it into small even slabs that were easy to carry and burn. When we stacked it on the little plot of land we called our shop, we noticed that we were receiving a little more attention than yesterday. The villagers gave us more looks of curiosity than of suspicion. Perhaps it was because we didn’t give up.</p>
-<p>In the morning, we found a freshwater river to bathe in. <em>Halmeoni</em> had discovered it while searching for wild greens to make soup. It felt unlike when I saw it with my own eyes than when <em>Halmeoni</em> told us at the tent. It shone differently from the ocean: it was sleek—pure. It looked like a little gem. Just by looking at it, it made me feel dirtier by the second, my skin crawling as if it finally noticed the layer of dirt, sweat, and blood that caked my body.</p>
-<p>Afraid that villagers would stumble on us bathing, we just swam with our clothes on. Without waiting for anyone, I leaped in, immediately being submerged in freezing cold water. I shouted in delight, the feeling of my raw voice against my throat almost liberating. The smooth pebbles at the bottom seemed to cool the hot callouses on the bottom of my feet, and the pressure of the rushing water against my body eased any tension in my joints. This felt different this time—different from when I washed myself with <em>Eonni</em> in the river back on the mainland. Not worse, but just <em>different</em>. I didn’t know what it was, but it made me smile.</p>
+<p>Dividing it into sections, he cut it into small even slabs that were easy to carry and burn. When we stacked it on the little plot of land we called our shop, we noticed that we were receiving a little more attention than yesterday, even though we hiked up the price to thirty won.</p>
+<p>The villagers gave us more looks of curiosity than of suspicion. Perhaps it was because we didn’t give up.</p>
+<p>In the morning, we found a freshwater river to bathe in. <em>Halmeoni</em> had discovered it while searching for wild greens to make soup. Looking at it with my own eyes felt different than when <em>Halmeoni</em> told us at the tent. It shone differently from the ocean: it was sleek—almost pure. It was like a little gem. Just by looking at it, it made me feel dirtier by the second, my skin crawling as if it finally noticed the layer of dirt, sweat, and blood that caked my body.</p>
+<p>Afraid that villagers would stumble on us bathing, we just swam with our clothes on. Without waiting for anyone, I leaped in, immediately submerging into freezing cold water. I shouted in delight, the feeling of my raw voice against my throat almost liberating. The smooth pebbles at the bottom seemed to cool the hot callouses on the bottom of my feet, and the pressure of the rushing water against my body eased any tension in my joints. It felt different this time—different from when I washed myself with <em>Eonni</em> in the river. Not worse, but just <em>different</em>. I didn’t know what it was, but it made me smile.</p>
 <p>When our skin and hair shone in the sunlight, we all laid down on a large, flat rock to dry. All the while, <em>Abeoji</em> was cutting down the tree. After he cut the tree and brought it to the tent, he came and bathed himself as we went back to carry the firewood to the market. Once we finally stacked all the wood in neat piles, <em>Abeoji</em> joined us looking clean and dry as well.</p>
 <p>When it was a little after midday, we had our first customer of the day. It was a married woman, probably in her mid-fifties.</p>
 <p>“Ten pieces, please.” She said curtly, without a greeting.</p>
 <p>I picked out ten pieces and handed them to <em>Eonni</em>. She gave <em>Abeoji </em>the money and walked with <em>Eonni</em> who took it to her house. It had become a thing, apparently—us delivering the firewood to the customers’ homes. <em>Eonni </em>didn’t come back until after the sun started going down.</p>
 <p>Nobody else came that day. Again, we ate a loaf of bread for dinner.</p>
 <div class="section-divider">✦</div>
-<p>&emsp;A week had passed and nobody seemed to want our firewood anymore. As we expected, many people already had their own firewood stash, and would cut it down themselves rather than buy it from defectors. The only customers would be the elderly, but even then they didn’t want a lot—often leaving us with just enough won to buy another loaf of bread.</p>
+<p>&emsp;A week had passed and nobody seemed to want our firewood anymore. As we expected, many people already had their own firewood stash, and would cut it down themselves rather than buy it. The only customers would be the elderly, but even then they didn’t want a lot—often leaving us with just enough won to buy another loaf of bread.</p>
 <p>We were still hungry.</p>
 <p>Our days soon were taken up by a single routine: chopping wood, selling some, buying bread, and then coming back home for the night, mostly with a growing supply of leftover firewood. Nothing really exciting or new happened, just the fact that we were still skin and bones, even when we had a loaf of bread—and sometimes two—everyday. I watched each resident walk past our pile of firewood, our calls and shouts becoming quieter and weaker. <em>Abeoji</em> had stopped cutting down trees, as we no longer needed to—and we didn’t want to either.</p>
 <p>&emsp;One day, as we were walking back to our tent after a normal day of sales, we were blocked by two villagers who were walking very slowly on the dirt path. Instead of excusing ourselves, their conversation piqued our interest. Walking from a distance, we were still able to listen to them without them knowing of our presence.</p>
@@ -98,7 +86,7 @@
 <p>&emsp;“Do you think it could really be him?” <em>Eonni</em> spoke up first as we all stopped walking.</p>
 <p>&emsp;“It’s unlikely,” <em>Halmeoni</em> sighed, “We’ve encountered so many stories similar to this, but none were him. Besides, it’s already been months since we last saw him… Do you really think he’s even alive?”</p>
 <p>&emsp;“He must be.” <em>Abeoji</em> said firmly, “He’s my son, and I know my children. Let’s go see if it's him.”</p>
-<p>We all followed his hurried steps as we made our way down the mountain and towards the shore. We didn’t utter a single word on the way there, as if the suspense in the air had blocked all the words that were in our throats. I walked behind everyone else, my gait a bit slower than the rest. I was tired of walking back and forth to the beach after hearing every whisper about a single defector arriving just to see a stranger—not the familiar face of <em>Oppa</em>. I was tired of constantly thinking about him and the fact that he was probably dead. We were all exhausted. We barely survived even when all of us were together as a family—I didn’t think <em>Oppa</em> would make it alone.</p>
+<p>We all followed his hurried steps as we made our way down the mountain and towards the shore. We didn’t utter a single word on the way there, as if the suspense in the air had choked all the words that were in our throats. I walked behind everyone else, my gait a bit slower than the rest. I was tired of walking back and forth to the beach after hearing every whisper about a single defector arriving just to see a stranger—not the familiar face of <em>Oppa</em>. I was tired of constantly thinking about him and the fact that he was probably dead. We were all exhausted. We barely survived even when all of us were together as a family—I didn’t think <em>Oppa</em> would make it alone.</p>
 <p>&emsp;Either way, I followed the rest of my family towards the beach. If it was really <em>Oppa</em>, how would he react when he saw us? Would he ask if we ever tried to look for him?</p>
 <p>Guilt grabbed at my chest as these questions flooded my mind. In fact—to answer that question—we <em>hadn’t</em> looked for him at all. We hadn’t given him a sign of where we were. We never even looked among the defectors on this island to see if it was <em>Oppa</em>. It was like we accepted his death and moved on within hours.</p>
 <p>My face burned with shame at the fact that I had been complaining just a moment ago. We had abandoned him, and while we didn’t know if he was alive or not, the thought still punched me in the gut.</p>
@@ -111,18 +99,16 @@
         <a href="chapter-22.html" class="nav-btn">Next &#8594;</a>
       </div>
     </div>
-
   </div>
 </div>
-
 <script>
 const canvas=document.getElementById('sky-canvas'),ctx=canvas.getContext('2d');
 function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
 resize();window.addEventListener('resize',resize);
-const stars=Array.from({length:130},()=>({x:Math.random(),y:Math.random()*0.70,size:Math.random()*2.8+0.6,phase:Math.random()*Math.PI*2,speed:Math.random()*0.6+0.3,brightness:Math.random()*0.5+0.55}));
+const stars=Array.from({length:60},()=>({x:Math.random(),y:Math.random()*0.70,size:Math.random()*1.4+0.3,phase:Math.random()*Math.PI*2,speed:Math.random()*0.6+0.3,brightness:Math.random()*0.5+0.55}));
 const shootingStars=[];let nextShoot=3+Math.random()*5;
-function spawnShootingStar(){shootingStars.push({x:Math.random()*0.7+0.05,y:Math.random()*0.35+0.03,len:0.08+Math.random()*0.1,angle:Math.PI/4+(Math.random()-0.5)*0.4,speed:0.18+Math.random()*0.15,progress:0,alpha:0.9+Math.random()*0.1});}
-const waves=[{y:0.765,amp:22,freq:0.007,spd:0.55,alpha:0.52,w:3.5},{y:0.800,amp:16,freq:0.011,spd:0.80,alpha:0.40,w:2.8},{y:0.832,amp:11,freq:0.016,spd:0.45,alpha:0.30,w:2.2},{y:0.860,amp:7,freq:0.024,spd:1.00,alpha:0.20,w:1.6},{y:0.890,amp:4,freq:0.035,spd:0.65,alpha:0.14,w:1.1}];
+function spawnShootingStar(){shootingStars.push({x:Math.random()*0.7+0.05,y:Math.random()*0.35+0.03,len:0.08+Math.random()*0.1,angle:Math.PI/8+(Math.random()-0.5)*0.2,speed:0.18+Math.random()*0.15,progress:0,alpha:0.9+Math.random()*0.1});}
+const waves=[{y:0.765,amp:22,freq:0.007,spd:0.55,alpha:0.22,w:3.5},{y:0.800,amp:16,freq:0.011,spd:0.80,alpha:0.17,w:2.8},{y:0.832,amp:11,freq:0.016,spd:0.45,alpha:0.13,w:2.2},{y:0.860,amp:7,freq:0.024,spd:1.00,alpha:0.08,w:1.6},{y:0.890,amp:4,freq:0.035,spd:0.65,alpha:0.06,w:1.1}];
 let animTime=0;
 function draw(ts){
   animTime=ts/1000;const W=canvas.width,H=canvas.height;
@@ -142,7 +128,7 @@ function draw(ts){
   ctx.fillStyle=mg;ctx.beginPath();ctx.arc(mx,my,mr*4,0,Math.PI*2);ctx.fill();
   ctx.beginPath();ctx.arc(mx,my,mr,0,Math.PI*2);ctx.fillStyle='rgba(255,252,235,1)';ctx.fill();
   ctx.beginPath();ctx.arc(mx-mr*0.2,my-mr*0.15,mr*0.85,0,Math.PI*2);ctx.fillStyle='rgba(5,12,20,0.92)';ctx.fill();
-  stars.forEach(s=>{const tw=0.55+0.45*Math.sin(s.phase+animTime*s.speed),a=s.brightness*tw;ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.size,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,235,${a})`;ctx.fill();if(s.size>1.8&&a>0.4){ctx.strokeStyle=`rgba(255,255,220,${a*0.55})`;ctx.lineWidth=0.7;const cx=s.x*W,cy=s.y*H,len=s.size*4;ctx.beginPath();ctx.moveTo(cx-len,cy);ctx.lineTo(cx+len,cy);ctx.moveTo(cx,cy-len);ctx.lineTo(cx,cy+len);ctx.stroke();}});
+  stars.forEach(s=>{const tw=0.55+0.45*Math.sin(s.phase+animTime*s.speed),a=s.brightness*tw;ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.size,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,235,${a})`;ctx.fill();});
   nextShoot-=0.016;if(nextShoot<=0){spawnShootingStar();nextShoot=4+Math.random()*7;}
   for(let i=shootingStars.length-1;i>=0;i--){const ss=shootingStars[i];ss.progress+=ss.speed*0.016;if(ss.progress>=1){shootingStars.splice(i,1);continue;}const fade=ss.progress<0.2?ss.progress/0.2:ss.progress>0.7?1-(ss.progress-0.7)/0.3:1;const hx=(ss.x+Math.cos(ss.angle)*ss.len*ss.progress)*W;const hy=(ss.y+Math.sin(ss.angle)*ss.len*ss.progress)*H;const tx=(ss.x+Math.cos(ss.angle)*ss.len*Math.max(0,ss.progress-0.35))*W;const ty=(ss.y+Math.sin(ss.angle)*ss.len*Math.max(0,ss.progress-0.35))*H;const gr=ctx.createLinearGradient(tx,ty,hx,hy);gr.addColorStop(0,'rgba(255,255,245,0)');gr.addColorStop(1,`rgba(255,255,245,${ss.alpha*fade})`);ctx.beginPath();ctx.moveTo(tx,ty);ctx.lineTo(hx,hy);ctx.strokeStyle=gr;ctx.lineWidth=1.5;ctx.stroke();ctx.beginPath();ctx.arc(hx,hy,1.5,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,245,${ss.alpha*fade})`;ctx.fill();}
   const hg=ctx.createLinearGradient(0,H*0.55,0,H*0.82);hg.addColorStop(0,'rgba(26,107,90,0.12)');hg.addColorStop(1,'transparent');ctx.fillStyle=hg;ctx.fillRect(0,0,W,H);

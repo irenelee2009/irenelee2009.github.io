@@ -12,44 +12,35 @@
     body { background: #0a0e1a; color: var(--salt); font-family: 'Cormorant Garamond', serif; font-weight: 300; overflow-x: hidden; min-height: 100vh; }
     #sky-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
     .content { position: relative; z-index: 2; }
-
     nav.top-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.5rem 10vw; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent); backdrop-filter: blur(6px); }
     .nav-brand { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; color: #fff; text-decoration: none; text-shadow: 0 2px 12px rgba(0,0,0,0.6); }
     .nav-toc { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.75); text-decoration: none; transition: color 0.3s; }
     .nav-toc:hover { color: #fff; }
-
     .chapter-wrapper { max-width: 720px; margin: 0 auto; padding: 9rem 2rem 6rem; }
-
     .chapter-header { text-align: center; margin-bottom: 4rem; opacity: 0; animation: fadeUp 1s 0.3s forwards; }
     .chapter-label { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: #7fffda; text-shadow: 0 0 14px rgba(127,255,218,0.5); display: block; margin-bottom: 1rem; }
     .chapter-number { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; color: var(--salt); text-shadow: 0 4px 30px rgba(0,0,0,0.6); display: block; margin-bottom: 1.5rem; }
     .header-rule { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 0 auto; }
-
     .glass-card { background: rgba(0,0,0,0.38); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(255,255,255,0.14); padding: 3.5rem 3rem; position: relative; overflow: visible; opacity: 0; animation: fadeUp 1s 0.5s forwards; display: flex; flex-direction: column; }
     .glass-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, var(--gold), #7fffda); pointer-events: none; }
-
     .chapter-content { flex: 1; }
     .chapter-content p { font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.95; color: rgba(232,237,245,0.92); margin-bottom: 1.5em; font-weight: 300; text-indent: 2em; }
     .chapter-content p:first-of-type { text-indent: 0; }
     .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
     .chapter-content strong { font-weight: 600; color: var(--gold); }
     .section-divider { text-align: center; color: var(--gold); font-size: 1rem; letter-spacing: 0.5em; margin: 2.5rem 0; text-shadow: 0 0 18px rgba(200,168,75,0.5); }
-
     .para-with-popup { position: relative; }
     .glossary-popup { position: absolute; right: -230px; top: 0; width: 210px; background: rgba(5,12,28,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.12); padding: 0.85rem 1rem; z-index: 20; opacity: 0; pointer-events: none; transition: opacity 0.6s ease; }
     .glossary-popup.visible { opacity: 1; }
     .popup-entry { font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; line-height: 1.55; color: rgba(232,237,245,0.88); margin-bottom: 0.55rem; }
     .popup-entry:last-child { margin-bottom: 0; }
     .popup-word { font-style: italic; color: var(--gold); text-shadow: 0 0 10px rgba(200,168,75,0.4); }
-
-    /* BOTTOM NAV — always at the very bottom of the glass card, never overlapping text */
     .bottom-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.08); flex-shrink: 0; position: static; }
     .nav-btn { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.6); text-decoration: none; padding: 0.6rem 1.2rem; border: 1px solid rgba(255,255,255,0.15); transition: all 0.3s; background: rgba(255,255,255,0.05); backdrop-filter: blur(4px); }
     .nav-btn:not(.disabled):hover { color: var(--gold); border-color: rgba(200,168,75,0.5); background: rgba(200,168,75,0.08); box-shadow: 0 0 20px rgba(200,168,75,0.15); }
     .nav-btn.disabled { opacity: 0.25; cursor: default; pointer-events: none; }
     .nav-btn-toc { font-family: 'Space Mono', monospace; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: #7fffda; text-decoration: none; text-shadow: 0 0 10px rgba(127,255,218,0.4); transition: color 0.3s; }
     .nav-btn-toc:hover { color: #fff; text-shadow: 0 0 18px rgba(127,255,218,0.7); }
-
     @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
     @media (max-width: 1000px) { .glossary-popup { right: auto; left: 0; top: auto; bottom: calc(100% + 8px); width: 100%; max-width: 100%; } }
     @media (max-width: 600px) { .chapter-wrapper { padding: 7rem 1.2rem 4rem; } .glass-card { padding: 2rem 1.5rem; } }
@@ -57,49 +48,47 @@
 </head>
 <body>
 <canvas id="sky-canvas"></canvas>
-
 <nav class="top-nav">
   <a href="index.html" class="nav-brand">Irene Lee</a>
   <a href="index.html#chapters" class="nav-toc">&#8592; All Chapters</a>
 </nav>
-
 <div class="content">
   <div class="chapter-wrapper">
-
     <header class="chapter-header">
       <span class="chapter-label">What Was Carried, What Was Lost</span>
       <span class="chapter-number">Chapter 16</span>
       <div class="header-rule"></div>
     </header>
-
     <div class="glass-card">
       <article class="chapter-content">
         <p>Every two days, another tent was left untouched, its flaps rustling in the wind. The usual voices I heard from every corner of the village were gone, the only noise on the island being the grumblings of everyone' s stomachs. It was early in the morning, and I sat outside our own tent, staring at one that was empty—its wooden bowl still sitting outside of it. If I had remembered correctly, a family lived in that tent and occupied it even until last night.</p>
-<p>A cool breeze whipped past me, my matted hair hitting my face. Frowning, I brushed it away and saw <em>Halmeoni</em> coming back from the shore with a pot filled with seawater. It was time to make breakfast.</p>
-<p>With no access to real food, we all resorted to making soup from scarce wild greens. When we first made it, it was incredibly bitter and bland. But to fix that, <em>Halmeoni</em> had an idea. Usually, we would have had clean water to make the soup, but she decided that it would be better if we used seawater so that its salt could be used as seasoning.</p>
+<p>A cool breeze whipped past me, my matted hair hitting my face. Frowning, I tugged it away and saw <em>Halmeoni</em> coming back from the shore with a pot filled with seawater. It was time to make breakfast.</p>
+<p>With no access to real food, we all resorted to making soup from scarce wild greens. When we first made it, it was incredibly bitter and bland. But to fix that, <em>Halmeoni</em> had an idea. Usually, we would have had clean water to make the soup, but she decided that it would be better if we also added seawater so that its salt could be used as seasoning.</p>
 <p>I had already roamed the small island, plucking wild greens that seemed edible and carried it back to our tent. <em>Eonni</em> had washed it, and now we watched as <em>Halmeoni</em> placed the pot full of seawater on top of a roaring fire.</p>
-<p>My stomach churned as I watched <em>Eonni</em> drop the greens into the boiling seawater. That same seawater had touched so many things, one of them being our waste. There were no toilets on the island, so many people did their business right on the sand. But, during high tide, the feces would end up in the seawater. Still, we waded away from the waste and scooped up the seawater, boiled whatever rice we had left in it, and ate it because it was salty enough.</p>
-<p>Even after having this meal more times than I could remember, I still felt nauseous when I saw it in my bowl. But the constant stab in my gut that reminded me that my organs were slowly withering away was enough to make me eat it.</p>
-<p>When breakfast was ready, we all sat near the fire and started to eat the soup. I tried not to think about what the seawater could also contain, and instead focused my attention on Yeomjae. I scooped up a little bit of the soup and directed it into his mouth, feeding him while I fed myself. He was still four years old and needed me to take care of him. He was always next to me and would cry whenever we separated.</p>
+<p>My stomach churned as I watched <em>Eonni</em> drop the greens into the boiling seawater. It wasn’t the good churning. That same seawater had touched so many things, one of them being our waste. There were no toilets on the island, so many people did their business right on the sand. But, during high tide, the feces would end up in the seawater. Still, we waded away from the waste and scooped up the seawater, boiled whatever rice we had left in it, and ate it because it was salty enough.</p>
+<p>Even after having this meal more times than I could remember, I still felt nauseous when I saw it in my bowl. But the constant stab in my gut was enough to make me eat it.</p>
+<p>When breakfast was ready, we all sat near the fire and started to eat the soup. I tried not to think about what the seawater could also contain, and instead focused my attention on Yeomjae. I scooped up a little bit of the soup and directed it into his mouth, feeding him while I fed myself. He was still two years old and needed me to take care of him. He was always next to me and would cry whenever we separated.</p>
 <p>But while we all regained color on our faces, Yeomjae became white and blue. I didn’t know why—maybe it was because of not having enough food as a growing baby. So whenever we had our meals, I made sure that he ate an extra bowl. But even then, he became paler by the day, his body becoming frail and thin.</p>
 <p>~</p>
 <p>&emsp;Soon, night blanketed the island once more. Another day had passed of doing the same things over and over again. I crawled into our tent, and saw everyone settling in to sleep. Yeomjae lay at the edge with his own blanket, his breaths shallow. Worry etched my face as I stared at him. I placed my hand on his forehead and felt a slight warmth but nothing out of the ordinary. What was wrong with him? I gave him enough food to keep him strong, let him rest whenever he was tired, and kept him walking around the island as a form of exercise.</p>
-<p>&emsp;“Go to bed, Hwajae.” <em>Abeoji</em> said in the darkness, “Yeomjae will be alright. We will figure it out tomorrow morning.”</p>
+<p>&emsp;“Go to bed, Hwajae.” <em>Abeoji</em> said in the darkness, “Yeomjae will be alright. We will figure it out tomorrow.”</p>
 <p>I listened and went to bed, but later was awoken by a horrible stench. Looking around in the darkness to find out where this smell was coming from, I gasped when I discovered that it was coming from Yeomjae. I tried to shake him awake, but he wouldn’t move. He felt rigid under my hand, and I nearly recoiled in shock when I saw that he had soiled himself, but it wasn’t…right. It didn’t look right.</p>
 <p>&emsp;I grabbed him, ignoring the odor as I ran to the neighboring tents, waking the villagers inside and asking if they could help. But they pushed me out, saying that they didn’t have anything that could help.</p>
-<p>I then ran into a tent of a mother and her baby. Surely, she would know something. Her eyes widened when she saw the soiled blanket. She took Yeomjae and examined him thoroughly. I watched with anxious anticipation but my stomach lurched when I saw her face droop with defeat. She said it was dysentery. She said he was dying.</p>
-<p>I couldn’t believe it. I didn’t want to believe it. I left the woman’s tent with Yeomjae’s burning hot body in my arms, and walked to the shores, away from the others.</p>
+<p>I then ran into a tent of a mother and her baby. Surely, she would know something. Her eyes widened when she saw the soiled blanket. She took Yeomjae and examined him thoroughly. I watched with anxious anticipation but my stomach lurched when I saw her face crumple with defeat. She said it was dysentery. She said he was dying.</p>
+<p><em>He was dying. He was dying. He was dying.</em></p>
+<p>I couldn’t believe it. I didn’t want to believe it. I left the woman’s tent with Yeomjae’s burning hot body in my arms, and walked to the water, away from the others.</p>
 <p>When I felt his body go limp in my arms, my vision blurred with hot tears. Ever since <em>Eomeoni</em> had passed away, he was my responsibility. The soft gaze he gave me every time I held him was the look a child gave to their mother, but now his dark brown eyes were lifeless as he looked up at the starry sky one last time.</p>
 <p>A lump formed in my throat as I watched his body turn cold while the sun rose above the horizon, painting the dark sky with  a marvelous gold and pink hue. My mind went blank as the camp awoke from its deep slumber, its droning noise lost to my ears. He didn’t deserve this.</p>
 <p>I should have been the one who had died.</p>
 <p>~</p>
-<p>When everyone else found out about Yeomjae’s death, I couldn’t go with <em>Abeoji</em> to bury him. Telling them about it was hard enough. Instead, I sat alone on the sand, staring at the same seawater that had taken <em>Oppa</em>, the same seawater that had killed Yeomjae. I stared and stared with so much bitter rage that <em>Eonni</em> had to drag me back to the tent just to get me to eat something.</p>
-<p>The next day, we decided to leave the island—to move on to the next one. We dragged the boat out of its hidden spot and pushed it into the lapping waves. When we were just about to enter the boat, a group of people emerged from the trees. They all had different emotions painted across their faces, but the eighteen year old looked the angriest.</p>
+<p>When everyone else found out about Yeomjae’s death, I couldn’t go with <em>Abeoji</em> to bury him. Telling them about it was hard enough. Instead, I sat alone on the sand, staring at the same seawater that had taken <em>Oppa</em>, the same seawater that had killed Yeomjae. I stared and stared with so much bitter rage that <em>Eonni</em> had to drag me back to the tent just to get me to eat something. That something was the same soup.</p>
+<p>The next day, we decided to leave the island—to move on to the next one. We dragged the boat out of its hidden spot and pushed it into the lapping waves. <em>Abeoji</em> had found a way to fill the hole, so it was good as new; well, except for the fact that it didn’t have a sail anymore. When we were just about to enter the boat, a group of people emerged from the trees. They all had different emotions painted across their faces, but the eighteen year old looked the angriest.</p>
 <p>&emsp;“Look at that,” he spat with contempt, “As soon as they eat up all of our food supply, they decide to leave.”</p>
 <p>&emsp;But the man next to him smacked the boy on the back of his head, “What is wrong with you? It’s not their fault.” He then walked up to <em>Abeoji</em> and grabbed his hand and shook it, “I hope you have a safe journey to wherever you are going next.”</p>
 <p>&emsp;“Thank you,” <em>Abeoji</em> smiled, but his eyes were still glazed from mourning, “We plan to go to South Korea, to find a new life. I hope you understand why we must move forward.”</p>
 <p>&emsp;The man furrowed his brows but nodded, “Of course. Good luck. Safe travels.”</p>
-<p>&emsp;<em>Abeoji</em> nodded and turned to all of us who were now stepping into the boat. It was time to leave. As we drifted away from the island, I turned back one final time, my gaze fixed on the place where we had laid Yeomjae to rest, where the stars would keep him company, and the sun would never fail to find him. I promised to come back for him.</p>
+<p>&emsp;<em>Abeoji</em> nodded and turned to all of us who were now stepping into the boat, his face expressionless, but his eyes grim. It was time to leave. As we drifted away from the island, I turned back one final time, my gaze fixed on the place where we had laid Yeomjae to rest, where the stars would keep him company and where the sun would never fail to find him.</p>
+<p>I promised to come back for him.</p>
 
       </article>
       <div class="bottom-nav">
@@ -108,18 +97,16 @@
         <a href="chapter-17.html" class="nav-btn">Next &#8594;</a>
       </div>
     </div>
-
   </div>
 </div>
-
 <script>
 const canvas=document.getElementById('sky-canvas'),ctx=canvas.getContext('2d');
 function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
 resize();window.addEventListener('resize',resize);
-const stars=Array.from({length:130},()=>({x:Math.random(),y:Math.random()*0.70,size:Math.random()*2.8+0.6,phase:Math.random()*Math.PI*2,speed:Math.random()*0.6+0.3,brightness:Math.random()*0.5+0.55}));
+const stars=Array.from({length:60},()=>({x:Math.random(),y:Math.random()*0.70,size:Math.random()*1.4+0.3,phase:Math.random()*Math.PI*2,speed:Math.random()*0.6+0.3,brightness:Math.random()*0.5+0.55}));
 const shootingStars=[];let nextShoot=3+Math.random()*5;
-function spawnShootingStar(){shootingStars.push({x:Math.random()*0.7+0.05,y:Math.random()*0.35+0.03,len:0.08+Math.random()*0.1,angle:Math.PI/4+(Math.random()-0.5)*0.4,speed:0.18+Math.random()*0.15,progress:0,alpha:0.9+Math.random()*0.1});}
-const waves=[{y:0.765,amp:22,freq:0.007,spd:0.55,alpha:0.52,w:3.5},{y:0.800,amp:16,freq:0.011,spd:0.80,alpha:0.40,w:2.8},{y:0.832,amp:11,freq:0.016,spd:0.45,alpha:0.30,w:2.2},{y:0.860,amp:7,freq:0.024,spd:1.00,alpha:0.20,w:1.6},{y:0.890,amp:4,freq:0.035,spd:0.65,alpha:0.14,w:1.1}];
+function spawnShootingStar(){shootingStars.push({x:Math.random()*0.7+0.05,y:Math.random()*0.35+0.03,len:0.08+Math.random()*0.1,angle:Math.PI/8+(Math.random()-0.5)*0.2,speed:0.18+Math.random()*0.15,progress:0,alpha:0.9+Math.random()*0.1});}
+const waves=[{y:0.765,amp:22,freq:0.007,spd:0.55,alpha:0.22,w:3.5},{y:0.800,amp:16,freq:0.011,spd:0.80,alpha:0.17,w:2.8},{y:0.832,amp:11,freq:0.016,spd:0.45,alpha:0.13,w:2.2},{y:0.860,amp:7,freq:0.024,spd:1.00,alpha:0.08,w:1.6},{y:0.890,amp:4,freq:0.035,spd:0.65,alpha:0.06,w:1.1}];
 let animTime=0;
 function draw(ts){
   animTime=ts/1000;const W=canvas.width,H=canvas.height;
@@ -139,7 +126,7 @@ function draw(ts){
   ctx.fillStyle=mg;ctx.beginPath();ctx.arc(mx,my,mr*4,0,Math.PI*2);ctx.fill();
   ctx.beginPath();ctx.arc(mx,my,mr,0,Math.PI*2);ctx.fillStyle='rgba(255,252,235,1)';ctx.fill();
   ctx.beginPath();ctx.arc(mx-mr*0.2,my-mr*0.15,mr*0.85,0,Math.PI*2);ctx.fillStyle='rgba(5,12,20,0.92)';ctx.fill();
-  stars.forEach(s=>{const tw=0.55+0.45*Math.sin(s.phase+animTime*s.speed),a=s.brightness*tw;ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.size,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,235,${a})`;ctx.fill();if(s.size>1.8&&a>0.4){ctx.strokeStyle=`rgba(255,255,220,${a*0.55})`;ctx.lineWidth=0.7;const cx=s.x*W,cy=s.y*H,len=s.size*4;ctx.beginPath();ctx.moveTo(cx-len,cy);ctx.lineTo(cx+len,cy);ctx.moveTo(cx,cy-len);ctx.lineTo(cx,cy+len);ctx.stroke();}});
+  stars.forEach(s=>{const tw=0.55+0.45*Math.sin(s.phase+animTime*s.speed),a=s.brightness*tw;ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.size,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,235,${a})`;ctx.fill();});
   nextShoot-=0.016;if(nextShoot<=0){spawnShootingStar();nextShoot=4+Math.random()*7;}
   for(let i=shootingStars.length-1;i>=0;i--){const ss=shootingStars[i];ss.progress+=ss.speed*0.016;if(ss.progress>=1){shootingStars.splice(i,1);continue;}const fade=ss.progress<0.2?ss.progress/0.2:ss.progress>0.7?1-(ss.progress-0.7)/0.3:1;const hx=(ss.x+Math.cos(ss.angle)*ss.len*ss.progress)*W;const hy=(ss.y+Math.sin(ss.angle)*ss.len*ss.progress)*H;const tx=(ss.x+Math.cos(ss.angle)*ss.len*Math.max(0,ss.progress-0.35))*W;const ty=(ss.y+Math.sin(ss.angle)*ss.len*Math.max(0,ss.progress-0.35))*H;const gr=ctx.createLinearGradient(tx,ty,hx,hy);gr.addColorStop(0,'rgba(255,255,245,0)');gr.addColorStop(1,`rgba(255,255,245,${ss.alpha*fade})`);ctx.beginPath();ctx.moveTo(tx,ty);ctx.lineTo(hx,hy);ctx.strokeStyle=gr;ctx.lineWidth=1.5;ctx.stroke();ctx.beginPath();ctx.arc(hx,hy,1.5,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,245,${ss.alpha*fade})`;ctx.fill();}
   const hg=ctx.createLinearGradient(0,H*0.55,0,H*0.82);hg.addColorStop(0,'rgba(26,107,90,0.12)');hg.addColorStop(1,'transparent');ctx.fillStyle=hg;ctx.fillRect(0,0,W,H);

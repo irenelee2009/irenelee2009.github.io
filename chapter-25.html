@@ -12,44 +12,35 @@
     body { background: #0a0e1a; color: var(--salt); font-family: 'Cormorant Garamond', serif; font-weight: 300; overflow-x: hidden; min-height: 100vh; }
     #sky-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
     .content { position: relative; z-index: 2; }
-
     nav.top-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.5rem 10vw; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent); backdrop-filter: blur(6px); }
     .nav-brand { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; color: #fff; text-decoration: none; text-shadow: 0 2px 12px rgba(0,0,0,0.6); }
     .nav-toc { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.75); text-decoration: none; transition: color 0.3s; }
     .nav-toc:hover { color: #fff; }
-
     .chapter-wrapper { max-width: 720px; margin: 0 auto; padding: 9rem 2rem 6rem; }
-
     .chapter-header { text-align: center; margin-bottom: 4rem; opacity: 0; animation: fadeUp 1s 0.3s forwards; }
     .chapter-label { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: #7fffda; text-shadow: 0 0 14px rgba(127,255,218,0.5); display: block; margin-bottom: 1rem; }
     .chapter-number { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; color: var(--salt); text-shadow: 0 4px 30px rgba(0,0,0,0.6); display: block; margin-bottom: 1.5rem; }
     .header-rule { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 0 auto; }
-
     .glass-card { background: rgba(0,0,0,0.38); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(255,255,255,0.14); padding: 3.5rem 3rem; position: relative; overflow: visible; opacity: 0; animation: fadeUp 1s 0.5s forwards; display: flex; flex-direction: column; }
     .glass-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, var(--gold), #7fffda); pointer-events: none; }
-
     .chapter-content { flex: 1; }
     .chapter-content p { font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.95; color: rgba(232,237,245,0.92); margin-bottom: 1.5em; font-weight: 300; text-indent: 2em; }
     .chapter-content p:first-of-type { text-indent: 0; }
     .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
     .chapter-content strong { font-weight: 600; color: var(--gold); }
     .section-divider { text-align: center; color: var(--gold); font-size: 1rem; letter-spacing: 0.5em; margin: 2.5rem 0; text-shadow: 0 0 18px rgba(200,168,75,0.5); }
-
     .para-with-popup { position: relative; }
     .glossary-popup { position: absolute; right: -230px; top: 0; width: 210px; background: rgba(5,12,28,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.12); padding: 0.85rem 1rem; z-index: 20; opacity: 0; pointer-events: none; transition: opacity 0.6s ease; }
     .glossary-popup.visible { opacity: 1; }
     .popup-entry { font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; line-height: 1.55; color: rgba(232,237,245,0.88); margin-bottom: 0.55rem; }
     .popup-entry:last-child { margin-bottom: 0; }
     .popup-word { font-style: italic; color: var(--gold); text-shadow: 0 0 10px rgba(200,168,75,0.4); }
-
-    /* BOTTOM NAV — always at the very bottom of the glass card, never overlapping text */
     .bottom-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.08); flex-shrink: 0; position: static; }
     .nav-btn { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.6); text-decoration: none; padding: 0.6rem 1.2rem; border: 1px solid rgba(255,255,255,0.15); transition: all 0.3s; background: rgba(255,255,255,0.05); backdrop-filter: blur(4px); }
     .nav-btn:not(.disabled):hover { color: var(--gold); border-color: rgba(200,168,75,0.5); background: rgba(200,168,75,0.08); box-shadow: 0 0 20px rgba(200,168,75,0.15); }
     .nav-btn.disabled { opacity: 0.25; cursor: default; pointer-events: none; }
     .nav-btn-toc { font-family: 'Space Mono', monospace; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: #7fffda; text-decoration: none; text-shadow: 0 0 10px rgba(127,255,218,0.4); transition: color 0.3s; }
     .nav-btn-toc:hover { color: #fff; text-shadow: 0 0 18px rgba(127,255,218,0.7); }
-
     @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
     @media (max-width: 1000px) { .glossary-popup { right: auto; left: 0; top: auto; bottom: calc(100% + 8px); width: 100%; max-width: 100%; } }
     @media (max-width: 600px) { .chapter-wrapper { padding: 7rem 1.2rem 4rem; } .glass-card { padding: 2rem 1.5rem; } }
@@ -57,42 +48,38 @@
 </head>
 <body>
 <canvas id="sky-canvas"></canvas>
-
 <nav class="top-nav">
   <a href="index.html" class="nav-brand">Irene Lee</a>
   <a href="index.html#chapters" class="nav-toc">&#8592; All Chapters</a>
 </nav>
-
 <div class="content">
   <div class="chapter-wrapper">
-
     <header class="chapter-header">
       <span class="chapter-label">What Was Carried, What Was Lost</span>
       <span class="chapter-number">Chapter 25</span>
       <div class="header-rule"></div>
     </header>
-
     <div class="glass-card">
       <article class="chapter-content">
-        <p>&emsp;We all scrambled out the ship. The sunlight burned my eyes and scorched my skin, our bodies reeking of stale air, fear, and human feces. We were hollowed out, skeletons with skin stretched tight over our cheeks. How long had we been trapped in that suffocating darkness? How long had we gone without food or light? <em>Abeoji</em> went to the Korean man to ask, and when he returned, his face was pale with disbelief.</p>
-<p>&emsp;“Six days,” <em>Abeoji</em> whispered, “Only six days on that ship. It felt like weeks. They made detours to get supplies and more refugees, apparently. Now they are taking us to <em>Jeonju</em> <em>Station</em> through trucks.”</p>
+        <p>&emsp;We all scrambled out the ship. The sunlight burned my eyes and scorched my skin, our bodies reeking of stale air, sweat, and human feces. We were hollowed out, skeletons with skin stretched tight over our bones. How long had we been trapped in that suffocating darkness? How long had we gone without food or light? <em>Abeoji</em> went to the Korean man to ask, and when he returned, his face was pale with disbelief.</p>
+<p>&emsp;“Six days,” <em>Abeoji</em> whispered, “Six days on that ship. They made detours to get supplies and more refugees, apparently. Now they are taking us to <em>Jeonju</em> <em>Station</em> through trucks.”</p>
 <p>&emsp;As if on cue, another Korean man stood in front of us and the rest of the others, yelling at us to move towards trucks that were lined up on a road. We barely had time to even sit down or soak up the sun before we were herded into the dark vehicles.</p>
 <p>When we finally arrived at <em>Jeonju Station</em>, we all couldn’t go to the refugee center at once, so we had to stay in a barn of a local house to wait for our turn. The family that lived there was welcoming, but we couldn’t stay there for free. We needed to work. We were allowed to sleep in their barn, but they didn’t give us any food.</p>
-<p><em>Oppa</em> worked as a farmhand to earn money, while <em>Abeoji</em> arranged for me to work as a housemaid for the family. It was so that I could at least eat regularly. <em>Abeoji</em>, educated and skilled in classical Chinese, worked as a village teacher in the <em>Jirisan</em> area. <em>Halmeoni</em> could not find any work, because she was too old and nobody would accept her. So instead, <em>Eonni</em> stayed with <em>Halmeoni</em> at the barn. But not long after that, <em>Eonni </em>got sick. At first, we thought it was a regular cold and kept her resting in the barn. But it got worse. She was sent to Jeonbuk Christian Hospital, and I didn’t see her for months.</p>
+<p><em>Oppa</em> worked as a farmhand to earn money, while <em>Abeoji</em> arranged for me to work as a housemaid for the family so that I could at least eat regularly. <em>Abeoji</em>, educated and skilled in classical Chinese, worked as a village teacher in the <em>Jirisan</em> area. <em>Halmeoni</em> could not find any work, because she was too old and nobody would accept her. So instead, <em>Eonni</em> stayed with <em>Halmeoni</em> at the barn. But not long after that, <em>Eonni </em>got sick. At first, we thought it was a regular cold and kept her resting in the barn. But it got worse. She was sent to <em>Jeonbuk Christian Hospital</em>, and I didn’t see her for weeks.</p>
 <p>The family’s house was not as large, so cleaning it was not that much of a hassle for me. The only hassle was looking after their eight-year-old son.</p>
 <p>&emsp;One day, we roamed the yard together and he talked about his life in South Korea. It sounded pleasant.</p>
 <p>&emsp;“I have lots of friends,” He said, then looked at me, “Do you have a lot of friends?”</p>
-<p>&emsp;I smiled, but I stayed silent. I <em>did</em> have a lot of friends. Lots of them. We would all play together at school, walk home together, and do everything together. At school, we would help each other study for exams, and would always crack jokes when one of us got punished for being disruptive. But once the <em>inmingun</em> came, they all disappeared. Voluntarily, I did not know. Their parents could have forced them not to visit me, or maybe they thought I was a spy. A bad citizen. A traitor. The smile on my face faded as I stared off into the distance. I wonder what they were doing now—studying for the next exam, perhaps, or maybe reading a new book. Now that I was gone, maybe one of them was named the new top student at school. Maybe their lives were back to normal. Maybe they were walking home from school together at this very moment as I stood in the fields of South Korea with an eight-year-old kid whose name I didn’t even know.</p>
+<p>&emsp;I smiled. I <em>did</em> have a lot of friends. Lots of them. We would all play together at school, walk home together, and do everything together. At school, we would help each other study for exams, and would always crack jokes when one of us got punished for being disruptive. But once the <em>inmingun</em> came, they all disappeared. Voluntarily, I did not know. Their parents could have forced them not to visit me, or maybe they thought I was a spy. A bad citizen. A traitor. The smile on my face faded as I stared off into the distance. I wonder what they were doing now—studying for the next exam, perhaps, or maybe reading a new book. Now that I was gone, maybe one of them was named the new top student at school. Maybe their lives were back to normal. Maybe they were walking home from school together at this very moment as I stood in the fields of South Korea with an eight-year-old kid whose name I didn’t even know.</p>
 <p>&emsp;“Hello? Did you hear me?” The boy asked again, looking at me with a frown.</p>
 <p>&emsp;“Oh, I’m sorry,” I said, startled. I shook myself out of my thoughts. “I don’t have any friends.”</p>
 <p>&emsp;“Really?” The boy’s eyes widened, his eyebrows raised, “How’s that like?”</p>
-<p>&emsp;“Hm,” I pondered, thinking about the time I found a river with <em>Eonni</em>, “It’s not so bad.”</p>
+<p>&emsp;“Hm,” I pondered, thinking about the time I found the river with <em>Eonni</em>, “It’s not so bad.”</p>
 <p>&emsp;The boy pursed his lips, “Wow. You must be really strong.”</p>
 <p>His eyes suddenly lit up and he started running towards the wall that enclosed his neighbor's home, then climbing on top of it.</p>
 <p>“Hey! What are you doing?” I shouted as I ran after him. I saw him reach for the persimmons that grew on a tree next to the wall in his neighbor’s fields. I tried to get him down as panic started to creep up my throat. After all, if the neighbor caught us, I would get in trouble. When I managed to get him back onto the ground without a persimmon, I placed both my hands on top of his shoulders, a heavy but gentle weight.</p>
 <p>&emsp;“You can’t do that,” I shook my head.</p>
 <p>&emsp;“Why not?” He answered, “I do it all the time.”</p>
-<p>&emsp;“It’s wrong to take what belongs to others. Imagine if a boy climbed over your wall and took your favorite toy? You’ll be sad too.”</p>
+<p>&emsp;“It’s wrong to take what belongs to others. How would you feel if a boy climbed over your wall and took your favorite toy? You’d be sad too.”</p>
 <p>&emsp;He frowned in response, then nodded slowly to show that he understood.</p>
 <p>&emsp;We walked back to the house, and I didn’t know until later that day that the mistress of that house had overheard our conversation and admired my honesty. She also noticed how I taught the boy arithmetic and Korean as we walked in the fields, and told the boy’s parents of how great and intelligent I was.</p>
 <div class="para-with-popup" data-popup-id="popup-25-0"><p>That autumn, the family dressed me as if I was their own daughter—giving me a white <em>jeogori</em> with a colorful skirt and bright ribbons—to celebrate a South Korean holiday. They then sent me to the barn with a bundle of food: rice cakes, <em>songpyeon</em>, and fried delicacies.</p><div class="glossary-popup" id="popup-25-0"><div class="popup-entry"><em class="popup-word">jeogori</em> — The upper garment of the traditional Korean hanbok, a two-piece dress worn on special occasions.</div><div class="popup-entry"><em class="popup-word">songpyeon</em> — A traditional Korean rice cake eaten during Chuseok, the Korean harvest thanksgiving festival.</div></div></div>
@@ -100,9 +87,12 @@
 <p>"Chunjae was conscripted into the army." <em>Halmeoni </em>sobbed.</p>
 <p>"What?" I gasped, the words catching in my throat. "How? We're North Korean refugees, not South Korean citizens."</p>
 <p>"Someone from the village used him," <em>Eonni </em>wailed, her voice breaking mid coughs. "They needed to meet their quota of men for the army. They found him working in the fields and handed him over to the soldiers, claiming he was their son!"</p>
-<p>I stood stock still as I watched everyone wipe their tears. The moment we had reunited with <em>Oppa</em>, we lost him yet again. But this time, he was sent off to war. My mind blanked, but my chest felt hot and heavy, and my face turned warm. I clenched my fists, anger replacing grief. I guess South Korea was no different.</p>
+<p>I stood stock still as I watched everyone wipe their tears. The moment we had reunited with <em>Oppa</em>, we lost him yet again. But this time, he was sent off to war. My mind blanked, but my chest felt hot and heavy, and my face turned warm. I clenched my fists, anger replacing grief. They just <em>took</em> him, saying that he was his son. South Korea was no different.</p>
+<p>When <em>Abeoji</em> came back from his job and heard of the news, his face fell. I never saw the painful expression that was on his face before, his eyes glassy with…tears. <em>Halmeoni</em> tried to comfort him, but then he jumped up from where he sat and rushed out the barn. He did not return until an hour later, his tears gone and his face composed.</p>
+<p>&emsp;“Chunjae will live.” was all he said, “I believe it.”</p>
+<p>&emsp;We tried to believe him, but it didn’t seem possible. <em>I</em> didn’t think it was possible. But I didn’t tell him.</p>
 <p>Despite our disbelief, we devoured the food with a desperate hunger. The morsels of sweetness and savoriness felt displaced from the anger that bubbled in my chest, but I ignored it as I knew that I needed all the strength I could get. <em>Eonni</em> ate with a newfound strength, her frail hands shaking less than usual as she brought the food to her mouth. The food, she said, was the taste of a new life.</p>
-<p><em>Oppa </em>served for three years.</p>
+<p><em>Oppa </em>served for three years. He did survive, somehow.</p>
 <p>We never saw him during that time even as we moved to the refugee camp, but only received redacted letters.</p>
 
       </article>
@@ -112,18 +102,16 @@
         <a href="chapter-26.html" class="nav-btn">Next &#8594;</a>
       </div>
     </div>
-
   </div>
 </div>
-
 <script>
 const canvas=document.getElementById('sky-canvas'),ctx=canvas.getContext('2d');
 function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
 resize();window.addEventListener('resize',resize);
-const stars=Array.from({length:130},()=>({x:Math.random(),y:Math.random()*0.70,size:Math.random()*2.8+0.6,phase:Math.random()*Math.PI*2,speed:Math.random()*0.6+0.3,brightness:Math.random()*0.5+0.55}));
+const stars=Array.from({length:60},()=>({x:Math.random(),y:Math.random()*0.70,size:Math.random()*1.4+0.3,phase:Math.random()*Math.PI*2,speed:Math.random()*0.6+0.3,brightness:Math.random()*0.5+0.55}));
 const shootingStars=[];let nextShoot=3+Math.random()*5;
-function spawnShootingStar(){shootingStars.push({x:Math.random()*0.7+0.05,y:Math.random()*0.35+0.03,len:0.08+Math.random()*0.1,angle:Math.PI/4+(Math.random()-0.5)*0.4,speed:0.18+Math.random()*0.15,progress:0,alpha:0.9+Math.random()*0.1});}
-const waves=[{y:0.765,amp:22,freq:0.007,spd:0.55,alpha:0.52,w:3.5},{y:0.800,amp:16,freq:0.011,spd:0.80,alpha:0.40,w:2.8},{y:0.832,amp:11,freq:0.016,spd:0.45,alpha:0.30,w:2.2},{y:0.860,amp:7,freq:0.024,spd:1.00,alpha:0.20,w:1.6},{y:0.890,amp:4,freq:0.035,spd:0.65,alpha:0.14,w:1.1}];
+function spawnShootingStar(){shootingStars.push({x:Math.random()*0.7+0.05,y:Math.random()*0.35+0.03,len:0.08+Math.random()*0.1,angle:Math.PI/8+(Math.random()-0.5)*0.2,speed:0.18+Math.random()*0.15,progress:0,alpha:0.9+Math.random()*0.1});}
+const waves=[{y:0.765,amp:22,freq:0.007,spd:0.55,alpha:0.22,w:3.5},{y:0.800,amp:16,freq:0.011,spd:0.80,alpha:0.17,w:2.8},{y:0.832,amp:11,freq:0.016,spd:0.45,alpha:0.13,w:2.2},{y:0.860,amp:7,freq:0.024,spd:1.00,alpha:0.08,w:1.6},{y:0.890,amp:4,freq:0.035,spd:0.65,alpha:0.06,w:1.1}];
 let animTime=0;
 function draw(ts){
   animTime=ts/1000;const W=canvas.width,H=canvas.height;
@@ -143,7 +131,7 @@ function draw(ts){
   ctx.fillStyle=mg;ctx.beginPath();ctx.arc(mx,my,mr*4,0,Math.PI*2);ctx.fill();
   ctx.beginPath();ctx.arc(mx,my,mr,0,Math.PI*2);ctx.fillStyle='rgba(255,252,235,1)';ctx.fill();
   ctx.beginPath();ctx.arc(mx-mr*0.2,my-mr*0.15,mr*0.85,0,Math.PI*2);ctx.fillStyle='rgba(5,12,20,0.92)';ctx.fill();
-  stars.forEach(s=>{const tw=0.55+0.45*Math.sin(s.phase+animTime*s.speed),a=s.brightness*tw;ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.size,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,235,${a})`;ctx.fill();if(s.size>1.8&&a>0.4){ctx.strokeStyle=`rgba(255,255,220,${a*0.55})`;ctx.lineWidth=0.7;const cx=s.x*W,cy=s.y*H,len=s.size*4;ctx.beginPath();ctx.moveTo(cx-len,cy);ctx.lineTo(cx+len,cy);ctx.moveTo(cx,cy-len);ctx.lineTo(cx,cy+len);ctx.stroke();}});
+  stars.forEach(s=>{const tw=0.55+0.45*Math.sin(s.phase+animTime*s.speed),a=s.brightness*tw;ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.size,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,235,${a})`;ctx.fill();});
   nextShoot-=0.016;if(nextShoot<=0){spawnShootingStar();nextShoot=4+Math.random()*7;}
   for(let i=shootingStars.length-1;i>=0;i--){const ss=shootingStars[i];ss.progress+=ss.speed*0.016;if(ss.progress>=1){shootingStars.splice(i,1);continue;}const fade=ss.progress<0.2?ss.progress/0.2:ss.progress>0.7?1-(ss.progress-0.7)/0.3:1;const hx=(ss.x+Math.cos(ss.angle)*ss.len*ss.progress)*W;const hy=(ss.y+Math.sin(ss.angle)*ss.len*ss.progress)*H;const tx=(ss.x+Math.cos(ss.angle)*ss.len*Math.max(0,ss.progress-0.35))*W;const ty=(ss.y+Math.sin(ss.angle)*ss.len*Math.max(0,ss.progress-0.35))*H;const gr=ctx.createLinearGradient(tx,ty,hx,hy);gr.addColorStop(0,'rgba(255,255,245,0)');gr.addColorStop(1,`rgba(255,255,245,${ss.alpha*fade})`);ctx.beginPath();ctx.moveTo(tx,ty);ctx.lineTo(hx,hy);ctx.strokeStyle=gr;ctx.lineWidth=1.5;ctx.stroke();ctx.beginPath();ctx.arc(hx,hy,1.5,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,245,${ss.alpha*fade})`;ctx.fill();}
   const hg=ctx.createLinearGradient(0,H*0.55,0,H*0.82);hg.addColorStop(0,'rgba(26,107,90,0.12)');hg.addColorStop(1,'transparent');ctx.fillStyle=hg;ctx.fillRect(0,0,W,H);

@@ -12,44 +12,35 @@
     body { background: #0a0e1a; color: var(--salt); font-family: 'Cormorant Garamond', serif; font-weight: 300; overflow-x: hidden; min-height: 100vh; }
     #sky-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
     .content { position: relative; z-index: 2; }
-
     nav.top-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.5rem 10vw; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent); backdrop-filter: blur(6px); }
     .nav-brand { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; color: #fff; text-decoration: none; text-shadow: 0 2px 12px rgba(0,0,0,0.6); }
     .nav-toc { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.75); text-decoration: none; transition: color 0.3s; }
     .nav-toc:hover { color: #fff; }
-
     .chapter-wrapper { max-width: 720px; margin: 0 auto; padding: 9rem 2rem 6rem; }
-
     .chapter-header { text-align: center; margin-bottom: 4rem; opacity: 0; animation: fadeUp 1s 0.3s forwards; }
     .chapter-label { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: #7fffda; text-shadow: 0 0 14px rgba(127,255,218,0.5); display: block; margin-bottom: 1rem; }
     .chapter-number { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 400; color: var(--salt); text-shadow: 0 4px 30px rgba(0,0,0,0.6); display: block; margin-bottom: 1.5rem; }
     .header-rule { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 0 auto; }
-
     .glass-card { background: rgba(0,0,0,0.38); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(255,255,255,0.14); padding: 3.5rem 3rem; position: relative; overflow: visible; opacity: 0; animation: fadeUp 1s 0.5s forwards; display: flex; flex-direction: column; }
     .glass-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, var(--gold), #7fffda); pointer-events: none; }
-
     .chapter-content { flex: 1; }
     .chapter-content p { font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.95; color: rgba(232,237,245,0.92); margin-bottom: 1.5em; font-weight: 300; text-indent: 2em; }
     .chapter-content p:first-of-type { text-indent: 0; }
     .chapter-content em { font-style: italic; color: rgba(255,249,225,0.95); }
     .chapter-content strong { font-weight: 600; color: var(--gold); }
     .section-divider { text-align: center; color: var(--gold); font-size: 1rem; letter-spacing: 0.5em; margin: 2.5rem 0; text-shadow: 0 0 18px rgba(200,168,75,0.5); }
-
     .para-with-popup { position: relative; }
     .glossary-popup { position: absolute; right: -230px; top: 0; width: 210px; background: rgba(5,12,28,0.82); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.12); padding: 0.85rem 1rem; z-index: 20; opacity: 0; pointer-events: none; transition: opacity 0.6s ease; }
     .glossary-popup.visible { opacity: 1; }
     .popup-entry { font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; line-height: 1.55; color: rgba(232,237,245,0.88); margin-bottom: 0.55rem; }
     .popup-entry:last-child { margin-bottom: 0; }
     .popup-word { font-style: italic; color: var(--gold); text-shadow: 0 0 10px rgba(200,168,75,0.4); }
-
-    /* BOTTOM NAV — always at the very bottom of the glass card, never overlapping text */
     .bottom-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.08); flex-shrink: 0; position: static; }
     .nav-btn { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.6); text-decoration: none; padding: 0.6rem 1.2rem; border: 1px solid rgba(255,255,255,0.15); transition: all 0.3s; background: rgba(255,255,255,0.05); backdrop-filter: blur(4px); }
     .nav-btn:not(.disabled):hover { color: var(--gold); border-color: rgba(200,168,75,0.5); background: rgba(200,168,75,0.08); box-shadow: 0 0 20px rgba(200,168,75,0.15); }
     .nav-btn.disabled { opacity: 0.25; cursor: default; pointer-events: none; }
     .nav-btn-toc { font-family: 'Space Mono', monospace; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: #7fffda; text-decoration: none; text-shadow: 0 0 10px rgba(127,255,218,0.4); transition: color 0.3s; }
     .nav-btn-toc:hover { color: #fff; text-shadow: 0 0 18px rgba(127,255,218,0.7); }
-
     @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
     @media (max-width: 1000px) { .glossary-popup { right: auto; left: 0; top: auto; bottom: calc(100% + 8px); width: 100%; max-width: 100%; } }
     @media (max-width: 600px) { .chapter-wrapper { padding: 7rem 1.2rem 4rem; } .glass-card { padding: 2rem 1.5rem; } }
@@ -57,41 +48,37 @@
 </head>
 <body>
 <canvas id="sky-canvas"></canvas>
-
 <nav class="top-nav">
   <a href="index.html" class="nav-brand">Irene Lee</a>
   <a href="index.html#chapters" class="nav-toc">&#8592; All Chapters</a>
 </nav>
-
 <div class="content">
   <div class="chapter-wrapper">
-
     <header class="chapter-header">
       <span class="chapter-label">What Was Carried, What Was Lost</span>
       <span class="chapter-number">Chapter 1</span>
       <div class="header-rule"></div>
     </header>
-
     <div class="glass-card">
       <article class="chapter-content">
-        <p>&emsp;My father and brother had fled. South Korean troops storming towards our lands had ordered every able man into the North Korean army, no matter the circumstances.</p>
-<p>But if you were sent to the army, you would die. That was the end of the story. There were no exceptions, no mercy, no second chances. This was war.</p>
-<div class="para-with-popup" data-popup-id="popup-1-0"><p>Sitting on the cold wooden floor of my living room, I cradled my one-year-old brother—Yeomjae—in my arms. Since <em>Abeoji</em> and <em>Oppa</em> were gone, <em>Eonni </em>was in the fields outside, tending to the rice paddies and garden. I heard the rhythmic thwack of the hoe as she slammed it onto the ground to dig out the weeds. Taejae, my younger brother of ten, lay beside me, staring up at the ceiling while reciting his arithmetic.</p><div class="glossary-popup" id="popup-1-0"><div class="popup-entry"><em class="popup-word">Abeoji</em> — Father; a respectful term of address used within the family.</div><div class="popup-entry"><em class="popup-word">Oppa</em> — Older brother; used by females to address or refer to an older male sibling.</div><div class="popup-entry"><em class="popup-word">Eonni</em> — Older sister; used by females to address or refer to an older female sibling.</div></div></div>
-<div class="para-with-popup" data-popup-id="popup-1-1"><p>I stared at our bookshelf, admiring the books that filled each level. On the highest level, however, was a straw doll. <em>Eomeoni</em> had made it for <em>Eonni</em> when she was younger. I let out a heavy sigh as I remembered the faint memories of <em>Eomeoni</em>. She died ten days after giving birth to the child that was now sleeping in my arms. Our home felt hollow with the echoes of <em>Eomeoni</em>’s witty jokes lingering faintly in its corners, nearly forgotten.</p><div class="glossary-popup" id="popup-1-1"><div class="popup-entry"><em class="popup-word">Eomeoni</em> — Mother; a respectful term of address used within the family.</div></div></div>
-<div class="para-with-popup" data-popup-id="popup-1-2"><p>Soon after <em>Eomeoni</em> passed, <em>Halmeoni</em> took over the household chores, doing as much as her body could allow.</p><div class="glossary-popup" id="popup-1-2"><div class="popup-entry"><em class="popup-word">Halmeoni</em> — Grandmother; a term of endearment and respect for one's grandmother.</div></div></div>
+        <p>&emsp;My father and brother had fled. South Korean troops storming towards us had ordered every able man into the North Korean army, no matter the circumstances.</p>
+<p>But if you were sent to the army, you would die. That was the end of the story. There were no exceptions, no mercy, no second chance—this was war.</p>
+<div class="para-with-popup" data-popup-id="popup-1-0"><p>Sitting on the cold wooden floor of my living room, I cradled my one-year-old brother–Yeomjae–in my arms. Since <em>Abeoji</em> and <em>Oppa</em> were gone, <em>Eonni </em>was in the fields outside, tending to the rice paddies and garden. I heard the rhythmic thwack of the hoe as she slammed it onto the ground to dig out the weeds. Taejae, my younger brother of ten, lay beside me, staring up at the ceiling while reciting his arithmetic.</p><div class="glossary-popup" id="popup-1-0"><div class="popup-entry"><em class="popup-word">Abeoji</em> — Father; a respectful term of address used within the family.</div><div class="popup-entry"><em class="popup-word">Oppa</em> — Older brother; used by females to address or refer to an older male sibling.</div><div class="popup-entry"><em class="popup-word">Eonni</em> — Older sister; used by females to address or refer to an older female sibling.</div></div></div>
+<div class="para-with-popup" data-popup-id="popup-1-1"><p>My eyes wandered to our bookshelf, admiring the books that filled each level. On the highest shelf, however, was a straw doll. <em>Eomeoni</em> had made it for <em>Eonni</em> when she was younger. I let out a heavy sigh as I remembered the faint memories of <em>Eomeoni</em>. She died ten days after giving birth to the child that was now sleeping in my arms. Our home felt hollow with the echoes of <em>Eomeoni</em>’s witty jokes lingering faintly in its corners, nearly forgotten.</p><div class="glossary-popup" id="popup-1-1"><div class="popup-entry"><em class="popup-word">Eomeoni</em> — Mother; a respectful term of address used within the family.</div></div></div>
+<div class="para-with-popup" data-popup-id="popup-1-2"><p>Soon after she passed, <em>Halmeoni</em> took over the household chores, doing as much as her body could allow.</p><div class="glossary-popup" id="popup-1-2"><div class="popup-entry"><em class="popup-word">Halmeoni</em> — Grandmother; a term of endearment and respect for one's grandmother.</div></div></div>
 <p>My responsibility was Yeomjae. After school, I always carried him on my back, my nose buried in my schoolbook as I walked from house to house. Women would feed him because he was too young for normal food that we ate.</p>
-<p>Compared to the other civilians of Hwanghae province, we were lucky. Wealthier. Our home had five rooms and an outhouse; our fields kept us well fed. We owned cattle, though they were used for the millstone, not for eating.</p>
+<p>Compared to the other civilians of Hwanghae province, we were lucky. Wealthier. Our home had five rooms and an outhouse; our fields kept us well fed. We owned cattle, though they were used for the millstone and not for food.</p>
 <p>I gently laid Yeomjae on his blankets and listened to <em>Halmeoni</em>’s loud shuffling as she slept in the next room. After taking over most of the household chores, she needed an afternoon nap just to stay upright.</p>
 <p>&emsp;“I’m done!” Taejae sat up suddenly, beaming with pride, “Did you hear me? I finished reciting everything perfectly.”</p>
 <p>&emsp;“Great,” I said dully, staring out the window. I glanced at Taejae and saw him glaring at me, frowning.</p>
 <p>&emsp;“Did you even listen to me?”</p>
-<p>&emsp;“Of course I did.” I lied. My arms ached from holding the baby. My throat ached even more.</p>
+<p>&emsp;“Of course I did.” I lied. My arms ached from holding the baby. My throat hurt even more.</p>
 <p>I stood up to go fetch water from the backyard well, gliding across the smooth floorboards. Just as I reached for the backdoor—</p>
 <p><em>Thunk</em></p>
 <p>I froze. The sound came from the other side. Through the front window, I could still see <em>Eonni </em>bent over the paddies. Taejae immediately stood up upon hearing the noise as well and stared at me with wide eyes. No one should be here. Maybe an animal?</p>
 <p>&emsp;“Hwajae,” a deep yet familiar voice whispered. Cold ice ran down my spine. No. He shouldn’t be here, “It’s me. Let me in, quick!”</p>
 <p>My hands fumbled for the latch. The door flew open, and my older brother stumbled in, slamming it behind him. He collapsed onto the floor, his back against the door. Taejae’s mouth was ajar.</p>
-<p>&emsp;“<em>Oppa</em>! What are you doing here? You’re supposed to be with <em>Abeoji</em>, heading to the islands.” I blurted, forgetting that Yeomjae was still asleep. He suddenly awoke with a start and started to cry. <em>Oppa </em>sighed with fatigue. Taejae rushed to the baby and rocked him to silence, and eventually back to sleep.</p>
+<p>&emsp;“<em>Oppa</em>! What are you doing here? You’re supposed to be with <em>Abeoji</em>, heading to the islands.” I blurted, forgetting that Yeomjae was still asleep. He suddenly awoke with a start and began to cry. <em>Oppa </em>sighed with fatigue. Taejae rushed to the baby and rocked him to silence, and eventually back to sleep.</p>
 <div class="para-with-popup" data-popup-id="popup-1-3"><p>&emsp;“The <em>inmingun</em> almost caught us,” he said. “<em>Abeoji</em> told me to run. I ran and hid for days.”</p><div class="glossary-popup" id="popup-1-3"><div class="popup-entry"><em class="popup-word">inmingun</em> — The Korean People's Army; the military force of North Korea.</div></div></div>
 <p>&emsp;I tried not to frown in confusion, but he saw it anyway.</p>
 <p>&emsp;“He told me it was important to split up. I didn’t know where else to go.” His eyes flashed with…panic?</p>
@@ -109,19 +96,19 @@
 <p>“Then we must prepare to die,” <em>Halmeoni</em> said, her voice hardening. “By coming back here, you might have just sealed our fate.”</p>
 <p>Silence.</p>
 <p>“I won’t let that happen. I swear it.”</p>
-<p>A cool breeze rushed through the gap and into my ear. They were standing up. I quickly shuffled backwards and across the living room as they opened the door. I pretended to look busy by flipping through my school textbooks, but my thoughts seemed to swirl in my head. The army? So he lied. He said that <em>Abeoji</em> told him to run, but he was actually caught stealing food. So where <em>was</em> <em>Abeoji</em>? Was he still on the islands, somewhere safe? Or was he starving right now with no food, near death while we ate good food? I shuddered at that thought.</p>
+<p>A cool breeze rushed through the gap and into my ear. They were standing up. I quickly shuffled backwards and across the living room as they opened the door. I pretended to look busy by flipping through my school textbooks, but my thoughts seemed to swirl in my head. The army? So he lied. He said that <em>Abeoji</em> told him to run, but he was actually caught stealing food. So where <em>was</em> <em>Abeoji</em>? Was he still on the islands, somewhere safe? Or was he starving right now with no food? I shuddered at that thought.</p>
 <p>&emsp;“Hwajae, come here.” <em>Oppa</em>’s voice stretched across the room. I froze and looked up at his somber dark eyes. I nodded, and walked to him. He was quite tall, and always had a friendly demeanor surrounding him, that is, until all of this happened. “I assume that your school has taught you who the <em>inmingun </em>are, right?” The army. The soldiers.</p>
 <p>I nodded again, the words not forming in my mouth.</p>
 <p>&emsp;“They are after me.” <em>Oppa </em>announced. Taejae, who was behind him, froze. “It is because they consider me a defector to the nation. Do you know what a defector is?”</p>
-<p>I recoiled slightly, but nodded again, the words barely escaping my lips. “They are people who betray our nation. People who are evil and whose minds are bad. But you weren’t—”</p>
+<p>I recoiled slightly, but nodded again, the words barely escaping my lips. “They are people who betray our nation. But you weren’t—”</p>
 <p>&emsp;“No. That is what they teach you, but that is not the real reason why we defect.” <em>Oppa</em> said, “We defect because there are more opportunities out there, Hwajae. <em>Better</em> opportunities. You can dream bigger, and get whatever you want. But now, we defected because we wanted to survive, and not join the army.”</p>
 <p>&emsp;I furrowed my brow and took a step back in confusion. Better opportunities? As if. The Leader told us that the world outside was poverty-stricken, filled with horrible violent people who looked strange. But <em>Oppa </em>snatched my arm and kept me from moving away. “I’m telling the truth. If the <em>inmingun, </em>or even anyone asks you anything about this, say that you don’t know. If not, we will all be in danger.”</p>
 <p>I glanced behind <em>Oppa</em> and saw <em>Eonni</em>, Taejae, and <em>Halmeoni</em> looking at me. “What are we going to do then, if the <em>inmingun</em> knows about this already?”</p>
 <p>&emsp;“I don’t know.” <em>Oppa </em>sighed and let go of my arm. “But I will hide in the storage room for now.”</p>
-<p>&emsp;He then left the living room and headed towards the storage room. The storage room was small and hidden away in another large room that was connected to the living room. Its walls were lined from floor to ceiling with food and our harvested goods, with barely any room to squeeze past to the back. There, <em>Oppa</em> would stay until we had a plan.</p>
+<p>&emsp;He then left the living room and headed towards the storage room. It was small and hidden away in another large room that was connected to the living room. Its walls were lined from floor to ceiling with food and our harvested goods, with barely any room to squeeze past to the back. There, <em>Oppa</em> would stay until we had a plan.</p>
 <div class="section-divider">✦</div>
 <p>&emsp;It had been two weeks since <em>Oppa</em> went into hiding. Nothing had changed. The <em>inmingun</em> hadn’t come either. The tension finally settled deeply into every crevice and niche of our home, blanketing us into an eerie silence. We couldn’t do anything but wait and plan.</p>
-<p>&emsp;“Why can’t we let him out now? The <em>inmingun</em> hadn’t come yet, and it has already been two weeks.” Taejae grumbled at the dinner table, stuffing his mouth full of rice.</p>
+<p>&emsp;“Why can’t we let him out now? The <em>inmingun</em> hadn’t come yet, and it’s already been two weeks.” Taejae grumbled at the dinner table, stuffing his mouth full of rice.</p>
 <p>&emsp;“You know that’s dangerous, Taejae.” <em>Halmeoni</em> said, cringing at the pieces of rice falling from his chin. Taejae just grumbled some more, but didn't say anything else.</p>
 <p>&emsp;“Do we have a plan?” I said as I turned to <em>Eonni</em>, the candle behind her flickering. “What about the <em>inmingun</em>? You went out a couple of times this week to tend to the fields. What did you see? Did anyone approach you?” I still had a million questions but I snapped my mouth shut when I saw <em>Eonni </em>shake her head with exhaustion and fear.</p>
 <p>&emsp;“I don’t know.” She said as she dropped her spoon and stared at it on the dinner table, “I really don’t know.”</p>
@@ -133,18 +120,16 @@
         <a href="chapter-2.html" class="nav-btn">Next &#8594;</a>
       </div>
     </div>
-
   </div>
 </div>
-
 <script>
 const canvas=document.getElementById('sky-canvas'),ctx=canvas.getContext('2d');
 function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
 resize();window.addEventListener('resize',resize);
-const stars=Array.from({length:130},()=>({x:Math.random(),y:Math.random()*0.70,size:Math.random()*2.8+0.6,phase:Math.random()*Math.PI*2,speed:Math.random()*0.6+0.3,brightness:Math.random()*0.5+0.55}));
+const stars=Array.from({length:60},()=>({x:Math.random(),y:Math.random()*0.70,size:Math.random()*1.4+0.3,phase:Math.random()*Math.PI*2,speed:Math.random()*0.6+0.3,brightness:Math.random()*0.5+0.55}));
 const shootingStars=[];let nextShoot=3+Math.random()*5;
-function spawnShootingStar(){shootingStars.push({x:Math.random()*0.7+0.05,y:Math.random()*0.35+0.03,len:0.08+Math.random()*0.1,angle:Math.PI/4+(Math.random()-0.5)*0.4,speed:0.18+Math.random()*0.15,progress:0,alpha:0.9+Math.random()*0.1});}
-const waves=[{y:0.765,amp:22,freq:0.007,spd:0.55,alpha:0.52,w:3.5},{y:0.800,amp:16,freq:0.011,spd:0.80,alpha:0.40,w:2.8},{y:0.832,amp:11,freq:0.016,spd:0.45,alpha:0.30,w:2.2},{y:0.860,amp:7,freq:0.024,spd:1.00,alpha:0.20,w:1.6},{y:0.890,amp:4,freq:0.035,spd:0.65,alpha:0.14,w:1.1}];
+function spawnShootingStar(){shootingStars.push({x:Math.random()*0.7+0.05,y:Math.random()*0.35+0.03,len:0.08+Math.random()*0.1,angle:Math.PI/8+(Math.random()-0.5)*0.2,speed:0.18+Math.random()*0.15,progress:0,alpha:0.9+Math.random()*0.1});}
+const waves=[{y:0.765,amp:22,freq:0.007,spd:0.55,alpha:0.22,w:3.5},{y:0.800,amp:16,freq:0.011,spd:0.80,alpha:0.17,w:2.8},{y:0.832,amp:11,freq:0.016,spd:0.45,alpha:0.13,w:2.2},{y:0.860,amp:7,freq:0.024,spd:1.00,alpha:0.08,w:1.6},{y:0.890,amp:4,freq:0.035,spd:0.65,alpha:0.06,w:1.1}];
 let animTime=0;
 function draw(ts){
   animTime=ts/1000;const W=canvas.width,H=canvas.height;
@@ -164,7 +149,7 @@ function draw(ts){
   ctx.fillStyle=mg;ctx.beginPath();ctx.arc(mx,my,mr*4,0,Math.PI*2);ctx.fill();
   ctx.beginPath();ctx.arc(mx,my,mr,0,Math.PI*2);ctx.fillStyle='rgba(255,252,235,1)';ctx.fill();
   ctx.beginPath();ctx.arc(mx-mr*0.2,my-mr*0.15,mr*0.85,0,Math.PI*2);ctx.fillStyle='rgba(5,12,20,0.92)';ctx.fill();
-  stars.forEach(s=>{const tw=0.55+0.45*Math.sin(s.phase+animTime*s.speed),a=s.brightness*tw;ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.size,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,235,${a})`;ctx.fill();if(s.size>1.8&&a>0.4){ctx.strokeStyle=`rgba(255,255,220,${a*0.55})`;ctx.lineWidth=0.7;const cx=s.x*W,cy=s.y*H,len=s.size*4;ctx.beginPath();ctx.moveTo(cx-len,cy);ctx.lineTo(cx+len,cy);ctx.moveTo(cx,cy-len);ctx.lineTo(cx,cy+len);ctx.stroke();}});
+  stars.forEach(s=>{const tw=0.55+0.45*Math.sin(s.phase+animTime*s.speed),a=s.brightness*tw;ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.size,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,235,${a})`;ctx.fill();});
   nextShoot-=0.016;if(nextShoot<=0){spawnShootingStar();nextShoot=4+Math.random()*7;}
   for(let i=shootingStars.length-1;i>=0;i--){const ss=shootingStars[i];ss.progress+=ss.speed*0.016;if(ss.progress>=1){shootingStars.splice(i,1);continue;}const fade=ss.progress<0.2?ss.progress/0.2:ss.progress>0.7?1-(ss.progress-0.7)/0.3:1;const hx=(ss.x+Math.cos(ss.angle)*ss.len*ss.progress)*W;const hy=(ss.y+Math.sin(ss.angle)*ss.len*ss.progress)*H;const tx=(ss.x+Math.cos(ss.angle)*ss.len*Math.max(0,ss.progress-0.35))*W;const ty=(ss.y+Math.sin(ss.angle)*ss.len*Math.max(0,ss.progress-0.35))*H;const gr=ctx.createLinearGradient(tx,ty,hx,hy);gr.addColorStop(0,'rgba(255,255,245,0)');gr.addColorStop(1,`rgba(255,255,245,${ss.alpha*fade})`);ctx.beginPath();ctx.moveTo(tx,ty);ctx.lineTo(hx,hy);ctx.strokeStyle=gr;ctx.lineWidth=1.5;ctx.stroke();ctx.beginPath();ctx.arc(hx,hy,1.5,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,245,${ss.alpha*fade})`;ctx.fill();}
   const hg=ctx.createLinearGradient(0,H*0.55,0,H*0.82);hg.addColorStop(0,'rgba(26,107,90,0.12)');hg.addColorStop(1,'transparent');ctx.fillStyle=hg;ctx.fillRect(0,0,W,H);
